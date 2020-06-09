@@ -1,17 +1,19 @@
-const model = require('../models/index.js');
+const { user } = require('../models/index.js');
 
-exports.findAll = (req, res) => {
-  model.User.findAll().then(user => {
+module.exports = {
+  findAll : (req, res) => {
+    user.findAll().then(user => {
       res.json({
           'status': 'OK',
           'messages': '',
           'data': user
       });
-  }).catch(err => {
-      res.json({
+    }).catch(err => {
+      res.status(500).json({
           'status': 'ERROR',
           'messages': err,
           'data': {}
       }); 
-  });
+    });
+  }
 }
