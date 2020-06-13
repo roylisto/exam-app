@@ -1,14 +1,18 @@
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import App from './containers/App.vue';
-import Button from 'ant-design-vue/lib/button';
-import 'ant-design-vue/dist/antd';
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
+import route from './router.js';
 import store from './store';
 
-Vue.component(Button.name, Button);
+Vue.component(Buefy);
+Vue.use(VueRouter)
 
 Vue.config.productionTip = false;
 
 new Vue({
+  route,
   store,
   el: '#root',
   render: h => h(App),

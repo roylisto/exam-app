@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div>{{ welcome }}</div>
+    <router-view></router-view>
   </div>
 </template>
 
