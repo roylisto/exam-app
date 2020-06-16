@@ -39,7 +39,7 @@ if (env === 'development') {
     });
   });
 } else {
-  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '..') + '/public/index.html'));
+  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '..') + '/dist/index.html'));
 }
 
 module.exports = app;
