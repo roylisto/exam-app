@@ -1,7 +1,7 @@
 const { user } = require('../models/index.js');
 
 module.exports = {
-  findAll: (req, res) => {
+  list: (req, res) => {
     user.findAll().then( users => {
       res.json({
           status: 'OK',
@@ -17,7 +17,7 @@ module.exports = {
     });
   },
 
-  findOne: (req, res) => {
+  get: (req, res) => {
     user.findOne({
       where: { id: req.params.id }
     }).then( users => {      

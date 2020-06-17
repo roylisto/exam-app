@@ -25,10 +25,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {    
     tableName: 'user',    
     underscored: true,
-    timestamps: true,  
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
-    deletedAt: 'deleted_at',
+    timestamps: true,
     paranoid: true
   });
 
