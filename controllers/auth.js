@@ -2,6 +2,7 @@ const { peserta } = require('../models/index.js');
 const jwt = require('jsonwebtoken');
 // const { Op } = require('sequelize');
 const moment = require('moment');
+moment.tz.setDefault("Asia/Jakarta");
 moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
 
 module.exports = {
