@@ -10,7 +10,8 @@ module.exports = {
       createdAt: 'created_at',
       updatedAt: 'updated_at',
       deletedAt: 'deleted_at'
-    }
+    },
+    "logging": console.log,
   },
   "staging": {
     "username": process.env.DB_USERNAME_STAGING,
@@ -22,7 +23,8 @@ module.exports = {
       createdAt: 'created_at',
       updatedAt: 'updated_at',
       deletedAt: 'deleted_at'
-    }
+    },
+    "logging": false
   },
   "production": {
     "username": process.env.DB_USERNAME_PRODUCTION,
@@ -34,6 +36,7 @@ module.exports = {
       createdAt: 'created_at',
       updatedAt: 'updated_at',
       deletedAt: 'deleted_at'
-    }
+    },
+    "logging": false
   }
 };
