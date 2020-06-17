@@ -7,21 +7,29 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
     },
     nama: {
+      allowNull: false,
       type: DataTypes.STRING
     },
     email: {
+      allowNull: false,
       type: DataTypes.STRING
     },
     no_hp: {
+      allowNull: false,
       type: DataTypes.STRING
     },
     instansi: {      
+      allowNull: false,
       type: DataTypes.STRING
     }
   }, {    
-    tableName: 'user',
+    tableName: 'user',    
     underscored: true,
-    timestamps: false,
+    timestamps: true,  
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+    deletedAt: 'deleted_at',
+    paranoid: true
   });
 
   return user;
