@@ -1,11 +1,14 @@
 const { peserta } = require('../models/index.js');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
-  login: async (req, res) => {        
+  login: async (req, res) => {  
+    let { email, password } = req.body 
+    console.log(email)     
     peserta.findOne({
       where: {
-        email: req.body.email,
-        password: req.body.password
+        email: email,
+        password: password
       }
     }).then(peserta => {
       if(peserta === null) {
@@ -15,17 +18,22 @@ module.exports = {
           data: {}
         });
       }
-
-      res.json({
-        status: 'OK',
-        message: 'Login Success',
-        data: {}
-      });  
+      
+      //sign token for 24 hour
+      jwt.sign({ data:peserta }, process.env.JWT_SECRET, { algorithm:'HS256', expiresIn:'24h' }, (err, token) => {        
+        res.json({
+          status: 'OK',
+          message: 'Login Success',
+          data: {
+            token: token
+          }
+        });  
+      });
     }).catch (err => {      
       res.status(400).json({
         status: 'ERROR',
         message: 'Bad Request!',
-        data: {}
+        data: err
       });
     });
   }
