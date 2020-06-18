@@ -19,6 +19,18 @@ module.exports = {
       },
       instansi: {        
         type: Sequelize.STRING
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      },
+      deleted_at: {
+        allowNull: true,
+        type: Sequelize.DATE
       }
     });
   },

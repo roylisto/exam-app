@@ -6,6 +6,11 @@ module.exports = {
     "database": process.env.DB_DATABASE_DEVELOPMENT,
     "host": process.env.DB_HOST_DEVELOPMENT,
     "dialect": "mysql",
+    "define": {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+      deletedAt: 'deleted_at'
+    },
     "logging": console.log,
   },
   "staging": {
@@ -14,6 +19,11 @@ module.exports = {
     "database": process.env.DB_DATABASE_STAGING,
     "host": process.env.DB_HOST_STAGING,
     "dialect": "mysql",
+    "define": {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+      deletedAt: 'deleted_at'
+    },
     "logging": false
   },
   "production": {
@@ -22,6 +32,11 @@ module.exports = {
     "database": process.env.DB_DATABASE_PRODUCTION,
     "host": process.env.DB_HOST_PRODUCTION,
     "dialect": "mysql",
+    "define": {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+      deletedAt: 'deleted_at'
+    },
     "logging": false
   }
 };
