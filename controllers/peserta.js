@@ -2,11 +2,11 @@ const { peserta } = require('../models/index.js');
 const md5 = require('md5');
 module.exports = {
   list: (req, res) => {
-    peserta.findAll().then( pserta => {
+    peserta.findAll().then( result => {
       res.json({
           status: 'OK',
           messages: '',
-          data: pserta
+          data: result
       });
     }).catch(err => {
       res.status(500).json({
@@ -20,8 +20,8 @@ module.exports = {
   get: (req, res) => {
     peserta.findOne({
       where: { id: req.params.id }
-    }).then( pserta => {      
-      if( pserta === null ) {
+    }).then( result => {      
+      if( result === null ) {
         return res.status(404).json({
           status: 'ERROR',
           messages: 'Resource Not Found!',
@@ -31,7 +31,7 @@ module.exports = {
       res.json({
         status: 'OK',
         messages: '',
-        data: pserta
+        data: result
       });
     }).catch( err => {
       res.status(500).json({
@@ -52,11 +52,11 @@ module.exports = {
       valid: valid,
       expired: expired,
       jadwal_test: jadwal_test
-    }).then( pserta => {
+    }).then( result => {
       res.json({
         status: 'OK',
         messages: 'Success insert data.',
-        data: pserta
+        data: result
       });
     }).catch( err => {
       res.status(400).json({
@@ -115,7 +115,7 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then( pserta => {
+    }).then( result => {
       res.json({
         status: 'OK',
         messages: 'Success update data.',
@@ -142,7 +142,7 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then( pserta => {
+    }).then( result => {
       res.json({
         status: 'OK',
         messages: 'Success delete data.',
