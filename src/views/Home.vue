@@ -1,17 +1,18 @@
 <template>
   <div>
     <Navbar />
-    <section class="hero">
-      <div class="hero-body">
+    <section class="hero is-medium is-bold">
+      <div class="hero-body has-text-centered">
         <div class="container">
-          <div class="card">
-            <div class="card-content">
-              <p>
-                “There are two hard things in computer science: cache
-                invalidation, naming things, and off-by-one errors.”
-              </p>
-            </div>
-          </div>
+          <h1 class="title has-text-primary">
+            Ketahui Minat dan Bakatmu disini !
+          </h1>
+          <p>
+            Ikuti tes ini dan dapatkan gambaran tentang diri Anda secara akurat
+            serta objektif. Ketahui apa yang unik dari diri Anda dan mengapa
+            melakukan sesuatu dengan cara Anda
+          </p>
+          <img src="../assets/hero-image.png" alt="" />
         </div>
       </div>
     </section>
@@ -20,14 +21,14 @@
 </template>
 
 <script>
-  import Navbar from "../components/Navbar.vue";
-  import Footer from "../components/Footer.vue";
+import Navbar from "../components/Navbar.vue";
+import Footer from "../components/Footer.vue";
 
-  export default {
-    name: "home",
-    components: {
-      Navbar,
-      Footer,
-    },
-  };
+export default {
+  name: "home",
+  components: {
+    Navbar,
+    Footer
+  }
+};
 </script>

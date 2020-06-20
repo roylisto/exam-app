@@ -2,7 +2,7 @@
 @import "~bulma/sass/utilities/_all";
 
 // Set your colors
-$primary: #8c67ef;
+$primary: #f86060;
 $primary-invert: findColorInvert($primary);
 $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
@@ -21,11 +21,31 @@ $colors: (
     "twitter": ($twitter, $twitter-invert)
 );
 
+@mixin button() {
+    width: 135px;
+    height: 83px;
+    border: 2px solid $primary !important;
+    color: $primary !important;
+}
+
+.navbar {
+    border-bottom: 1px solid $primary;
+}
+
+.button-outline { @include button(); }
+
+.button-round {
+    @include button();
+    border-radius: 2000px !important;
+}
+
 // Links
 $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
+$footer-background-color: $primary;
+$footer-color: white;
 
 // Import Bulma and Buefy styles
 @import "~bulma";
-@import "~buefy/src/scss/buefy";
+@import "~buefy/src/scss/buefy"

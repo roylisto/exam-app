@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer class="footer">
+    <footer class="footer is-primary">
       <div class="content has-text-centered">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum,
