@@ -21,6 +21,10 @@ $colors: (
     "twitter": ($twitter, $twitter-invert)
 );
 
+.container {
+    margin: 2rem auto !important;
+}
+
 .login-image {
     background-image: url('https://cdn.zeplin.io/5eea0882a4d52d4a36e76902/assets/1d14cebf-8693-4379-98d3-64dd1a62fee6.png');
       /* Full height */
@@ -30,6 +34,15 @@ $colors: (
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.box {
+    width: 100%;
+    padding: 60px;
+    height: 100%;
+    border-radius: 32px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #f5f5f5;
 }
 
 @mixin button() {
