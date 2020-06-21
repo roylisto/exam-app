@@ -12,7 +12,10 @@
             serta objektif. Ketahui apa yang unik dari diri Anda dan mengapa
             melakukan sesuatu dengan cara Anda
           </p>
-          <img src="../assets/hero-image.png" alt="" />
+          <img
+            src="https://cdn.zeplin.io/5eea0882a4d52d4a36e76902/assets/9c71260d-bab9-4036-a3e5-2c192901e874.png"
+            style="height: 21rem"
+          />
         </div>
       </div>
     </section>

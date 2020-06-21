@@ -21,6 +21,17 @@ $colors: (
     "twitter": ($twitter, $twitter-invert)
 );
 
+.login-image {
+    background-image: url('https://cdn.zeplin.io/5eea0882a4d52d4a36e76902/assets/1d14cebf-8693-4379-98d3-64dd1a62fee6.png');
+      /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 @mixin button() {
     width: 135px;
     height: 83px;
@@ -45,6 +56,7 @@ $link-invert: $primary-invert;
 $link-focus-border: $primary;
 $footer-background-color: $primary;
 $footer-color: white;
+$footer-padding: 2rem 1rem 5rem;
 
 // Import Bulma and Buefy styles
 @import "~bulma";
