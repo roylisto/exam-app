@@ -1,16 +1,18 @@
 <template>
   <div>
-    <b-navbar type="is-primary" spaced fixed-top>
+    <b-navbar spaced fixed-top>
       <template slot="brand">
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          Bakatku.id
+          <a class="button button-outline">
+            bakatku.id
+          </a>
         </b-navbar-item>
       </template>
 
       <template slot="end">
         <b-navbar-item tag="div">
           <div class="buttons">
-            <a class="button is-primary">
+            <a class="button button-round">
               Log in
             </a>
           </div>
