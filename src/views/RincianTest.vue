@@ -4,7 +4,7 @@
     <div class="container">
       <p class="title has-text-centered has-text-weight-light">Rincian Test</p>
       <div class="box">
-        <div class="columns has-text-centered">
+        <div class="columns is-mobile has-text-centered">
           <div class="column">
             <h5 class="is-size-5 has-text-weight-semibold">Jenis Test</h5>
             <p>Subtest 1 IST</p>
