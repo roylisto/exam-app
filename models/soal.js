@@ -1,33 +1,38 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  const soal = sequelize.define('soal', {
-    kategori: {
-      DataTypes.STRING
+module.exports = function(sequelize, DataTypes) {
+  let soal = sequelize.define('soal', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    kategori: {        
+      type: DataTypes.STRING
     },
     paket_soal: {
-      DataTypes.STRING
+      type: DataTypes.STRING
     },
-    pertanyaan: {
-      DataTypes.TEXT
+    pertanyaan: {        
+      type: DataTypes.TEXT
     },
-    kunci_jawaban: {
-      DataTypes.STRING
+    kunci_jawaban: {        
+      type: DataTypes.STRING(1)
     },
-    pilihan: {
-      DataTypes.TEXT,
-      get: {
-        const rawValue = this.getDataValue(pilihan);
+    pilihan: {        
+      type: DataTypes.TEXT,
+      get() {
+        const rawValue = this.getDataValue(pilihan)
         return rawValue? JSON.parse(rawValue) : null
       }
     },
     waktu: {
-      DataTypes.INTEGER
+      type: DataTypes.INTEGER
     }
-  }, {
+  }, {    
     tableName: 'soal',
     underscored: true,
     timestamps: false,
   });
-    
+
   return soal;
 };
