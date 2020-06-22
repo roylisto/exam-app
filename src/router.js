@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from "../src/views/Home.vue";
-import Login from "../src/views/login.vue";
+import Login from "../src/views/Login.vue";
 import RincianTest from "../src/views/RincianTest.vue";
 import PetunjukSoal from "../src/views/PetunjukSoal.vue";
 
