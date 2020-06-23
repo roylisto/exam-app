@@ -7,7 +7,7 @@ import PetunjukSoal from "../src/views/PetunjukSoal.vue";
 
 Vue.use(Router)
 
-export default new Router({
+const routes = new Router({
   mode: 'history',
   routes: [
     {
@@ -32,3 +32,5 @@ export default new Router({
     }
   ]
 })
+
+export default routes;
