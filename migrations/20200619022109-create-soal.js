@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.TEXT
       },
       kunci_jawaban: {
-        type: Sequelize.STRING(1)
+        type: Sequelize.STRING
       },
       pilihan: {
         type: Sequelize.TEXT,

@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT
     },
     kunci_jawaban: {        
-      type: DataTypes.STRING(1)
+      type: DataTypes.STRING
     },
     pilihan: {        
       type: DataTypes.TEXT,
