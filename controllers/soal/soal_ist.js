@@ -1,8 +1,8 @@
-const { soal } = require('../models/index.js');
+const { soal_ist } = require('../../models/index.js');
 
 module.exports = {
   list: (req, res) => {
-    soal.findAll({
+    soal_ist.findAll({
       where: req.query
     }).then( result => {
       res.json({
@@ -20,7 +20,7 @@ module.exports = {
   },
 
   get: (req, res) => {
-    soal.findOne({
+    soal_ist.findOne({
       where: {
         id: req.params.id
       }
@@ -49,16 +49,16 @@ module.exports = {
   create: (req, res) => {
     let {
       kategori,
-      paket_soal,
+      paket_soal_ist,
       pertanyaan,
       kunci_jawaban,
       pilihan,
       waktu
     } = req.body    
 
-    soal.create({
+    soal_ist.create({
       kategori: kategori,
-      paket_soal: paket_soal,
+      paket_soal_ist: paket_soal_ist,
       pertanyaan: pertanyaan,
       kunci_jawaban: kunci_jawaban,
       pilihan: pilihan,
@@ -86,7 +86,7 @@ module.exports = {
       jadwal_test,
       password
     } = req.body
-    soal.update({
+    soal_ist.update({
       email: email,
       password: password,
       valid: valid,
@@ -119,7 +119,7 @@ module.exports = {
   },
 
   delete: (req, res) => {
-    soal.destroy({
+    soal_ist.destroy({
       where: {
         id: req.params.id
       }

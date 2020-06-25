@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  let soal = sequelize.define('soal', {
+  let soal_ist = sequelize.define('soal_ist', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -32,10 +32,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER
     }
   }, {    
-    tableName: 'soal',
+    tableName: 'soal_ist',
     underscored: true,
     timestamps: false,
   });
 
-  return soal;
+  return soal_ist;
 };
