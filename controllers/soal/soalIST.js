@@ -1,8 +1,8 @@
-const { soal_ist } = require('../../models/index.js');
+const { soalIST } = require('../../models/index.js');
 
 module.exports = {
   list: (req, res) => {
-    soal_ist.findAll({
+    soalIST.findAll({
       where: req.query
     }).then( result => {
       res.json({
@@ -20,7 +20,7 @@ module.exports = {
   },
 
   get: (req, res) => {
-    soal_ist.findOne({
+    soalIST.findOne({
       where: {
         id: req.params.id
       }
@@ -48,17 +48,19 @@ module.exports = {
 
   create: (req, res) => {
     let {
+      nomor,
       kategori,
-      paket_soal_ist,
+      paket_soal,
       pertanyaan,
       kunci_jawaban,
       pilihan,
       waktu
     } = req.body    
 
-    soal_ist.create({
+    soalIST.create({
+      nomor: nomor,
       kategori: kategori,
-      paket_soal_ist: paket_soal_ist,
+      paket_soal: paket_soal,
       pertanyaan: pertanyaan,
       kunci_jawaban: kunci_jawaban,
       pilihan: pilihan,
@@ -80,18 +82,22 @@ module.exports = {
 
   update: (req, res) => {
     let {
-      email,
-      valid,
-      expired,
-      jadwal_test,
-      password
+      nomor,
+      kategori,
+      paket_soal,
+      pertanyaan,
+      kunci_jawaban,
+      pilihan,
+      waktu
     } = req.body
-    soal_ist.update({
-      email: email,
-      password: password,
-      valid: valid,
-      expired: expired,
-      jadwal_test: jadwal_test
+    soalIST.update({
+      nomor: nomor,
+      kategori: kategori,
+      paket_soal: paket_soal,
+      pertanyaan: pertanyaan,
+      kunci_jawaban: kunci_jawaban,
+      pilihan: pilihan,
+      waktu: waktu
     }, {
       where: {
         id: req.params.id
@@ -102,11 +108,13 @@ module.exports = {
         messages: 'Success update data.',
         data: {
           id: req.params.id,
-          email: email,
-          password: password,
-          valid: valid,
-          expired: expired,
-          jadwal_test: jadwal_test
+          nomor: nomor,
+          kategori: kategori,
+          paket_soal: paket_soal,
+          pertanyaan: pertanyaan,
+          kunci_jawaban: kunci_jawaban,
+          pilihan: pilihan,
+          waktu: waktu
         }
       });
     }).catch(err => {
@@ -119,7 +127,7 @@ module.exports = {
   },
 
   delete: (req, res) => {
-    soal_ist.destroy({
+    soalIST.destroy({
       where: {
         id: req.params.id
       }

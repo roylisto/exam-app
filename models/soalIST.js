@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  let soal_ist = sequelize.define('soal_ist', {
+  let soalIST = sequelize.define('soalIST', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -37,5 +37,5 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false,
   });
 
-  return soal_ist;
+  return soalIST;
 };
