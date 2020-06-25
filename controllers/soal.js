@@ -2,18 +2,20 @@ const { soal } = require('../models/index.js');
 
 module.exports = {
   list: (req, res) => {
-    soal.findAll().then(result => {
+    soal.findAll({
+      where: req.query
+    }).then( result => {
       res.json({
-        status: 'OK',
-        messages: '',
-        data: result
+          status: 'OK',
+          messages: '',
+          data: result
       });
     }).catch(err => {
       res.status(500).json({
-        status: 'ERROR',
-        messages: err,
-        data: {}
-      });
+          status: 'ERROR',
+          messages: err,
+          data: {}
+      }); 
     });
   },
 

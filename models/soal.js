@@ -6,6 +6,9 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true,
     },
+    nomor: {
+      type: DataTypes.INTEGER
+    },
     kategori: {        
       type: DataTypes.STRING
     },
@@ -21,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     pilihan: {        
       type: DataTypes.TEXT,
       get() {
-        const rawValue = this.getDataValue(pilihan)
+        let rawValue = this.getDataValue('pilihan')
         return rawValue? JSON.parse(rawValue) : null
       }
     },
