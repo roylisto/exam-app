@@ -56,6 +56,14 @@ $colors: (
     border-bottom: 1px solid $primary;
 }
 
+.soal-item {
+    margin-top: 2rem;
+
+    h1 {
+        font-weight: bold;
+    }
+}
+
 .button-outline { @include button(); }
 
 .button-round {

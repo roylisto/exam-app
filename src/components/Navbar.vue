@@ -10,7 +10,7 @@
       </template>
 
       <template slot="end">
-        <b-navbar-item tag="router-link" to="/login">
+        <b-navbar-item tag="router-link" :to="{ path: '/login' }">
           <div class="buttons">
             <a class="button button-round">
               Log in
