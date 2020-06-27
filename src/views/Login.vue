@@ -55,13 +55,28 @@ import Footer from "../components/Footer.vue";
 
 export default {
   name: "login",
+  data: () => ({
+    email: '',
+    password: ''
+  }),
   components: {
     Navbar,
     Footer
   },
   methods: {
     login() {
-      console.log("login");
+      let payload = {
+        email: this.email,
+        password: this.password
+      }
+
+      this.$store.dispatch('auth/login', payload)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }
   }
 };
