@@ -6,12 +6,26 @@
         Petunjuk Soal Subtest 1 (01-20)
       </p>
       <div class="box">
-        <p>
-          Soal-soal 01-20 terdiri atas kalimat-kalimat Pada setiap kalimat satu
-          kata yang hilang dan disediakan 5 (lima) kata pilihan sebagai
-          penggantinya Pilihlah kata yang tepat yang dapat menyempurnakan
-          kalimat itu.
-        </p>
+        <div class="soal-petunjuk">
+          <p>
+            Soal-soal 01-20 terdiri atas kalimat-kalimat Pada setiap kalimat satu
+            kata yang hilang dan disediakan 5 (lima) kata pilihan sebagai
+            penggantinya Pilihlah kata yang tepat yang dapat menyempurnakan
+            kalimat itu.
+          </p>
+        </div>
+        <div class="soal-item">
+          <h1>Contoh 01</h1>
+          <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
+        </div>
+        
+        <div class="soal-item">
+          <h1>Contoh 01</h1>
+          <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
+        </div>
+        
+        <b-button expanded type="is-primary" @click="login" style="margin-top: 2rem"
+        >Mulai test</b-button>
       </div>
     </div>
     <Footer />
