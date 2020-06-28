@@ -3,6 +3,7 @@ const user = require('../controllers/user.js');
 const auth = require('../controllers/auth.js');
 const peserta = require('../controllers/peserta.js');
 const soalIST = require('../controllers/soal/soalIST.js');
+const soalMII = require('../controllers/soal/soalMII.js');
 //users route
 router.get('/users', user.list);
 router.get('/users/:id', user.get);
@@ -21,6 +22,10 @@ router.delete('/peserta/:id', peserta.delete);
 //soal_IST route
 router.get('/soal/ist', soalIST.list);
 router.get('/soal/ist/:id', soalIST.get);
+
+//soal_MII route
+router.get('/soal/mii', soalMII.list);
+router.get('/soal/mii/:id', soalMII.get);
 
 router.post('/auth', auth.login);
 module.exports = router;
