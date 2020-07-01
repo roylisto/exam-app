@@ -25,9 +25,6 @@ module.exports = {
       },
       pilihan: {
         type: Sequelize.TEXT,
-      },
-      waktu: {
-        type: Sequelize.INTEGER
       }
     });
   },
