@@ -1,34 +1,29 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('soal_ist', {
+    return queryInterface.createTable('log_soal_peserta', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nomor: {
+      peserta_id: {
         type: Sequelize.INTEGER
       },
-      kategori: {
+      jenis_soal: {
         type: Sequelize.STRING
       },
       paket_soal: {
         type: Sequelize.STRING
       },
-      pertanyaan: {
-        type: Sequelize.TEXT
-      },
-      kunci_jawaban: {
-        type: Sequelize.STRING
-      },
-      pilihan: {
-        type: Sequelize.TEXT,
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('soal_ist');
+    return queryInterface.dropTable('log_soal_peserta');
   }
 };

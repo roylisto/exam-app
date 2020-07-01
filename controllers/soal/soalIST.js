@@ -1,22 +1,44 @@
 const { soalIST } = require('../../models/index.js');
 
 module.exports = {
-  list: (req, res) => {
-    soalIST.findAll({
-      where: req.query
-    }).then( result => {
-      res.json({
+  list: async (req, res) => {
+    try {
+      const soal = await soalIST.findAll({
+        where: req.query,      
+      });
+
+      if(soal.length==1) {
+        const isFirst = await soalIST.min('nomor', {where: {paket_soal: req.query.paket_soal}})
+          .then(min => {
+            if(min==soal[0].nomor) { return true; } 
+            else { return false; }
+          });
+        const isLast = await soalIST.max('nomor', {where: {paket_soal: req.query.paket_soal}})
+          .then(max => {
+            if(max==soal[0].nomor) { return true; } 
+            else { return false; }
+          });
+        res.json({
           status: 'OK',
           messages: '',
-          data: result
+          data: soal[0],
+          isFirst: isFirst,
+          isLast: isLast
+        });
+      } else {
+        res.json({
+          status: 'OK',
+          messages: '',
+          data: soal
+        });
+      }
+    } catch (err) {
+      res.status(400).json({
+        status: 'ERROR',
+        messages: err,
+        data: {}
       });
-    }).catch(err => {
-      res.status(500).json({
-          status: 'ERROR',
-          messages: err,
-          data: {}
-      }); 
-    });
+    }
   },
 
   get: (req, res) => {

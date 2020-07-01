@@ -4,6 +4,11 @@ const auth = require('../controllers/auth.js');
 const peserta = require('../controllers/peserta.js');
 const soalIST = require('../controllers/soal/soalIST.js');
 const soalMII = require('../controllers/soal/soalMII.js');
+const time = require('../controllers/timeController.js');
+
+//etc: api/time/ist/subtest1/3
+router.get('/time/:jenis_soal/:paket_soal/:peserta_id', time.get);
+
 //users route
 router.get('/users', user.list);
 router.get('/users/:id', user.get);
