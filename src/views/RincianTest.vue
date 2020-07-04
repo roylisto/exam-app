@@ -46,6 +46,7 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "rincian-test",
@@ -53,9 +54,21 @@ export default {
     Navbar,
     Footer
   },
+  computed: {
+    ...mapGetters("ist", ["soalIST"])
+  },
+  mounted() {
+    this.getSoal();
+  },
   methods: {
-    login() {
-      console.log("login");
+    getSoal() {
+      this.$store.dispatch("ist/getSoalIST")
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 };
