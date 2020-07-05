@@ -2,7 +2,7 @@ import API from './API'
 
 const api = {
   getSingleSoal(data) {
-    return API().get('api/soal/ist', {
+    return API().get('soal/ist', {
       params: {
         nomor: data.nomor,
         paket_soal: data.paket
@@ -10,7 +10,7 @@ const api = {
     });
   },
   getSoal() {
-    return API().get('api/soal/ist');
+    return API().get('soal/ist');
   },
 }
 

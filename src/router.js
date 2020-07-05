@@ -49,17 +49,18 @@ const routes = new Router({
   ]
 })
 
-// routes.beforeEach((to, from, next) => {
-//   let user = JSON.stringify(localStorage.getItem('user'));
+routes.beforeEach((to, from, next) => {
+  let token = localStorage.getItem('token');
 
-//   if (to.matched.some(route => route.meta.requiresAuth)) {
-//     if (user != null) {
-//       next();
-//     } else {
-//       next({ path: '/login' });
-//     }
-//   }
-//   next();
-// })
+  if (to.matched.some(route => route.meta.requiresAuth)) {
+    if (token) {
+      next();
+    } else {
+      console.log(token)
+      next({ path: '/login' });
+    }
+  }
+  next();
+})
 
 export default routes;
