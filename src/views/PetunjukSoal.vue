@@ -24,7 +24,7 @@
           <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
         </div>
         
-        <b-button expanded type="is-primary" @click="login" style="margin-top: 2rem"
+        <b-button expanded type="is-primary" @click="login" tag="router-link" to="/soal" style="margin-top: 2rem"
         >Mulai test</b-button>
       </div>
     </div>

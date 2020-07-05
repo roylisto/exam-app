@@ -6,6 +6,7 @@
       <div class="box">
         <div class="is-mobile has-text-centered">
           <soal-container
+            :total="totalSoal"
             :soal="allSoal[nomor]"
             v-on:jawaban="handleJawaban"
             :nomor="nomor + 1"
@@ -29,6 +30,7 @@ export default {
     soal: [],
     jawaban: [],
     nomor: 0,
+    totalSoal: '',
     allSoal: [],
     benar: 0
   }),
@@ -56,8 +58,6 @@ export default {
 
       this.$store.dispatch("ist/getSingle", payload)
         .then((response) => {
-          console.log(response)
-          // this.$set(this.soal, 'soal', response.data.data)
           this.soal = response.data
         })
         .catch((error) => {
@@ -68,6 +68,7 @@ export default {
      this.$store.dispatch("ist/getAllSoal")
         .then((response) => {
           this.allSoal = response.data.data
+          this.totalSoal = this.allSoal.length
         })
         .catch((error) => {
           console.log(error)
@@ -82,9 +83,7 @@ export default {
       }
     },
     handleHasil() {
-      console.log('handle');
       this.allSoal.forEach((item, index) => {
-        console.log(this.jawaban)
         if (this.jawaban[index] === item.kunci_jawaban) this.benar++;
       })
     }
