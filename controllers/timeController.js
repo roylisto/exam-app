@@ -44,8 +44,8 @@ module.exports = {
     } else {
       const last_time = moment(last_log.created_at);
       const now = moment(new Date());
-      
-      if(now.diff(last_time, 'minutes') > waktu_soal.waktu) {
+      const sisa_waktu = (waktu_soal.waktu*60)-now.diff(last_time, 'seconds');
+      if(sisa_waktu < 0) {
         res.json({
           status: 'OK',
           messages: 'sesi waktu untuk jenis dan subtes ini telah habis',
@@ -56,7 +56,7 @@ module.exports = {
           status: 'OK',
           messages: '',
           data: {          
-            waktu: waktu_soal.waktu*60 //convert menit ke detik
+            waktu: sisa_waktu
           }
         });
       }

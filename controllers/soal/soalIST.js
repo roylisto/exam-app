@@ -18,6 +18,8 @@ module.exports = {
             if(max==soal[0].nomor) { return true; } 
             else { return false; }
           });
+
+        soal[0].kunci_jawaban = null;
         res.json({
           status: 'OK',
           messages: '',
