@@ -73,7 +73,7 @@ export default {
       this.$store.dispatch('auth/login', payload)
         .then((response) => {
           this.$router.push({
-            path: '/petunjuk-soal'
+            path: '/rincian-test'
           })
         })
         .catch((error) => {

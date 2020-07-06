@@ -17,13 +17,22 @@
             </a>
           </div>
         </b-navbar-item>
-        <b-navbar-item v-else>
-          <div class="buttons">
-            <button class="button button-round" @click="logout">
-              Log out
-            </button>
-          </div>
-        </b-navbar-item>
+        <template v-else>
+          <b-navbar-item>
+            <div class="buttons">
+              <button class="button button-round">
+                Anawula - Jadwal tes 13 November 2020
+              </button>
+            </div>
+          </b-navbar-item>
+          <b-navbar-item>
+            <div class="buttons">
+              <button class="button is-text" @click="logout">
+                Log out
+              </button>
+            </div>
+          </b-navbar-item>
+        </template>
       </template>
     </b-navbar>
   </div>

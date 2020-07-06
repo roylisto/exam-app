@@ -4,7 +4,7 @@ import createLogger from 'vuex/dist/logger';
 import modules from './modules';
 import auth from './auth/main';
 import ist from './ist/main';
-// import createPersistedState from "vuex-persistedstate";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -16,7 +16,8 @@ const logger = createLogger({
 });
 
 export default new Vuex.Store({
-  plugins: [logger],
+  // plugins: [logger],
+  plugins: [logger, createPersistedState()],
   modules: {
     auth: auth,
     ist: ist

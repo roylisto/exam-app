@@ -1,4 +1,5 @@
 import Auth from '../../services/AuthService';
+import VueJwtDecode from 'vue-jwt-decode'
 
 const user = {
   namespaced: true,
@@ -8,7 +9,7 @@ const user = {
   },
   mutations: {
     SET_USER(state, payload) {
-      state.user.push(payload)
+      state.user = payload
     },
     SET_TOKEN(state, payload) {
       state.token = payload
@@ -23,9 +24,16 @@ const user = {
       return Auth.login(payload)
         .then((response) => {
           var token = response.data.data.token
+
+          var decodedToken = VueJwtDecode.decode(token)
+          var user = JSON.stringify(decodedToken.data)
+
           localStorage.setItem('token', token)
+
           commit('SET_TOKEN', token);
-          return response
+          commit('SET_USER', user);
+          
+          return response;
         })
         .catch((error) => {
           return error
