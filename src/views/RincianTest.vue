@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <div class="container">
+    <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">Rincian Test</p>
       <div class="box">
         <div class="columns is-mobile has-text-centered">

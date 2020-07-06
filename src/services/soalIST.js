@@ -12,6 +12,9 @@ const api = {
   getSoal() {
     return API().get('soal/ist');
   },
+  submit() {
+    return API().post('jawaban');
+  }
 }
 
 export default api;
