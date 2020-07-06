@@ -6,12 +6,13 @@ const soalIST = require('../controllers/soal/soalIST.js');
 const soalMII = require('../controllers/soal/soalMII.js');
 const time = require('../controllers/timeController.js');
 const jawaban = require('../controllers/jawaban.js');
+const authorize = require('../middlewares/authorize.js');
 //etc: api/time/ist/subtest1/3
-router.get('/time/:jenis_soal/:paket_soal/:peserta_id', time.get);
+router.get('/time/:jenis_soal', authorize(), time.get);
 
 //jawaban route
-router.post('/jawaban', jawaban.store);
-router.get('/rincian-test/:peserta_id', jawaban.list);
+router.post('/jawaban', authorize(), jawaban.store);
+router.get('/rincian-test', authorize(), jawaban.list);
 //users route
 router.get('/users', user.list);
 router.get('/users/:id', user.get);
