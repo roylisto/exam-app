@@ -5,9 +5,12 @@ const peserta = require('../controllers/peserta.js');
 const soalIST = require('../controllers/soal/soalIST.js');
 const soalMII = require('../controllers/soal/soalMII.js');
 const time = require('../controllers/timeController.js');
-
+const jawaban = require('../controllers/jawaban.js');
 //etc: api/time/ist/subtest1/3
 router.get('/time/:jenis_soal/:paket_soal/:peserta_id', time.get);
+
+//jawaban route
+router.post('/jawaban', jawaban.store);
 
 //users route
 router.get('/users', user.list);
