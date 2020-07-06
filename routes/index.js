@@ -29,12 +29,12 @@ router.put('/peserta/:id', peserta.update);
 router.delete('/peserta/:id', peserta.delete);
 
 //soal_IST route
-router.get('/soal/ist', soalIST.list);
-router.get('/soal/ist/:id', soalIST.get);
+router.get('/soal/ist', authorize(), soalIST.list);
+router.get('/soal/ist/:id', authorize(), soalIST.get);
 
 //soal_MII route
-router.get('/soal/mii', soalMII.list);
-router.get('/soal/mii/:id', soalMII.get);
+router.get('/soal/mii', authorize(), soalMII.list);
+router.get('/soal/mii/:id', authorize(), soalMII.get);
 
 router.post('/auth', auth.login);
 module.exports = router;
