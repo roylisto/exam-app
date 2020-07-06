@@ -11,7 +11,7 @@ router.get('/time/:jenis_soal/:paket_soal/:peserta_id', time.get);
 
 //jawaban route
 router.post('/jawaban', jawaban.store);
-
+router.get('/rincian-test/:peserta_id', jawaban.list);
 //users route
 router.get('/users', user.list);
 router.get('/users/:id', user.get);
