@@ -27,9 +27,6 @@ module.exports = function(sequelize, DataTypes) {
         let rawValue = this.getDataValue('pilihan')
         return rawValue? JSON.parse(rawValue) : null
       }
-    },
-    waktu: {
-      type: DataTypes.INTEGER
     }
   }, {    
     tableName: 'soal_ist',
