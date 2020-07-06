@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <div class="container">
+    <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
         Petunjuk Soal Subtest 1 (01-20)
       </p>
@@ -24,7 +24,7 @@
           <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
         </div>
         
-        <b-button expanded type="is-primary" @click="login" tag="router-link" to="/soal" style="margin-top: 2rem"
+        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', params: {paket: 'subtest1', jenis: 'ist'}}" style="margin-top: 2rem"
         >Mulai test</b-button>
       </div>
     </div>
