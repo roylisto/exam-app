@@ -28,21 +28,20 @@ const user = {
           var decodedToken = VueJwtDecode.decode(token)
           var user = JSON.stringify(decodedToken.data)
 
-          console.log(decodedToken)
-
           localStorage.setItem('token', token)
 
           commit('SET_TOKEN', token);
           commit('SET_USER', user);
           
-          return response;
+          return Promise.resolve(response)
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
         })
     },
     logout({commit}) {
       localStorage.removeItem('token');
+      localStorage.removeItem('vuex');
       commit('SET_EMPTY_USER');
       return 'Logged out';
     }

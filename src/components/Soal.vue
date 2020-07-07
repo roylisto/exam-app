@@ -9,7 +9,7 @@
       </div>
     </template>
     <template v-else>
-      <div v-for="(value, index) in soal.pilihan" :key="index" class="radiobtn has-text-left">
+      <div v-for="(value, index) in soal.pilihan" :key="index" class="radiobtn has-text-left" >
         <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
         <label>{{value}}</label>
       </div>

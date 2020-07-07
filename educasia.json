@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "c66bf69f-90f6-4af6-8cb9-9b7680e26593",
+		"name": "educasia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:5000/api/users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/users",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				},
+				"description": "get all user data"
+			},
+			"response": []
+		},
+		{
+			"name": "get one soal MII",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_URL}}/soal/mii?paket_soal=Bagian 1 Verb Ling&nomor=1",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"soal",
+						"mii"
+					],
+					"query": [
+						{
+							"key": "paket_soal",
+							"value": "Bagian 1 Verb Ling"
+						},
+						{
+							"key": "nomor",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get one soal IST",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_URL}}/soal/ist?paket_soal=subtest1&nomor=1",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"soal",
+						"ist"
+					],
+					"query": [
+						{
+							"key": "paket_soal",
+							"value": "subtest1"
+						},
+						{
+							"key": "nomor",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth peserta",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"jhon@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SERVER_URL}}/auth",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get sisa waktu subtest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER_URL}}/time/ist/subtest1/13",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"time",
+						"ist",
+						"subtest1",
+						"13"
+					]
+				},
+				"description": "/time/:jenis_soal/:paket_soal/:peserta_id"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -110,6 +110,7 @@ export default {
     getAllSoal() {
      this.$store.dispatch("ist/getAllSoal")
         .then((response) => {
+          console.log(response)
           this.allSoal = response.data.data
           this.totalSoal = this.allSoal.length
         })
