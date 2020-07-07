@@ -24,7 +24,7 @@
           <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
         </div>
         
-        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', params: {paket: 'subtest1', jenis: 'ist'}}" style="margin-top: 2rem"
+        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: 'subtes1', jenis: 'ist'}}" style="margin-top: 2rem"
         >Mulai test</b-button>
       </div>
     </div>

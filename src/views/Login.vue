@@ -72,6 +72,7 @@ export default {
 
       this.$store.dispatch('auth/login', payload)
         .then((response) => {
+          console.log(response)
           this.$router.push({
             path: '/rincian-test'
           })

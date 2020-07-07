@@ -1,7 +1,7 @@
 <template>
   <div id="soal">
     <Navbar />
-    <template v-if="!hasilTes">
+    <template v-if="!akhirTes">
       <div class="container">
         <p class="title has-text-centered has-text-weight-light">Test IST Bagian 1</p>
         <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan</p>
@@ -60,13 +60,36 @@ export default {
     Footer
   },
   computed: {
-    ...mapGetters("ist", ["soalIST"])
+    ...mapGetters("ist", ["soalIST"]),
+    ...mapGetters("auth", ["user"]),
+    userInfo() {
+      return JSON.parse(this.user)
+    }
   },
   created() {
-    // this.getSingleSoal();
+    this.fetchWaktu();
     this.getAllSoal();
   },
   methods: {
+    fetchWaktu() {
+      var jenis = this.$route.query.jenis;
+      var paket = this.$route.query.paket;
+      var id    = this.userInfo.id;
+
+      var payload = {
+        jenis_soal: jenis,
+        paket_soal: paket,
+        peserta_id: id
+      }
+
+      this.$store.dispatch("waktu/sisaWaktu", payload)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    },
     // getSingleSoal() {
     //   var nomor = this.$route.query.nomor;
     //   var paket_soal = this.$route.query.paket_soal;

@@ -28,6 +28,8 @@ const user = {
           var decodedToken = VueJwtDecode.decode(token)
           var user = JSON.stringify(decodedToken.data)
 
+          console.log(decodedToken)
+
           localStorage.setItem('token', token)
 
           commit('SET_TOKEN', token);
@@ -44,6 +46,9 @@ const user = {
       commit('SET_EMPTY_USER');
       return 'Logged out';
     }
+  },
+  getters: {
+    user: state => state.user
   }
 }
 
