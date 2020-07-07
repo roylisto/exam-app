@@ -3,11 +3,13 @@
     <transition name="fade">
       <router-view></router-view>
     </transition>
+    <Footer />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import Footer from "../components/Footer.vue";
 
 const states = mapState({
   welcome: state => state.dummy.welcome
@@ -15,7 +17,10 @@ const states = mapState({
 
 export default {
   name: "app",
-  computed: { ...states }
+  computed: { ...states },
+  components: {
+    Footer
+  }
 };
 </script>
 
