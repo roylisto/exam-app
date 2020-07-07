@@ -21,7 +21,7 @@
           <b-navbar-item>
             <div class="buttons">
               <button class="button button-round">
-                Anawula - Jadwal tes 13 November 2020
+                {{userInfo.nama}} - Jadwal tes {{ moment(userInfo.waktu).format('MMMM Do YYYY') }}
               </button>
             </div>
           </b-navbar-item>
@@ -39,6 +39,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import moment from 'moment';
+import 'moment/locale/id';
+
 export default {
   name: 'login',
   methods: {
@@ -49,10 +53,26 @@ export default {
         })
     }
   },
+  mounted() {
+    this.userInfo
+  },
   computed: {
+    ...mapGetters("auth", ["user"]),
     token() {
       return localStorage.getItem('token');
+    },
+    userInfo() {
+      var user = JSON.parse(this.user)
+      return user
     }
-  }
+  },
+  methods: {
+    moment: function (date) {
+      return moment(date);
+    },
+    logout() {
+      
+    }
+  },
 }
 </script>

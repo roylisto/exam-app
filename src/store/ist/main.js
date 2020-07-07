@@ -1,4 +1,4 @@
-import soalIST from '../../services/soalIST';
+import soalIST from '../../services/SoalIST';
 
 const soal = {
   namespaced: true,

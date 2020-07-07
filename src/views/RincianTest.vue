@@ -3,28 +3,24 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">Rincian Test</p>
-      <div class="box">
+      <div class="box my-5">
         <div class="columns is-mobile has-text-centered">
           <div class="column">
             <h5 class="is-size-5 has-text-weight-semibold">Jenis Test</h5>
-            <p>Subtest 1 IST</p>
-            <p>Subtest 1 IST</p>
-            <p>Subtest 1 IST</p>
-            <p>Subtest 1 IST</p>
-            <p>Subtest 1 IST</p>
-            <p>Subtest 1 IST</p>
-            <p>Subtest 1 IST</p>
           </div>
           <div class="column">
             <h5 class="is-size-5 has-text-weight-semibold">Status</h5>
-            <p>Belum</p>
-            <p>Belum</p>
-            <p>Belum</p>
-            <p>Belum</p>
-            <p>Belum</p>
-            <p>Belum</p>
-            <p>Belum</p>
           </div>
+        </div>
+        <div v-for="(value, index) in soalTes" :key="index">
+          <div class="columns is-mobile has-text-centered">
+            <div class="column">
+              <p>{{value.test}}</p>
+            </div>
+            <div class="column">
+              <p>{{value.status}}</p>
+          </div>
+            </div>
         </div>
         <div class="field">
           <div class="control">
@@ -50,6 +46,9 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: "rincian-test",
+  data: () => ({
+    soalTes: []
+  }),
   components: {
     Navbar,
     Footer
@@ -62,9 +61,11 @@ export default {
   },
   methods: {
     getSoal() {
-      this.$store.dispatch("ist/getSoalIST")
+      var peserta_id = JSON.parse(this.$store.getters['auth/user']).id
+      this.$store.dispatch("soal/getRincianTes", peserta_id)
         .then((response) => {
-          console.log(response)
+          this.soalTes = response.data.data
+          console.log(this.soalTes)
         })
         .catch((error) => {
           console.log(error)
