@@ -5,6 +5,7 @@ import modules from './modules';
 import auth from './auth/main';
 import ist from './ist/main';
 import waktu from './waktu/main'
+import soal from './soal/main'
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
@@ -22,6 +23,7 @@ export default new Vuex.Store({
   modules: {
     auth: auth,
     ist: ist,
-    waktu: waktu
+    waktu: waktu,
+    soal: soal
   }
 });
