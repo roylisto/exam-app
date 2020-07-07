@@ -7,12 +7,10 @@ module.exports = {
   get: async (req, res) => {
     
     try {
-      let {
-        jenis_soal,
-        paket_soal,
-        peserta_id
-      } = req.params
-
+      let { jenis_soal } = req.params
+      let { paket_soal } = req.query
+      peserta_id = req.decoded.data.id
+      
       const last_log = await logSoalPeserta.findOne({
         order: [['created_at', 'DESC']],
         where: {
@@ -27,7 +25,7 @@ module.exports = {
           paket_soal: paket_soal
         }
       });
-
+      
       if(last_log===null) {
         logSoalPeserta.create({
           jenis_soal: jenis_soal,

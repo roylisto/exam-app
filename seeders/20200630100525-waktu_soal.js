@@ -4,11 +4,11 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('waktu_soal', [{
         jenis_soal: 'ist',
-        paket_soal: 'subtest1',
+        paket_soal: 'subtest 1 ist',
         waktu: 5
       }, {
         jenis_soal: 'ist',
-        paket_soal: 'subtest2',
+        paket_soal: 'subtest 2 ist',
         waktu: 5
       }, {
         jenis_soal: 'mii',
