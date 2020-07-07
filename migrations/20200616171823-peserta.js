@@ -21,10 +21,6 @@ module.exports = {
       expired: {        
         type: Sequelize.DATE
       },
-      score: {        
-        type: Sequelize.FLOAT,
-        defaultValue: 0
-      },
       jadwal_test: {
         type: Sequelize.INTEGER
       }

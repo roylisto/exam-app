@@ -18,9 +18,6 @@ module.exports = function(sequelize, DataTypes) {
     expired: {        
       type: DataTypes.DATE
     },
-    score: {        
-      type: DataTypes.FLOAT
-    },
     jadwal_test: {
       type: DataTypes.INTEGER
     }
