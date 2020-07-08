@@ -20,10 +20,10 @@ module.exports = {
   list: async (req, res) => {
     try {      
       const all_soal = [
-        'subtest 1 ist', 'subtest 2 ist', 'subtest 3 ist', 'subtest 4 ist', 'subtest 5 ist',
-        'subtest 6 ist', 'subtest 7 ist', 'subtest 8 ist', 'subtest 9 ist',
-        'Bagian 1 Verb Ling', 'Bagian 2 Log-Math', 'Bagian 3 Spat', 'Bagian 4 Mus',
-        'Bagian 5 Bod-Kin', 'Bagian 6 Inter', 'Bagian 7 Intra', 'Bagian 8 Nat'
+        "subtest_1_ist", "subtest_2_ist", "subtest_3_ist", "subtest_4_ist", "subtest_5_ist",
+        "subtest_6_ist", "subtest_7_ist", "subtest_8_ist", "subtest_9_ist",
+        "Bagian_1_Verb_Ling", "Bagian_2_Log-Math", "Bagian_3_Spat", "Bagian_4_Mus", "Bagian_5_Bod-Kin",
+        "Bagian_6_Inter", "Bagian_7_Intra", "Bagian_8_Nat"
       ];
       
       const jawaban_user = await jawaban.findAll({where: {

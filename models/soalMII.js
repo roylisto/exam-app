@@ -12,8 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     pilihan: {
       type: DataTypes.STRING,
       get() {
-        let rawValue = this.getDataValue('pilihan')
-        return rawValue? JSON.parse(rawValue) : null
+        const rawValue = this.getDataValue('pilihan')
+        return rawValue? rawValue.split("|") : null
+      },
+      set(value) {
+        this.setDataValue('pilihan', value.join("|"))
       }
     }
   }, {
