@@ -14,12 +14,10 @@ const soal = {
     sisaWaktu({commit}, payload) {
       return waktu.waktuSisa(payload)
         .then((response) => {
-          console.log(response);
-          return response
+          Promise.resolve(response)
         })
         .catch((error) => {
-          console.error(error)
-          return error
+          Promise.reject(error)
         })
     },
   },

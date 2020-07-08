@@ -52,7 +52,8 @@ export default {
     totalSoal: '',
     allSoal: [],
     benar: 0,
-    akhirTes: false
+    akhirTes: false,
+    waktu: ''
   }),
   components: {
     SoalContainer,
@@ -64,6 +65,14 @@ export default {
     ...mapGetters("auth", ["user"]),
     userInfo() {
       return JSON.parse(this.user)
+    },
+    convertTime() {
+      console.log(this.waktu)
+      var menit = Math.floor(this.waktu / 60);
+      var detik = this.waktu * 60;
+      var totalWaktu = `${menit}:${detik}`
+      console.log(totalWaktu)
+      return totalWaktu
     }
   },
   created() {
@@ -84,7 +93,8 @@ export default {
 
       this.$store.dispatch("waktu/sisaWaktu", payload)
         .then((response) => {
-          console.log(response);
+          this.waktu = response.data.data.waktu
+          console.log(this.waktu)
         })
         .catch((error) => {
           console.error(error)

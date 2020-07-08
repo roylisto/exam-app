@@ -56,7 +56,6 @@ routes.beforeEach((to, from, next) => {
     if (token) {
       next();
     } else {
-      console.log(token)
       next({ path: '/login' });
     }
   }
