@@ -33,9 +33,11 @@ module.exports = {
       let check_test = [];
       const log_jawaban_user = jawaban_user.map(row => row.paket_soal);
       
-      all_soal.forEach(element => {
+      all_soal.forEach((element, index) => {
         let tmp_status = log_jawaban_user.includes(element);
+        let jenis_soal = (index<9) ? 'ist': 'mii'; 
         check_test.push({
+          jenis: jenis_soal,
           test: element,
           status: tmp_status? 'Selesai':'Belum'
         });
