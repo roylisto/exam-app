@@ -17,6 +17,9 @@ module.exports = {
       no_hp: {
         type: Sequelize.STRING
       },
+      umur: {
+        type: Sequelize.INTEGER
+      },
       instansi: {        
         type: Sequelize.STRING
       },

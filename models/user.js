@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       type: DataTypes.STRING
     },
+    umur: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
     instansi: {      
       allowNull: false,
       type: DataTypes.STRING
