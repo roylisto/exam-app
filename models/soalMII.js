@@ -7,7 +7,13 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     nomor: DataTypes.INTEGER,
-    paket_soal: DataTypes.STRING,
+    paket_soal: {
+      type: DataTypes.STRING,
+      set(value) {
+        value = value.replace(/ /g,"_");                
+        this.setDataValue('paket_soal', value.toLowerCase())
+      }
+    },
     pertanyaan: DataTypes.TEXT,
     pilihan: {
       type: DataTypes.STRING,

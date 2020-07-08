@@ -22,8 +22,8 @@ module.exports = {
       const all_soal = [
         "subtest_1_ist", "subtest_2_ist", "subtest_3_ist", "subtest_4_ist", "subtest_5_ist",
         "subtest_6_ist", "subtest_7_ist", "subtest_8_ist", "subtest_9_ist",
-        "Bagian_1_Verb_Ling", "Bagian_2_Log-Math", "Bagian_3_Spat", "Bagian_4_Mus", "Bagian_5_Bod-Kin",
-        "Bagian_6_Inter", "Bagian_7_Intra", "Bagian_8_Nat"
+        "bagian_1_verb_ling", "bagian_2_log_math", "bagian_3_spat", "bagian_4_mus", "bagian_5_bod_kin",
+        "bagian_6_inter", "bagian_7_intra", "bagian_8_nat"
       ];
       
       const jawaban_user = await jawaban.findAll({where: {

@@ -13,7 +13,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     paket_soal: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      set(value) {
+        value = value.replace(/ /g,"_");                
+        this.setDataValue('paket_soal', value.toLowerCase())
+      }
     },
     pertanyaan: {        
       type: DataTypes.TEXT
