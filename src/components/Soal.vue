@@ -1,19 +1,26 @@
 <template>
   <div id="soal-ist">
     <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
-    <template v-if="!jawabanTersimpan">
-      {{jawabanTersimpan}}
-      <div v-for="(value, index) in soal.pilihan" :key="index" class="radiobtn has-text-left">
-        <input type="radio" id="value" :value="jawabanTersimpan[soal.nomor]" :checked="a">
-        <label>{{value}}</label>
+      <div v-if="soal.kategori == 'pilgan'">
+        <div class="radio-btn-group">
+          <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
+            <input :id="value" type="radio" name="radio" :value="value" checked="checked" v-model="checked">
+            <label :for="value">{{value}}</label>
+          </div>
+        </div>
       </div>
-    </template>
-    <template v-else>
-      <div v-for="(value, index) in soal.pilihan" :key="index" class="radiobtn has-text-left" >
-        <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
-        <label>{{value}}</label>
+      <div v-else-if="soal.kategori == 'gambar'">
+        <div v-for="(value, index) in soal.pilihan" :key="index" class="radiobtn has-text-left" >
+          <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
+          <label>{{value}}</label>
+        </div>
       </div>
-    </template>
+      <div v-else-if="soal.kategori == 'nosoal'">
+        <div v-for="(value, index) in soal.pilihan" :key="index" class="radiobtn has-text-left" >
+          <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
+          <label>{{value}}</label>
+        </div>
+      </div>
     <button class="button" v-if="total !== nomor" @click="submitJawaban">Berikutnya</button>
     <!-- <button class="button" @click="Kembali">Sebelumnya</button> -->
     <button class="button" v-else @click="kirimJawaban">Selesai</button>
@@ -27,7 +34,8 @@ export default {
   name: 'soal-ist',
   props: ['soal', 'nomor', 'total', 'jawabanBundle'],
   data: () => ({
-    jawaban: ''
+    jawaban: '',
+    checked: ''
   }),
   computed: {
     isLast() {
@@ -41,13 +49,62 @@ export default {
       this.jawaban;
     },
     kirimJawaban: function() {
+      var id = JSON.parse(this.$store.getters['auth/user']).id
       var payload = {
         jawaban_peserta: this.jawabanBundle,
         peserta_id: id,
-        paket_soal: this.$router.params.query.paket,
-        jenis_soal: this.$router.params.query.jenis,
+        paket_soal: this.$route.query.paket,
+        jenis_soal: this.$route.query.jenis,
       }
+      console.log(payload)
     }
   }
 }
 </script>
+
+<style>
+.radio-btn-group {
+  display: -webkit-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.radio-btn-group .radio {
+  margin: 1em .25rem;
+}
+
+.radio-btn-group .radio label {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: .5rem 1.25rem;
+  border-radius: 56px;
+  cursor: pointer;
+  color: #444;
+  -webkit-transition: box-shadow 400ms ease;
+  transition: box-shadow 400ms ease;
+}
+.radio-btn-group .radio label:hover {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.radio-btn-group .radio input[type="radio"] {
+  display: none;
+}
+.radio-btn-group .radio input[type="radio"]:checked + label {
+  background: #2196F3;
+  color: #fff;
+  border-color: #2196F3;
+}
+
+.show {
+  font-weight: 400;
+  color: #444;
+}
+.show span {
+  background: #f5f5f5;
+  color: #F44336;
+  border-radius: 3px;
+  padding: .25rem .5rem;
+  font-size: 1.25rem;
+  border: 1px solid #f1f1f1;
+}
+</style>

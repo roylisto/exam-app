@@ -26,7 +26,7 @@
           <div class="control">
             <b-button
               tag="router-link"
-              to="/petunjuk-soal"
+              :to="{path: '/petunjuk-SOAL', query: {paket: 'subtest1', jenis: 'ist'}}"
               expanded
               type="is-primary"
               >Petunjuk Test</b-button
@@ -61,6 +61,8 @@ export default {
   },
   methods: {
     getSoal() {
+      const loadingComponent = this.$buefy.loading.open()
+
       var peserta_id = JSON.parse(this.$store.getters['auth/user']).id
       this.$store.dispatch("soal/getRincianTes", peserta_id)
         .then((response) => {
@@ -69,6 +71,9 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+        })
+        .finally(() => {
+          loadingComponent.close()
         })
     }
   }

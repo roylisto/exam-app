@@ -4,7 +4,7 @@
     <template v-if="!akhirTes">
       <div class="container">
         <p class="title has-text-centered has-text-weight-light">Test IST Bagian 1</p>
-        <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan</p>
+        <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan: {{convertTime}}</p>
         <div class="box">
           <div class="is-mobile has-text-centered">
             <soal-container
@@ -68,11 +68,17 @@ export default {
     },
     convertTime() {
       console.log(this.waktu)
-      var menit = Math.floor(this.waktu / 60);
-      var detik = this.waktu * 60;
+      var menit = Math.floor(this.waktu % 3600 / 60);
+      var detik = Math.floor(this.waktu % 3600 % 60);
       var totalWaktu = `${menit}:${detik}`
       console.log(totalWaktu)
       return totalWaktu
+    }
+  },
+  watch: {
+    waktu: function (newVal, oldVal) {
+      console.log(newVal)
+      console.log(oldVal)
     }
   },
   created() {
@@ -93,6 +99,7 @@ export default {
 
       this.$store.dispatch("waktu/sisaWaktu", payload)
         .then((response) => {
+          console.log(response)
           this.waktu = response.data.data.waktu
           console.log(this.waktu)
         })
