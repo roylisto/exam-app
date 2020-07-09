@@ -15,7 +15,11 @@ const routes = new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      beforeEnter: (to, from, next) => {
+        let token = localStorage.getItem('token');
+        if (token) next({path: '/rincian-test'})
+      }
     },
     {
       path: '/login',
@@ -58,10 +62,6 @@ routes.beforeEach((to, from, next) => {
     } else {
       next({ path: '/login' });
     }
-  }
-
-  if (to.fullPath == '/login') {
-    if (token) next({ path: '/rincian-test'})
   }
   next();
 })

@@ -1,17 +1,17 @@
-import SoalIST from '../../services/SoalIST';
+import SoalMII from '../../services/SoalMII';
 
 const soal = {
   namespaced: true,
   state: {
-    SoalIST: [],
+    SoalMII: [],
     jawaban: []
   },
   mutations: {
     SET_SOAL(state, payload) {
-      state.SoalIST.push(payload)
+      state.SoalMII.push(payload)
     },
     SIMPAN_JAWABAN(state, payload) {
-      console.log(typeof state.SoalIST)
+      console.log(typeof state.SoalMII)
       // state.jawaban.push(payload)
     },
     // RESET(state, payload) {
@@ -20,7 +20,7 @@ const soal = {
   },
   actions: {
     // getSingle({commit}, payload) {
-    //   return SoalIST.getSingleSoal(payload)
+    //   return SoalMII.getSingleSoal(payload)
     //     .then((response) => {
     //       return response
     //     })
@@ -33,7 +33,7 @@ const soal = {
       // commit('RESET', "");
     },
     getAllSoal({commit}) {
-      return SoalIST.getSoal()
+      return SoalMII.getSoal()
         .then((response) => {
           return response
         })
@@ -42,7 +42,7 @@ const soal = {
         })
     },
     submitJawaban({commit}, payload) {
-      return SoalIST.submit(payload)
+      return SoalMII.submit(payload)
         .then((response) => {
           return response
         })
@@ -52,7 +52,7 @@ const soal = {
     }
   },
   getters: {
-    SoalIST: state => state.SoalIST,
+    SoalMII: state => state.SoalMII,
     jawabanTersimpan: state => state.jawaban
   }
 }

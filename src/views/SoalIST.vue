@@ -3,7 +3,7 @@
     <Navbar />
     <template v-if="!akhirTes">
       <div class="container">
-        <p class="title has-text-centered has-text-weight-light">Test IST Bagian 1</p>
+        <p class="title has-text-centered has-text-weight-light">Test {{jenisSoal.toUpperCase()}} Bagian 1</p>
         <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan: {{convertTime}}</p>
         <div class="box">
           <div class="is-mobile has-text-centered">
@@ -66,6 +66,9 @@ export default {
     userInfo() {
       return JSON.parse(this.user)
     },
+    jenisSoal() {
+      return this.$route.query.jenis;
+    },
     convertTime() {
       console.log(this.waktu)
       var menit = Math.floor(this.waktu % 3600 / 60);
@@ -125,15 +128,29 @@ export default {
     //     })
     // },
     getAllSoal() {
-     this.$store.dispatch("ist/getAllSoal")
-        .then((response) => {
-          console.log(response)
-          this.allSoal = response.data.data
-          this.totalSoal = this.allSoal.length
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      var jenis = this.$route.query.jenis;
+      
+      if (jenis == 'ist') {
+      this.$store.dispatch("ist/getAllSoal")
+          .then((response) => {
+            console.log(response)
+            this.allSoal = response.data.data
+            this.totalSoal = this.allSoal.length
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else {
+        this.$store.dispatch("mii/getAllSoal")
+          .then((response) => {
+            console.log(response)
+            this.allSoal = response.data.data
+            this.totalSoal = this.allSoal.length
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
     },
     submitJawaban() {
       

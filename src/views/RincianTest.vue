@@ -15,7 +15,7 @@
         <div v-for="(value, index) in soalTes" :key="index">
           <div class="columns is-mobile has-text-centered">
             <div class="column">
-              <p>{{value.test}}</p>
+              <router-link :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test}}</router-link>
             </div>
             <div class="column">
               <p>{{value.status}}</p>
