@@ -38,6 +38,7 @@ module.exports = {
       let index = 0;
       for (const element of all_soal) {
         let jenis_soal = (index<9) ? 'ist': 'mii'; 
+        index++;
         let status_test = 'Sudah';
         let tmp_status = log_jawaban_user.includes(element);
         if(tmp_status===false) {
