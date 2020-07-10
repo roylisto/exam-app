@@ -24,8 +24,6 @@ router.delete('/users/:id', user.delete);
 router.get('/peserta', peserta.list);
 router.get('/peserta/:id', peserta.get);
 router.post('/peserta', peserta.create);
-router.post('/peserta/bulk', peserta.createBulk);
-router.put('/peserta/:id', peserta.update);
 router.delete('/peserta/:id', peserta.delete);
 
 //soal_IST route
