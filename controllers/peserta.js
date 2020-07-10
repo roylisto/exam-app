@@ -1,5 +1,9 @@
-const { peserta } = require('../models/index.js');
-const md5 = require('md5');
+const { peserta, jadwalTest } = require('../models/index.js');
+const randomstring = require("randomstring");
+const moment = require('moment');
+moment.tz.setDefault("Asia/Jakarta");
+moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
+
 module.exports = {
   list: (req, res) => {
     peserta.findAll().then( result => {
@@ -42,99 +46,37 @@ module.exports = {
     });
   },
 
-  create: (req, res) => {
-    let { email, valid, expired, jadwal_test } = req.body
-    let password = md5(email+valid+new Date()).slice(0,8);
-    
-    peserta.create({
-      email: email,
-      password: password,
-      valid: valid,
-      expired: expired,
-      jadwal_test: jadwal_test
-    }).then( result => {
+  create: async (req, res) => {
+    try {
+      let { user_email, jadwal_test } = req.body    
+      let calon_peseta = []    
+      
+      let test = await jadwalTest.findByPk(jadwal_test);
+      
+      user_email.forEach(row => {
+        calon_peseta.push({
+          email: row,
+          password: randomstring.generate(8),
+          valid: test.waktu,
+          expired: moment(test.waktu).add(1, 'days'),
+          jadwal_test: jadwal_test
+        });
+      });
+      
+      peserta.bulkCreate(calon_peseta);
+
       res.json({
         status: 'OK',
         messages: 'Success insert data.',
-        data: result
+        data: {}
       });
-    }).catch( err => {
-      res.status(400).json({
+    } catch (err) {
+      res.status(500).json({
         status: 'ERROR',
         messages: err,
         data: {}
       });
-    });
-  },
-
-  createBulk: (req, res) => {
-    let calon_peserta = req.body
-    if(Array.isArray(calon_peserta)) {
-      let data = []
-      calon_peserta.map( (value, index) => {
-        return data.push({
-          email: value.email,
-          password: md5(value.email+value.valid+new Date()).slice(0,8),
-          valid: value.valid,
-          expired: value.expired,
-          jadwal_test: value.jadwal_test
-        });
-      });
-      peserta.bulkCreate(data)
-      .then( ()=> {
-        res.json({
-          status: 'OK',
-          messages: 'Success insert data.',
-          data: {}
-        });
-      }).catch( err => {
-        res.status(400).json({
-          status: 'ERROR',
-          messages: err,
-          data: {}
-        });
-      });
-    } else {
-      res.status(400).json({
-        status: 'ERROR',
-        messages: 'Bad Request!',
-        data: {}
-      });
-    }    
-  },
-
-  update: (req, res) => {
-    let { email, valid, expired, jadwal_test, password } = req.body
-    peserta.update({
-      email: email,
-      password: password,
-      valid: valid,
-      expired: expired,
-      jadwal_test: jadwal_test
-    }, {
-      where: {
-        id: req.params.id
-      }
-    }).then( result => {
-      res.json({
-        status: 'OK',
-        messages: 'Success update data.',
-        data: {
-          id: req.params.id,
-          email: email,
-          password: password,
-          valid: valid,
-          expired: expired,
-          jadwal_test: jadwal_test
-        }
-      });
-    }).catch( err => {
-      res.status(400).json({
-        status: 'ERROR',
-        messages: err,
-        data: {}
-      });
-    });
+    }
   },
 
   delete: (req, res) => {

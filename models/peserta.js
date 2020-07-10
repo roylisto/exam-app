@@ -10,10 +10,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     password: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      set(value) {
+        this.setDataValue('password', value.toLowerCase())
+      }
     },
     valid: {        
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     },
     expired: {        
       type: DataTypes.DATE
