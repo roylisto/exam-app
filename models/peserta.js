@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       set(value) {
-        this.setDataValue('password', value.toLowerCase())
+        this.setDataValue('password', value.toUpperCase())
       }
     },
     valid: {        
