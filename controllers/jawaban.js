@@ -1,4 +1,7 @@
-const { jawaban } = require('../models/index.js');
+const { jawaban, logSoalPeserta, waktuSoal } = require('../models/index.js');
+const moment = require('moment');
+moment.tz.setDefault("Asia/Jakarta");
+moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
 
 module.exports = {
   store: (req, res) => {
@@ -32,16 +35,43 @@ module.exports = {
       
       let check_test = [];
       const log_jawaban_user = jawaban_user.map(row => row.paket_soal);
-      
-      all_soal.forEach((element, index) => {
-        let tmp_status = log_jawaban_user.includes(element);
+      let index = 0;
+      for (const element of all_soal) {
         let jenis_soal = (index<9) ? 'ist': 'mii'; 
+        let status_test = 'Sudah';
+        let tmp_status = log_jawaban_user.includes(element);
+        if(tmp_status===false) {
+          const last_log = await logSoalPeserta.findOne({
+            order: [['created_at', 'DESC']],
+            where: {
+              jenis_soal: jenis_soal,
+              paket_soal: element,
+              peserta_id: req.decoded.data.id
+            }
+          });
+
+          if(last_log===null) {
+            status_test = 'Belum';
+          } else {
+            const waktu_soal = await waktuSoal.findOne({
+              where: {
+                jenis_soal: jenis_soal,
+                paket_soal: element
+              }
+            });
+            const last_time = moment(last_log.created_at);
+            const now = moment(new Date());
+            const sisa_waktu = (waktu_soal.waktu*60)-now.diff(last_time, 'seconds');
+            status_test = (sisa_waktu < 1) ? 'Waktu habis' : 'Sedang dikerjakan';
+          }
+        }
+
         check_test.push({
           jenis: jenis_soal,
           test: element,
-          status: tmp_status? 'Selesai':'Belum'
+          status: status_test
         });
-      });
+      }
 
       res.json({
         status: 'OK',
