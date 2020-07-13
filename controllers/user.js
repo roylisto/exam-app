@@ -43,12 +43,13 @@ module.exports = {
   },
 
   create: (req, res) => {
-    let { nama, email, no_hp, umur, instansi } = req.body
+    let { nama, email, no_hp, tanggal_lahir, kelompok, instansi } = req.body
     user.create({
       nama: nama,
       email: email,
       no_hp: no_hp,
-      umur: umur,
+      tanggal_lahir: tanggal_lahir,
+      kelompok: kelompok,
       instansi: instansi
     }).then( users => {
       res.json({
@@ -66,12 +67,13 @@ module.exports = {
   },
 
   update: (req, res) => {
-    let { nama, email, no_hp, umur, instansi } = req.body
+    let { nama, email, no_hp, tanggal_lahir, kelompok, instansi } = req.body
     user.update({
       nama: nama,
       email: email,
       no_hp: no_hp,
-      umur: umur,
+      tanggal_lahir: tanggal_lahir,
+      kelompok: kelompok,
       instansi: instansi
     }, {
       where: {
@@ -86,6 +88,8 @@ module.exports = {
           nama: nama,
           email: email,
           no_hp: no_hp,
+          tanggal_lahir: tanggal_lahir,
+          kelompok: kelompok,
           instansi: instansi
         }
       });
