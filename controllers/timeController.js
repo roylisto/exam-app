@@ -11,8 +11,7 @@ module.exports = {
       let { paket_soal } = req.query
       peserta_id = req.decoded.data.id
       
-      const last_log = await logSoalPeserta.findOne({
-        order: [['created_at', 'DESC']],
+      const last_log = await logSoalPeserta.findOne({        
         where: {
           jenis_soal: jenis_soal,
           paket_soal: paket_soal,
@@ -37,13 +36,13 @@ module.exports = {
           status: 'OK',
           messages: 'Create new log soal for this user',
           data: {          
-            waktu: waktu_soal.waktu*60 //convert menit ke detik
+            waktu: waktu_soal.waktu //convert menit ke detik
           }
         })
       } else {
         const last_time = moment(last_log.created_at);
         const now = moment(new Date());
-        const sisa_waktu = (waktu_soal.waktu*60)-now.diff(last_time, 'seconds');
+        const sisa_waktu = (waktu_soal.waktu)-now.diff(last_time, 'seconds');
         if(sisa_waktu < 0) {
           res.json({
             status: 'OK',

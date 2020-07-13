@@ -33,37 +33,42 @@ module.exports = {
         peserta_id: req.decoded.data.id
       }});
       
+      const log_peserta = await logSoalPeserta.findAll({            
+        where: {         
+          peserta_id: req.decoded.data.id
+        }
+      });
+
       let check_test = [];
+      let log_test_peserta = {};
       const log_jawaban_user = jawaban_user.map(row => row.paket_soal);
+      
+      log_peserta.forEach(row => {
+        log_test_peserta[row.paket_soal] = row.created_at;
+      });
+            
       let index = 0;
+      let status_test = 'Sudah';
+      const now = moment(new Date());
       for (const element of all_soal) {
         let jenis_soal = (index<9) ? 'ist': 'mii'; 
         index++;
-        let status_test = 'Sudah';
+        
         let tmp_status = log_jawaban_user.includes(element);
         if(tmp_status===false) {
-          const last_log = await logSoalPeserta.findOne({
-            order: [['created_at', 'DESC']],
-            where: {
-              jenis_soal: jenis_soal,
-              paket_soal: element,
-              peserta_id: req.decoded.data.id
-            }
-          });
-
-          if(last_log===null) {
+          if(log_test_peserta[element]==null) {
             status_test = 'Belum';
           } else {
-            const waktu_soal = await waktuSoal.findOne({
+            let waktu_soal = await waktuSoal.findOne({
               where: {
                 jenis_soal: jenis_soal,
                 paket_soal: element
               }
             });
-            const last_time = moment(last_log.created_at);
-            const now = moment(new Date());
-            const sisa_waktu = (waktu_soal.waktu*60)-now.diff(last_time, 'seconds');
-            status_test = (sisa_waktu < 1) ? 'Waktu habis' : 'Sedang dikerjakan';
+            const last_time = moment(log_test_peserta[element]);
+            const waktu_pengerjaan = now.diff(last_time, 'seconds');
+            
+            status_test = (waktu_pengerjaan > waktu_soal.waktu) ? 'Waktu habis' : 'Sedang dikerjakan';
           }
         }
 

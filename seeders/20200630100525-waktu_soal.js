@@ -14,7 +14,7 @@ module.exports = {
       waktu_soal.push({
         jenis_soal: jenis_soal,
         paket_soal: element,
-        waktu: 5
+        waktu: 300
       });
     });
     return queryInterface.bulkInsert('waktu_soal', waktu_soal, {});    
