@@ -1,4 +1,7 @@
-const { jawaban } = require('../models/index.js');
+const { jawaban, logSoalPeserta, waktuSoal } = require('../models/index.js');
+const moment = require('moment');
+moment.tz.setDefault("Asia/Jakarta");
+moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
 
 module.exports = {
   store: (req, res) => {
@@ -30,18 +33,55 @@ module.exports = {
         peserta_id: req.decoded.data.id
       }});
       
+      const log_peserta = await logSoalPeserta.findAll({            
+        where: {         
+          peserta_id: req.decoded.data.id
+        }
+      });
+
       let check_test = [];
+      let log_test_peserta = {};
       const log_jawaban_user = jawaban_user.map(row => row.paket_soal);
       
-      all_soal.forEach((element, index) => {
-        let tmp_status = log_jawaban_user.includes(element);
+      log_peserta.forEach(row => {
+        log_test_peserta[row.paket_soal] = row.created_at;
+      });
+            
+      let index = 0;
+      let status_test = 'Sudah';
+      const now = moment(new Date());
+      for (const element of all_soal) {
+        
         let jenis_soal = (index<9) ? 'ist': 'mii'; 
+        index++;
+        
+        let tmp_status = log_jawaban_user.includes(element);        
+        if(tmp_status===false) {
+          console.log("element: ",element)
+          if(log_test_peserta[element]==null) {
+            status_test = 'Belum';
+          } else {
+            let waktu_soal = await waktuSoal.findOne({
+              where: {
+                jenis_soal: jenis_soal,
+                paket_soal: element
+              }
+            });
+            const last_time = moment(log_test_peserta[element]);
+            const waktu_pengerjaan = now.diff(last_time, 'seconds');
+            
+            status_test = (waktu_pengerjaan > waktu_soal.waktu) ? 'Waktu habis' : 'Sedang dikerjakan';
+          }
+        } else {
+          status_test = 'Sudah';
+        }
+
         check_test.push({
           jenis: jenis_soal,
           test: element,
-          status: tmp_status? 'Selesai':'Belum'
+          status: status_test
         });
-      });
+      }
 
       res.json({
         status: 'OK',
