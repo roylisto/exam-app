@@ -51,11 +51,13 @@ module.exports = {
       let status_test = 'Sudah';
       const now = moment(new Date());
       for (const element of all_soal) {
+        
         let jenis_soal = (index<9) ? 'ist': 'mii'; 
         index++;
         
-        let tmp_status = log_jawaban_user.includes(element);
+        let tmp_status = log_jawaban_user.includes(element);        
         if(tmp_status===false) {
+          console.log("element: ",element)
           if(log_test_peserta[element]==null) {
             status_test = 'Belum';
           } else {
@@ -70,6 +72,8 @@ module.exports = {
             
             status_test = (waktu_pengerjaan > waktu_soal.waktu) ? 'Waktu habis' : 'Sedang dikerjakan';
           }
+        } else {
+          status_test = 'Sudah';
         }
 
         check_test.push({
