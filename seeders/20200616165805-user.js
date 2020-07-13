@@ -7,7 +7,8 @@ module.exports = {
       nama: 'John Doe',
       email: 'jhon@gmail.com',
       no_hp: '085758612442',
-      umur: 24,
+      tanggal_lahir: '1997-12-15',      
+      kelompok: 'kelas 9',
       instansi: 'unsri ilkom',
       created_at: today,
       updated_at: today      
@@ -15,7 +16,8 @@ module.exports = {
       nama: 'irsyad eins',
       email: 'syadeins@gmail.com',
       no_hp: '085758612443',
-      umur: 23,
+      tanggal_lahir: '1997-12-15',      
+      kelompok: 'kelas 9',
       instansi: 'unsri ilkom',
       created_at: today,
       updated_at: today      
@@ -23,7 +25,8 @@ module.exports = {
       nama: 'sultan',
       email: 'bebas@gmail.com',
       no_hp: '089958612463',
-      umur: 22,
+      tanggal_lahir: '1998-12-15',      
+      kelompok: 'kelas 9',
       instansi: 'binadarma',
       created_at: today,
       updated_at: today      
@@ -31,7 +34,8 @@ module.exports = {
       nama: 'ana wula',
       email: 'anasaya@gmail.com',
       no_hp: '085758619999',
-      umur: 21,
+      tanggal_lahir: '1999-12-15',      
+      kelompok: 'kelas 9',
       instansi: 'unsri ilkom',
       created_at: today,
       updated_at: today      

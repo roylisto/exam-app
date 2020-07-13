@@ -17,8 +17,11 @@ module.exports = {
       no_hp: {
         type: Sequelize.STRING
       },
-      umur: {
-        type: Sequelize.INTEGER
+      tanggal_lahir: {
+        type: Sequelize.DATEONLY
+      },
+      kelompok: {        
+        type: Sequelize.STRING
       },
       instansi: {        
         type: Sequelize.STRING

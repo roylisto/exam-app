@@ -18,9 +18,13 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       type: DataTypes.STRING
     },
-    umur: {
+    tanggal_lahir: {
       allowNull: false,
       type: DataTypes.INTEGER
+    },
+    kelompok: {      
+      allowNull: false,
+      type: DataTypes.STRING
     },
     instansi: {      
       allowNull: false,
