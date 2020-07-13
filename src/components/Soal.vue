@@ -21,9 +21,17 @@
           <label>{{value}}</label>
         </div>
       </div>
-    <button class="button" v-if="total !== nomor" @click="submitJawaban">Berikutnya</button>
+      <div v-else>
+        <div class="radio-btn-group">
+          <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
+            <input :id="value" type="radio" name="radio" :value="value" checked="checked" v-model="checked">
+            <label :for="value">{{value}}</label>
+          </div>
+        </div>
+      </div>
+    <b-button class="button" v-if="total !== nomor" @click="submitJawaban" type="is-primary">Berikutnya</b-button>
     <!-- <button class="button" @click="Kembali">Sebelumnya</button> -->
-    <button class="button" v-else @click="kirimJawaban">Selesai</button>
+    <b-button class="button" v-else @click="kirimJawaban" type="is-primary">Selesai</b-button>
   </div>
 </template>
 
@@ -57,6 +65,7 @@ export default {
         jenis_soal: this.$route.query.jenis,
       }
       console.log(payload)
+      this.$route.push({ path: '/rincian-test' })
     }
   }
 }

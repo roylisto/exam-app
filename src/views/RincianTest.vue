@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <div class="container mt-5">
+    <div class="container">
       <p class="title has-text-centered has-text-weight-light">Rincian Test</p>
       <div class="box my-5">
         <div class="columns is-mobile has-text-centered">
@@ -22,12 +22,11 @@
           </div>
             </div>
         </div>
-        <div class="field">
-          <div class="control">
+        <div class="field" style="margin-top: 2rem;">
+          <div class="control  has-text-centered">
             <b-button
               tag="router-link"
               :to="{path: '/petunjuk-SOAL', query: {paket: 'subtest1', jenis: 'ist'}}"
-              expanded
               type="is-primary"
               >Petunjuk Test</b-button
             >

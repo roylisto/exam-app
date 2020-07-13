@@ -3,8 +3,8 @@
     <Navbar />
     <template v-if="!akhirTes">
       <div class="container">
-        <p class="title has-text-centered has-text-weight-light">Test {{jenisSoal.toUpperCase()}} Bagian 1</p>
-        <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan: {{convertTime}}</p>
+        <p class="title has-text-centered has-text-weight-light">Test {{jenisSoal.toUpperCase()}} Bagian {{bagianSoal}}</p>
+        <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan: <span class="has-text-danger">{{convertTime}}</span></p>
         <div class="box">
           <div class="is-mobile has-text-centered">
             <soal-container
@@ -66,15 +66,21 @@ export default {
     userInfo() {
       return JSON.parse(this.user)
     },
+    bagianSoal() {
+      return this.$route.query.paket.split("_")[1]
+    },
     jenisSoal() {
       return this.$route.query.jenis;
     },
     convertTime() {
-      console.log(this.waktu)
-      var menit = Math.floor(this.waktu % 3600 / 60);
-      var detik = Math.floor(this.waktu % 3600 % 60);
-      var totalWaktu = `${menit}:${detik}`
-      console.log(totalWaktu)
+      var totalWaktu;
+      if (this.waktu != null) {
+        var menit = Math.floor(this.waktu / 60);
+        var detik = Math.floor(this.waktu % 60);
+        totalWaktu = `${menit}:${detik}`;
+      } else {
+        totalWaktu = "Sesi waktu tidak ada"
+      }
       return totalWaktu
     }
   },
@@ -89,6 +95,11 @@ export default {
     this.getAllSoal();
   },
   methods: {
+    hitungWaktu() {
+      // setInterval(() => {
+      //   (this.)
+      // })
+    },
     fetchWaktu() {
       var jenis = this.$route.query.jenis;
       var paket = this.$route.query.paket;
@@ -102,9 +113,7 @@ export default {
 
       this.$store.dispatch("waktu/sisaWaktu", payload)
         .then((response) => {
-          console.log(response)
           this.waktu = response.data.data.waktu
-          console.log(this.waktu)
         })
         .catch((error) => {
           console.error(error)
