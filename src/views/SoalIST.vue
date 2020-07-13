@@ -3,8 +3,8 @@
     <Navbar />
     <template v-if="!akhirTes">
       <div class="container">
-        <p class="title has-text-centered has-text-weight-light">Test IST Bagian 1</p>
-        <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan</p>
+        <p class="title has-text-centered has-text-weight-light">Test {{jenisSoal.toUpperCase()}} Bagian {{bagianSoal}}</p>
+        <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan: <span class="has-text-danger">{{convertTime}}</span></p>
         <div class="box">
           <div class="is-mobile has-text-centered">
             <soal-container
@@ -52,7 +52,8 @@ export default {
     totalSoal: '',
     allSoal: [],
     benar: 0,
-    akhirTes: false
+    akhirTes: false,
+    waktu: ''
   }),
   components: {
     SoalContainer,
@@ -64,6 +65,29 @@ export default {
     ...mapGetters("auth", ["user"]),
     userInfo() {
       return JSON.parse(this.user)
+    },
+    bagianSoal() {
+      return this.$route.query.paket.split("_")[1]
+    },
+    jenisSoal() {
+      return this.$route.query.jenis;
+    },
+    convertTime() {
+      var totalWaktu;
+      if (this.waktu != null) {
+        var menit = Math.floor(this.waktu / 60);
+        var detik = Math.floor(this.waktu % 60);
+        totalWaktu = `${menit}:${detik}`;
+      } else {
+        totalWaktu = "Sesi waktu tidak ada"
+      }
+      return totalWaktu
+    }
+  },
+  watch: {
+    waktu: function (newVal, oldVal) {
+      console.log(newVal)
+      console.log(oldVal)
     }
   },
   created() {
@@ -71,6 +95,11 @@ export default {
     this.getAllSoal();
   },
   methods: {
+    hitungWaktu() {
+      // setInterval(() => {
+      //   (this.)
+      // })
+    },
     fetchWaktu() {
       var jenis = this.$route.query.jenis;
       var paket = this.$route.query.paket;
@@ -84,7 +113,7 @@ export default {
 
       this.$store.dispatch("waktu/sisaWaktu", payload)
         .then((response) => {
-          console.log(response);
+          this.waktu = response.data.data.waktu
         })
         .catch((error) => {
           console.error(error)
@@ -108,14 +137,29 @@ export default {
     //     })
     // },
     getAllSoal() {
-     this.$store.dispatch("ist/getAllSoal")
-        .then((response) => {
-          this.allSoal = response.data.data
-          this.totalSoal = this.allSoal.length
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      var jenis = this.$route.query.jenis;
+      
+      if (jenis == 'ist') {
+      this.$store.dispatch("ist/getAllSoal")
+          .then((response) => {
+            console.log(response)
+            this.allSoal = response.data.data
+            this.totalSoal = this.allSoal.length
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else {
+        this.$store.dispatch("mii/getAllSoal")
+          .then((response) => {
+            console.log(response)
+            this.allSoal = response.data.data
+            this.totalSoal = this.allSoal.length
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
     },
     submitJawaban() {
       

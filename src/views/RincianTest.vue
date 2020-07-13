@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <div class="container mt-5">
+    <div class="container">
       <p class="title has-text-centered has-text-weight-light">Rincian Test</p>
       <div class="box my-5">
         <div class="columns is-mobile has-text-centered">
@@ -15,19 +15,18 @@
         <div v-for="(value, index) in soalTes" :key="index">
           <div class="columns is-mobile has-text-centered">
             <div class="column">
-              <p>{{value.test}}</p>
+              <router-link :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test}}</router-link>
             </div>
             <div class="column">
               <p>{{value.status}}</p>
           </div>
             </div>
         </div>
-        <div class="field">
-          <div class="control">
+        <div class="field" style="margin-top: 2rem;">
+          <div class="control  has-text-centered">
             <b-button
               tag="router-link"
-              to="/petunjuk-soal"
-              expanded
+              :to="{path: '/petunjuk-SOAL', query: {paket: 'subtest1', jenis: 'ist'}}"
               type="is-primary"
               >Petunjuk Test</b-button
             >
@@ -61,6 +60,8 @@ export default {
   },
   methods: {
     getSoal() {
+      const loadingComponent = this.$buefy.loading.open()
+
       var peserta_id = JSON.parse(this.$store.getters['auth/user']).id
       this.$store.dispatch("soal/getRincianTes", peserta_id)
         .then((response) => {
@@ -69,6 +70,9 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+        })
+        .finally(() => {
+          loadingComponent.close()
         })
     }
   }

@@ -26,11 +26,9 @@
             </div>
           </b-navbar-item>
           <b-navbar-item>
-            <div class="buttons">
-              <button class="button is-text" @click="logout">
-                Log out
-              </button>
-            </div>
+                                  <b-button type="is-text" @click="logout"
+                        >Log out</b-button
+                      >
           </b-navbar-item>
         </template>
       </template>
@@ -45,14 +43,6 @@ import 'moment/locale/id';
 
 export default {
   name: 'login',
-  methods: {
-    logout() {
-      this.$store.dispatch("auth/logout")
-        .then(() => {
-          this.$router.push({ path: '/login' })
-        })
-    }
-  },
   mounted() {
     this.userInfo
   },
@@ -71,7 +61,10 @@ export default {
       return moment(date);
     },
     logout() {
-      
+      this.$store.dispatch("auth/logout")
+        .then(() => {
+          this.$router.replace({ path: '/login' })
+        })
     }
   },
 }

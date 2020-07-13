@@ -72,13 +72,23 @@ export default {
 
       this.$store.dispatch('auth/login', payload)
         .then((response) => {
-          console.log(response)
+          this.$buefy.toast.open({
+              duration: 5000,
+              message: `Berhasil login.`,
+              position: 'is-bottom',
+              type: 'is-success'
+          })
           this.$router.push({
             path: '/rincian-test'
           })
         })
         .catch((error) => {
-          console.error(error)
+          this.$buefy.toast.open({
+              duration: 5000,
+              message: `Email atau password salah. Silahkan ulangi kembali`,
+              position: 'is-bottom',
+              type: 'is-danger'
+          })
         })
     }
   }

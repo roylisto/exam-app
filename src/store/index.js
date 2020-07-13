@@ -4,6 +4,7 @@ import createLogger from 'vuex/dist/logger';
 import modules from './modules';
 import auth from './auth/main';
 import ist from './ist/main';
+import mii from './mii/main';
 import waktu from './waktu/main'
 import soal from './soal/main'
 import createPersistedState from "vuex-persistedstate";
@@ -24,6 +25,7 @@ export default new Vuex.Store({
     auth: auth,
     ist: ist,
     waktu: waktu,
-    soal: soal
+    soal: soal,
+    mii: mii
   }
 });
