@@ -15,7 +15,7 @@
         <div v-for="(value, index) in soalTes" :key="index">
           <div class="columns is-mobile has-text-centered">
             <div class="column">
-              <router-link :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test}}</router-link>
+              <router-link :class="value.status == 'Sudah' ? 'disabled' : ''" :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test}}</router-link>
             </div>
             <div class="column">
               <p>{{value.status}}</p>
@@ -78,3 +78,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+a.disabled {
+  /* Make the disabled links grayish*/
+  color: gray;
+  /* And disable the pointer events */
+  pointer-events: none;
+}
+</style>

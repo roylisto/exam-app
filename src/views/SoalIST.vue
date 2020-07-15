@@ -79,8 +79,14 @@ export default {
         var detik = Math.floor(this.waktu % 60);
         totalWaktu = `${menit}:${detik}`;
       } else {
-        totalWaktu = "Sesi waktu tidak ada"
-        // this.$router.replace('rincian-test')
+        // totalWaktu = "Sesi waktu tidak ada"
+        this.$buefy.toast.open({
+            duration: 5000,
+            message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
+            position: 'is-bottom',
+            type: 'is-warning'
+        })
+        this.$router.replace('rincian-test')
       }
       return totalWaktu
     }
