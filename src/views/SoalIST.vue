@@ -80,7 +80,6 @@ export default {
         totalWaktu = `${menit}:${detik}`;
       } else {
         totalWaktu = "Sesi waktu tidak ada"
-        // this.$router.replace('rincian-test')
       }
       return totalWaktu
     }

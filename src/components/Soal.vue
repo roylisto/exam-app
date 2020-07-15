@@ -64,23 +64,8 @@ export default {
         paket_soal: this.$route.query.paket,
         jenis_soal: this.$route.query.jenis,
       }
-      
-      this.$store.dispatch("soal/kirimJawaban", payload)
-        .then((response) => {
-          console.log(response)
-          if (response.status == 200) {
-            this.$buefy.toast.open({
-                duration: 5000,
-                message: `Jawaban berhasil diinput`,
-                position: 'is-bottom',
-                type: 'is-success'
-            })
-            this.$router.replace('rincian-test');
-          }
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+      console.log(payload)
+      this.$route.push({ path: '/rincian-test' })
     }
   }
 }
