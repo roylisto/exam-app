@@ -79,7 +79,6 @@ export default {
         var detik = Math.floor(this.waktu % 60);
         totalWaktu = `${menit}:${detik}`;
       } else {
-        // totalWaktu = "Sesi waktu tidak ada"
         this.$buefy.toast.open({
             duration: 5000,
             message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
@@ -91,22 +90,11 @@ export default {
       return totalWaktu
     }
   },
-  watch: {
-    waktu: function (newVal, oldVal) {
-      console.log(newVal)
-      console.log(oldVal)
-    }
-  },
   created() {
     this.fetchWaktu();
     this.getAllSoal();
   },
   methods: {
-    hitungWaktu() {
-      // setInterval(() => {
-      //   (this.)
-      // })
-    },
     fetchWaktu() {
       var jenis = this.$route.query.jenis;
       var paket = this.$route.query.paket;
@@ -121,6 +109,10 @@ export default {
       this.$store.dispatch("waktu/sisaWaktu", payload)
         .then((response) => {
           this.waktu = response.data.data.waktu
+            setTimeout(() => {
+                this.waktu -= 1
+                this.fetchWaktu()
+            }, 1000)
         })
         .catch((error) => {
           console.error(error)
@@ -144,6 +136,7 @@ export default {
     //     })
     // },
     getAllSoal() {
+      const loadingComponent = this.$buefy.loading.open()
       var jenis = this.$route.query.jenis;
       
       if (jenis == 'ist') {
@@ -167,6 +160,7 @@ export default {
             console.log(error)
           })
       }
+      loadingComponent.close()
     },
     submitJawaban() {
       
