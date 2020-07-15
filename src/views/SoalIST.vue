@@ -74,7 +74,7 @@ export default {
     },
     convertTime() {
       var totalWaktu;
-      if (this.waktu != null) {
+      if (this.waktu != null && this.waktu != ' ') {
         var menit = Math.floor(this.waktu / 60);
         var detik = Math.floor(this.waktu % 60);
         totalWaktu = `${menit}:${detik}`;
