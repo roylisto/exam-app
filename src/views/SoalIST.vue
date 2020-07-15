@@ -13,6 +13,7 @@
               v-on:jawaban="handleJawaban"
               :jawabanBundle="jawaban"
               :nomor="nomor + 1"
+              :dataJawaban="dataJawaban"
             ></soal-container>
           </div>
         </div>
@@ -88,6 +89,9 @@ export default {
         this.$router.replace('rincian-test')
       }
       return totalWaktu
+    },
+    dataJawaban() {
+      return this.$store.state.ist.jawaban
     }
   },
   created() {
@@ -167,7 +171,6 @@ export default {
       
     },
     handleJawaban(e) {
-      console.log(e)
       if (e.aksi == 'Berikutnya') {
         this.jawaban[this.nomor] = e.jawaban;
         this.$store.dispatch('ist/simpanJawaban', this.jawaban[this.nomor])
