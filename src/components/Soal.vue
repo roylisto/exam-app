@@ -29,7 +29,8 @@
           </div>
         </div>
       </div>
-    <b-button class="button" v-if="total !== nomor" @click="submitJawaban" type="is-primary">Berikutnya</b-button>
+    <b-button class="button" v-if="nomor != '1'" @click="submitJawaban('Sebelumnya')" type="is-primary" outlined>Sebelumnya</b-button>
+    <b-button class="button" v-if="total !== nomor" @click="submitJawaban('Berikutnya')" type="is-primary">Berikutnya</b-button>
     <!-- <button class="button" @click="Kembali">Sebelumnya</button> -->
     <b-button class="button" v-else @click="kirimJawaban" type="is-primary">Selesai</b-button>
   </div>
@@ -52,8 +53,8 @@ export default {
     ...mapGetters("ist", ["jawabanTersimpan"])
   },
   methods: {
-    submitJawaban: function() {
-      this.$emit('jawaban', { jawaban: this.jawaban });
+    submitJawaban: function(e) {
+      this.$emit('jawaban', { jawaban: this.jawaban, aksi: e });
       this.jawaban;
     },
     kirimJawaban: function() {
