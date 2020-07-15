@@ -23,6 +23,17 @@ const tes = {
           return error
         })
     },
+    kirimJawaban({commit}, payload) {
+      return Soal.kirimJawaban(payload)
+        .then((response) => {
+          console.log(response)
+          return response
+        })
+        .catch((error) => {
+          console.error(error)
+          Promise.reject(error)
+        })
+    },
   },
   getters: {
     tes: state => state.tes
