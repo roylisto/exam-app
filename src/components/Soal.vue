@@ -1,24 +1,29 @@
 <template>
   <div id="soal-ist">
     <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
+    {{dataJawaban}}
       <div v-if="soal.kategori == 'pilgan'">
         <div class="radio-btn-group">
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
-            <input :id="value" type="radio" name="radio" :value="value" checked="checked" v-model="checked">
+            <input :id="value" type="radio" name="radio" :value="value" :checked="dataJawaban" v-model="checked">
             <label :for="value">{{value}}</label>
           </div>
         </div>
       </div>
       <div v-else-if="soal.kategori == 'gambar'">
-        <div v-for="(value, index) in soal.pilihan" :key="index" class="radiobtn has-text-left" >
-          <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
-          <label>{{value}}</label>
+        <div class="radio-btn-group">
+          <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
+            <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
+            <label>{{value}}</label>
+          </div>
         </div>
       </div>
       <div v-else-if="soal.kategori == 'nosoal'">
-        <div v-for="(value, index) in soal.pilihan" :key="index" class="radiobtn has-text-left" >
-          <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
-          <label>{{value}}</label>
+        <div class="radio-btn-group">
+          <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
+            <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
+            <label>{{value}}</label>
+          </div>
         </div>
       </div>
       <div v-else>
@@ -29,7 +34,8 @@
           </div>
         </div>
       </div>
-    <b-button class="button" v-if="total !== nomor" @click="submitJawaban" type="is-primary">Berikutnya</b-button>
+    <b-button class="button" v-if="nomor != '1'" @click="submitJawaban('Sebelumnya')" type="is-primary" outlined>Sebelumnya</b-button>
+    <b-button class="button" v-if="total !== nomor" @click="submitJawaban('Berikutnya')" type="is-primary">Berikutnya</b-button>
     <!-- <button class="button" @click="Kembali">Sebelumnya</button> -->
     <b-button class="button" v-else @click="kirimJawaban" type="is-primary">Selesai</b-button>
   </div>
@@ -40,7 +46,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'soal-ist',
-  props: ['soal', 'nomor', 'total', 'jawabanBundle'],
+  props: ['soal', 'nomor', 'total', 'jawabanBundle', 'dataJawaban'],
   data: () => ({
     jawaban: '',
     checked: ''
@@ -52,8 +58,8 @@ export default {
     ...mapGetters("ist", ["jawabanTersimpan"])
   },
   methods: {
-    submitJawaban: function() {
-      this.$emit('jawaban', { jawaban: this.jawaban });
+    submitJawaban: function(e) {
+      this.$emit('jawaban', { jawaban: this.jawaban, aksi: e });
       this.jawaban;
     },
     kirimJawaban: function() {

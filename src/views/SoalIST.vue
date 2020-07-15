@@ -9,10 +9,11 @@
           <div class="is-mobile has-text-centered">
             <soal-container
               :total="totalSoal"
-              :soal="allSoal[nomor]"
+              :soal="soal[nomor]"
               v-on:jawaban="handleJawaban"
               :jawabanBundle="jawaban"
               :nomor="nomor + 1"
+              :dataJawaban="dataJawaban"
             ></soal-container>
           </div>
         </div>
@@ -88,11 +89,14 @@ export default {
         this.$router.replace('rincian-test')
       }
       return totalWaktu
+    },
+    dataJawaban() {
+      return this.$store.state.ist.jawaban
     }
   },
   created() {
     this.fetchWaktu();
-    this.getAllSoal();
+    this.getSingleSoal();
   },
   methods: {
     fetchWaktu() {
@@ -118,57 +122,62 @@ export default {
           console.error(error)
         })
     },
-    // getSingleSoal() {
-    //   var nomor = this.$route.query.nomor;
-    //   var paket_soal = this.$route.query.paket_soal;
+    getSingleSoal() {
+      var nomor = this.$route.query.nomor;
+      var paket_soal = this.$route.query.paket_soal;
 
-    //   var payload = {
-    //     nomor: nomor,
-    //     paket: paket_soal
-    //   }
-
-    //   this.$store.dispatch("ist/getSingle", payload)
-    //     .then((response) => {
-    //       this.soal = response.data
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
-    // },
-    getAllSoal() {
-      const loadingComponent = this.$buefy.loading.open()
-      var jenis = this.$route.query.jenis;
-      
-      if (jenis == 'ist') {
-      this.$store.dispatch("ist/getAllSoal")
-          .then((response) => {
-            console.log(response)
-            this.allSoal = response.data.data
-            this.totalSoal = this.allSoal.length
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      } else {
-        this.$store.dispatch("mii/getAllSoal")
-          .then((response) => {
-            console.log(response)
-            this.allSoal = response.data.data
-            this.totalSoal = this.allSoal.length
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+      var payload = {
+        nomor: nomor,
+        paket: paket_soal
       }
-      loadingComponent.close()
+
+      this.$store.dispatch("ist/getSingle", payload)
+        .then((response) => {
+          this.soal = response.data.data
+          console.log(this.soal)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
+    // getAllSoal() {
+    //   const loadingComponent = this.$buefy.loading.open()
+    //   var jenis = this.$route.query.jenis;
+      
+    //   if (jenis == 'ist') {
+    //   this.$store.dispatch("ist/getAllSoal")
+    //       .then((response) => {
+    //         console.log(response)
+    //         this.allSoal = response.data.data
+    //         this.totalSoal = this.allSoal.length
+    //       })
+    //       .catch((error) => {
+    //         console.log(error)
+    //       })
+    //   } else {
+    //     this.$store.dispatch("mii/getAllSoal")
+    //       .then((response) => {
+    //         console.log(response)
+    //         this.allSoal = response.data.data
+    //         this.totalSoal = this.allSoal.length
+    //       })
+    //       .catch((error) => {
+    //         console.log(error)
+    //       })
+    //   }
+    //   loadingComponent.close()
+    // },
     submitJawaban() {
       
     },
     handleJawaban(e) {
-      this.jawaban[this.nomor] = e.jawaban;
-      this.$store.dispatch('ist/simpanJawaban', this.jawaban[this.nomor])
-      this.nomor++;
+      if (e.aksi == 'Berikutnya') {
+        this.jawaban[this.nomor] = e.jawaban;
+        this.$store.dispatch('ist/simpanJawaban', this.jawaban[this.nomor])
+        this.nomor++;
+      } else {
+        this.nomor--;
+      }
       // if(this.nomor + 1 === this.allSoal.length) {
       //   // this.handleHasil();
       //   // this.akhirTes = true
