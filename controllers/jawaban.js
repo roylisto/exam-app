@@ -19,20 +19,22 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
   });
 
   let rw_peserta = 0;
-  if(jenis_soal=='ist' && paket_soal=='subtest_1_ist') {    
+  if(jenis_soal=='ist') {    
     const ist = await soalIST.findAll({
       attributes: ['kunci_jawaban'],
       where: {
         paket_soal: paket_soal
       }
     });
-    
-    let kunci_ist = ist.map(x => x.kunci_jawaban);
-    kunci_ist.forEach((row, index) => {
-      if(row==jawaban[index]) {
-        rw_peserta++;
-      }
-    });
+    let kunci_ist = [];
+    if(paket_soal=='subtest_1_ist' || paket_soal=='subtest_2_ist') {
+      kunci_ist = ist.map(x => x.kunci_jawaban);
+      kunci_ist.forEach((row, index) => {
+        if(row==jawaban[index]) {
+          rw_peserta++;
+        }
+      });
+    }
     
     const now = moment(new Date());
     let umur = now.diff(account.tanggal_lahir, 'years');
