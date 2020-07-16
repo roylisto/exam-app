@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       sw: {
-        type: Sequelize.DECIMAL(3, 1)
+        type: Sequelize.DECIMAL(4, 1)
       },
       kategori: {
         type: Sequelize.STRING
