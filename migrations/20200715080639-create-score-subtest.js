@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       sw: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL(4, 1)
       },
       umur: {
         type: Sequelize.INTEGER

@@ -9,7 +9,14 @@ moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
 const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => {  
   const kode_soal = {
     subtest_1_ist: "SE",
-    subtest_2_ist: "WA"
+    subtest_2_ist: "WA",
+    subtest_3_ist: "AN",
+    subtest_4_ist: "GE",
+    subtest_5_ist: "RA",
+    subtest_6_ist: "ZR",
+    subtest_7_ist: "FA",
+    subtest_8_ist: "WU",
+    subtest_9_ist: "ME"
   }
 
   const account = await user.findOne({
