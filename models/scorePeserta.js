@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     kode_soal: DataTypes.STRING,
     rw: DataTypes.INTEGER,
-    sw: DataTypes.INTEGER,
+    sw: DataTypes.DECIMAL(3, 1),
     kategori: DataTypes.STRING,
     peserta_id: DataTypes.INTEGER
   }, {

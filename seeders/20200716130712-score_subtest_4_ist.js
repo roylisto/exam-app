@@ -23,27 +23,27 @@ module.exports = {
     let umur = 13;
     let flag = umur;
     sw.forEach((row, index) => {
-      if(index > 374) {
+      if(index > 395) {
         umur = 46;
-      } else if (index > 342) {
+      } else if (index > 362) {
         umur = 45;
-      } else if (index > 310) {
+      } else if (index > 329) {
         umur = 39;
-      } else if (index > 288) {
+      } else if (index > 296) {
         umur = 33;
-      } else if (index > 256) {
+      } else if (index > 263) {
         umur = 28;
-      } else if (index > 224) {
+      } else if (index > 230) {
         umur = 24;
-      } else if (index > 192) {
+      } else if (index > 197) {
         umur = 20;
-      } else if (index > 160) {
+      } else if (index > 164) {
         umur = 18;
-      } else if (index > 128) {
+      } else if (index > 131) {
         umur = 17;
-      } else if (index > 96) {
+      } else if (index > 98) {
         umur = 16;
-      } else if (index > 64) {
+      } else if (index > 65) {
         umur = 15;
       } else if (index > 32) {
         umur = 14;
