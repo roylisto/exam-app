@@ -9,6 +9,9 @@ const tes = {
     SET_TES(state, payload) {
       state.tes = payload
     },
+    RESET_JAWABAN(state, payload) {
+      state.jawaban = [];
+    }
   },
   actions: {
     getRincianTes({commit}, payload) {
@@ -23,9 +26,10 @@ const tes = {
           return error
         })
     },
-    kirimJawaban({commit}, payload) {
+    kirimJawaban({commit, rootState}, payload) {
       return Soal.kirimJawaban(payload)
         .then((response) => {
+          commit('RESET_JAWABAN', rootState)
           console.log(response)
           return response
         })

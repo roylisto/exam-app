@@ -19,15 +19,15 @@ const soal = {
     // }
   },
   actions: {
-    // getSingle({commit}, payload) {
-    //   return soalIST.getSingleSoal(payload)
-    //     .then((response) => {
-    //       return response
-    //     })
-    //     .catch((error) => {
-    //       return error
-    //     })
-    // },
+    getSingle({commit}, payload) {
+      return soalIST.getSingleSoal(payload)
+        .then((response) => {
+          return response
+        })
+        .catch((error) => {
+          return error
+        })
+    },
     simpanJawaban({commit}, payload) {
       commit('SIMPAN_JAWABAN', payload);
       // commit('RESET', "");

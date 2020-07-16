@@ -65,6 +65,8 @@ export default {
   },
   methods: {
     login() {
+      const loadingComponent = this.$buefy.loading.open()
+
       let payload = {
         email: this.email,
         password: this.password
@@ -89,6 +91,9 @@ export default {
               position: 'is-bottom',
               type: 'is-danger'
           })
+        })
+        .finally(() => {
+          loadingComponent.close()
         })
     }
   }

@@ -13,6 +13,7 @@
               v-on:jawaban="handleJawaban"
               :jawabanBundle="jawaban"
               :nomor="nomor + 1"
+              :dataJawaban="dataJawaban"
             ></soal-container>
           </div>
         </div>
@@ -60,47 +61,51 @@ export default {
     Footer
   },
   computed: {
-    ...mapGetters("mii", ["soalMII"])
+    ...mapGetters("mii", ["soalMII"]),
+    dataJawaban() {
+      return this.$store.state.mii.jawaban
+    }
   },
   created() {
-    // this.getSingleSoal();
-    this.getAllSoal();
+    this.getSingleSoal();
+    // this.getAllSoal();
   },
   methods: {
-    // getSingleSoal() {
-    //   var nomor = this.$route.query.nomor;
-    //   var paket_soal = this.$route.query.paket_soal;
+    getSingleSoal() {
+      var nomor = this.$route.query.nomor;
+      var paket_soal = this.$route.query.paket_soal;
 
-    //   var payload = {
-    //     nomor: nomor,
-    //     paket: paket_soal
-    //   }
+      var payload = {
+        nomor: nomor,
+        paket: paket_soal
+      }
 
-    //   this.$store.dispatch("mii/getSingle", payload)
-    //     .then((response) => {
-    //       this.soal = response.data
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
-    // },
-    getAllSoal() {
-     this.$store.dispatch("mii/getAllSoal")
+      this.$store.dispatch("mii/getSingle", payload)
         .then((response) => {
-          this.allSoal = response.data.data
-          this.totalSoal = this.allSoal.length
+          this.soal = response.data
         })
         .catch((error) => {
           console.log(error)
         })
     },
-    submitJawaban() {
-      
-    },
+    // getAllSoal() {
+    //  this.$store.dispatch("mii/getAllSoal")
+    //     .then((response) => {
+    //       this.allSoal = response.data.data
+    //       this.totalSoal = this.allSoal.length
+    //     })
+    //     .catch((error) => {
+    //       console.log(error)
+    //     })
+    // },
     handleJawaban(e) {
-      this.jawaban[this.nomor] = e.jawaban;
-      this.$store.dispatch('mii/simpanJawaban', this.jawaban[this.nomor])
-      this.nomor++;
+      if (e.aksi == 'Berikutnya') {
+        this.jawaban[this.nomor] = e.jawaban;
+        this.$store.dispatch('mii/simpanJawaban', this.jawaban[this.nomor])
+        this.nomor++;
+      } else {
+        this.nomor--;
+      }
       // if(this.nomor + 1 === this.allSoal.length) {
       //   // this.handleHasil();
       //   // this.akhirTes = true
