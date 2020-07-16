@@ -1,12 +1,74 @@
-const { jawaban, logSoalPeserta, waktuSoal } = require('../models/index.js');
+const { 
+  jawaban, logSoalPeserta, waktuSoal, scoreSubtest, soalIST, soalMII, 
+  user , scorePeserta
+} = require('../models/index.js');
 const moment = require('moment');
 moment.tz.setDefault("Asia/Jakarta");
 moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
 
+const hitungSubtestPilgan = async (jawaban, paket_soal, jenis_soal) => {
+  console.log(jenis_soal);
+  const kode_soal = {
+    subtest_1_ist: "SE",
+    subtest_2_ist: "WA"
+  }
+
+  let rw_peserta = 0;
+  if(jenis_soal=='ist') {
+    console.log('aaaa');
+    const ist = await soalIST.findAll({
+      attributes: ['kunci_jawaban'],
+      where: {
+        paket_soal: paket_soal
+      }
+    });
+    
+    let kunci_ist = ist.map(x => x.kunci_jawaban);
+    
+    return kunci_ist;
+    kunci_ist.forEach((row, index) => {
+      if(row==jawaban[index]) {
+        rw++;
+      }
+      
+
+      user.findOne({
+        where: {
+          email: req.decoded.data.email
+        }
+      }).then(user => {
+        const now = moment(new Date());
+        const umur = now.diff(user.tanggal_lahir, 'years');
+
+        scoreSubtest.findOne({
+          where: {
+            kode_soal: kode_soal[paket_soal],
+            rw: rw_peserta,
+            umur: umur
+          }
+        }).then(score_subtest => {
+          scorePeserta.create({
+            kode_soal: score_subtest.kode_soal,
+            rw: score_subtest.rw,
+            sw: score_subtest.sw,
+            kategori: 'kurang',
+            peserta_id: req.decoded.data.id
+          });
+        });
+      });
+      
+    })
+  }
+}
+
 module.exports = {
   store: (req, res) => {
+    console.log('bbbbbb');
+    console.log('bbbb: ', req.body.jenis_soal);
+    return res.json(hitungSubtestPilgan(req.body.jawaban_peserta, req.body.paket_soal, req.body.jenis_soal));
     req.body.peserta_id = req.decoded.data.id    
     jawaban.create(req.body).then(result => {
+      hitungSubtestPilgan(req.jawaban, req.paket_soal, req.jenis_soal);
       res.json({
         status: 'OK',
         messages: 'Success insert data.',
