@@ -58,7 +58,7 @@ export default {
     ...mapGetters("ist", ["soalIST"]),
     testWhichBelum() {
       return _.filter(this.soalTes, function(o) {
-        return o.status == 'Belum'
+        return o.status == 'Belum' || o.status == 'Sedang dikerjakan'
       })
     }
   },
@@ -89,7 +89,7 @@ export default {
 <style scoped>
 a.disabled, p.disabled {
   /* Make the disabled links grayish*/
-  color: gray;
+  color: rgb(202, 202, 202);
   /* And disable the pointer events */
   pointer-events: none;
 }
