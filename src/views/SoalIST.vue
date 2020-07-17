@@ -106,6 +106,11 @@ export default {
     this.getSingleSoal();
     this.getAllSoal();
   },
+  // watch: {
+  //   'jawaban': function(newVal, oldVal) {
+  //     console.log(newVal);
+  //   }
+  // },
   methods: {
     fetchWaktu() {
       var jenis = this.$route.query.jenis;
@@ -132,16 +137,19 @@ export default {
     },
     getSingleSoal() {
       var nomor = this.$route.query.nomor;
-      var paket_soal = this.$route.query.paket_soal;
+      var paket_soal = this.$route.query.paket;
 
       var payload = {
         nomor: nomor,
         paket: paket_soal
       }
+      console.log(payload)
 
       this.$store.dispatch("ist/getSingle", payload)
         .then((response) => {
+          console.log(response)
           this.soal = response.data.data
+          this.totalSoal = this.soal.length
           console.log(this.soal)
         })
         .catch((error) => {
@@ -151,14 +159,36 @@ export default {
     getAllSoal() {
       const loadingComponent = this.$buefy.loading.open()
       var jenis = this.$route.query.jenis;
-      
+    //   if (jenis == 'ist') {
+    //   this.$store.dispatch("ist/getAllSoal")
+    //       .then((response) => {
+    //         console.log(response)
+    //         this.allSoal = response.data.data
+    //         this.totalSoal = this.allSoal.length
+    //       })
+    //       .catch((error) => {
+    //         console.log(error)
+    //       })
+    //   } else {
+    //     this.$store.dispatch("mii/getAllSoal")
+    //       .then((response) => {
+    //         console.log(response)
+    //         this.allSoal = response.data.data
+    //         this.totalSoal = this.allSoal.length
+    //       })
+    //       .catch((error) => {
+    //         console.log(error)
+    //       })
+    //   }
+    //   loadingComponent.close()
+    // },
       if (jenis == 'ist') {
       this.$store.dispatch("ist/getAllSoal")
           .then((response) => {
             console.log(response)
             this.allSoal = response.data.data
-            this.totalSoal = this.allSoal.length
-            console.log(this.totalSoal)
+            // this.totalSoal = this.allSoal.length
+            // console.log(this.totalSoal)
           })
           .catch((error) => {
             console.log(error)
@@ -175,9 +205,6 @@ export default {
           })
       }
       loadingComponent.close()
-    },
-    submitJawaban() {
-      
     },
     handleJawaban(e) {
       if (e.aksi == 'Berikutnya') {

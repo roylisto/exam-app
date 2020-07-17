@@ -34,6 +34,8 @@
           </div>
         </div>
       </div>
+      {{nomor}}
+      || {{total}}
     <b-button class="button" v-if="nomor != '1'" @click="submitJawaban('Sebelumnya')" type="is-primary" outlined>Sebelumnya</b-button>
     <b-button class="button" v-if="total !== nomor" @click="submitJawaban('Berikutnya')" type="is-primary">Berikutnya</b-button>
     <b-button class="button" v-else @click="kirimJawaban" type="is-primary">Selesai</b-button>
@@ -47,7 +49,9 @@ export default {
   name: 'soal-ist',
   props: ['soal', 'nomor', 'total', 'jawabanBundle', 'dataJawaban'],
   data: () => ({
-    jawaban: []
+    jawaban: [],
+    checked: '',
+    selected: []
   }),
   computed: {
     isLast() {
