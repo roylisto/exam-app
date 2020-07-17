@@ -79,7 +79,13 @@ export default {
         var detik = Math.floor(this.waktu % 60);
         totalWaktu = `${menit}:${detik}`;
       } else {
-        // totalWaktu = "Sesi waktu tidak ada"
+        this.$store.dispatch('ist/simpanJawaban', this.jawaban[this.nomor])
+          .then((response) => {
+            console.info(response)
+          })
+          .catch((error) => {
+            console.error(error)
+          })
         this.$buefy.toast.open({
             duration: 5000,
             message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
