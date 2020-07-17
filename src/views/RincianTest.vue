@@ -22,7 +22,7 @@
           </div>
             </div>
         </div>
-        <div class="field" style="margin-top: 2rem;">
+        <!-- <div class="field" style="margin-top: 2rem;">
           <div class="control  has-text-centered">
             <b-button
               tag="router-link"
@@ -31,7 +31,7 @@
               >Petunjuk Test</b-button
             >
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <Footer />
