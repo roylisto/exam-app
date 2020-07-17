@@ -1,6 +1,7 @@
 <template>
   <div id="soal-ist">
     <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
+    {{dataJawaban}}
       <div v-if="soal.kategori == 'pilgan'">
         <div class="radio-btn-group">
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
@@ -10,15 +11,19 @@
         </div>
       </div>
       <div v-else-if="soal.kategori == 'gambar'">
-        <div v-for="(value, index) in soal.pilihan" :key="index" class="radiobtn has-text-left" >
-          <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
-          <label>{{value}}</label>
+        <div class="radio-btn-group">
+          <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
+            <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
+            <label>{{value}}</label>
+          </div>
         </div>
       </div>
       <div v-else-if="soal.kategori == 'nosoal'">
-        <div v-for="(value, index) in soal.pilihan" :key="index" class="radiobtn has-text-left" >
-          <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
-          <label>{{value}}</label>
+        <div class="radio-btn-group">
+          <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
+            <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
+            <label>{{value}}</label>
+          </div>
         </div>
       </div>
       <div v-else>
@@ -42,7 +47,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'soal-ist',
-  props: ['soal', 'nomor', 'total', 'jawabanBundle'],
+  props: ['soal', 'nomor', 'total', 'jawabanBundle', 'dataJawaban'],
   data: () => ({
     jawaban: ''
   }),
