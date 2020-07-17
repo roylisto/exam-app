@@ -53,7 +53,12 @@ export default {
     Footer
   },
   computed: {
-    ...mapGetters("ist", ["soalIST"])
+    ...mapGetters("ist", ["soalIST"]),
+    testWhichBelum() {
+      return _.filter(this.soalTes, function(o) {
+        return o.status == 'Belum' || o.status == 'Sedang dikerjakan'
+      })
+    }
   },
   mounted() {
     this.getSoal();
@@ -82,7 +87,7 @@ export default {
 <style scoped>
 a.disabled, p.disabled {
   /* Make the disabled links grayish*/
-  color: gray;
+  color: rgb(202, 202, 202);
   /* And disable the pointer events */
   pointer-events: none;
 }
