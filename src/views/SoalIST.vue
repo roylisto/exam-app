@@ -104,6 +104,7 @@ export default {
   created() {
     this.fetchWaktu();
     this.getSingleSoal();
+    this.getAllSoal();
   },
   methods: {
     fetchWaktu() {
@@ -147,33 +148,34 @@ export default {
           console.log(error)
         })
     },
-    // getAllSoal() {
-    //   const loadingComponent = this.$buefy.loading.open()
-    //   var jenis = this.$route.query.jenis;
+    getAllSoal() {
+      const loadingComponent = this.$buefy.loading.open()
+      var jenis = this.$route.query.jenis;
       
-    //   if (jenis == 'ist') {
-    //   this.$store.dispatch("ist/getAllSoal")
-    //       .then((response) => {
-    //         console.log(response)
-    //         this.allSoal = response.data.data
-    //         this.totalSoal = this.allSoal.length
-    //       })
-    //       .catch((error) => {
-    //         console.log(error)
-    //       })
-    //   } else {
-    //     this.$store.dispatch("mii/getAllSoal")
-    //       .then((response) => {
-    //         console.log(response)
-    //         this.allSoal = response.data.data
-    //         this.totalSoal = this.allSoal.length
-    //       })
-    //       .catch((error) => {
-    //         console.log(error)
-    //       })
-    //   }
-    //   loadingComponent.close()
-    // },
+      if (jenis == 'ist') {
+      this.$store.dispatch("ist/getAllSoal")
+          .then((response) => {
+            console.log(response)
+            this.allSoal = response.data.data
+            this.totalSoal = this.allSoal.length
+            console.log(this.totalSoal)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else {
+        this.$store.dispatch("mii/getAllSoal")
+          .then((response) => {
+            console.log(response)
+            this.allSoal = response.data.data
+            this.totalSoal = this.allSoal.length
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+      loadingComponent.close()
+    },
     submitJawaban() {
       
     },
