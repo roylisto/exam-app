@@ -10,6 +10,8 @@ const tes = {
       state.tes = payload
     },
     RESET_JAWABAN(state, payload) {
+      console.log(state)
+      state.jawaban = [];
       state.jawaban = [];
     }
   },
