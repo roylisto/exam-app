@@ -78,16 +78,27 @@ module.exports = {
               waktu: null,
               keterangan: null
             }
-          })
-        } else {
-          res.json({
-            status: 'OK',
-            messages: '',
-            data: {          
-              waktu: sisa_waktu,
-              keterangan: (jenis_soal=='mii') ? ((sisa_waktu < 900) ? 'secondary' : 'primary') : null
-            }
           });
+        } else {
+          if(jenis_soal=='ist') {
+            res.json({
+              status: 'OK',
+              messages: '',
+              data: {          
+                waktu: sisa_waktu,
+                keterangan: null
+              }
+            });
+          } else {
+            res.json({
+              status: 'OK',
+              messages: '',
+              data: {          
+                waktu: (sisa_waktu>900) ? sisa_waktu-900 : sisa_waktu,
+                keterangan: (jenis_soal=='mii') ? ((sisa_waktu < 900) ? 'secondary' : 'primary') : null
+              }
+            });
+          }
         }
       }
     } catch (err) {
