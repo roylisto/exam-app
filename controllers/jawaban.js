@@ -34,7 +34,8 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
       }
     });
     let kunci_ist = [];
-    if(paket_soal=='subtest_1_ist' || paket_soal=='subtest_2_ist') {
+    if(paket_soal=='subtest_1_ist' || paket_soal=='subtest_2_ist' || paket_soal=='subtest_3_ist'
+        || paket_soal=='subtest_7_ist' || paket_soal=='subtest_8_ist' || paket_soal=='subtest_9_ist') {
       kunci_ist = ist.map(x => x.kunci_jawaban);
       kunci_ist.forEach((row, index) => {
         if(row==jawaban[index]) {
