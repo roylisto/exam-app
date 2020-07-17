@@ -2,22 +2,93 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const all_soal = [
-      "subtest_1_ist", "subtest_2_ist", "subtest_3_ist", "subtest_4_ist", "subtest_5_ist",
-      "subtest_6_ist", "subtest_7_ist", "subtest_8_ist", "subtest_9_ist",
-      "bagian_1_verb_ling", "bagian_2_log_math", "bagian_3_spat", "bagian_4_mus", "bagian_5_bod_kin",
-      "bagian_6_inter", "bagian_7_intra", "bagian_8_nat"
-    ];
-    let waktu_soal = []
-    all_soal.forEach((element, index) => {
-      let jenis_soal = (index<9) ? 'ist': 'mii' 
-      waktu_soal.push({
-        jenis_soal: jenis_soal,
-        paket_soal: element,
-        waktu: 300
-      });
-    });
-    return queryInterface.bulkInsert('waktu_soal', waktu_soal, {});    
+    return queryInterface.bulkInsert('waktu_soal', [
+      {
+        jenis_soal: 'ist',
+        paket_soal: 'subtest_1_ist',
+        waktu: 360
+      },
+      {
+        jenis_soal: 'ist',
+        paket_soal: 'subtest_2_ist',
+        waktu: 360
+      },
+      {
+        jenis_soal: 'ist',
+        paket_soal: 'subtest_3_ist',
+        waktu: 420
+      },
+      {
+        jenis_soal: 'ist',
+        paket_soal: 'subtest_4_ist',
+        waktu: 480
+      },
+      {
+        jenis_soal: 'ist',
+        paket_soal: 'subtest_5_ist',
+        waktu: 600
+      },
+      {
+        jenis_soal: 'ist',
+        paket_soal: 'subtest_6_ist',
+        waktu: 600
+      },
+      {
+        jenis_soal: 'ist',
+        paket_soal: 'subtest_7_ist',
+        waktu: 420
+      },
+      {
+        jenis_soal: 'ist',
+        paket_soal: 'subtest_8_ist',
+        waktu: 540
+      },
+      {
+        jenis_soal: 'ist',
+        paket_soal: 'subtest_9_ist',
+        waktu: 360
+      },
+      {
+        jenis_soal: 'mii',
+        paket_soal: 'bagian_1_verb_ling',
+        waktu: 2700
+      },
+      {
+        jenis_soal: 'mii',
+        paket_soal: 'bagian_2_log_math',
+        waktu: 2700
+      },
+      {
+        jenis_soal: 'mii',
+        paket_soal: 'bagian_3_spat',
+        waktu: 2700
+      },
+      {
+        jenis_soal: 'mii',
+        paket_soal: 'bagian_4_mus',
+        waktu: 2700
+      },
+      {
+        jenis_soal: 'mii',
+        paket_soal: 'bagian_5_bod_kin',
+        waktu: 2700
+      },
+      {
+        jenis_soal: 'mii',
+        paket_soal: 'bagian_6_inter',
+        waktu: 2700
+      },
+      {
+        jenis_soal: 'mii',
+        paket_soal: 'bagian_7_intra',
+        waktu: 2700
+      },
+      {
+        jenis_soal: 'mii',
+        paket_soal: 'bagian_8_nat',
+        waktu: 2700
+      }
+    ], {});    
   },
 
   down: (queryInterface, Sequelize) => {
