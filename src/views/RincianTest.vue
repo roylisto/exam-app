@@ -15,14 +15,15 @@
         <div v-for="(value, index) in soalTes" :key="index">
           <div class="columns is-mobile has-text-centered">
             <div class="column">
-              <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' ? 'disabled' : ''" :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test}}</router-link>
+              <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' || value.test != testWhichBelum[0].test ? 'disabled' : ''" :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test}}</router-link>
+              <!-- <router-link :class=" ? 'disabled': ''" :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test}}</router-link> -->
             </div>
             <div class="column">
               <p :class="value.status == 'Sudah' || value.status == 'Waktu habis'? 'disabled' : value.status == 'Sedang dikerjakan' ? 'has-text-success' : ''">{{value.status}}</p>
           </div>
             </div>
         </div>
-        <div class="field" style="margin-top: 2rem;">
+        <!-- <div class="field" style="margin-top: 2rem;">
           <div class="control  has-text-centered">
             <b-button
               tag="router-link"
@@ -31,7 +32,7 @@
               >Petunjuk Test</b-button
             >
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <Footer />
@@ -42,6 +43,7 @@
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import { mapGetters } from 'vuex';
+import _ from 'lodash'
 
 export default {
   name: "rincian-test",
@@ -53,7 +55,12 @@ export default {
     Footer
   },
   computed: {
-    ...mapGetters("ist", ["soalIST"])
+    ...mapGetters("ist", ["soalIST"]),
+    testWhichBelum() {
+      return _.filter(this.soalTes, function(o) {
+        return o.status == 'Belum' || o.status == 'Sedang dikerjakan'
+      })
+    }
   },
   mounted() {
     this.getSoal();
@@ -82,7 +89,7 @@ export default {
 <style scoped>
 a.disabled, p.disabled {
   /* Make the disabled links grayish*/
-  color: gray;
+  color: rgb(202, 202, 202);
   /* And disable the pointer events */
   pointer-events: none;
 }

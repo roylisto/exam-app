@@ -1,11 +1,11 @@
 <template>
   <div id="soal-ist">
     <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
-    {{dataJawaban}}
       <div v-if="soal.kategori == 'pilgan'">
         <div class="radio-btn-group">
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
-            <input :id="value" type="radio" name="radio" :value="value" :checked="dataJawaban" v-model="checked">
+            <!-- {{jawaban}} -->
+            <input :id="value" type="radio" :name="jawaban[index]" :value="value" v-model="jawaban[1]" :checked="jawaban[2]">
             <label :for="value">{{value}}</label>
           </div>
         </div>
@@ -34,9 +34,10 @@
           </div>
         </div>
       </div>
+      {{nomor}}
+      || {{total}}
     <b-button class="button" v-if="nomor != '1'" @click="submitJawaban('Sebelumnya')" type="is-primary" outlined>Sebelumnya</b-button>
     <b-button class="button" v-if="total !== nomor" @click="submitJawaban('Berikutnya')" type="is-primary">Berikutnya</b-button>
-    <!-- <button class="button" @click="Kembali">Sebelumnya</button> -->
     <b-button class="button" v-else @click="kirimJawaban" type="is-primary">Selesai</b-button>
   </div>
 </template>
@@ -48,14 +49,23 @@ export default {
   name: 'soal-ist',
   props: ['soal', 'nomor', 'total', 'jawabanBundle', 'dataJawaban'],
   data: () => ({
-    jawaban: '',
-    checked: ''
+    jawaban: [],
+    checked: '',
+    selected: []
   }),
   computed: {
     isLast() {
       return this.nomor === this.soal.length
     },
-    ...mapGetters("ist", ["jawabanTersimpan"])
+    ...mapGetters("ist", ["jawabanTersimpan"]),
+    bindJawaban() {
+      this.jawaban = this.jawabanTersimpan
+      console.log(this.jawaban)
+    }
+  },
+  created() {
+    this.jawabanTersimpan;
+    this.bindJawaban;
   },
   methods: {
     submitJawaban: function(e) {
@@ -138,3 +148,7 @@ export default {
   border: 1px solid #f1f1f1;
 }
 </style>
+
+
+// waktu ada 0 nya
+// ketika waktu habis, kirim jawaban
