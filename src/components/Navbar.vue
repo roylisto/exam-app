@@ -26,9 +26,9 @@
             </div>
           </b-navbar-item>
           <b-navbar-item>
-                                  <b-button type="is-text" @click="logout"
-                        >Log out</b-button
-                      >
+            <b-button type="is-text" @click="logout"
+              >Log out</b-button
+            >
           </b-navbar-item>
         </template>
       </template>
@@ -61,6 +61,7 @@ export default {
       return moment(date);
     },
     logout() {
+      this.$store.dispatch('ist/resetJawaban');
       this.$store.dispatch("auth/logout")
         .then(() => {
           this.$router.replace({ path: '/login' })

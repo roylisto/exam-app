@@ -15,24 +15,13 @@
         <div v-for="(value, index) in soalTes" :key="index">
           <div class="columns is-mobile has-text-centered">
             <div class="column">
-              <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' || value.test != testWhichBelum[0].test ? 'disabled' : ''" :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test}}</router-link>
-              <!-- <router-link :class=" ? 'disabled': ''" :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test}}</router-link> -->
+              <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' || value.test != testWhichBelum[0].test ? 'disabled' : ''" :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test.replace(/_/g, " ").toUpperCase()}}</router-link>
             </div>
             <div class="column">
               <p :class="value.status == 'Sudah' || value.status == 'Waktu habis'? 'disabled' : value.status == 'Sedang dikerjakan' ? 'has-text-success' : ''">{{value.status}}</p>
           </div>
             </div>
         </div>
-        <!-- <div class="field" style="margin-top: 2rem;">
-          <div class="control  has-text-centered">
-            <b-button
-              tag="router-link"
-              :to="{path: '/petunjuk-SOAL', query: {paket: 'subtest1', jenis: 'ist'}}"
-              type="is-primary"
-              >Petunjuk Test</b-button
-            >
-          </div>
-        </div> -->
       </div>
     </div>
     <Footer />
