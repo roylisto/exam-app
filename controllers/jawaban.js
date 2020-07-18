@@ -33,17 +33,34 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
         paket_soal: paket_soal
       }
     });
-    let kunci_ist = [];
+    let kunci_ist = ist.map(x => x.kunci_jawaban);
     if(paket_soal=='subtest_1_ist' || paket_soal=='subtest_2_ist' || paket_soal=='subtest_3_ist'
         || paket_soal=='subtest_7_ist' || paket_soal=='subtest_8_ist' || paket_soal=='subtest_9_ist') {
-      kunci_ist = ist.map(x => x.kunci_jawaban);
       kunci_ist.forEach((row, index) => {
         if(row==jawaban[index]) {
           rw_peserta++;
         }
       });
+    } else if(paket_soal=='subtest_5_ist' || paket_soal=='subtest_6_ist') {
+      kunci_ist.forEach((row, index) => {        
+        let tmp_jawaban = jawaban[index];
+        if(tmp_jawaban) {          
+          tmp_jawaban.sort()
+          if(row==tmp_jawaban.join("")) {
+            rw_peserta++;
+          }
+        }
+      });
+    } else if(paket_soal=='subtest_4_ist') {
+      kunci_ist.forEach((row, index) => {
+        let tmp_row = JSON.parse(row);
+        let tmp_jawaban = jawaban[index].toLowerCase();
+        if(tmp_row[tmp_jawaban]) {
+          rw_peserta = rw_peserta+tmp_row[tmp_jawaban];
+        }
+      });
     }
-    
+    console.log("rw: ", rw_peserta);
     const now = moment(new Date());
     let umur = now.diff(account.tanggal_lahir, 'years');
     if(umur>18 && umur<=20) {
