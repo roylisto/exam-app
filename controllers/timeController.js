@@ -21,8 +21,7 @@ module.exports = {
           }
         });
       } else {
-        last_log = await logSoalPeserta.findOne({
-          order: [['created_at', 'DESC']],        
+        last_log = await logSoalPeserta.findOne({      
           where: {
             jenis_soal: jenis_soal,
             peserta_id: peserta_id
@@ -43,6 +42,10 @@ module.exports = {
           peserta_id: peserta_id
         });
 
+        if(jenis_soal=='mii') {
+          waktu_soal.waktu = waktu_soal.waktu-900; 
+        }
+        
         res.json({
           status: 'OK',
           messages: 'Create new log soal for this user',
