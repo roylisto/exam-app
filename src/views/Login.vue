@@ -72,6 +72,8 @@ export default {
         password: this.password
       }
 
+
+      this.$store.dispatch('ist/resetJawaban');
       this.$store.dispatch('auth/login', payload)
         .then((response) => {
           this.$buefy.toast.open({
