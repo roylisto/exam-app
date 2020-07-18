@@ -14,7 +14,7 @@ module.exports = {
     subtest_pertanyaan.forEach((row, index) => {
       soal_subtest.push({
         nomor: index+1,
-        kategori: 'nopilgan',
+        kategori: 'pilganbutton',
         paket_soal: 'subtest_6_ist',
         pertanyaan: row,
         kunci_jawaban: subtest_kunci[index],
