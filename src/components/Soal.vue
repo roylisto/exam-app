@@ -1,44 +1,60 @@
 <template>
   <div id="soal-ist">
-    <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
       <div v-if="soal.kategori == 'pilgan'">
+      <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
         <div class="radio-btn-group">
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
-            <!-- {{jawaban}} -->
-            <input :id="value" type="radio" :name="jawaban[index]" :value="value" v-model="jawaban[1]" :checked="jawaban[2]">
-            <label :for="value">{{value}}</label>
+            <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
+            <label :for="value">{{`${index}. ${value}`}}</label>
           </div>
         </div>
       </div>
       <div v-else-if="soal.kategori == 'gambar'">
+        <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
         <div class="radio-btn-group">
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
-            <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
-            <label>{{value}}</label>
+            <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
+            <label :for="value">{{`${index}. ${value}`}}</label>
           </div>
         </div>
       </div>
       <div v-else-if="soal.kategori == 'nosoal'">
         <div class="radio-btn-group">
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
-            <input type="radio" id="value" v-model="jawaban" v-bind:value="index">
-            <label>{{value}}</label>
+            <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
+            <label :for="value">{{`${index}. ${value}`}}</label>
           </div>
         </div>
+      </div>
+      <!-- inputan -->
+      <div v-else-if="soal.kategori == 'nopilgan'">
+        <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
+          <section>
+            <b-field label="Jawaban">
+                <b-input v-model="jawaban[soal.nomor - 1]"></b-input>
+            </b-field>
+          </section>
       </div>
       <div v-else>
         <div class="radio-btn-group">
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
-            <input :id="value" type="radio" name="radio" :value="value" checked="checked" v-model="checked">
+            <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
             <label :for="value">{{value}}</label>
           </div>
         </div>
       </div>
-      {{nomor}}
-      || {{total}}
-    <b-button class="button" v-if="nomor != '1'" @click="submitJawaban('Sebelumnya')" type="is-primary" outlined>Sebelumnya</b-button>
-    <b-button class="button" v-if="total !== nomor" @click="submitJawaban('Berikutnya')" type="is-primary">Berikutnya</b-button>
-    <b-button class="button" v-else @click="kirimJawaban" type="is-primary">Selesai</b-button>
+      <div class="columns">
+        <div class="column">
+          <b-button class="button" v-if="nomor != '1'" @click="submitJawaban('Sebelumnya')" type="is-primary" outlined>Sebelumnya</b-button>
+          <b-button class="button" v-if="total !== nomor" @click="submitJawaban('Berikutnya')" type="is-primary">Berikutnya</b-button>
+          <b-button class="button" v-else @click="kirimJawaban" type="is-primary">Selesai</b-button>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <b-button disabled type="is-text">{{`Nomor ${nomor} dari ${total} soal`}}</b-button>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -47,11 +63,9 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'soal-ist',
-  props: ['soal', 'nomor', 'total', 'jawabanBundle', 'dataJawaban'],
+  props: ['soal', 'nomor', 'total', 'dataJawaban'],
   data: () => ({
-    jawaban: [],
-    checked: '',
-    selected: []
+    jawaban: []
   }),
   computed: {
     isLast() {
@@ -60,7 +74,6 @@ export default {
     ...mapGetters("ist", ["jawabanTersimpan"]),
     bindJawaban() {
       this.jawaban = this.jawabanTersimpan
-      console.log(this.jawaban)
     }
   },
   created() {
@@ -75,15 +88,16 @@ export default {
     kirimJawaban: function() {
       var id = JSON.parse(this.$store.getters['auth/user']).id
       var payload = {
-        jawaban_peserta: this.jawabanBundle,
+        jawaban_peserta: this.jawaban,
         peserta_id: id,
         paket_soal: this.$route.query.paket,
         jenis_soal: this.$route.query.jenis,
       }
-      
+      console.log(this.jawaban)
+      console.log('--------------------------------kirim')
       this.$store.dispatch("soal/kirimJawaban", payload)
         .then((response) => {
-          console.log(response)
+          console.log(response);
           if (response.status == 200) {
             this.$buefy.toast.open({
                 duration: 5000,
@@ -91,6 +105,7 @@ export default {
                 position: 'is-bottom',
                 type: 'is-success'
             })
+            this.$store.dispatch('ist/resetJawaban');
             this.$router.replace('rincian-test');
           }
         })

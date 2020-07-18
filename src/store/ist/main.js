@@ -11,12 +11,15 @@ const soal = {
       state.soalIST.push(payload)
     },
     SIMPAN_JAWABAN(state, payload) {
+      console.log(payload)
       console.log(typeof state.soalIST)
+      console.log(state.jawaban)
       // state.jawaban.push(payload)
     },
-    // RESET(state, payload) {
-    //   state.jawaban = payload
-    // }
+    RESET_JAWABAN(state, payload) {
+      console.log(state)
+      state.jawaban = [];
+    }
   },
   actions: {
     getSingle({commit}, payload) {
@@ -28,9 +31,8 @@ const soal = {
           return error
         })
     },
-    simpanJawaban({commit}, payload) {
-      commit('SIMPAN_JAWABAN', payload);
-      // commit('RESET', "");
+    resetJawaban({commit}) {
+      commit('RESET_JAWABAN');
     },
     getAllSoal({commit}) {
       return soalIST.getSoal()
@@ -49,6 +51,10 @@ const soal = {
         .catch((error) => {
           return error
         })
+    },
+    simpanJawaban({commit}, payload) {
+      commit('SIMPAN_JAWABAN', payload);
+      console.log(payload)
     }
   },
   getters: {
