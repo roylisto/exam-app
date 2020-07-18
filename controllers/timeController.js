@@ -11,13 +11,23 @@ module.exports = {
       let { paket_soal } = req.query
       peserta_id = req.decoded.data.id
       
-      const last_log = await logSoalPeserta.findOne({        
-        where: {
-          jenis_soal: jenis_soal,
-          paket_soal: paket_soal,
-          peserta_id: peserta_id
-        }
-      });
+      let last_log = null;
+      if(jenis_soal=='ist') {
+        last_log = await logSoalPeserta.findOne({        
+          where: {
+            jenis_soal: jenis_soal,
+            paket_soal: paket_soal,
+            peserta_id: peserta_id
+          }
+        });
+      } else {
+        last_log = await logSoalPeserta.findOne({      
+          where: {
+            jenis_soal: jenis_soal,
+            peserta_id: peserta_id
+          }
+        });        
+      }
       const waktu_soal = await waktuSoal.findOne({
         where: {
           jenis_soal: jenis_soal,
@@ -32,14 +42,34 @@ module.exports = {
           peserta_id: peserta_id
         });
 
+        if(jenis_soal=='mii') {
+          waktu_soal.waktu = waktu_soal.waktu-900; 
+        }
+        
         res.json({
           status: 'OK',
           messages: 'Create new log soal for this user',
           data: {          
-            waktu: waktu_soal.waktu //convert menit ke detik
+            waktu: waktu_soal.waktu, //convert menit ke detik
+            keterangan: (jenis_soal=='mii') ? 'primary' : null
           }
         })
       } else {
+        if(jenis_soal=='mii') {
+          logSoalPeserta.findOrCreate({
+            where: {
+              jenis_soal: jenis_soal,
+              paket_soal: paket_soal,
+              peserta_id: peserta_id
+            },
+            defaults: {
+              jenis_soal: jenis_soal,
+              paket_soal: paket_soal,
+              peserta_id: peserta_id
+            }
+          });
+        }
+
         const last_time = moment(last_log.created_at);
         const now = moment(new Date());
         const sisa_waktu = (waktu_soal.waktu)-now.diff(last_time, 'seconds');
@@ -48,17 +78,30 @@ module.exports = {
             status: 'OK',
             messages: 'sesi waktu untuk jenis dan subtes ini telah habis',
             data: {
-              waktu: null
-            }
-          })
-        } else {
-          res.json({
-            status: 'OK',
-            messages: '',
-            data: {          
-              waktu: sisa_waktu
+              waktu: null,
+              keterangan: null
             }
           });
+        } else {
+          if(jenis_soal=='ist') {
+            res.json({
+              status: 'OK',
+              messages: '',
+              data: {          
+                waktu: sisa_waktu,
+                keterangan: null
+              }
+            });
+          } else {
+            res.json({
+              status: 'OK',
+              messages: '',
+              data: {          
+                waktu: (sisa_waktu>900) ? sisa_waktu-900 : sisa_waktu,
+                keterangan: (jenis_soal=='mii') ? ((sisa_waktu < 900) ? 'secondary' : 'primary') : null
+              }
+            });
+          }
         }
       }
     } catch (err) {

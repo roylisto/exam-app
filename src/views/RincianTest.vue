@@ -32,6 +32,7 @@
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import { mapGetters } from 'vuex';
+import _ from 'lodash'
 
 export default {
   name: "rincian-test",

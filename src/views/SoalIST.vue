@@ -75,11 +75,18 @@ export default {
     },
     convertTime() {
       var totalWaktu;
-      if (this.waktu != null) {
+      if (this.waktu != null && this.waktu != ' ') {
         var menit = Math.floor(this.waktu / 60);
         var detik = Math.floor(this.waktu % 60);
         totalWaktu = `${menit}:${detik}`;
       } else {
+        this.$store.dispatch('ist/simpanJawaban', this.jawaban[this.nomor])
+          .then((response) => {
+            console.info(response)
+          })
+          .catch((error) => {
+            console.error(error)
+          })
         this.$buefy.toast.open({
             duration: 5000,
             message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
@@ -97,7 +104,13 @@ export default {
   created() {
     this.fetchWaktu();
     this.getSingleSoal();
+    this.getAllSoal();
   },
+  // watch: {
+  //   'jawaban': function(newVal, oldVal) {
+  //     console.log(newVal);
+  //   }
+  // },
   methods: {
     fetchWaktu() {
       var jenis = this.$route.query.jenis;
@@ -124,26 +137,28 @@ export default {
     },
     getSingleSoal() {
       var nomor = this.$route.query.nomor;
-      var paket_soal = this.$route.query.paket_soal;
+      var paket_soal = this.$route.query.paket;
 
       var payload = {
         nomor: nomor,
         paket: paket_soal
       }
+      console.log(payload)
 
       this.$store.dispatch("ist/getSingle", payload)
         .then((response) => {
+          console.log(response)
           this.soal = response.data.data
+          this.totalSoal = this.soal.length
           console.log(this.soal)
         })
         .catch((error) => {
           console.log(error)
         })
     },
-    // getAllSoal() {
-    //   const loadingComponent = this.$buefy.loading.open()
-    //   var jenis = this.$route.query.jenis;
-      
+    getAllSoal() {
+      const loadingComponent = this.$buefy.loading.open()
+      var jenis = this.$route.query.jenis;
     //   if (jenis == 'ist') {
     //   this.$store.dispatch("ist/getAllSoal")
     //       .then((response) => {
@@ -167,8 +182,29 @@ export default {
     //   }
     //   loadingComponent.close()
     // },
-    submitJawaban() {
-      
+      if (jenis == 'ist') {
+      this.$store.dispatch("ist/getAllSoal")
+          .then((response) => {
+            console.log(response)
+            this.allSoal = response.data.data
+            // this.totalSoal = this.allSoal.length
+            // console.log(this.totalSoal)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else {
+        this.$store.dispatch("mii/getAllSoal")
+          .then((response) => {
+            console.log(response)
+            this.allSoal = response.data.data
+            this.totalSoal = this.allSoal.length
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+      loadingComponent.close()
     },
     handleJawaban(e) {
       if (e.aksi == 'Berikutnya') {
