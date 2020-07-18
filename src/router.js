@@ -19,7 +19,7 @@ const routes = new Router({
       beforeEnter: (to, from, next) => {
         let token = localStorage.getItem('token');
         if (token) next({path: '/rincian-test'})
-        next();
+        else next();
       }
     },
     {
