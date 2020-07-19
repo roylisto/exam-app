@@ -42,9 +42,11 @@
       </div>
       <div v-else-if="soal.kategori == 'pilganbutton'">
         <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
-          <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
-            <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
-            <label :for="value">{{`${index}. ${value}`}}</label>
+          <div class="radio-gbr-group">
+            <div v-for="(value, index) in pilganbutton" :key="index" class="radio" >
+              <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
+              <label :for="value">{{value}}</label>
+            </div>
           </div>
       </div>
       <div v-else>
@@ -82,6 +84,9 @@ export default {
   name: 'soal-ist',
   props: ['soal', 'nomor', 'total', 'dataJawaban'],
   data: () => ({
+    pilganbutton: [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 0
+    ],
     jawaban: []
   }),
   computed: {
