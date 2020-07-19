@@ -34,7 +34,9 @@ module.exports = (sequelize, DataTypes) => {
         type: sequelize.QueryTypes.SELECT
       }
     );
-    
+    if(look_sw[0].sw==0) {
+      return 0;
+    }
     let look_iq = await sequelize.query(
       'SELECT sw FROM score_subtest WHERE kode_soal = ? AND rw = ?',
       {

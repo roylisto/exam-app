@@ -61,10 +61,12 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
       });
     } else if(paket_soal=='subtest_4_ist') {
       kunci_ist.forEach((row, index) => {
-        let tmp_row = JSON.parse(row);
-        let tmp_jawaban = jawaban[index].toLowerCase();
-        if(tmp_row[tmp_jawaban]) {
-          rw_peserta = rw_peserta+tmp_row[tmp_jawaban];
+        if(jawaban[index]) {
+          let tmp_row = JSON.parse(row);
+          let tmp_jawaban = jawaban[index].toLowerCase();
+          if(tmp_row[tmp_jawaban]) {
+            rw_peserta = rw_peserta+tmp_row[tmp_jawaban];
+          }
         }
       });
     }
