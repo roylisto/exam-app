@@ -29,6 +29,10 @@ module.exports = function(sequelize, DataTypes) {
     underscored: true,
     timestamps: false,
   });
-
+  peserta.associate = function(models) {
+    peserta.hasMany(models.scorePeserta, {
+      foreignKey: 'peserta_id'
+    });
+  };
   return peserta;
 };
