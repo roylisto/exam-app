@@ -18,7 +18,7 @@
               <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' || value.test != testWhichBelum[0].test ? 'disabled' : ''" :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test.replace(/_/g, " ").toUpperCase()}}</router-link>
             </div>
             <div class="column">
-              <p :class="value.status == 'Sudah' || value.status == 'Waktu habis'? 'disabled' : value.status == 'Sedang dikerjakan' ? 'has-text-success' : ''">{{value.status}}</p>
+              <p :class="value.status == 'Sudah' || value.status == 'Waktu habis' || value.test != testWhichBelum[0].test ? 'disabled' : value.status == 'Sedang dikerjakan' ? 'has-text-success' : ''">{{value.status}}</p>
           </div>
             </div>
         </div>
