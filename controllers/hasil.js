@@ -1,4 +1,5 @@
 const db = require('../models/index.js');
+const Excel = require('exceljs');
 const moment = require('moment');
 moment.tz.setDefault("Asia/Jakarta");
 moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
@@ -11,16 +12,125 @@ module.exports = {
         jadwal_test: req.params.id
       }, 
       // include: db.scorePeserta,
-      raw: true,
-      nest: true
+      raw: true
     });
 
+    //init workbook
+    const workbook = new Excel.Workbook();
+
+    workbook.creator = 'Bakatku.id';
+    workbook.lastModifiedBy = 'Bakatku';
+    workbook.created = new Date();
+    workbook.modified = new Date();
+    
+    const worksheet =  workbook.addWorksheet('Hasil Test Ist', {
+      pageSetup:{paperSize: 9, orientation:'landscape'}
+    });
+
+    const worksheet2 =  workbook.addWorksheet('Hasil Test Mii', {
+      pageSetup:{paperSize: 9, orientation:'landscape'}
+    });
+
+    worksheet.columns = [
+      { header: 'No', key: 'no', width: 5 },
+      { header: 'Email', key: 'email', width: 32 },
+      { header: 'SE_rw', key: 'SE_rw', width: 8},
+      { header: 'SE_sw', key: 'SE_sw', width: 8},
+      { header: 'WA_rw', key: 'WA_rw', width: 8},
+      { header: 'WA_sw', key: 'WA_sw', width: 8},
+      { header: 'AN_rw', key: 'AN_rw', width: 8},
+      { header: 'AN_sw', key: 'AN_sw', width: 8},
+      { header: 'GE_rw', key: 'GE_rw', width: 8},
+      { header: 'GE_sw', key: 'GE_sw', width: 8},
+      { header: 'RA_rw', key: 'RA_rw', width: 8},
+      { header: 'RA_sw', key: 'RA_sw', width: 8},
+      { header: 'ZR_rw', key: 'ZR_rw', width: 8},
+      { header: 'ZR_sw', key: 'ZR_sw', width: 8},
+      { header: 'FA_rw', key: 'FA_rw', width: 8},
+      { header: 'FA_sw', key: 'FA_sw', width: 8},
+      { header: 'WU_rw', key: 'WU_rw', width: 8},
+      { header: 'WU_sw', key: 'WU_sw', width: 8},
+      { header: 'ME_rw', key: 'ME_rw', width: 8},
+      { header: 'ME_sw', key: 'ME_sw', width: 8},
+      { header: 'IQ', key: 'IQ', width: 8},
+    ];
+
+    worksheet2.columns = [
+      { header: 'No', key: 'no', width: 5 },
+      { header: 'Email', key: 'email', width: 32 },
+      { header: 'M1', key: 'M1', width: 8},
+      { header: 'M2', key: 'M2', width: 8},
+      { header: 'M3', key: 'M3', width: 8},
+      { header: 'M4', key: 'M4', width: 8},
+      { header: 'M5', key: 'M5', width: 8},
+      { header: 'M6', key: 'M6', width: 8},
+      { header: 'M7', key: 'M7', width: 8},
+      { header: 'M8', key: 'M8', width: 8}
+    ];
+    // end init workbook    
     for(let i=0; i<peserta.length; i++) {
+      let row = {};
+      let row2 = {};
+      row.no = i+1;
+      row2.no = i+1;
+      row.email = peserta[i].email;
+      row2.email = peserta[i].email;
       peserta[i].scorePeserta = await db.scorePeserta.findAll({
         where: {
           peserta_id: peserta[i].id
         }
       });
+
+      for(let j=0; j<peserta[i].scorePeserta.length; j++) {
+        switch(peserta[i].scorePeserta[j].kode_soal) {
+          case 'SE':
+            row.SE_rw = peserta[i].scorePeserta[j].rw;
+            row.SE_sw = peserta[i].scorePeserta[j].sw
+            break;
+          case 'WA':
+            row.WA_rw = peserta[i].scorePeserta[j].rw;
+            row.WA_sw = peserta[i].scorePeserta[j].sw
+            break;
+          case 'AN':
+            row.AN_rw = peserta[i].scorePeserta[j].rw;
+            row.AN_sw = peserta[i].scorePeserta[j].sw
+            break;
+          case 'GE':
+            row.GE_rw = peserta[i].scorePeserta[j].rw;
+            row.GE_sw = peserta[i].scorePeserta[j].sw
+            break;
+          case 'RA':
+            row.RA_rw = peserta[i].scorePeserta[j].rw;
+            row.RA_sw = peserta[i].scorePeserta[j].sw
+            break;
+          case 'ZR':
+            row.ZR_rw = peserta[i].scorePeserta[j].rw;
+            row.ZR_sw = peserta[i].scorePeserta[j].sw
+            break;
+          case 'FA':
+            row.FA_rw = peserta[i].scorePeserta[j].rw;
+            row.FA_sw = peserta[i].scorePeserta[j].sw
+            break;
+          case 'WU':
+            row.WU_rw = peserta[i].scorePeserta[j].rw;
+            row.WU_sw = peserta[i].scorePeserta[j].sw
+            break;
+          case 'ME':
+            row.ME_rw = peserta[i].scorePeserta[j].rw;
+            row.ME_sw = peserta[i].scorePeserta[j].sw
+            break;
+          case 'M1':
+          case 'M2':
+          case 'M3':
+          case 'M4':
+          case 'M5':
+          case 'M6':
+          case 'M7':
+          case 'M8':
+            row2[peserta[i].scorePeserta[j].kode_soal] = peserta[i].scorePeserta[j].rw;
+            break;
+        }
+      }
 
       let tanggal_lahir = await db.user.findOne({
         where: {
@@ -47,9 +157,12 @@ module.exports = {
       }
       
       peserta[i].iq = await db.scorePeserta.getIQ(peserta[i].id, umur);
+      row.IQ = peserta[i].iq;
+      
+      worksheet.addRow(row);
+      worksheet2.addRow(row2);
     }
-    
-    return res.json(peserta);
-    
+    await workbook.xlsx.writeFile('./files/cobaFile2.xlsx');
+    res.json(peserta);
   }
 }
