@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
 
   scorePeserta.getIQ = async (peserta_id, umur) => {
     let sum_rw = await scorePeserta.sum('rw', {where: {peserta_id: peserta_id}});
-    if(sum_rw==null) {
+    
+    if(isNaN(sum_rw)) {
       return 0;
     }
     let look_sw = await sequelize.query(
@@ -33,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         type: sequelize.QueryTypes.SELECT
       }
     );
-    console.log("look_sw: ", look_sw)
+    
     let look_iq = await sequelize.query(
       'SELECT sw FROM score_subtest WHERE kode_soal = ? AND rw = ?',
       {
