@@ -17,7 +17,6 @@ const soal = {
       // state.jawaban.push(payload)
     },
     RESET_JAWABAN(state, payload) {
-      console.log(state)
       state.jawaban = [];
     }
   },
@@ -54,7 +53,6 @@ const soal = {
     },
     simpanJawaban({commit}, payload) {
       commit('SIMPAN_JAWABAN', payload);
-      console.log(payload)
     }
   },
   getters: {

@@ -28,7 +28,6 @@ const tes = {
       }
       return Soal.kirimJawaban(payload)
         .then((response) => {
-          console.log(response)
           return response
         })
         .catch((error) => {

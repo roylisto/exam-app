@@ -121,11 +121,10 @@ export default {
         paket_soal: this.$route.query.paket,
         jenis_soal: this.$route.query.jenis,
       }
-      console.log(this.jawaban)
-      console.log('--------------------------------kirim')
+
       this.$store.dispatch("soal/kirimJawaban", payload)
         .then((response) => {
-          console.log(response);
+          
           if (response.status == 200) {
             this.$buefy.toast.open({
                 duration: 5000,
