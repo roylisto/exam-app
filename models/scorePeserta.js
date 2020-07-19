@@ -16,7 +16,33 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
   scorePeserta.associate = function(models) {
-    // associations can be defined here
+    scorePeserta.belongsTo(models.peserta, {
+      foreignKey: 'peserta_id'
+    });
   };
+
+  scorePeserta.getIQ = async (peserta_id, umur) => {
+    let sum_rw = await scorePeserta.sum('rw', {where: {peserta_id: peserta_id}});
+    
+    if(isNaN(sum_rw)) {
+      return 0;
+    }
+    let look_sw = await sequelize.query(
+      'SELECT sw FROM score_subtest WHERE kode_soal = ? AND rw = ? AND umur = ?',
+      {
+        replacements: ['gesampt', sum_rw, umur],
+        type: sequelize.QueryTypes.SELECT
+      }
+    );
+    
+    let look_iq = await sequelize.query(
+      'SELECT sw FROM score_subtest WHERE kode_soal = ? AND rw = ?',
+      {
+        replacements: ['iq', look_sw[0].sw],
+        type: sequelize.QueryTypes.SELECT
+      }
+    );
+    return look_iq[0].sw;
+  }
   return scorePeserta;
 };
