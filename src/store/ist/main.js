@@ -40,7 +40,7 @@ const soal = {
           return response
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
         })
     },
     submitJawaban({commit}, payload) {
@@ -49,7 +49,7 @@ const soal = {
           return response
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
         })
     },
     simpanJawaban({commit}, payload) {
