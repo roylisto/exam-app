@@ -16,7 +16,15 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
     subtest_6_ist: "ZR",
     subtest_7_ist: "FA",
     subtest_8_ist: "WU",
-    subtest_9_ist: "ME"
+    subtest_9_ist: "ME",
+    bagian_1_verb_ling: "M1",
+    bagian_2_log_math: "M2",
+    bagian_3_spat: "M3",
+    bagian_4_mus: "M4",
+    bagian_5_bod_kin: "M5",
+    bagian_6_inter: "M6",
+    bagian_7_intra: "M7",
+    bagian_8_nat: "M8"
   }
 
   const account = await user.findOne({
@@ -104,6 +112,16 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
       rw: score_subtest.rw,
       sw: score_subtest.sw,
       kategori: kategori,
+      peserta_id: peserta.id
+    });
+  } else if(jenis_soal=='mii') {
+    let jumlah_ya = jawaban.filter(x => x==='ya').length;
+    console.log("ya: ", jumlah_ya);
+    scorePeserta.create({
+      kode_soal: kode_soal[paket_soal],
+      rw: jumlah_ya,
+      sw: jumlah_ya,
+      kategori: 'mii',
       peserta_id: peserta.id
     });
   }
