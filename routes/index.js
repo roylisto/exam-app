@@ -6,6 +6,7 @@ const soalIST = require('../controllers/soal/soalIST.js');
 const soalMII = require('../controllers/soal/soalMII.js');
 const time = require('../controllers/timeController.js');
 const jawaban = require('../controllers/jawaban.js');
+const jadwalTest = require('../controllers/jadwalTest.js');
 const authorize = require('../middlewares/authorize.js');
 //etc: api/time/ist/subtest1/3
 router.get('/time/:jenis_soal', authorize(), time.get);
@@ -34,5 +35,11 @@ router.get('/soal/ist/:id', authorize(), soalIST.get);
 router.get('/soal/mii', authorize(), soalMII.list);
 router.get('/soal/mii/:id', authorize(), soalMII.get);
 
+//route jadwal test
+router.get('/jadwal-test', jadwalTest.list);
+router.get('/jadwal-test/:id', jadwalTest.get);
+router.post('/jadwal-test', jadwalTest.create);
+router.put('/jadwal-test/:id', jadwalTest.update);
+router.delete('/jadwal-test/:id', jadwalTest.delete);
 router.post('/auth', auth.login);
 module.exports = router;
