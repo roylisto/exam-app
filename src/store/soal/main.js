@@ -18,7 +18,7 @@ const tes = {
           return response;
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
         })
     },
     kirimJawaban({commit}, payload) {
@@ -28,7 +28,6 @@ const tes = {
       }
       return Soal.kirimJawaban(payload)
         .then((response) => {
-          console.log(response)
           return response
         })
         .catch((error) => {

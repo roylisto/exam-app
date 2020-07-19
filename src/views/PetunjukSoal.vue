@@ -72,11 +72,6 @@ export default {
       return this.$route.query.paket;
     },
   },
-  methods: {
-    login() {
-      console.log("login");
-    }
-  }
 };
 </script>
 

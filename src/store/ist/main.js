@@ -17,7 +17,6 @@ const soal = {
       // state.jawaban.push(payload)
     },
     RESET_JAWABAN(state, payload) {
-      console.log(state)
       state.jawaban = [];
     }
   },
@@ -28,7 +27,7 @@ const soal = {
           return response
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
         })
     },
     resetJawaban({commit}) {
@@ -40,7 +39,7 @@ const soal = {
           return response
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
         })
     },
     submitJawaban({commit}, payload) {
@@ -49,12 +48,11 @@ const soal = {
           return response
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
         })
     },
     simpanJawaban({commit}, payload) {
       commit('SIMPAN_JAWABAN', payload);
-      console.log(payload)
     }
   },
   getters: {

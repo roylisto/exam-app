@@ -17,7 +17,6 @@ const soal = {
           return response
         })
         .catch((error) => {
-          console.log(error)
           Promise.reject(error)
         })
     },

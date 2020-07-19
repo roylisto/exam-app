@@ -106,9 +106,6 @@ export default {
         }
 
         this.$store.dispatch('soal/kirimJawaban', payload)
-          .then((response) => {
-            console.info(response)
-          })
           .catch((error) => {
             console.error(error)
           })
@@ -162,17 +159,14 @@ export default {
         nomor: nomor,
         paket: paket_soal
       }
-      console.log(payload)
 
       this.$store.dispatch("ist/getSingle", payload)
         .then((response) => {
-          console.log(response)
           this.soal = response.data.data
           this.totalSoal = this.soal.length
-          console.log(this.soal)
         })
         .catch((error) => {
-          console.log(error)
+          console.error(error)
         })
     },
     getAllSoalIST() {
