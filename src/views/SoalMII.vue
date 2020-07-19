@@ -172,7 +172,7 @@ export default {
           console.log(this.soal)
         })
         .catch((error) => {
-          console.log(error)
+          console.error(error)
         })
     },
     getAllSoalMII() {

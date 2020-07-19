@@ -62,10 +62,9 @@ export default {
       this.$store.dispatch("soal/getRincianTes", peserta_id)
         .then((response) => {
           this.soalTes = response.data.data
-          console.log(this.soalTes)
         })
         .catch((error) => {
-          console.log(error)
+          console.error(error)
         })
         .finally(() => {
           loadingComponent.close()

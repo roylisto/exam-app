@@ -18,7 +18,7 @@ const tes = {
           return response;
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
         })
     },
     kirimJawaban({commit}, payload) {

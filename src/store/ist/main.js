@@ -28,7 +28,7 @@ const soal = {
           return response
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
         })
     },
     resetJawaban({commit}) {
