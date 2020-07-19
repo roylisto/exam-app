@@ -1,17 +1,21 @@
 <template>
   <div id="soal">
     <Navbar />
-    <template v-if="!hasilTes">
+    <template v-if="!akhirTes">
       <div class="container">
-        <p class="title has-text-centered has-text-weight-light">Test MII Bagian 1</p>
-        <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan</p>
+        <p class="title has-text-centered has-text-weight-light">Test {{jenisSoal.toUpperCase()}} Bagian {{bagianSoal}}</p>
+        <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan: <span class="has-text-danger">{{convertTime}}</span></p>
         <div class="box">
+          <div class="columns">
+            <div class="column has-text-centered">
+              <b-button disabled type="is-text">{{`Nomor ${nomor + 1} dari ${totalSoal} soal`}}</b-button>
+            </div>
+          </div>
           <div class="is-mobile has-text-centered">
             <soal-container
               :total="totalSoal"
-              :soal="allSoal[nomor]"
+              :soal="soal[nomor]"
               v-on:jawaban="handleJawaban"
-              :jawabanBundle="jawaban"
               :nomor="nomor + 1"
               :dataJawaban="dataJawaban"
             ></soal-container>
@@ -52,52 +56,149 @@ export default {
     nomor: 0,
     totalSoal: '',
     allSoal: [],
-    benar: 0,
-    akhirTes: false
+    akhirTes: false,
+    waktu: ''
   }),
   components: {
     SoalContainer,
     Navbar,
     Footer
   },
+  mounted() {
+    this.$options.interval = setInterval(() => {
+        this.waktu -= 1
+    }, 1000);
+  },
+  watch: {
+    'interval': function (newValue, oldValue) {
+      this.convertTime
+    }
+  },
+  beforeDestroy () {
+    clearInterval(this.$options.interval);
+  },
   computed: {
     ...mapGetters("mii", ["soalMII"]),
+    ...mapGetters("auth", ["user"]),
+    userInfo() {
+      return JSON.parse(this.user)
+    },
+    bagianSoal() {
+      return this.$route.query.paket.split("_")[1]
+    },
+    jenisSoal() {
+      return this.$route.query.jenis;
+    },
+    convertTime() {
+      var totalWaktu;
+      if (this.waktu != null && this.waktu != ' ') {
+        var menit = Math.floor(this.waktu / 60);
+        var detik = Math.floor(this.waktu % 60);
+        totalWaktu = `${menit < 10 ? '0' + menit : menit}:${detik < 10 ? '0' + detik : detik}`;
+      } else {
+        // auto send jawaban if time reached < 1
+        var id = JSON.parse(this.$store.getters['auth/user']).id
+        var payload = {
+          jawaban_peserta: this.jawaban,
+          peserta_id: id,
+          paket_soal: this.$route.query.paket,
+          jenis_soal: this.$route.query.jenis,
+        }
+
+        this.$store.dispatch('soal/kirimJawaban', payload)
+          .then((response) => {
+            console.info(response)
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+
+          // reset jawaban
+          this.$store.dispatch('mii/resetJawaban');
+          this.$buefy.toast.open({
+              duration: 5000,
+              message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
+              position: 'is-bottom',
+              type: 'is-warning'
+          })
+          this.$router.replace('rincian-test')
+      }
+      return totalWaktu
+    },
     dataJawaban() {
       return this.$store.state.mii.jawaban
     }
   },
   created() {
-    this.getSingleSoal();
-    // this.getAllSoal();
+    this.fetchWaktu();
+    this.getSingleSoalMII();
+    this.getAllSoalMII();
   },
   methods: {
-    getSingleSoal() {
+    fetchWaktu() {
+      var jenis = this.$route.query.jenis;
+      var paket = this.$route.query.paket;
+      var id    = this.userInfo.id;
+
+      var payload = {
+        jenis_soal: jenis,
+        paket_soal: paket,
+        peserta_id: id
+      }
+
+      this.$store.dispatch("waktu/sisaWaktu", payload)
+        .then((response) => {
+          this.waktu = response.data.data.waktu
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    },
+    getSingleSoalMII() {
       var nomor = this.$route.query.nomor;
-      var paket_soal = this.$route.query.paket_soal;
+      var paket_soal = this.$route.query.paket;
 
       var payload = {
         nomor: nomor,
         paket: paket_soal
       }
+      console.log(payload)
 
       this.$store.dispatch("mii/getSingle", payload)
         .then((response) => {
-          this.soal = response.data
+          console.log(response)
+          this.soal = response.data.data
+          this.totalSoal = this.soal.length
+          console.log(this.soal)
         })
         .catch((error) => {
           console.log(error)
         })
     },
-    // getAllSoal() {
-    //  this.$store.dispatch("mii/getAllSoal")
-    //     .then((response) => {
-    //       this.allSoal = response.data.data
-    //       this.totalSoal = this.allSoal.length
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
-    // },
+    getAllSoalMII() {
+      const loadingComponent = this.$buefy.loading.open()
+      var jenis = this.$route.query.jenis;
+      
+      if (jenis == 'mii') {
+      this.$store.dispatch("mii/getAllSoal")
+          .then((response) => {
+            this.allSoal = response.data.data
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+      } else {
+        this.$store.dispatch("mii/getAllSoal")
+          .then((response) => {
+            this.allSoal = response.data.data
+            this.totalSoal = this.allSoal.length
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+      }
+      loadingComponent.close()
+    },
     handleJawaban(e) {
       if (e.aksi == 'Berikutnya') {
         this.jawaban[this.nomor] = e.jawaban;
@@ -106,23 +207,7 @@ export default {
       } else {
         this.nomor--;
       }
-      // if(this.nomor + 1 === this.allSoal.length) {
-      //   // this.handleHasil();
-      //   // this.akhirTes = true
-      // } else {
-      //   this.nomor++;
-      // }
     },
-    handleHasil() {
-      this.allSoal.forEach((item, index) => {
-        if (this.jawaban[index] === item.kunci_jawaban) this.benar++;
-      })
-    }
   },
-  watch: {
-    '$route.query.nomor': function () {
-      this.getSingleSoal();
-    }
-  }
 }
 </script>

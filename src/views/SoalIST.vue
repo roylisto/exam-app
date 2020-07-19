@@ -6,6 +6,11 @@
         <p class="title has-text-centered has-text-weight-light">Test {{jenisSoal.toUpperCase()}} Bagian {{bagianSoal}}</p>
         <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan: <span class="has-text-danger">{{convertTime}}</span></p>
         <div class="box">
+          <div class="columns">
+            <div class="column has-text-centered">
+              <b-button disabled type="is-text">{{`Nomor ${nomor + 1} dari ${totalSoal} soal`}}</b-button>
+            </div>
+          </div>
           <div class="is-mobile has-text-centered">
             <soal-container
               :total="totalSoal"
@@ -23,7 +28,7 @@
         <div class="hero-body has-text-centered">
           <div class="container">
             <h1 class="title has-text-weight-light">
-              Anda telah selesai mengerjakan soal test IST
+              Anda telah selesai mengerjakan soal test {{jenisSoal.toUpperCase()}}
             </h1>
             <h2 class="subtitle">
               Submit jawaban anda dengan menekan tombol button dibawah ini
@@ -89,7 +94,7 @@ export default {
       if (this.waktu != null && this.waktu != ' ') {
         var menit = Math.floor(this.waktu / 60);
         var detik = Math.floor(this.waktu % 60);
-        totalWaktu = `${menit < 10 ? '0' + menit : ''}:${detik < 10 ? '0' + detik : detik}`;
+        totalWaktu = `${menit < 10 ? '0' + menit : menit}:${detik < 10 ? '0' + detik : detik}`;
       } else {
         // auto send jawaban if time reached < 1
         var id = JSON.parse(this.$store.getters['auth/user']).id
@@ -126,8 +131,8 @@ export default {
   },
   created() {
     this.fetchWaktu();
-    this.getSingleSoal();
-    this.getAllSoal();
+    this.getSingleSoalIST();
+    this.getAllSoalIST();
   },
   methods: {
     fetchWaktu() {
@@ -149,7 +154,7 @@ export default {
           console.error(error)
         })
     },
-    getSingleSoal() {
+    getSingleSoalIST() {
       var nomor = this.$route.query.nomor;
       var paket_soal = this.$route.query.paket;
 
@@ -170,7 +175,7 @@ export default {
           console.log(error)
         })
     },
-    getAllSoal() {
+    getAllSoalIST() {
       const loadingComponent = this.$buefy.loading.open()
       var jenis = this.$route.query.jenis;
       
