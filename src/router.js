@@ -4,7 +4,7 @@ import Home from "../src/views/Home.vue";
 import Login from "../src/views/Login.vue";
 import RincianTest from "../src/views/RincianTest.vue";
 import PetunjukSoal from "../src/views/PetunjukSoal.vue";
-import Soal from "../src/views/SoalIST.vue";
+import Soal from "../src/views/Soal.vue";
 
 Vue.use(Router)
 

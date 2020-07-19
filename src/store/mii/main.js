@@ -1,58 +1,62 @@
-import SoalMII from '../../services/SoalMII';
+import soalMII from '../../services/SoalMII';
 
 const soal = {
   namespaced: true,
   state: {
-    SoalMII: [],
+    soalMII: [],
     jawaban: []
   },
   mutations: {
     SET_SOAL(state, payload) {
-      state.SoalMII.push(payload)
+      state.soalMII.push(payload)
     },
     SIMPAN_JAWABAN(state, payload) {
-      console.log(typeof state.SoalMII)
+      console.log(payload)
+      console.log(typeof state.soalMII)
+      console.log(state.jawaban)
       // state.jawaban.push(payload)
     },
-    // RESET(state, payload) {
-    //   state.jawaban = payload
-    // }
+    RESET_JAWABAN(state, payload) {
+      state.jawaban = [];
+    }
   },
   actions: {
-    // getSingle({commit}, payload) {
-    //   return SoalMII.getSingleSoal(payload)
-    //     .then((response) => {
-    //       return response
-    //     })
-    //     .catch((error) => {
-    //       return error
-    //     })
-    // },
-    simpanJawaban({commit}, payload) {
-      commit('SIMPAN_JAWABAN', payload);
-      // commit('RESET', "");
-    },
-    getAllSoal({commit}) {
-      return SoalMII.getSoal()
+    getSingle({commit}, payload) {
+      return soalMII.getSingleSoal(payload)
         .then((response) => {
           return response
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
+        })
+    },
+    resetJawaban({commit}) {
+      commit('RESET_JAWABAN');
+    },
+    getAllSoal({commit}) {
+      return soalMII.getSoal()
+        .then((response) => {
+          return response
+        })
+        .catch((error) => {
+          return Promise.reject(error)
         })
     },
     submitJawaban({commit}, payload) {
-      return SoalMII.submit(payload)
+      return soalMII.submit(payload)
         .then((response) => {
           return response
         })
         .catch((error) => {
-          return error
+          return Promise.reject(error)
         })
+    },
+    simpanJawaban({commit}, payload) {
+      commit('SIMPAN_JAWABAN', payload);
     }
   },
   getters: {
-    SoalMII: state => state.SoalMII,
+    soalMII: state => state.soalMII,
     jawabanTersimpan: state => state.jawaban
   }
 }
