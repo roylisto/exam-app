@@ -12,10 +12,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       email: {        
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       no_hp: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       tanggal_lahir: {
         type: Sequelize.DATEONLY
