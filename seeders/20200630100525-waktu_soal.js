@@ -46,7 +46,7 @@ module.exports = {
       {
         jenis_soal: 'ist',
         paket_soal: 'subtest_9_ist',
-        waktu: 360
+        waktu: 540
       },
       {
         jenis_soal: 'mii',

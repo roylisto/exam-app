@@ -134,7 +134,7 @@ module.exports = {
     req.body.peserta_id = req.decoded.data.id    
     jawaban.create(req.body).then(result => {
       hitungSubtestPilgan(req.decoded.data, req.body.jawaban_peserta, req.body.paket_soal, req.body.jenis_soal);
-      res.json({
+      return res.json({
         status: 'OK',
         messages: 'Success insert data.',
         data: result

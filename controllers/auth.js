@@ -1,29 +1,29 @@
 const { peserta, jadwalTest, user } = require('../models/index.js');
 const jwt = require('jsonwebtoken');
-// const { Op } = require('sequelize');
 const moment = require('moment');
 moment.tz.setDefault("Asia/Jakarta");
 moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
 
 module.exports = {
   login: (req, res) => {  
-    let { email, password } = req.body 
-    // let today = moment().format(); 
-    // let tomorrow = moment().add(1, 'days').format();
+    let { email, password } = req.body     
+    let today = moment().format();
 
     peserta.findOne({
       where: {
         email: email,
-        password: password,
-        // valid: {
-        //   [Op.gte]: today
-        // },
-        // expired: {
-        //   [Op.lte]: tomorrow
-        // }
+        password: password
       }
     }).then(async peserta => {
-      if(peserta) {        
+      let valid = moment(today).isSameOrAfter(peserta.valid);
+      let expired = moment(today).isSameOrBefore(peserta.expired);
+      
+      if(process.env.NODE_ENV == 'development') {
+        valid = true;
+        expired = true;
+      }
+
+      if(peserta && valid==true && expired==true) {        
         const test = await jadwalTest.findByPk(peserta.jadwal_test);
         const user_peserta = await user.findOne({attributes: ['nama']},{where: {email:peserta.email}});
         
