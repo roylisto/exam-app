@@ -45,14 +45,21 @@ module.exports = {
         if(jenis_soal=='mii') {
           waktu_soal.waktu = waktu_soal.waktu-900; 
         }
+
+        let resp = {
+          waktu: waktu_soal.waktu,
+          keterangan: (jenis_soal=='mii') ? 'primary' : null
+        }
+
+        if(paket_soal=='subtest_9_ist') {
+          resp.waktu = waktu_soal.waktu-360;
+          resp.keterangan = 'hapalan';
+        }
         
         res.json({
           status: 'OK',
           messages: 'Create new log soal for this user',
-          data: {          
-            waktu: waktu_soal.waktu, //convert menit ke detik
-            keterangan: (jenis_soal=='mii') ? 'primary' : null
-          }
+          data: resp
         })
       } else {
         if(jenis_soal=='mii') {
@@ -84,13 +91,22 @@ module.exports = {
           });
         } else {
           if(jenis_soal=='ist') {
+            let resp = {
+              waktu: sisa_waktu,
+              keterangan: null
+            }
+            if(paket_soal=='subtest_9_ist') {
+              if(sisa_waktu>360) {
+                resp.waktu = sisa_waktu-360;
+                resp.keterangan = 'hapalan';
+              } else {
+                resp.keterangan = 'soal';
+              }
+            }
             res.json({
               status: 'OK',
               messages: '',
-              data: {          
-                waktu: sisa_waktu,
-                keterangan: null
-              }
+              data: resp
             });
           } else {
             res.json({
