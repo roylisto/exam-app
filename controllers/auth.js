@@ -1,6 +1,5 @@
 const { peserta, jadwalTest, user } = require('../models/index.js');
 const jwt = require('jsonwebtoken');
-const { Op } = require('sequelize');
 const moment = require('moment');
 moment.tz.setDefault("Asia/Jakarta");
 moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
@@ -23,7 +22,7 @@ module.exports = {
         valid = true;
         expired = true;
       }
-      
+
       if(peserta && valid==true && expired==true) {        
         const test = await jadwalTest.findByPk(peserta.jadwal_test);
         const user_peserta = await user.findOne({attributes: ['nama']},{where: {email:peserta.email}});
