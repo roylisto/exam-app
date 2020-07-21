@@ -6,13 +6,13 @@
         Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (61-76)
       </p>
       <div class="box">
-        <div class="soal-petunjuk">
+        <div class="soal-petunjuk container">
           <p class="has-text-weight-normal">
             Persoalan berikutnya ialah soal-soal hitungan
           </p>
         </div>
 
-        <div class="soal-item">
+        <div class="soal-item container">
           <h1>Contoh 05</h1>
           <p>Sebatang pensil harganya 25 rupiah. Berapa harga 3 batang?</p>
           <div class="checkbox-gbr-group">
@@ -28,7 +28,7 @@
             Untuk menunjukan jawaban suatu soal, maka plilihlah angka-angka yang terdapat didalam jawaban itu urutan angka jawaban tidak perlu dihiraukan pada contoh 05 jawaban ialah 75 oleh karena itu pilihlah angka 7 dan 5  </p>
         </div>
 
-        <div class="soal-item">
+        <div class="soal-item container">
           <h1>Contoh berikutnya</h1>
           <p>Dengan sepeda Husin dapat mencapai 15 km dalam waktu 1 jam. Berapa km-kah yang dapat ia capai dalam waktu 4 jam ? </p>
           <div class="checkbox-gbr-group">
