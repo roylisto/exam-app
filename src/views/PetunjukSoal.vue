@@ -1,124 +1,51 @@
 <template>
   <div>
-    <Navbar />
-    <div class="container mt-5">
-      <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal}} (01-20)
-      </p>
-      <div class="box">
-        <div class="soal-petunjuk">
-          <p>
-            Soal-soal 01-20 terdiri atas kalimat-kalimat Pada setiap kalimat satu
-            kata yang hilang dan disediakan 5 (lima) kata pilihan sebagai
-            penggantinya Pilihlah kata yang tepat yang dapat menyempurnakan
-            kalimat itu.
-          </p>
-        </div>
-        <div class="soal-item">
-          <h1>Contoh 01</h1>
-          <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
-          <div class="radio-btn-group">
-            <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-            </div>
-          </div>
-        </div>
-        
-        <div class="soal-item">
-          <h1>Contoh berikutnya</h1>
-          <p>Lawannya "Harapan" adalah.....</p>
-          <div class="radio-btn-group">
-            <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Duka</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Putus Asa</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Sengsara</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Cinta</label>
-            </div>
-          </div>
-        </div>
-        
-        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: 'subtest1', jenis: 'ist'}}" style="margin-top: 2rem"
-        >Mulai test</b-button>
-      </div>
-    </div>
-    <Footer />
+    <sub-test-1 v-if="paketSoal == 'subtest_1_ist'"></sub-test-1>
+    <sub-test-2 v-if="paketSoal == 'subtest_2_ist'"></sub-test-2>
+    <sub-test-3 v-if="paketSoal == 'subtest_3_ist'"></sub-test-3>
+    <sub-test-4 v-if="paketSoal == 'subtest_4_ist'"></sub-test-4>
+    <sub-test-5 v-if="paketSoal == 'subtest_5_ist'"></sub-test-5>
+    <sub-test-6 v-if="paketSoal == 'subtest_6_ist'"></sub-test-6>
+    <sub-test-7 v-if="paketSoal == 'subtest_7_ist'"></sub-test-7>
+    <sub-test-8 v-if="paketSoal == 'subtest_8_ist'"></sub-test-8>
+    <sub-test-9 v-if="paketSoal == 'subtest_9_ist'"></sub-test-9>
   </div>
 </template>
 
-
 <script>
-import Navbar from "../components/Navbar.vue";
-import Footer from "../components/Footer.vue";
+import SubTest1 from '../components/IST/Subtest1.vue'
+import SubTest2 from '../components/IST/Subtest2.vue'
+import SubTest3 from '../components/IST/Subtest3.vue'
+import SubTest4 from '../components/IST/Subtest4.vue'
+import SubTest5 from '../components/IST/Subtest5.vue'
+import SubTest6 from '../components/IST/Subtest6.vue'
+import SubTest7 from '../components/IST/Subtest7.vue'
+import SubTest8 from '../components/IST/Subtest8.vue'
+import SubTest9 from '../components/IST/Subtest9.vue'
 
 export default {
-  name: "rincian-test",
+  name: 'petunjuk-soal',
   components: {
-    Navbar,
-    Footer
+    SubTest1,
+    SubTest2,
+    SubTest3,
+    SubTest4,
+    SubTest5,
+    SubTest6,
+    SubTest7,
+    SubTest8,
+    SubTest9,
   },
   computed: {
-    bagianSoal() {
+    jenisSoal() {
+      return this.$route.query.jenis;
+    },
+    paketSoal() {
       return this.$route.query.paket;
     },
-  },
-};
+    bagianSoal() {
+      return this.$route.query.paket.split("_")[1]
+    },
+  }
+}
 </script>
-
-
-<style>
-.radio-btn-group {
-  display: -webkit-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.radio-btn-group .radio {
-  margin: 1em .25rem;
-}
-
-.radio-btn-group .radio label {
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: .5rem 1.25rem;
-  border-radius: 56px;
-  cursor: pointer;
-  color: #444;
-  -webkit-transition: box-shadow 400ms ease;
-  transition: box-shadow 400ms ease;
-}
-.radio-btn-group .radio label:hover {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-.radio-btn-group .radio input[type="radio"] {
-  display: none;
-}
-.radio-btn-group .radio input[type="radio"]:checked + label {
-  background: #2196F3;
-  color: #fff;
-  border-color: #2196F3;
-}
-
-.show {
-  font-weight: 400;
-  color: #444;
-}
-.show span {
-  background: #f5f5f5;
-  color: #F44336;
-  border-radius: 3px;
-  padding: .25rem .5rem;
-  font-size: 1.25rem;
-  border: 1px solid #f1f1f1;
-}
-</style>

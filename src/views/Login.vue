@@ -33,7 +33,7 @@
                   </div>
                   <div class="field">
                     <div class="control">
-                      <b-button expanded type="is-primary" @click="login"
+                      <b-button expanded type="is-primary" @click="login" native-type="submit"
                         >Log in</b-button
                       >
                     </div>

@@ -57,7 +57,7 @@ export default {
     totalSoal: '',
     allSoal: [],
     akhirTes: false,
-    waktu: ''
+    waktu: []
   }),
   components: {
     SoalContainer,
@@ -66,13 +66,8 @@ export default {
   },
   mounted() {
     this.$options.interval = setInterval(() => {
-        this.waktu -= 1
+        this.waktu.waktu -= 1
     }, 1000);
-  },
-  watch: {
-    'interval': function (newValue, oldValue) {
-      this.convertTime
-    }
   },
   beforeDestroy () {
     clearInterval(this.$options.interval);
@@ -91,36 +86,76 @@ export default {
     },
     convertTime() {
       var totalWaktu;
-      if (this.waktu != null && this.waktu != ' ') {
-        var menit = Math.floor(this.waktu / 60);
-        var detik = Math.floor(this.waktu % 60);
-        totalWaktu = `${menit < 10 ? '0' + menit : menit}:${detik < 10 ? '0' + detik : detik}`;
+      var menit = Math.floor(this.waktu.waktu / 60);
+      var detik = Math.floor(this.waktu.waktu % 60);
+      totalWaktu = `${menit < 10 ? '0' + menit : menit}:${detik < 10 ? '0' + detik : detik}`;
+      
+      if (this.waktu.waktu > 4) {
+        return totalWaktu
       } else {
-        // auto send jawaban if time reached < 1
-        var id = JSON.parse(this.$store.getters['auth/user']).id
-        var payload = {
-          jawaban_peserta: this.jawaban,
-          peserta_id: id,
-          paket_soal: this.$route.query.paket,
-          jenis_soal: this.$route.query.jenis,
+        if (this.waktu.keterangan == 'primary') {
+          return totalWaktu
+         } else {
+          if (this.waktu.waktu === null) {
+              // auto send jawaban if time reached < 1
+              var id = JSON.parse(this.$store.getters['auth/user']).id
+              var payload = {
+                jawaban_peserta: this.jawaban,
+                peserta_id: id,
+                paket_soal: this.$route.query.paket,
+                jenis_soal: this.$route.query.jenis,
+              }
+
+              this.$store.dispatch('soal/kirimJawaban', payload)
+                .catch((error) => {
+                  console.error(error)
+                })
+
+                // reset jawaban
+                this.$store.dispatch('mii/resetJawaban');
+                this.$buefy.toast.open({
+                    duration: 5000,
+                    message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
+                    position: 'is-bottom',
+                    type: 'is-warning'
+                })
+                this.$router.replace('rincian-test')
+          } else {
+            this.fetchWaktu()
+            return totalWaktu + ' (Tambahan)'
+          }
         }
-
-        this.$store.dispatch('soal/kirimJawaban', payload)
-          .catch((error) => {
-            console.error(error)
-          })
-
-          // reset jawaban
-          this.$store.dispatch('mii/resetJawaban');
-          this.$buefy.toast.open({
-              duration: 5000,
-              message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
-              position: 'is-bottom',
-              type: 'is-warning'
-          })
-          this.$router.replace('rincian-test')
       }
-      return totalWaktu
+      
+      // console.log(this.waktu.waktu)
+      // console.log(this.waktu.waktu != null)
+      // console.log(this.waktu.waktu != ' ')
+      // } else {
+      //   // auto send jawaban if time reached < 1
+      //   var id = JSON.parse(this.$store.getters['auth/user']).id
+      //   var payload = {
+      //     jawaban_peserta: this.jawaban,
+      //     peserta_id: id,
+      //     paket_soal: this.$route.query.paket,
+      //     jenis_soal: this.$route.query.jenis,
+      //   }
+
+      //   this.$store.dispatch('soal/kirimJawaban', payload)
+      //     .catch((error) => {
+      //       console.error(error)
+      //     })
+
+      //     // reset jawaban
+      //     this.$store.dispatch('mii/resetJawaban');
+      //     this.$buefy.toast.open({
+      //         duration: 5000,
+      //         message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
+      //         position: 'is-bottom',
+      //         type: 'is-warning'
+      //     })
+      //     this.$router.replace('rincian-test')
+      // }
+      // return totalWaktu
     },
     dataJawaban() {
       return this.$store.state.mii.jawaban
@@ -145,7 +180,8 @@ export default {
 
       this.$store.dispatch("waktu/sisaWaktu", payload)
         .then((response) => {
-          this.waktu = response.data.data.waktu
+          console.log(response)
+          this.waktu = response.data.data
         })
         .catch((error) => {
           console.error(error)

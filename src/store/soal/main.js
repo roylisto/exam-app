@@ -4,11 +4,18 @@ const tes = {
   namespaced: true,
   state: {
     test: [],
+    timerSoalIST: 180
   },
   mutations: {
     SET_TES(state, payload) {
       state.tes = payload
     },
+    COUNTDOWN_TIMER(state) {
+      state.timerSoalIST -= 1
+    },
+    RESET_TIMER(state) {
+      state.timerSoalIST = 180
+    }
   },
   actions: {
     getRincianTes({commit}, payload) {
@@ -34,9 +41,16 @@ const tes = {
           Promise.reject(error)
         })
     },
+    startTimer({commit}) {
+      commit('COUNTDOWN_TIMER')
+    },
+    resetTimer({commit}) {
+      commit('RESET_TIMER')
+    }
   },
   getters: {
-    tes: state => state.tes
+    tes: state => state.tes,
+    timer: state => state.timerSoalIST
   }
 }
 
