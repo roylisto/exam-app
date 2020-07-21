@@ -34,7 +34,7 @@
         <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
           <section>
             <b-field label="Jawaban">
-                <b-input v-model="jawaban[soal.nomor - 1]" maxlength="50"></b-input>
+                <b-input v-model="jawaban[soal.nomor - 1]" maxlength="50" @keyup.native.enter="submitJawaban('Berikutnya')"></b-input>
             </b-field>
           </section>
       </div>
