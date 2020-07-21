@@ -171,7 +171,7 @@ module.exports = {
         worksheet2.addRow(row2);
       }
 
-      let nameFile = `${event_test.waktu}_${event_test.instansi}`;
+      let nameFile = `${moment(event_test.waktu).format('YYYY-MM-DD')}_${event_test.instansi}`;
       nameFile = nameFile.replace(/ /g,"_").replace(/:/g,"-") +'-'+event_test.id;
 
       await workbook.xlsx.writeFile(`./files/${nameFile}.xlsx`);
