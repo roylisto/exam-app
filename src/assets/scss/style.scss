@@ -1,0 +1,90 @@
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+// Set your colors
+$primary: #f86060;
+$primary-invert: findColorInvert($primary);
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "primary": ($primary, $primary-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert),
+    "twitter": ($twitter, $twitter-invert)
+);
+
+.container {
+    margin: 2rem auto !important;
+}
+
+.login-image {
+    background-image: url('https://cdn.zeplin.io/5eea0882a4d52d4a36e76902/assets/1d14cebf-8693-4379-98d3-64dd1a62fee6.png');
+      /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.box {
+    width: 100%;
+    padding: 60px;
+    height: 100%;
+    border-radius: 32px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #f5f5f5;
+}
+
+@mixin button() {
+    width: 100%;
+    height: 83px;
+    padding: 0 1.5rem !important;
+    border: 2px solid $primary !important;
+    color: $primary !important;
+}
+
+.button.is-text {
+    text-decoration: none !important;
+    font-weight: bold;
+}
+
+.navbar {
+    border-bottom: 1px solid $primary;
+}
+
+.soal-item {
+    margin-top: 2rem;
+
+    h1 {
+        font-weight: bold;
+    }
+}
+
+.button-outline { @include button(); }
+
+.button-round {
+    @include button();
+    border-radius: 2000px !important;
+}
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+$footer-background-color: $primary;
+$footer-color: white;
+$footer-padding: 2rem 1rem 5rem;
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy"

@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const env = process.env.NODE_ENV;
 const apiRoutes = require('../routes');
+const fs = require('fs');
+const fileDir = './files';
 
 app.use(helmet());
 app.use(bodyParser.json());
@@ -15,6 +17,10 @@ app.use(cookieParser());
 
 app.use('/api', apiRoutes);
 app.use(express.static(path.resolve(__dirname, '..') + '/dist'));
+
+if (!fs.existsSync(fileDir)) {
+  fs.mkdirSync(fileDir);
+}
 
 if (env === 'development') {
   const webpack = require('webpack');

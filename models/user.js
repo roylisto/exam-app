@@ -6,24 +6,35 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
-      type: DataTypes.STRING,
+    nama: {
+      allowNull: false,
+      type: DataTypes.STRING
     },
-    username: {
-      type: DataTypes.STRING,
+    email: {
+      allowNull: false,
+      type: DataTypes.STRING
     },
-    password: {
-      type: DataTypes.STRING,
+    no_hp: {
+      allowNull: false,
+      type: DataTypes.STRING
     },
-    created_at: {
-      type: DataTypes.DATE
+    tanggal_lahir: {
+      allowNull: false,
+      type: DataTypes.INTEGER
     },
-    updated_at: {      
-      type: DataTypes.DATE
+    kelompok: {      
+      allowNull: false,
+      type: DataTypes.STRING
     },
+    instansi: {      
+      allowNull: false,
+      type: DataTypes.STRING
+    }
   }, {    
-    tableName: 'user',
+    tableName: 'user',    
     underscored: true,
+    timestamps: true,
+    paranoid: true
   });
 
   return user;

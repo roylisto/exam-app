@@ -8,6 +8,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const webpack = require('webpack');
 
 const env = process.env.NODE_ENV;
 const dir = path.resolve(__dirname, '..');
@@ -110,6 +111,11 @@ const options = {
     new LiveReloadPlugin({
       port: 0,
       appendScriptTag: env === 'development' ? true : false,
+    }),
+    new webpack.DefinePlugin({
+      'process.env.VUE_APP_API_URL': JSON.stringify(process.env.VUE_APP_API_URL),
+      'process.env.VUE_APP_IMAGE_URL': JSON.stringify(process.env.VUE_APP_IMAGE_URL),
+      'process.env.VUE_APP_NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
   ],
   resolve: {
