@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="soal-item">
           <h1>Contoh berikutnya</h1>
           <p>Lawannya "Harapan" adalah.....</p>
