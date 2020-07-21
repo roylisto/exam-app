@@ -33,8 +33,8 @@
           <p>9      7       10      8      11      9      12      ? </p>
           <div class="checkbox-gbr-group">
             <div v-for="(value, index) in pilganbutton" :key="index" class="checkbox" >
-              <input :id="value" type="checkbox" :name="jawaban[index]" :value="value" v-model="tmpJawaban">
-              <label :for="value">{{value}}</label>
+              <input :id="value + '1'" type="checkbox" :name="jawaban[index]" :value="value + '1'" v-model="tmpJawaban">
+              <label :for="value + '1'">{{value}}</label>
             </div>
           </div>
         </div>
