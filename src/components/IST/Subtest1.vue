@@ -20,14 +20,14 @@
           <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="value" type="radio" name="radio-1" value="value">
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio-1" value="value">
-              <label for="value">Bajing</label>
-              <input id="value" type="radio" name="radio-1" value="value">
-              <label for="value">Lembu</label>
-              <input id="value" type="radio" name="radio-1" value="value">
-              <label for="value">Anjing</label>
+              <input id="kucing" type="radio" name="radio-1" value="kucing">
+              <label for="kucing">Kucing</label>
+              <input id="bajing" type="radio" name="radio-1" value="bajing">
+              <label for="bajing">Bajing</label>
+              <input id="lembu" type="radio" name="radio-1" value="lembu">
+              <label for="lembu">Lembu</label>
+              <input id="anjing" type="radio" name="radio-1" value="anjing">
+              <label for="anjing">Anjing</label>
             </div>
           </div>
         </div>
@@ -37,19 +37,19 @@
           <p>Lawannya "Harapan" adalah.....</p>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Duka</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Putus Asa</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Sengsara</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Cinta</label>
+              <input id="duka" type="radio" name="radio-2" value="duka">
+              <label for="duka">Duka</label>
+              <input id="putusAsa" type="radio" name="radio-2" value="putusAsa">
+              <label for="putusAsa">Putus Asa</label>
+              <input id="sengsara" type="radio" name="radio-2" value="sengsara">
+              <label for="sengsara">Sengsara</label>
+              <input id="cinta" type="radio" name="radio-2" value="cinta">
+              <label for="cinta">Cinta</label>
             </div>
           </div>
         </div>
         
-        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
+        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
         >Mulai test</b-button>
       </div>
     </div>
@@ -71,6 +71,9 @@ export default {
   computed: {
     bagianSoal() {
       return this.$route.query.paket;
+    },
+    jenisSoal() {
+      return this.$route.query.jenis;
     },
   },
 };
