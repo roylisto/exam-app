@@ -3,52 +3,63 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (01-20)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (21-40)
       </p>
       <div class="box">
-        <div class="soal-petunjuk">
-          <p>
-            Soal-soal 01-20 terdiri atas kalimat-kalimat Pada setiap kalimat satu
-            kata yang hilang dan disediakan 5 (lima) kata pilihan sebagai
-            penggantinya Pilihlah kata yang tepat yang dapat menyempurnakan
-            kalimat itu.
-          </p>
+        <div class="container">
+          <p class="has-text-weight-normal">Ditentukan lima kata</p>
+          <p class="has-text-weight-normal">Pada 4 dari 5 kata itu terdapat satu kesamaan</p>
+          <p class="has-text-weight-normal">Carilah kata yang kelima yang tidak memiliki kesamaan dari keempat kata itu. </p>
         </div>
-        <div class="soal-item">
-          <h1>Contoh 01</h1>
-          <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
+        <div class="soal-item container">
+          <h1>Contoh 02</h1>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
+              <input id="kucing" type="radio" name="radio-1" value="kucing">
+              <label for="kucing">a) Meja</label>
+              <input id="bajing" type="radio" name="radio-1" value="bajing">
+              <label for="bajing">b) Kursi</label>
+              <input id="lembu" type="radio" name="radio-1" value="lembu">
+              <label for="lembu">c) Burung</label>
+              <input id="anjing" type="radio" name="radio-1" value="anjing">
+              <label for="anjing">d) Lemari</label>
+              <input id="tempat" type="radio" name="radio-1" value="tempat">
+              <label for="tempat">d) Tempat Tidur</label>
             </div>
           </div>
         </div>
+        
+        <div class="container">
+          <p class="has-text-weight-normal">a,b,d, dan e adalah peralatan perabot rumah (meubel) <br />c burung bukan perabot rumah atau tidak memiliki kesamaan keempat kata itu 
+          <br/> oleh karena itu, jawaban yang harus dipilih adalah c</p>
+        </div>
 
-        <div class="soal-item">
+        <div class="soal-item container">
           <h1>Contoh berikutnya</h1>
           <p>Lawannya "Harapan" adalah.....</p>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Duka</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Putus Asa</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Sengsara</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Cinta</label>
+              <input id="duduk" type="radio" name="radio-2" value="duduk">
+              <label for="duduk">a) Duduk</label>
+              <input id="berbaring" type="radio" name="radio-2" value="berbaring">
+              <label for="berbaring">b) Putus Asa</label>
+              <input id="berdiri" type="radio" name="radio-2" value="berdiri">
+              <label for="berdiri">c) Berdiri</label>
+              <input id="berjalan" type="radio" name="radio-2" value="berjalan">
+              <label for="berjalan">d) Berjalan</label>
+              <input id="berjongkok" type="radio" name="radio-2" value="berjongkok">
+              <label for="berjongkok">e) Berjongkok</label>
             </div>
           </div>
         </div>
-
-        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
+        
+        <div class="container">
+          <p class="has-text-weight-normal">Pada a,b,c dan e orang berada dalam keadaan tidak bergerak, sedangkan d orang dalam
+            keadaan bergerak. Maka jawaban yang benar adalah d berjalan.
+            oleh karena itu jawabna yang harus dipilih adalah d. berjalan</p>
+        </div>
+        
+        <b-button   type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
         >Mulai test</b-button>
       </div>
     </div>
@@ -71,22 +82,24 @@ export default {
     bagianSoal() {
       return this.$route.query.paket;
     },
+    jenisSoal() {
+      return this.$route.query.jenis;
+    },
   },
 };
 </script>
 
-
 <style>
+/* non-gambar */
 .radio-btn-group {
   display: -webkit-box;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
 }
 .radio-btn-group .radio {
   margin: 1em .25rem;
 }
-
 .radio-btn-group .radio label {
   background: #fff;
   border: 1px solid #ddd;
@@ -108,7 +121,6 @@ export default {
   color: #fff;
   border-color: #2196F3;
 }
-
 .show {
   font-weight: 400;
   color: #444;
