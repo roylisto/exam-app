@@ -15,10 +15,10 @@
         <div v-for="(value, index) in soalTes" :key="index">
           <div class="columns is-mobile has-text-centered">
             <div class="column">
-              <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' || value.test != testWhichBelum[0].test ? 'disabled' : 'has-text-primary has-text-weight-semibold'" :to="{path: '/soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test.replace(/_/g, " ").toUpperCase()}}</router-link>
+              <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' ? 'disabled' : 'has-text-primary has-text-weight-semibold'" :to="{path: '/petunjuk-soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test.replace(/_/g, " ").toUpperCase()}}</router-link>
             </div>
             <div class="column">
-              <p :class="value.status == 'Sudah' || value.status == 'Waktu habis' || value.test != testWhichBelum[0].test ? 'disabled' : value.status == 'Sedang dikerjakan' ? 'has-text-success' : 'has-text-primary has-text-weight-semibold'">{{value.status}}</p>
+              <p :class="value.status == 'Sudah' || value.status == 'Waktu habis' ? 'disabled' : value.status == 'Sedang dikerjakan' ? 'has-text-success' : 'has-text-primary has-text-weight-semibold'">{{value.status}}</p>
           </div>
             </div>
         </div>

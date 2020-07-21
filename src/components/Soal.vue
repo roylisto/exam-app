@@ -11,7 +11,6 @@
         </div>
       </div>
       <div v-else-if="soal.kategori == 'gambar'">
-        <!-- <p class="has-text-left">{{soal.nomor}}</p> -->
         <div class="has-text-left">
           <img :src="gambarURL + '/' + soal.pertanyaan" alt="">
         </div>
@@ -24,7 +23,6 @@
         </div>
       </div>
       <div v-else-if="soal.kategori == 'nosoal'">
-        <b-button disabled type="is-text">{{`Nomor ${nomor} dari ${total} soal`}}</b-button>
         <div class="radio-btn-group">
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
             <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
@@ -32,19 +30,20 @@
           </div>
         </div>
       </div>
-      <div v-else-if="soal.kategori == 'nopilgan'">
+      <div v-else-if="soal.kategori == 'nopilgan'" style="margin: 1rem 0;">
         <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
           <section>
             <b-field label="Jawaban">
-                <b-input v-model="jawaban[soal.nomor - 1]"></b-input>
+                <b-input v-model="jawaban[soal.nomor - 1]" maxlength="50"></b-input>
             </b-field>
           </section>
       </div>
       <div v-else-if="soal.kategori == 'pilganbutton'">
         <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
-          <div class="radio-gbr-group">
-            <div v-for="(value, index) in pilganbutton" :key="index" class="radio" >
-              <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
+            {{jawaban}}
+          <div class="checkbox-gbr-group">
+            <div v-for="(value, index) in pilganbutton" :key="index" class="checkbox" >
+              <input :id="value" type="checkbox" :name="jawaban[index]" :value="value" v-model="jawaban[nomor]">
               <label :for="value">{{value}}</label>
             </div>
           </div>
@@ -58,11 +57,11 @@
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="jenisSoal == 'mii'">
       <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
       <div class="radio-btn-group">
         <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
-          <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
+          <input :id="value" type="radio" :name="jawaban[index]" :value="value" v-model="jawaban[soal.nomor - 1]">
           <label :for="value">{{value}}</label>
         </div>
       </div>
@@ -70,7 +69,7 @@
     <div class="columns">
       <div class="column">
         <b-button class="button" v-if="nomor != '1'" @click="submitJawaban('Sebelumnya')" type="is-primary" outlined>Sebelumnya</b-button>
-        <b-button class="button" v-if="total !== nomor" @click="submitJawaban('Berikutnya')" type="is-primary">Berikutnya</b-button>
+        <b-button class="button" native-type="submit" v-if="total !== nomor" @click="submitJawaban('Berikutnya')" type="is-primary">Berikutnya</b-button>
         <b-button class="button" v-else @click="kirimJawaban" type="is-primary">Selesai</b-button>
       </div>
     </div>
@@ -87,7 +86,10 @@ export default {
     pilganbutton: [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 0
     ],
-    jawaban: []
+    jawaban: [
+      [3,5],
+      [2,8,0],
+    ]
   }),
   computed: {
     gambarURL() {
@@ -100,9 +102,9 @@ export default {
       return this.nomor === this.soal.length
     },
     ...mapGetters("ist", ["jawabanTersimpan"]),
-    bindJawaban() {
-      this.jawaban = this.jawabanTersimpan
-    }
+    // bindJawaban() {
+    //   this.jawaban = this.jawabanTersimpan
+    // }
   },
   created() {
     this.jawabanTersimpan;
@@ -211,6 +213,42 @@ export default {
   color: #fff;
   border-color: #2196F3;
 }
+
+/* checkbox */
+.checkbox-gbr-group {
+  margin: 2rem 0;
+  display: -webkit-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+}
+.checkbox-gbr-group .checkbox {
+  margin: .20em .25rem;
+}
+.checkbox-gbr-group .checkbox label {
+  margin-top: 2rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: .5rem 1.25rem;
+  border-radius: 56px;
+  cursor: pointer;
+  color: #444;
+  -webkit-transition: box-shadow 400ms ease;
+  transition: box-shadow 400ms ease;
+}
+.checkbox-gbr-group .checkbox label:hover {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.checkbox-gbr-group .checkbox input[type="checkbox"] {
+  display: none;
+}
+.checkbox-gbr-group .checkbox input[type="checkbox"]:checked + label {
+  background: #2196F3;
+  color: #fff;
+  border-color: #2196F3;
+}
+
 .image img {
     height: 210px;
 }
