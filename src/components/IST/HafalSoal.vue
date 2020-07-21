@@ -54,7 +54,7 @@ export default {
       if (this.timer < 1) {
         this.$store.dispatch("soal/resetTimer");
         this.$router.replace({
-          path: '/petunjuk-soal', query: {
+          path: '/soal', query: {
             paket: this.bagianSoal,
             jenis: this.jenis
           }
