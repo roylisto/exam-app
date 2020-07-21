@@ -86,10 +86,7 @@ export default {
     pilganbutton: [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 0
     ],
-    jawaban: [
-      [3,5],
-      [2,8,0],
-    ]
+    jawaban: []
   }),
   computed: {
     gambarURL() {
@@ -126,7 +123,7 @@ export default {
 
       this.$store.dispatch("soal/kirimJawaban", payload)
         .then((response) => {
-          
+
           if (response.status == 200) {
             this.$buefy.toast.open({
                 duration: 5000,
