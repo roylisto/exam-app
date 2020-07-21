@@ -3,49 +3,44 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (01-20)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (61-76)
       </p>
       <div class="box">
         <div class="soal-petunjuk">
-          <p>
-            Soal-soal 01-20 terdiri atas kalimat-kalimat Pada setiap kalimat satu
-            kata yang hilang dan disediakan 5 (lima) kata pilihan sebagai
-            penggantinya Pilihlah kata yang tepat yang dapat menyempurnakan
-            kalimat itu.
+          <p class="has-text-weight-normal">
+            Persoalan berikutnya ialah soal-soal hitungan
           </p>
         </div>
+
         <div class="soal-item">
-          <h1>Contoh 01</h1>
-          <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
-          <div class="radio-btn-group">
-            <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
+          <h1>Contoh 05</h1>
+          <p>Sebatang pensil harganya 25 rupiah. Berapa harga 3 batang?</p>
+          <div class="checkbox-gbr-group">
+            <div v-for="(value, index) in pilganbutton" :key="index" class="checkbox" >
+              <input :id="value" type="checkbox" :name="jawaban[index]" :value="value" v-model="tmpJawaban">
+              <label :for="value">{{value}}</label>
             </div>
           </div>
         </div>
 
+        <div class="container">
+          <p>Kolom ini terdiri atas angka-angka 1 sampai 9 dan 0. <br/>
+            Untuk menunjukan jawaban suatu soal, maka plilihlah angka-angka yang terdapat didalam jawaban itu urutan angka jawaban tidak perlu dihiraukan pada contoh 05 jawaban ialah 75 oleh karena itu pilihlah angka 7 dan 5  </p>
+        </div>
+
         <div class="soal-item">
           <h1>Contoh berikutnya</h1>
-          <p>Lawannya "Harapan" adalah.....</p>
-          <div class="radio-btn-group">
-            <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Duka</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Putus Asa</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Sengsara</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Cinta</label>
+          <p>Dengan sepeda Husin dapat mencapai 15 km dalam waktu 1 jam. Berapa km-kah yang dapat ia capai dalam waktu 4 jam ? </p>
+          <div class="checkbox-gbr-group">
+            <div v-for="(value, index) in pilganbutton" :key="index" class="checkbox" >
+              <input :id="value" type="checkbox" :name="jawaban[index]" :value="value" v-model="tmpJawaban">
+              <label :for="value">{{value}}</label>
             </div>
           </div>
+        </div>
+
+        <div class="container">
+          <p>Jawabannya ialah 60 maka untuk menunjukan jawaban itu pilihlah angka 6 dan 0 </p>
         </div>
 
         <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
@@ -63,6 +58,12 @@ import Footer from "../Footer.vue";
 
 export default {
   name: "rincian-test",
+  data: () => ({
+    pilganbutton: [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 0
+    ],
+    jawaban: [],
+  }),
   components: {
     Navbar,
     Footer
