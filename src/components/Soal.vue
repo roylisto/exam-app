@@ -16,7 +16,7 @@
         </div>
         <div class="radio-gbr-group has-text-centered">
             <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
-              <img :src="gambarURL + '/' + value" alt="">
+              <img :src="gambarURL + '/' + value" alt=""> <br>
               <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
               <label :for="value">{{index}}</label>
             </div>

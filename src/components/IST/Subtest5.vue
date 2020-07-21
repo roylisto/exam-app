@@ -3,7 +3,7 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (61-76)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (77-96)
       </p>
       <div class="box">
         <div class="soal-petunjuk container">
@@ -43,8 +43,10 @@
           <p>Jawabannya ialah 60 maka untuk menunjukan jawaban itu pilihlah angka 6 dan 0 </p>
         </div>
 
-        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
-        >Mulai test</b-button>
+         <div class="has-text-centered">
+          <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
+          >Mulai test</b-button>
+        </div>
       </div>
     </div>
     <Footer />

@@ -4,6 +4,7 @@ import Home from "../src/views/Home.vue";
 import Login from "../src/views/Login.vue";
 import RincianTest from "../src/views/RincianTest.vue";
 import PetunjukSoal from "../src/views/PetunjukSoal.vue";
+import HafalSoal from "../src/components/IST/HafalSoal.vue";
 import Soal from "../src/views/Soal.vue";
 
 Vue.use(Router)
@@ -39,6 +40,14 @@ const routes = new Router({
       path: '/petunjuk-soal',
       name: 'Petunjuk Soal',
       component: PetunjukSoal,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/hafal-soal',
+      name: 'Hafal Soal',
+      component: HafalSoal,
       meta: {
         requiresAuth: true
       }

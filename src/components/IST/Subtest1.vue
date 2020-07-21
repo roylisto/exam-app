@@ -49,8 +49,10 @@
           </div>
         </div>
         
-        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
-        >Mulai test</b-button>
+        <div class="has-text-centered">
+          <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
+          >Mulai test</b-button>
+        </div>
       </div>
     </div>
     <Footer />
