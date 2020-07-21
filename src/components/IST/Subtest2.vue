@@ -3,13 +3,13 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (01-20)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (21-40)
       </p>
       <div class="box">
         <div class="soal-petunjuk">
+          <p>Soal-soal 01-20 terdiri atas kalimat-kalimat</p>
           <p>
-            Soal-soal 01-20 terdiri atas kalimat-kalimat Pada setiap kalimat satu
-            kata yang hilang dan disediakan 5 (lima) kata pilihan sebagai
+            Pada setiap kalimat satu kata yang hilang dan disediakan 5 (lima) kata pilihan sebagai
             penggantinya Pilihlah kata yang tepat yang dapat menyempurnakan
             kalimat itu.
           </p>
@@ -19,14 +19,14 @@
           <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
+              <input id="kucing" type="radio" name="radio-1" value="kucing">
+              <label for="kucing">Kucing</label>
+              <input id="bajing" type="radio" name="radio-1" value="bajing">
+              <label for="bajing">Bajing</label>
+              <input id="lembu" type="radio" name="radio-1" value="lembu">
+              <label for="lembu">Lembu</label>
+              <input id="anjing" type="radio" name="radio-1" value="anjing">
+              <label for="anjing">Anjing</label>
             </div>
           </div>
         </div>
@@ -36,19 +36,19 @@
           <p>Lawannya "Harapan" adalah.....</p>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Duka</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Putus Asa</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Sengsara</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Cinta</label>
+              <input id="duka" type="radio" name="radio-2" value="duka">
+              <label for="duka">Duka</label>
+              <input id="putusAsa" type="radio" name="radio-2" value="putusAsa">
+              <label for="putusAsa">Putus Asa</label>
+              <input id="sengsara" type="radio" name="radio-2" value="sengsara">
+              <label for="sengsara">Sengsara</label>
+              <input id="cinta" type="radio" name="radio-2" value="cinta">
+              <label for="cinta">Cinta</label>
             </div>
           </div>
         </div>
         
-        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: 'subtest1', jenis: 'ist'}}" style="margin-top: 2rem"
+        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
         >Mulai test</b-button>
       </div>
     </div>
@@ -71,22 +71,24 @@ export default {
     bagianSoal() {
       return this.$route.query.paket;
     },
+    jenisSoal() {
+      return this.$route.query.jenis;
+    },
   },
 };
 </script>
 
-
 <style>
+/* non-gambar */
 .radio-btn-group {
   display: -webkit-box;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
 }
 .radio-btn-group .radio {
   margin: 1em .25rem;
 }
-
 .radio-btn-group .radio label {
   background: #fff;
   border: 1px solid #ddd;
@@ -108,7 +110,6 @@ export default {
   color: #fff;
   border-color: #2196F3;
 }
-
 .show {
   font-weight: 400;
   color: #444;
