@@ -4,7 +4,7 @@
     <template v-if="!akhirTes">
       <div class="container">
         <p class="title has-text-centered has-text-weight-light">Test {{jenisSoal.toUpperCase()}} Bagian {{bagianSoal}}</p>
-        <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan: <span class="has-text-danger">{{convertTime}}</span></p>
+        <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan seluruh soal MII: <span class="has-text-danger">{{convertTime}}</span></p>
         <div class="box">
           <div class="columns">
             <div class="column has-text-centered">
@@ -89,7 +89,7 @@ export default {
       var menit = Math.floor(this.waktu.waktu / 60);
       var detik = Math.floor(this.waktu.waktu % 60);
       totalWaktu = `${menit < 10 ? '0' + menit : menit}:${detik < 10 ? '0' + detik : detik}`;
-      
+
       if (this.waktu.waktu > 4) {
         return totalWaktu
       } else {
@@ -126,7 +126,7 @@ export default {
           }
         }
       }
-      
+
       // console.log(this.waktu.waktu)
       // console.log(this.waktu.waktu != null)
       // console.log(this.waktu.waktu != ' ')
@@ -208,7 +208,7 @@ export default {
     getAllSoalMII() {
       const loadingComponent = this.$buefy.loading.open()
       var jenis = this.$route.query.jenis;
-      
+
       if (jenis == 'mii') {
       this.$store.dispatch("mii/getAllSoal")
           .then((response) => {
