@@ -17,8 +17,8 @@ module.exports = {
       let expired = moment(today).isSameOrBefore(peserta.expired);
 
       if(process.env.NODE_ENV == 'development') {
-        // valid = true;
-        // expired = true;
+        valid = true;
+        expired = true;
       }
 
       if(peserta && valid==true && expired==true) {
