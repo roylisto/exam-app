@@ -10,7 +10,7 @@
           Untuk mengerjakan soal selanjutnya anda harus menghafalkan kata-kata yang terdapat pada daftar kata berikut ini selama 3 menit
         </p>
         <div class="has-text-centered">
-          <b-button type="is-primary" tag="router-link" :to="{path: '/hafal-soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
+          <b-button type="is-primary" tag="router-link" :to="{path: '/hafal-soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
           >Daftar Kata</b-button>
         </div>
       </div>
