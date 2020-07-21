@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="soal-item">
           <h1>Contoh berikutnya</h1>
           <p>Lawannya "Harapan" adalah.....</p>
@@ -47,8 +47,8 @@
             </div>
           </div>
         </div>
-        
-        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: 'subtest1', jenis: 'ist'}}" style="margin-top: 2rem"
+
+        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
         >Mulai test</b-button>
       </div>
     </div>
