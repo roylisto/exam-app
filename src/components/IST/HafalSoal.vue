@@ -40,6 +40,9 @@ export default {
   },
   computed: {
     ...mapGetters("soal", ["timer"]),
+    jenisSoal() {
+      return this.$route.query.jenis;
+    },
     bagianSoal() {
       return this.$route.query.paket;
     },
