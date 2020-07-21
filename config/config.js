@@ -12,7 +12,11 @@ module.exports = {
       deletedAt: 'deleted_at'
     },
     "logging": console.log,
-    "timezone": process.env.TZ
+    "timezone": process.env.TZ,
+    "pool": {
+      min: 0,
+      max: 30,
+    }
   },
   "staging": {
     "username": process.env.DB_USERNAME_STAGING,
@@ -26,7 +30,11 @@ module.exports = {
       deletedAt: 'deleted_at'
     },
     "logging": false,
-    "timezone": process.env.TZ
+    "timezone": process.env.TZ,
+    "pool": {
+      min: 0,
+      max: 30,
+    }
   },
   "production": {
     "username": process.env.DB_USERNAME_PRODUCTION,
@@ -40,6 +48,10 @@ module.exports = {
       deletedAt: 'deleted_at'
     },
     "logging": false,
-    "timezone": process.env.TZ
+    "timezone": process.env.TZ,
+    "pool": {
+      min: 0,
+      max: 30,
+    }
   }
 };
