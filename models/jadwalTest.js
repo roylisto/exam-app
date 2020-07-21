@@ -1,7 +1,4 @@
 'use strict';
-const moment = require('moment');
-moment.tz.setDefault("Asia/Jakarta");
-moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
 
 module.exports = (sequelize, DataTypes) => {
   const jadwalTest = sequelize.define('jadwalTest', {
@@ -12,10 +9,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     waktu: {
       type: DataTypes.DATE,
-      get() {
-        let rawValue = this.getDataValue('waktu')
-        return rawValue? moment(rawValue).format() : null
-      }
     },
     instansi: DataTypes.STRING
   }, {

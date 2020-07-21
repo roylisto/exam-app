@@ -1,8 +1,6 @@
 const db = require('../models/index.js');
 const Excel = require('exceljs');
 const moment = require('moment');
-moment.tz.setDefault("Asia/Jakarta");
-moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
 
 module.exports = {
   list: async (req, res) => {
@@ -15,11 +13,11 @@ module.exports = {
           data: {}
         });
       }
-      const now = moment(new Date());
+
       let peserta = await db.peserta.findAll({
         where: {
           jadwal_test: req.params.id
-        }, 
+        },
         // include: db.scorePeserta,
         raw: true
       });
@@ -31,7 +29,7 @@ module.exports = {
       workbook.lastModifiedBy = 'Bakatku';
       workbook.created = new Date();
       workbook.modified = new Date();
-      
+
       const worksheet =  workbook.addWorksheet('Hasil Test Ist', {
         pageSetup:{paperSize: 9, orientation:'landscape'}
       });
@@ -76,8 +74,8 @@ module.exports = {
         { header: 'M7', key: 'M7', width: 8},
         { header: 'M8', key: 'M8', width: 8}
       ];
-      
-      // end init workbook    
+
+      // end init workbook
       for(let i=0; i<peserta.length; i++) {
         let row = {};
         let row2 = {};
@@ -147,8 +145,8 @@ module.exports = {
             email: peserta[i].email
           }
         }).then(result => result.tanggal_lahir);
-        
-        let umur = now.diff(tanggal_lahir, 'years');
+
+        let umur = moment().diff(tanggal_lahir, 'years');
 
         if(umur>18 && umur<=20) {
           umur = 20;
@@ -165,17 +163,17 @@ module.exports = {
         } else if(umur >= 46) {
           umur = 46;
         }
-        
+
         peserta[i].iq = await db.scorePeserta.getIQ(peserta[i].id, umur);
         row.IQ = peserta[i].iq;
-        
+
         worksheet.addRow(row);
         worksheet2.addRow(row2);
       }
 
       let nameFile = `${event_test.waktu}_${event_test.instansi}`;
       nameFile = nameFile.replace(/ /g,"_").replace(/:/g,"-") +'-'+event_test.id;
-      
+
       await workbook.xlsx.writeFile(`./files/${nameFile}.xlsx`);
       res.json(peserta);
     } catch (err) {
@@ -186,5 +184,5 @@ module.exports = {
       });
     }
   }
-  
+
 }
