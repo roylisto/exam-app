@@ -13,7 +13,7 @@ module.exports = {
           data: {}
         });
       }
-      const now = moment().format('YYYY-MM-DD');
+
       let peserta = await db.peserta.findAll({
         where: {
           jadwal_test: req.params.id
@@ -146,7 +146,7 @@ module.exports = {
           }
         }).then(result => result.tanggal_lahir);
 
-        let umur = now.diff(tanggal_lahir, 'years');
+        let umur = moment().diff(tanggal_lahir, 'years');
 
         if(umur>18 && umur<=20) {
           umur = 20;

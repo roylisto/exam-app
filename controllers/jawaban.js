@@ -69,8 +69,7 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
       });
     }
     console.log("rw: ", rw_peserta);
-    const now = moment().format('YYYY-MM-DD');
-    let umur = now.diff(account.tanggal_lahir, 'years');
+    let umur = moment().diff(account.tanggal_lahir, 'years');
     if(umur>18 && umur<=20) {
       umur = 20;
     } else if(umur <= 24) {
@@ -192,7 +191,7 @@ module.exports = {
               }
             });
             const last_time = moment(log_test_peserta[element]).format('YYYY-MM-DD HH:mm:ss');
-            const waktu_pengerjaan = now.diff(last_time, 'seconds');
+            const waktu_pengerjaan = moment().diff(last_time, 'seconds');
 
             status_test = (waktu_pengerjaan > waktu_soal.waktu) ? 'Waktu habis' : 'Sedang dikerjakan';
           }
@@ -213,6 +212,7 @@ module.exports = {
         data: check_test
       });
     } catch (err) {
+      console.error(err);
       res.status(500).json({
         status: 'ERROR',
         messages: err,

@@ -76,8 +76,7 @@ module.exports = {
         }
 
         const last_time = moment(last_log.created_at).format('YYYY-MM-DD HH:mm:ss')
-        const now = moment().format('YYYY-MM-DD HH:mm:ss');
-        const sisa_waktu = (waktu_soal.waktu)-now.diff(last_time, 'seconds');
+        const sisa_waktu = (waktu_soal.waktu)-moment().diff(last_time, 'seconds');
         if(sisa_waktu < 0) {
           res.json({
             status: 'OK',
