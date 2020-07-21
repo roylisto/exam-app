@@ -10,11 +10,11 @@
           <p>
             Ditentukan 5 (lima) buah kubus, yaitu kubus a,b,c,d,e pada tiap tiap kubus terdapat enam tanda yang berlainan pada setiap sisinya. Tiga dari tanda itu dapat dilihat. <br>
 
-            Kubus-kubus yang ditentukan itu ( a, b, c, d,e) ialah kubus-kubus yang berbeda, artinya kubus-kubus itu dapat mempunyai tanda-tanda yang sama, akan tetapi susunannya berlainan. 
+            Kubus-kubus yang ditentukan itu ( a, b, c, d,e) ialah kubus-kubus yang berbeda, artinya kubus-kubus itu dapat mempunyai tanda-tanda yang sama, akan tetapi susunannya berlainan.
             Setiap soal memperlihatkan salah satu kubus yang ditentukan didalam kedudukan yang berbeda. <br>
 
             Carilah kubus yang dimaksudkan itu dan pilihlah jawaban yang tersedia dibawah soal. <br>
-            Kubus itu dapat diputar, dapat digulingkan atau dapat diputar dan digulingkan dalam pikiran saudara. Oleh karena itu mungkin akan terlihat suatu tanda yang baru. 
+            Kubus itu dapat diputar, dapat digulingkan atau dapat diputar dan digulingkan dalam pikiran saudara. Oleh karena itu mungkin akan terlihat suatu tanda yang baru.
           </p>
         </div>
         <div class="soal-item container">

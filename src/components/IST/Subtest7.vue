@@ -9,11 +9,11 @@
         <div class="container">
           <p>Pada persoalan berikutnya, setiap soal memperlihatkan sesuatu bentuk tertentu yang terpotong menjadi beberapa bagian. <br>
 
-            Carilah diantara bentu-bentuk yang ditentukan (a,b,c,d) bentuk yang dapat dibangun 
-            dengan menyusun potongan potongan itu sedemikian rupa sehingga tidak ada kelebihan 
+            Carilah diantara bentu-bentuk yang ditentukan (a,b,c,d) bentuk yang dapat dibangun
+            dengan menyusun potongan potongan itu sedemikian rupa sehingga tidak ada kelebihan
             atau ruang diantaranya. <br>
 
-            Carilah bentuk-bentuk itu dan pilihlah huruf yang menunjukkan bentuk tadi pada 
+            Carilah bentuk-bentuk itu dan pilihlah huruf yang menunjukkan bentuk tadi pada
             pilihan gambar dibawah soal.
           </p>
         </div>
