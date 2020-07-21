@@ -6,7 +6,7 @@
         Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (01-20)
       </p>
       <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu menghafal: <span class="has-text-danger">{{convertTime}}</span></p>
-      <div class="box">
+      <div class="box has-text-centered">
         <p class="has-text-weight-semibold subtitle">Disediakan waktu 3 menit untuk menghafalkan kata-kata di bawah ini:</p>
         <ul>
           <li class="is-size-5">BUNGA: Soka - Larat - Flamboyan - Jasmin - Dahlia</li>
