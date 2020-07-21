@@ -40,10 +40,9 @@
       </div>
       <div v-else-if="soal.kategori == 'pilganbutton'">
         <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
-            {{jawaban}}
           <div class="checkbox-gbr-group">
             <div v-for="(value, index) in pilganbutton" :key="index" class="checkbox" >
-              <input :id="value" type="checkbox" :name="jawaban[index]" :value="value" v-model="jawaban[nomor]">
+              <input :id="value" type="checkbox" :name="jawaban[index]" :value="value" v-model="tmpJawaban" @change="pilihAngka(value)">
               <label :for="value">{{value}}</label>
             </div>
           </div>
@@ -86,7 +85,8 @@ export default {
     pilganbutton: [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 0
     ],
-    jawaban: []
+    jawaban: [],
+    tmpJawaban: [],
   }),
   computed: {
     gambarURL() {
@@ -109,8 +109,21 @@ export default {
   },
   methods: {
     submitJawaban: function(e) {
+      if (this.soal.kategori === 'pilganbutton') {
+        if (e === 'Sebelumnya') {
+        this.tmpJawaban = this.jawaban[this.nomor - 2];
+        } else {
+          if (this.jawaban[this.nomor] && this.jawaban[this.nomor].length > 0) {
+            this.tmpJawaban = this.jawaban[this.nomor];
+          } else {
+            this.tmpJawaban = [];
+          }
+        }
+      }
       this.$emit('jawaban', { jawaban: this.jawaban, aksi: e });
-      this.jawaban;
+    },
+    pilihAngka: function(value) {
+      this.jawaban[this.nomor - 1] = JSON.parse(JSON.stringify(this.tmpJawaban));
     },
     kirimJawaban: function() {
       var id = JSON.parse(this.$store.getters['auth/user']).id
