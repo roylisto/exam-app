@@ -9,6 +9,7 @@
     <sub-test-7 v-if="paketSoal == 'subtest_7_ist'"></sub-test-7>
     <sub-test-8 v-if="paketSoal == 'subtest_8_ist'"></sub-test-8>
     <sub-test-9 v-if="paketSoal == 'subtest_9_ist'"></sub-test-9>
+    <m-i-i v-if="jenisSoal == 'mii'"></m-i-i>
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import SubTest6 from '../components/IST/Subtest6.vue'
 import SubTest7 from '../components/IST/Subtest7.vue'
 import SubTest8 from '../components/IST/Subtest8.vue'
 import SubTest9 from '../components/IST/Subtest9.vue'
+import MII from '../components/MII/SoalMII.vue'
 
 export default {
   name: 'petunjuk-soal',
@@ -35,6 +37,7 @@ export default {
     SubTest7,
     SubTest8,
     SubTest9,
+    MII
   },
   computed: {
     jenisSoal() {

@@ -1,13 +1,11 @@
 const { peserta, jadwalTest, user } = require('../models/index.js');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
-moment.tz.setDefault("Asia/Jakarta");
-moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
 
 module.exports = {
   login: (req, res) => {
     let { email, password } = req.body
-    let today = moment().format();
+    let today = moment().format('YYYY-MM-DD HH:mm:ss');
 
     peserta.findOne({
       where: {

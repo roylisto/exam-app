@@ -172,7 +172,7 @@ export default {
     getAllSoalIST() {
       const loadingComponent = this.$buefy.loading.open()
       var jenis = this.$route.query.jenis;
-      
+
       if (jenis == 'ist') {
       this.$store.dispatch("ist/getAllSoal")
           .then((response) => {

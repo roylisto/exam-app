@@ -3,53 +3,43 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (01-20)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (61-76)
       </p>
       <div class="box">
         <div class="soal-petunjuk">
-          <p>
-            Soal-soal 01-20 terdiri atas kalimat-kalimat Pada setiap kalimat satu
-            kata yang hilang dan disediakan 5 (lima) kata pilihan sebagai
-            penggantinya Pilihlah kata yang tepat yang dapat menyempurnakan
-            kalimat itu.
+          <p class="has-text-weight-normal">
+            Ditentukan dua kata. Carilah satu perkataan yang meliputi pengertian kedua kata tadi. Tulislah perkataan itu pada kolom yang tersedia dibawah soal 
           </p>
         </div>
+
         <div class="soal-item">
           <h1>Contoh 01</h1>
-          <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
-          <div class="radio-btn-group">
-            <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Kucing</label>
-            </div>
-          </div>
+          <p>Ayam - Itik</p>
+          <b-field label="Jawab">
+            <b-input></b-input>
+          </b-field>
+        </div>
+
+        <div class="container">
+          <p>Perkataan  "burung" dapat meliputi pengertian kedua kata itu. Maka jawabannya ialah "burung". Oleh karena itu pada kolom yang terdapat pada bawah soal dituliskan "burung"</p>
         </div>
 
         <div class="soal-item">
-          <h1>Contoh berikutnya</h1>
-          <p>Lawannya "Harapan" adalah.....</p>
-          <div class="radio-btn-group">
-            <div class="radio">
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Duka</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Putus Asa</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Sengsara</label>
-              <input id="value" type="radio" name="radio" value="value"
-              <label for="value">Cinta</label>
-            </div>
-          </div>
+          <h1>Contoh 01</h1>
+          <p>Gaun - Celana</p>
+          <b-field label="Jawab">
+            <b-input></b-input>
+          </b-field>
         </div>
 
-        <b-button expanded type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
-        >Mulai test</b-button>
+        <div class="container">
+          <p>Pada contoh ini jawabannya ialah "pakaian, maka "pakaian" yang seharusnya ditulis carilah selalu perkataan yang tepat yang dapat meliputi pengertian kedua kata itu</p>
+        </div>
+
+         <div class="has-text-centered">
+          <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
+          >Mulai test</b-button>
+        </div>
       </div>
     </div>
     <Footer />
