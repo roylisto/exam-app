@@ -173,7 +173,7 @@ module.exports = {
 
       let index = 0;
       let status_test = 'Sudah';
-      const now = moment().format('YYYY-MM-DD HH:mm:ss');
+      
       for (const element of all_soal) {
 
         let jenis_soal = (index<9) ? 'ist': 'mii';
