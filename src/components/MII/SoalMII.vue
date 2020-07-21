@@ -13,9 +13,9 @@
           <p>saya tertarik untuk mengikuti kegiatan musik </p>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="ya" type="radio" value="ya">
+              <input id="ya" type="radio" name="mii" value="ya">
               <label for="ya">a) Ya</label>
-              <input id="tidak" type="radio" value="tidak">
+              <input id="tidak" type="radio" name="mii" value="tidak">
               <label for="tidak">b) Tidak</label>
             </div>
           </div>
