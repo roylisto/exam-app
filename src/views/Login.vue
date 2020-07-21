@@ -18,6 +18,7 @@
                         type="email"
                         placeholder="Email"
                         v-model="email"
+                        v-on:keyup.enter="login"
                       />
                     </div>
                   </div>
@@ -28,6 +29,7 @@
                         type="password"
                         placeholder="Password"
                         v-model="password"
+                        v-on:keyup.enter="login"
                       />
                     </div>
                   </div>
