@@ -23,11 +23,14 @@ module.exports = {
 
       if(peserta && valid==true && expired==true) {
         const test = await jadwalTest.findByPk(peserta.jadwal_test);
-        const user_peserta = await user.findOne({attributes: ['nama']},{where: {email:peserta.email}});
+        const userPeserta = await user.findOne({
+          attributes: ['nama'],
+          where: {email:peserta.email}
+        });
 
         let credential = {
           "id": peserta.id,
-          "nama": user_peserta.nama,
+          "nama": userPeserta.nama,
           "email": peserta.email,
           "valid": peserta.valid,
           "expired": peserta.expired,
