@@ -15,12 +15,12 @@
         <div v-for="(value, index) in soalTes" :key="index">
           <div class="columns is-mobile has-text-centered">
             <div class="column">
-              <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' ? 'disabled' : 'has-text-primary has-text-weight-semibold'" :to="{path: '/petunjuk-soal', query: {paket: value.test, jenis: value.jenis}}">{{value.test.replace(/_/g, " ").toUpperCase()}}</router-link>
+              <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' || (nodeENV !== 'development' && value.test != testWhichBelum[0].test) ? 'disabled' : 'has-text-primary has-text-weight-semibold'" :to="{path: '/petunjuk-soal', query: {paket: value.test, jenis: value.jenis}}">{{(value.test.replace(/_/g, " ").toUpperCase()).replace("BAGIAN", "MII")}}</router-link>
             </div>
             <div class="column">
-              <p :class="value.status == 'Sudah' || value.status == 'Waktu habis' ? 'disabled' : value.status == 'Sedang dikerjakan' ? 'has-text-success' : 'has-text-primary has-text-weight-semibold'">{{value.status}}</p>
-          </div>
+              <p :class="value.status == 'Sudah' || value.status == 'Waktu habis' || (nodeENV !== 'development' && value.test != testWhichBelum[0].test) ? 'disabled' : value.status == 'Sedang dikerjakan' ? 'has-text-success' : 'has-text-primary has-text-weight-semibold'">{{value.status}}</p>
             </div>
+          </div>
         </div>
       </div>
     </div>
@@ -49,7 +49,10 @@ export default {
       return _.filter(this.soalTes, function(o) {
         return o.status == 'Belum' || o.status == 'Sedang dikerjakan'
       })
-    }
+    },
+    nodeENV() {
+      return process.env.VUE_APP_NODE_ENV
+    },
   },
   mounted() {
     this.getSoal();
