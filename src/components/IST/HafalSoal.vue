@@ -15,7 +15,7 @@
           <li class="is-size-5">KESENIAN: Quintet - Arca - Opera - Gamelan - Ukiran</li>
           <li class="is-size-5">BINATANG: Musang - Rusa - Beruang - Zebra - Harimau</li>
         </ul>
-        <b-button   type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
+        <b-button   type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
         >Mulai test</b-button>
       </div>
     </div>
@@ -60,7 +60,7 @@ export default {
           }
         })
       } else {
-        return totalWaktu 
+        return totalWaktu
       }
     },
   },
