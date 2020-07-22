@@ -47,7 +47,7 @@ module.exports = {
       updatedAt: 'updated_at',
       deletedAt: 'deleted_at'
     },
-    "logging": console.error,
+    "logging": false,
     "timezone": process.env.TZ,
     "pool": {
       min: 0,
