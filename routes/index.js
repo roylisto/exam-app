@@ -15,7 +15,10 @@ router.get('/time/:jenis_soal', authorize(), time.get);
 //jawaban route
 router.post('/jawaban', authorize(), jawaban.store);
 router.get('/rincian-test', authorize(), jawaban.list);
-router.delete('/rincian-test/delete/:pesertaId', jawaban.delete);
+
+if (process.env.NODE_ENV === 'development') {
+  router.delete('/rincian-test/delete/:pesertaId', jawaban.delete);
+}
 //users route
 router.get('/users', user.list);
 router.get('/users/:id', user.get);
