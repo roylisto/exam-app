@@ -111,7 +111,7 @@ module.exports = {
               messages: '',
               data: {
                 waktu: (sisa_waktu>900) ? sisa_waktu-900 : sisa_waktu,
-                keterangan: (jenis_soal=='mii') ? ((sisa_waktu < 900) ? 'secondary' : 'primary') : null
+                keterangan: (jenis_soal=='mii') ? ((sisa_waktu <= 900) ? 'secondary' : 'primary') : null
               }
             });
           }
