@@ -8,7 +8,7 @@
       <div class="box">
         <div class="soal-petunjuk">
           <p class="has-text-weight-normal">
-            Ditentukan dua kata. Carilah satu perkataan yang meliputi pengertian kedua kata tadi. Tulislah perkataan itu pada kolom yang tersedia dibawah soal 
+            Ditentukan dua kata. Carilah satu perkataan yang meliputi pengertian kedua kata tadi. Tulislah perkataan itu pada kolom yang tersedia dibawah soal
           </p>
         </div>
 
@@ -60,6 +60,9 @@ export default {
   computed: {
     bagianSoal() {
       return this.$route.query.paket;
+    },
+    jenisSoal() {
+      return this.$route.query.jenis;
     },
   },
 };
