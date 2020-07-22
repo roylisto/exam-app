@@ -27,5 +27,18 @@ module.exports = (sequelize, DataTypes) => {
   jawaban.associate = function(models) {
     // associations can be defined here
   };
+
+  jawaban.deleteAllAnswer = (pesertaId) => {
+    const query = `
+      DELETE FROM log_soal_peserta WHERE peserta_id = :pesertaId;
+      DELETE FROM score_peserta WHERE peserta_id = :pesertaId;
+      DELETE FROM jawaban WHERE peserta_id = :pesertaId;
+    `;
+
+    return sequelize.query(query, {
+      replacements: {pesertaId: pesertaId},
+      type: sequelize.QueryTypes.SELECT,
+    });
+  }
   return jawaban;
 };

@@ -15,6 +15,7 @@ router.get('/time/:jenis_soal', authorize(), time.get);
 //jawaban route
 router.post('/jawaban', authorize(), jawaban.store);
 router.get('/rincian-test', authorize(), jawaban.list);
+router.get('/rincian-test/reset/:pesertaId', authorize(), jawaban.reset);
 //users route
 router.get('/users', user.list);
 router.get('/users/:id', user.get);
