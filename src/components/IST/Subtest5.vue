@@ -33,14 +33,18 @@
           <p>Dengan sepeda Husin dapat mencapai 15 km dalam waktu 1 jam. Berapa km-kah yang dapat ia capai dalam waktu 4 jam ? </p>
           <div class="checkbox-gbr-group">
             <div v-for="(value, index) in pilganbutton" :key="index" class="checkbox" >
-              <input :id="value" type="checkbox" :name="jawaban[index]" :value="value" v-model="tmpJawaban">
-              <label :for="value">{{value}}</label>
+              <input :id="value + '1'" type="checkbox" :name="jawaban[index]" :value="value + '1'" v-model="tmpJawaban">
+              <label :for="value + '1'">{{value}}</label>
             </div>
           </div>
         </div>
 
         <div class="container">
           <p>Jawabannya ialah 60 maka untuk menunjukan jawaban itu pilihlah angka 6 dan 0 </p>
+        </div>
+
+        <div class="container">
+          <p>Pada subtest ini peserta boleh menggunakan kertas coret-coretan untuk menghitung</p>
         </div>
 
          <div class="has-text-centered">

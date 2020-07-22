@@ -43,6 +43,10 @@
           <p>Pada deret ini selalu berganti-ganti harus dikurangi dengan 2 setelah itu ditambah dengan 3. Jawaban contoh ini ialah 10. Maka dari itu pilihlah angka 1 dan angka 0</p>
         </div>
 
+        <div class="container">
+          <p>Pada subtest ini peserta boleh menggunakan kertas coret-coretan untuk menghitung</p>
+        </div>
+
          <div class="has-text-centered">
           <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
           >Mulai test</b-button>
