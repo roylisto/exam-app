@@ -9,7 +9,7 @@
         <div class="soal-petunjuk container">
           <p class="has-text-weight-normal">
             Pada persoalan berikut akan diberikan deret angka. Setiap deret tersusun menurut aturan yang tertentu dan dapat dilanjutkan menurut aturan itu.
-            Carilah untuk setia deret angka berikutnya dan pilihlah jawaban saudara. 
+            Carilah untuk setia deret angka berikutnya dan pilihlah jawaban saudara.
           </p>
         </div>
 
@@ -73,6 +73,9 @@ export default {
   computed: {
     bagianSoal() {
       return this.$route.query.paket;
+    },
+    jenisSoal() {
+      return this.$route.query.jenis;
     },
   },
 };

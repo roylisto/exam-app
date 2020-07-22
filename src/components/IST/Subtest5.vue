@@ -74,6 +74,9 @@ export default {
     bagianSoal() {
       return this.$route.query.paket;
     },
+    jenisSoal() {
+      return this.$route.query.jenis;
+    },
   },
 };
 </script>
