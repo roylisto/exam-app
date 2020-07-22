@@ -9,6 +9,9 @@
         <p class="subtitle has-text-centered">
           Untuk mengerjakan soal selanjutnya anda harus menghafalkan kata-kata yang terdapat pada daftar kata berikut ini selama 3 menit
         </p>
+        <p class="subtitle has-text-centered">
+          Dalam mengerjakan tes ini diperlukan kejujuran dari saudara
+        </p>
         <div class="has-text-centered">
           <b-button type="is-primary" tag="router-link" :to="{path: '/hafal-soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
           >Daftar Kata</b-button>
