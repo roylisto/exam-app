@@ -3,7 +3,7 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (01-20)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase().replace('IST','')}} (01-20)
       </p>
       <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu menghafal: <span class="has-text-danger">{{convertTime}}</span></p>
       <div class="box has-text-centered">

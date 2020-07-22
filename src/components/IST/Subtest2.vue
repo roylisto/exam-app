@@ -3,7 +3,7 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (21-40)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase().replace('IST','')}} (21-40)
       </p>
       <div class="box">
         <div class="container">
@@ -28,9 +28,9 @@
             </div>
           </div>
         </div>
-        
+
         <div class="container">
-          <p class="has-text-weight-normal">a,b,d, dan e adalah peralatan perabot rumah (meubel) <br />c burung bukan perabot rumah atau tidak memiliki kesamaan keempat kata itu 
+          <p class="has-text-weight-normal">a,b,d, dan e adalah peralatan perabot rumah (meubel) <br />c burung bukan perabot rumah atau tidak memiliki kesamaan keempat kata itu
           <br/> oleh karena itu, jawaban yang harus dipilih adalah c</p>
         </div>
 
@@ -52,13 +52,13 @@
             </div>
           </div>
         </div>
-        
+
         <div class="container">
           <p class="has-text-weight-normal">Pada a,b,c dan e orang berada dalam keadaan tidak bergerak, sedangkan d orang dalam
             keadaan bergerak. Maka jawaban yang benar adalah d berjalan.
             oleh karena itu jawabna yang harus dipilih adalah d. berjalan</p>
         </div>
-        
+
         <b-button   type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
         >Mulai test</b-button>
       </div>
