@@ -180,12 +180,12 @@ module.exports = {
 
       let index = 0;
       let status_test = 'Sudah';
-      
+
       for (const element of all_soal) {
 
         let jenis_soal = (index<9) ? 'ist': 'mii';
         index++;
-        
+
         let tmp_status = log_jawaban_user.includes(element);
 
         if(tmp_status===false) {
@@ -212,7 +212,7 @@ module.exports = {
             });
             const last_time = moment(log_test_peserta[element]).format('YYYY-MM-DD HH:mm:ss');
             let waktu_pengerjaan = moment().diff(last_time, 'seconds');
-            
+
             if(jenis_soal=='mii') {
               waktu_pengerjaan = moment().diff(log_peserta_mii.created_at, 'seconds');
             }
@@ -243,5 +243,29 @@ module.exports = {
         data: {}
       });
     }
+  },
+  delete: async (req, res) => {
+    await Promise.all([
+      logSoalPeserta.destroy({
+        where: {
+          peserta_id: req.params.pesertaId,
+        },
+      }),
+      scorePeserta.destroy({
+        where: {
+          peserta_id: req.params.pesertaId,
+        },
+      }),
+      jawaban.destroy({
+        where: {
+          peserta_id: req.params.pesertaId,
+        },
+      }),
+    ]);
+
+    res.json({
+      status: 'OK',
+      messages: 'All answers deleted successfully',
+    });
   }
 }

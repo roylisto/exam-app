@@ -114,7 +114,7 @@ export default {
           this.$store.dispatch('ist/resetJawaban');
           this.$buefy.toast.open({
               duration: 5000,
-              message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
+              message: `Sesi waktu soal bagian ${this.bagianSoal} sudah habis`,
               position: 'is-bottom',
               type: 'is-warning'
           })

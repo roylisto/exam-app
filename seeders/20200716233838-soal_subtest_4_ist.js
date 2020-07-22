@@ -4,23 +4,23 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     const subtest_pertanyaan = [
-      'mawar - melati', 'mata - telinga', 'gula - intan', 'hutan - salju', 'pengantar surat - telepon', 'kamera- kacamata', 'lambung -usus', 'banyak -sedikit', 'telur - benih', 'bendera - lencana', 'rumput - gajah', 'ember - kantong', 'awal - akhir', 'kikir - boros', 'penawaran - permintaan', 'atas - bawah'
+      'mawar - melati', 'mata - telinga', 'gula - intan', 'hujan - salju', 'pengantar surat - telepon', 'kamera- kacamata', 'lambung -usus', 'banyak -sedikit', 'telur - benih', 'bendera - lencana', 'rumput - gajah', 'ember - kantong', 'awal - akhir', 'kikir - boros', 'penawaran - permintaan', 'atas - bawah'
     ];
-    
+
     const subtest_kunci = [
       {
         "bunga":2,
         "kembang":2,
         "perdu":2,
-        "tumbuh-tumbuhan":1, 
+        "tumbuh-tumbuhan":1,
         "tumbuhan":1,
         "tanaman":1,
         "tangkai":1,
-        "harum":1      
-      }, 
+        "harum":1
+      },
       {
         "alat indra":2,
-        "indra":2,   
+        "indra":2,
         "panca indra":2,
         "organ":1,
         "organ tubuh":1,
@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         "hablur":2,
-        "kristal":2,   
+        "kristal":2,
         "zat arang":2,
         "berkilau":1,
         "berkilauanan":1,
@@ -38,14 +38,14 @@ module.exports = {
       },
       {
         "cuaca":2,
-        "musim":2,   
+        "musim":2,
         "air":1,
         "basah":1,
         "gejala alam":1,
       },
       {
         "pembawa berita":2,
-        "alat perhubungan":2,   
+        "alat perhubungan":2,
         "alat komunikasi":2,
         "pos":1,
         "p.t.t":1,
@@ -55,12 +55,12 @@ module.exports = {
       },
       {
         "alat optik":2,
-        "optik":2,   
+        "optik":2,
         "lensa":1
       },
       {
         "alat pencernaan":2,
-        "jalan makanan":1,   
+        "jalan makanan":1,
         "isi perut":1,
         "perut":1,
         "pencernaan":1,
@@ -68,7 +68,7 @@ module.exports = {
       },
       {
         "penyebut jumlah":2,
-        "pengertian jumlah":2,   
+        "pengertian jumlah":2,
         "jumlah":2,
         "kuantitas":2,
         "mengukur":1,
@@ -77,7 +77,7 @@ module.exports = {
       },
       {
         "bibit":2,
-        "bakal":2,   
+        "bakal":2,
         "alat pembiak":2,
         "permulaan kehidupan":2,
         "sel":1,
@@ -87,7 +87,7 @@ module.exports = {
       },
       {
         "simbol":2,
-        "lambang":2,   
+        "lambang":2,
         "tanda":2,
         "nama":1,
         "pengenal":1,
@@ -95,7 +95,7 @@ module.exports = {
       },
       {
         "makhluk":2,
-        "makhluk hidup":2,   
+        "makhluk hidup":2,
         "organisme":2,
         "tumbuh":1,
         "biologi":1,
@@ -104,7 +104,7 @@ module.exports = {
       },
       {
         "wadah":2,
-        "tempat mengisi":2,   
+        "tempat mengisi":2,
         "tempat penyimpan":2,
         "tempat penyimpanan":2,
         "tempat susuatu":1,
@@ -114,7 +114,7 @@ module.exports = {
       },
       {
         "pengertian waktu":2,
-        "batas":2,   
+        "batas":2,
         "batas waktu":2,
         "waktu":1,
         "saat":1,
@@ -123,14 +123,14 @@ module.exports = {
       },
       {
         "sifat-watak":2,
-        "sifat-karakter":2,   
+        "sifat-karakter":2,
         "karakter":2,
         "watak":2,
         "sifat":1
       },
       {
         "regulator harga":2,
-        "regulasi harga":2,   
+        "regulasi harga":2,
         "pengertian ekonomi":2,
         "dagang":1,
         "niaga":1,
@@ -140,7 +140,7 @@ module.exports = {
       },
       {
         "pengertian ruang":2,
-        "penyebut ruang":2,   
+        "penyebut ruang":2,
         "arah":1,
         "letak":1,
         "penentuan daerah":1,
@@ -165,6 +165,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('soal_ist', null, {});    
+    return queryInterface.bulkDelete('soal_ist', null, {});
   }
 };
