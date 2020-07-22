@@ -70,17 +70,20 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
     }
     console.log("rw: ", rw_peserta);
     let umur = moment().diff(account.tanggal_lahir, 'years');
-    if(umur>18 && umur<=20) {
+
+    if (umur<13) {
+      umur = 13;
+    } else if(umur>18 && umur<=20) {
       umur = 20;
-    } else if(umur <= 24) {
+    } else if(umur>20 && umur <= 24) {
       umur = 24;
-    } else if(umur <= 28) {
+    } else if(umur>24 && umur <= 28) {
       umur = 28;
-    } else if(umur <= 33) {
+    } else if(umur>28 && umur <= 33) {
       umur = 33;
-    } else if(umur <= 39) {
+    } else if(umur>33 && umur <= 39) {
       umur = 39;
-    } else if(umur <= 45) {
+    } else if(umur>39 && umur <= 45) {
       umur = 45;
     } else if(umur >= 46) {
       umur = 46;
@@ -96,11 +99,11 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
     let kategori = 'Sangat Rendah';
     if(score_subtest.sw>80 && score_subtest.sw<=94) {
       kategori = 'Rendah';
-    } else if(score_subtest.sw <= 99) {
+    } else if(score_subtest.sw > 94 && score_subtest.sw <= 99) {
       kategori = 'Sedang';
-    } else if(score_subtest.sw <= 104) {
+    } else if(score_subtest.sw > 99 && score_subtest.sw <= 104) {
       kategori = 'Cukup';
-    } else if(score_subtest.sw <= 118) {
+    } else if(score_subtest.sw > 104 && score_subtest.sw <= 118) {
       kategori = 'Tinggi';
     } else if(score_subtest.sw > 118) {
       kategori = 'Sangat Tinggi';
