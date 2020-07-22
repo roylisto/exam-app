@@ -3,7 +3,7 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (01-20)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase().replace('IST','')}} (01-20)
       </p>
       <div class="box">
         <div class="soal-petunjuk">
@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="soal-item">
           <h1>Contoh berikutnya</h1>
           <p>Lawannya "Harapan" adalah.....</p>
@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="has-text-centered">
           <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
           >Mulai test</b-button>
