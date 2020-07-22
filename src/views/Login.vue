@@ -65,6 +65,9 @@ export default {
     Navbar,
     Footer
   },
+  mounted() {
+    localStorage.clear();
+  },
   methods: {
     login() {
       const loadingComponent = this.$buefy.loading.open()

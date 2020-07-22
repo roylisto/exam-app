@@ -14,7 +14,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$http = API;
 
 API.interceptors.request.use((config) => {
-  let token = localStorage.getItem('token');
+  let token = sessionStorage.getItem('token');
   if (token) {
     config.headers['x-access-token'] = `${token}`;
   }

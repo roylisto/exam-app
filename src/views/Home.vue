@@ -32,6 +32,9 @@ export default {
   components: {
     Navbar,
     Footer
-  }
+  },
+  mounted() {
+    localStorage.clear();
+  },
 };
 </script>
