@@ -191,7 +191,7 @@ module.exports = {
         if(tmp_status===false) {
           if(log_test_peserta[element]==null) {
             status_test = 'Belum';
-            if(jenis_soal=='mii') {
+            if(jenis_soal=='mii' && log_peserta_mii) {
               let waktu_soal = await waktuSoal.findOne({
                 where: {
                   jenis_soal: jenis_soal,
