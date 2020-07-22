@@ -175,7 +175,10 @@ module.exports = {
       nameFile = nameFile.replace(/ /g,"_").replace(/:/g,"-") +'-'+event_test.id;
 
       await workbook.xlsx.writeFile(`./files/${nameFile}.xlsx`);
-      res.json(peserta);
+      res.json({
+        download:`${process.env.VUE_APP_API_URL}download?file=${nameFile}.xlsx`,
+        peserta
+      });
     } catch (err) {
       res.status(500).json({
         status: 'ERROR',
