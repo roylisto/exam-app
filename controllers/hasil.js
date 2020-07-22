@@ -148,17 +148,19 @@ module.exports = {
 
         let umur = moment().diff(tanggal_lahir, 'years');
 
-        if(umur>18 && umur<=20) {
+        if (umur<13) {
+          umur = 13;
+        } else if(umur>18 && umur<=20) {
           umur = 20;
-        } else if(umur <= 24) {
+        } else if(umur>20 && umur <= 24) {
           umur = 24;
-        } else if(umur <= 28) {
+        } else if(umur>24 && umur <= 28) {
           umur = 28;
-        } else if(umur <= 33) {
+        } else if(umur>28 && umur <= 33) {
           umur = 33;
-        } else if(umur <= 39) {
+        } else if(umur>33 && umur <= 39) {
           umur = 39;
-        } else if(umur <= 45) {
+        } else if(umur>39 && umur <= 45) {
           umur = 45;
         } else if(umur >= 46) {
           umur = 46;
