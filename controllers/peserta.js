@@ -1,8 +1,6 @@
 const { peserta, jadwalTest } = require('../models/index.js');
 const randomstring = require("randomstring");
 const moment = require('moment');
-moment.tz.setDefault("Asia/Jakarta");
-moment.defaultFormat = "YYYY-MM-DD HH:mm:ss";
 
 module.exports = {
   list: (req, res) => {
@@ -17,14 +15,14 @@ module.exports = {
           status: 'ERROR',
           messages: err,
           data: {}
-      }); 
+      });
     });
   },
 
   get: (req, res) => {
     peserta.findOne({
       where: { id: req.params.id }
-    }).then( result => {      
+    }).then( result => {
       if( result === null ) {
         return res.status(404).json({
           status: 'ERROR',
@@ -48,21 +46,21 @@ module.exports = {
 
   create: async (req, res) => {
     try {
-      let { user_email, jadwal_test } = req.body    
-      let calon_peseta = []    
-      
+      let { user_email, jadwal_test } = req.body
+      let calon_peseta = []
+
       let test = await jadwalTest.findByPk(jadwal_test);
-      
+
       user_email.forEach(row => {
         calon_peseta.push({
           email: row,
           password: randomstring.generate(8),
           valid: test.waktu,
-          expired: moment(test.waktu).add(1, 'days'),
+          expired: moment(test.waktu).add(1, 'days').format('YYYY-MM-DD HH:mm:ss'),
           jadwal_test: jadwal_test
         });
       });
-      
+
       peserta.bulkCreate(calon_peseta);
 
       res.json({

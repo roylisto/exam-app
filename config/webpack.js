@@ -115,6 +115,7 @@ const options = {
     new webpack.DefinePlugin({
       'process.env.VUE_APP_API_URL': JSON.stringify(process.env.VUE_APP_API_URL),
       'process.env.VUE_APP_IMAGE_URL': JSON.stringify(process.env.VUE_APP_IMAGE_URL),
+      'process.env.VUE_APP_NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
   ],
   resolve: {
