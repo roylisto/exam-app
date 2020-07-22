@@ -163,6 +163,13 @@ module.exports = {
         }
       });
 
+      const log_peserta_mii = await logSoalPeserta.findOne({
+        where: {
+          jenis_soal: 'mii',
+          peserta_id: req.decoded.data.id
+        }
+      });
+
       let check_test = [];
       let log_test_peserta = {};
       const log_jawaban_user = jawaban_user.map(row => row.paket_soal);
@@ -178,11 +185,24 @@ module.exports = {
 
         let jenis_soal = (index<9) ? 'ist': 'mii';
         index++;
-
+        
         let tmp_status = log_jawaban_user.includes(element);
+
         if(tmp_status===false) {
           if(log_test_peserta[element]==null) {
             status_test = 'Belum';
+            if(jenis_soal=='mii' && log_peserta_mii) {
+              let waktu_soal = await waktuSoal.findOne({
+                where: {
+                  jenis_soal: jenis_soal,
+                  paket_soal: element
+                }
+              });
+              waktu_pengerjaan = moment().diff(log_peserta_mii.created_at, 'seconds');
+              if(waktu_pengerjaan > waktu_soal.waktu) {
+                status_test = 'Waktu habis';
+              }
+            }
           } else {
             let waktu_soal = await waktuSoal.findOne({
               where: {
@@ -191,7 +211,11 @@ module.exports = {
               }
             });
             const last_time = moment(log_test_peserta[element]).format('YYYY-MM-DD HH:mm:ss');
-            const waktu_pengerjaan = moment().diff(last_time, 'seconds');
+            let waktu_pengerjaan = moment().diff(last_time, 'seconds');
+            
+            if(jenis_soal=='mii') {
+              waktu_pengerjaan = moment().diff(log_peserta_mii.created_at, 'seconds');
+            }
 
             status_test = (waktu_pengerjaan > waktu_soal.waktu) ? 'Waktu habis' : 'Sedang dikerjakan';
           }
