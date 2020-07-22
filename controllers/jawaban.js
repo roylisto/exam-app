@@ -244,8 +244,24 @@ module.exports = {
       });
     }
   },
-  reset: async (req, res) => {
-    await jawaban.deleteAllAnswer(req.params.pesertaId);
+  delete: async (req, res) => {
+    await Promise.all([
+      logSoalPeserta.destroy({
+        where: {
+          peserta_id: req.params.pesertaId,
+        },
+      }),
+      scorePeserta.destroy({
+        where: {
+          peserta_id: req.params.pesertaId,
+        },
+      }),
+      jawaban.destroy({
+        where: {
+          peserta_id: req.params.pesertaId,
+        },
+      }),
+    ]);
 
     res.json({
       status: 'OK',
