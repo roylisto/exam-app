@@ -90,72 +90,41 @@ export default {
       var detik = Math.floor(this.waktu.waktu % 60);
       totalWaktu = `${menit < 10 ? '0' + menit : menit}:${detik < 10 ? '0' + detik : detik}`;
 
-      if (this.waktu.waktu > 4) {
+      if (this.waktu.waktu > 0) {
+        if (this.waktu.keterangan == 'secondary') {
+          return totalWaktu + ' (Tambahan)'
+        }
         return totalWaktu
       } else {
         if (this.waktu.keterangan == 'primary') {
-          return totalWaktu
-         } else {
-          if (this.waktu.waktu === null) {
-              // auto send jawaban if time reached < 1
-              var id = JSON.parse(this.$store.getters['auth/user']).id
-              var payload = {
-                jawaban_peserta: this.jawaban,
-                peserta_id: id,
-                paket_soal: this.$route.query.paket,
-                jenis_soal: this.$route.query.jenis,
-              }
-
-              this.$store.dispatch('soal/kirimJawaban', payload)
-                .catch((error) => {
-                  console.error(error)
-                })
-
-                // reset jawaban
-                this.$store.dispatch('mii/resetJawaban');
-                this.$buefy.toast.open({
-                    duration: 5000,
-                    message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
-                    position: 'is-bottom',
-                    type: 'is-warning'
-                })
-                this.$router.replace('rincian-test')
-          } else {
-            this.fetchWaktu()
-            return totalWaktu + ' (Tambahan)'
+          this.fetchWaktu();
+          return totalWaktu;
+        } else if (this.waktu.waktu === null || this.waktu.waktu === 0) {
+          // auto send jawaban if time reached < 1
+          var id = JSON.parse(this.$store.getters['auth/user']).id
+          var payload = {
+            jawaban_peserta: this.jawaban,
+            peserta_id: id,
+            paket_soal: this.$route.query.paket,
+            jenis_soal: this.$route.query.jenis,
           }
+
+          this.$store.dispatch('soal/kirimJawaban', payload)
+            .catch((error) => {
+              console.error(error)
+            })
+
+          // reset jawaban
+          this.$store.dispatch('mii/resetJawaban');
+          this.$buefy.toast.open({
+              duration: 5000,
+              message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
+              position: 'is-bottom',
+              type: 'is-warning'
+          })
+          this.$router.replace('rincian-test')
         }
       }
-
-      // console.log(this.waktu.waktu)
-      // console.log(this.waktu.waktu != null)
-      // console.log(this.waktu.waktu != ' ')
-      // } else {
-      //   // auto send jawaban if time reached < 1
-      //   var id = JSON.parse(this.$store.getters['auth/user']).id
-      //   var payload = {
-      //     jawaban_peserta: this.jawaban,
-      //     peserta_id: id,
-      //     paket_soal: this.$route.query.paket,
-      //     jenis_soal: this.$route.query.jenis,
-      //   }
-
-      //   this.$store.dispatch('soal/kirimJawaban', payload)
-      //     .catch((error) => {
-      //       console.error(error)
-      //     })
-
-      //     // reset jawaban
-      //     this.$store.dispatch('mii/resetJawaban');
-      //     this.$buefy.toast.open({
-      //         duration: 5000,
-      //         message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
-      //         position: 'is-bottom',
-      //         type: 'is-warning'
-      //     })
-      //     this.$router.replace('rincian-test')
-      // }
-      // return totalWaktu
     },
     dataJawaban() {
       return this.$store.state.mii.jawaban
@@ -180,8 +149,7 @@ export default {
 
       this.$store.dispatch("waktu/sisaWaktu", payload)
         .then((response) => {
-          console.log(response)
-          this.waktu = response.data.data
+          this.waktu = response.data.data;
         })
         .catch((error) => {
           console.error(error)
