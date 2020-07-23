@@ -69,7 +69,7 @@
       <div class="column">
         <b-button class="button" v-if="nomor != '1'" @click="submitJawaban('Sebelumnya')" type="is-primary" outlined>Sebelumnya</b-button>
         <b-button class="button" native-type="submit" v-if="total !== nomor" @click="submitJawaban('Berikutnya')" type="is-primary">Berikutnya</b-button>
-        <b-button class="button" v-else @click="kirimJawaban" type="is-primary">Selesai</b-button>
+        <b-button class="button" v-else @click="kirimJawaban" type="is-primary" :disabled="submitAnswer">Selesai</b-button>
       </div>
     </div>
   </div>
@@ -87,6 +87,7 @@ export default {
     ],
     jawaban: [],
     tmpJawaban: [],
+    submitAnswer: false,
   }),
   computed: {
     gambarURL() {
@@ -126,6 +127,7 @@ export default {
       this.jawaban[this.nomor - 1] = JSON.parse(JSON.stringify(this.tmpJawaban));
     },
     kirimJawaban: function() {
+      this.submitAnswer = true;
       var id = JSON.parse(this.$store.getters['auth/user']).id
       var payload = {
         jawaban_peserta: this.jawaban,
