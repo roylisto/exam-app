@@ -15,7 +15,7 @@
 
         <div class="soal-item">
           <h1>Contoh 06</h1>
-          <p>2      4      6      8      10      12      14      16      ?</p>
+          <p>2&emsp;4&emsp;6&emsp;8&emsp;10&emsp;12&emsp;14&emsp;16&emsp;?</p>
           <div class="checkbox-gbr-group">
             <div v-for="(value, index) in pilganbutton" :key="index" class="checkbox" >
               <input :id="value" type="checkbox" :name="jawaban[index]" :value="value" v-model="tmpJawaban">
@@ -30,7 +30,7 @@
 
         <div class="soal-item">
           <h1>Contoh berikutnya</h1>
-          <p>9      7       10      8      11      9      12      ? </p>
+          <p>9&emsp;7&emsp; 10&emsp;8&emsp;11&emsp;9&emsp;12&emsp;? </p>
           <div class="checkbox-gbr-group">
             <div v-for="(value, index) in pilganbutton" :key="index" class="checkbox" >
               <input :id="value + '1'" type="checkbox" :name="jawaban[index]" :value="value + '1'" v-model="tmpJawaban">

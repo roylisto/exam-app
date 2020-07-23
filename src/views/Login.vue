@@ -27,6 +27,7 @@
                       <input
                         class="input"
                         type="password"
+                        password-reveal
                         placeholder="Password"
                         v-model="password"
                         v-on:keyup.enter="login"

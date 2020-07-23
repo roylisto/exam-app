@@ -7,18 +7,21 @@
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
             <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
             <label :for="value">{{`${index}. ${value}`}}</label>
+            <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
           </div>
         </div>
       </div>
       <div v-else-if="soal.kategori == 'gambar'">
-        <div class="has-text-left">
+        <div class="has-text-left" style="position: relative;">
           <img :src="gambarURL + '/' + soal.pertanyaan" alt="">
+          <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
         </div>
         <div class="radio-gbr-group has-text-centered">
-            <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
+            <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" style="position: relative;">
               <img :src="gambarURL + '/' + value" alt=""> <br>
               <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
               <label :for="value">{{index}}</label>
+              <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
             </div>
         </div>
       </div>
@@ -27,6 +30,7 @@
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio" >
             <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
             <label :for="value">{{`${index}. ${value}`}}</label>
+            <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
           </div>
         </div>
       </div>
@@ -37,6 +41,7 @@
                 <b-input v-model="jawaban[soal.nomor - 1]" maxlength="50" @keyup.native.enter="submitJawaban('Berikutnya')"></b-input>
             </b-field>
           </section>
+          <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
       </div>
       <div v-else-if="soal.kategori == 'pilganbutton'">
         <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
@@ -44,6 +49,7 @@
             <div v-for="(value, index) in pilganbutton" :key="index" class="checkbox" >
               <input :id="value" type="checkbox" :name="jawaban[index]" :value="value" v-model="tmpJawaban" @change="pilihAngka(value)">
               <label :for="value">{{value}}</label>
+              <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
             </div>
           </div>
       </div>
@@ -52,6 +58,7 @@
           <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
             <input :id="value" type="radio" :name="jawaban[index]" :value="index" v-model="jawaban[soal.nomor - 1]">
             <label :for="value">{{value}}</label>
+            <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
           </div>
         </div>
       </div>
@@ -62,6 +69,7 @@
         <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
           <input :id="value" type="radio" :name="jawaban[index]" :value="value" v-model="jawaban[soal.nomor - 1]">
           <label :for="value">{{value}}</label>
+          <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
         </div>
       </div>
     </div>
@@ -69,7 +77,7 @@
       <div class="column">
         <b-button class="button" v-if="nomor != '1'" @click="submitJawaban('Sebelumnya')" type="is-primary" outlined>Sebelumnya</b-button>
         <b-button class="button" native-type="submit" v-if="total !== nomor" @click="submitJawaban('Berikutnya')" type="is-primary">Berikutnya</b-button>
-        <b-button class="button" v-else @click="kirimJawaban" type="is-primary">Selesai</b-button>
+        <b-button class="button" v-else @click="kirimJawaban" type="is-primary" :disabled="submitAnswer">Selesai</b-button>
       </div>
     </div>
   </div>
@@ -87,6 +95,8 @@ export default {
     ],
     jawaban: [],
     tmpJawaban: [],
+    submitAnswer: false,
+    isLoading: false,
   }),
   computed: {
     gambarURL() {
@@ -99,15 +109,19 @@ export default {
       return this.nomor === this.soal.length
     },
     ...mapGetters("ist", ["jawabanTersimpan"]),
-    // bindJawaban() {
-    //   this.jawaban = this.jawabanTersimpan
-    // }
   },
   created() {
     this.jawabanTersimpan;
     this.bindJawaban;
+    this.openLoading()
   },
   methods: {
+    openLoading() {
+      this.isLoading = true
+      setTimeout(() => {
+          this.isLoading = false
+      }, 1000)
+    },
     submitJawaban: function(e) {
       if (this.soal.kategori === 'pilganbutton') {
         if (e === 'Sebelumnya') {
@@ -126,6 +140,7 @@ export default {
       this.jawaban[this.nomor - 1] = JSON.parse(JSON.stringify(this.tmpJawaban));
     },
     kirimJawaban: function() {
+      this.submitAnswer = true;
       var id = JSON.parse(this.$store.getters['auth/user']).id
       var payload = {
         jawaban_peserta: this.jawaban,

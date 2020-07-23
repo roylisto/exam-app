@@ -21,7 +21,7 @@
           <b-navbar-item>
             <div class="buttons">
               <button class="button button-round">
-                {{userInfo.nama}} - Jadwal tes {{ moment(userInfo.waktu).format('MMMM Do YYYY') }}
+                {{userInfo.nama}} - Jadwal Tes {{ moment(userInfo.waktu).format('MMMM Do YYYY') }}
               </button>
             </div>
           </b-navbar-item>

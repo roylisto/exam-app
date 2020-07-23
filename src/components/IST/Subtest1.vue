@@ -17,15 +17,21 @@
         </div>
         <div class="soal-item">
           <h1>Contoh 01</h1>
-          <p>Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
+          <p class="has-text-left">Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
           <div class="radio-btn-group">
             <div class="radio">
               <input id="kucing" type="radio" name="radio-1" value="kucing">
               <label for="kucing">Kucing</label>
+            </div>
+            <div class="radio">
               <input id="bajing" type="radio" name="radio-1" value="bajing">
               <label for="bajing">Bajing</label>
+            </div>
+            <div class="radio">
               <input id="lembu" type="radio" name="radio-1" value="lembu">
               <label for="lembu">Lembu</label>
+            </div>
+            <div class="radio">
               <input id="anjing" type="radio" name="radio-1" value="anjing">
               <label for="anjing">Anjing</label>
             </div>
@@ -39,10 +45,16 @@
             <div class="radio">
               <input id="duka" type="radio" name="radio-2" value="duka">
               <label for="duka">Duka</label>
+            </div>
+            <div class="radio">
               <input id="putusAsa" type="radio" name="radio-2" value="putusAsa">
               <label for="putusAsa">Putus Asa</label>
+            </div>
+            <div class="radio">
               <input id="sengsara" type="radio" name="radio-2" value="sengsara">
               <label for="sengsara">Sengsara</label>
+            </div>
+            <div class="radio">
               <input id="cinta" type="radio" name="radio-2" value="cinta">
               <label for="cinta">Cinta</label>
             </div>

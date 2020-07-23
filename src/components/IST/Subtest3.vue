@@ -18,12 +18,20 @@
             <div class="radio">
               <input id="batuBara" type="radio" name="radio-1" value="batuBara">
               <label for="batuBara">a) Batu Bara</label>
+            </div>
+            <div class="radio">
               <input id="bajing" type="radio" name="radio-1" value="bajing">
               <label for="bajing">b) Rumah</label>
+            </div>
+            <div class="radio">
               <input id="lembu" type="radio" name="radio-1" value="lembu">
               <label for="lembu">c) Semen</label>
+            </div>
+            <div class="radio">
               <input id="anjing" type="radio" name="radio-1" value="anjing">
               <label for="anjing">d) Putih</label>
+            </div>
+            <div class="radio">
               <input id="tempat" type="radio" name="radio-1" value="tempat">
               <label for="tempat">d) Dinding</label>
             </div>
@@ -41,12 +49,20 @@
             <div class="radio">
               <input id="duduk" type="radio" name="radio-2" value="duduk">
               <label for="duduk">a) Hujan</label>
+            </div>
+            <div class="radio">
               <input id="berbaring" type="radio" name="radio-2" value="berbaring">
               <label for="berbaring">b) Hari</label>
+            </div>
+            <div class="radio">
               <input id="berdiri" type="radio" name="radio-2" value="berdiri">
               <label for="berdiri">c) Lembab</label>
+            </div>
+            <div class="radio">
               <input id="berjalan" type="radio" name="radio-2" value="berjalan">
               <label for="berjalan">d) Angin</label>
+            </div>
+            <div class="radio">
               <input id="berjongkok" type="radio" name="radio-2" value="berjongkok">
               <label for="berjongkok">e) Kering</label>
             </div>
@@ -58,9 +74,11 @@
             keadaan bergerak. Maka jawaban yang benar adalah d berjalan.
             oleh karena itu jawabna yang harus dipilih adalah d. berjalan</p>
         </div>
-
-        <b-button   type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
-        >Mulai test</b-button>
+        
+        <div class="has-text-centered">
+          <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
+          >Mulai test</b-button>
+        </div>
       </div>
     </div>
     <Footer />
