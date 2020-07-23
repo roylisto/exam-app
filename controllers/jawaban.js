@@ -131,7 +131,13 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
 
 module.exports = {
   store: (req, res) => {
-    req.body.peserta_id = req.decoded.data.id
+    req.body.peserta_id = req.decoded.data.id;
+    req.body.jawaban_peserta = req.body.jawaban_peserta.map((j) => {
+      if (j === null) {
+        return '#';
+      }
+      return j;
+    });
     jawaban.create(req.body).then(result => {
       hitungSubtestPilgan(req.decoded.data, req.body.jawaban_peserta, req.body.paket_soal, req.body.jenis_soal);
       return res.json({
