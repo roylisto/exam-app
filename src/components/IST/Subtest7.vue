@@ -19,8 +19,9 @@
         </div>
         <div class="soal-item container">
           <h1>Contoh 07</h1>
-          <div class="has-text-left">
+          <div class="has-text-left" style="position: relative;">
             <img src="https://cdn.zeplin.io/5eea0882a4d52d4a36e76902/assets/ca27f0cd-a11f-447d-9248-ffb1e178860d.png" alt="">
+            <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
           </div>
           <div class="container">
             <p>Jika potongan-potongan pada contoh 07 di atas disusun (digabungkan), maka akan menghasilkan bentuk a. Oleh karena itu, pilihlah gambar a . </p>
@@ -112,10 +113,22 @@ export default {
       1, 2, 3, 4, 5, 6, 7, 8, 9, 0
     ],
     jawaban: [],
+    isLoading: false,
   }),
   components: {
     Navbar,
     Footer
+  },
+  created() {
+    this.openLoading()
+  },
+  methods: {
+    openLoading() {
+        this.isLoading = true
+        setTimeout(() => {
+            this.isLoading = false
+        }, 300)
+    }
   },
   computed: {
     jenisSoal() {
