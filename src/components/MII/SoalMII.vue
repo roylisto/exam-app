@@ -15,6 +15,8 @@
             <div class="radio">
               <input id="ya" type="radio" name="mii" value="ya">
               <label for="ya">a) Ya</label>
+            </div>
+            <div class="radio">
               <input id="tidak" type="radio" name="mii" value="tidak">
               <label for="tidak">b) Tidak</label>
             </div>
