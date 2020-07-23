@@ -3,7 +3,7 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (97-116)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase().replace('IST','')}} (97-116)
       </p>
       <div class="box">
         <div class="soal-petunjuk container">
@@ -41,6 +41,10 @@
 
         <div class="container">
           <p>Pada deret ini selalu berganti-ganti harus dikurangi dengan 2 setelah itu ditambah dengan 3. Jawaban contoh ini ialah 10. Maka dari itu pilihlah angka 1 dan angka 0</p>
+        </div>
+
+        <div class="container">
+          <p>Pada subtest ini peserta boleh menggunakan kertas coret-coretan untuk menghitung</p>
         </div>
 
          <div class="has-text-centered">

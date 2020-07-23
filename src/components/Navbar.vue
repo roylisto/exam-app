@@ -21,7 +21,7 @@
           <b-navbar-item>
             <div class="buttons">
               <button class="button button-round">
-                {{userInfo.nama}} - Jadwal tes {{ moment(userInfo.waktu).format('MMMM Do YYYY') }}
+                {{userInfo.nama}} - Jadwal Tes {{ moment(userInfo.waktu).format('MMMM Do YYYY') }}
               </button>
             </div>
           </b-navbar-item>
@@ -49,7 +49,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["user"]),
     token() {
-      return localStorage.getItem('token');
+      return sessionStorage.getItem('token');
     },
     userInfo() {
       var user = JSON.parse(this.user)
@@ -64,6 +64,7 @@ export default {
       this.$store.dispatch('ist/resetJawaban');
       this.$store.dispatch("auth/logout")
         .then(() => {
+          localStorage.clear();
           this.$router.replace({ path: '/login' })
         })
     }

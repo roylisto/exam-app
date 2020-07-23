@@ -70,17 +70,20 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
     }
     console.log("rw: ", rw_peserta);
     let umur = moment().diff(account.tanggal_lahir, 'years');
-    if(umur>18 && umur<=20) {
+
+    if (umur<13) {
+      umur = 13;
+    } else if(umur>18 && umur<=20) {
       umur = 20;
-    } else if(umur <= 24) {
+    } else if(umur>20 && umur <= 24) {
       umur = 24;
-    } else if(umur <= 28) {
+    } else if(umur>24 && umur <= 28) {
       umur = 28;
-    } else if(umur <= 33) {
+    } else if(umur>28 && umur <= 33) {
       umur = 33;
-    } else if(umur <= 39) {
+    } else if(umur>33 && umur <= 39) {
       umur = 39;
-    } else if(umur <= 45) {
+    } else if(umur>39 && umur <= 45) {
       umur = 45;
     } else if(umur >= 46) {
       umur = 46;
@@ -96,11 +99,11 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
     let kategori = 'Sangat Rendah';
     if(score_subtest.sw>80 && score_subtest.sw<=94) {
       kategori = 'Rendah';
-    } else if(score_subtest.sw <= 99) {
+    } else if(score_subtest.sw > 94 && score_subtest.sw <= 99) {
       kategori = 'Sedang';
-    } else if(score_subtest.sw <= 104) {
+    } else if(score_subtest.sw > 99 && score_subtest.sw <= 104) {
       kategori = 'Cukup';
-    } else if(score_subtest.sw <= 118) {
+    } else if(score_subtest.sw > 104 && score_subtest.sw <= 118) {
       kategori = 'Tinggi';
     } else if(score_subtest.sw > 118) {
       kategori = 'Sangat Tinggi';
@@ -173,11 +176,13 @@ module.exports = {
 
       let index = 0;
       let status_test = 'Sudah';
-      
+
       for (const element of all_soal) {
 
         let jenis_soal = (index<9) ? 'ist': 'mii';
         index++;
+
+        let tmp_status = log_jawaban_user.includes(element);
 
         let tmp_status = log_jawaban_user.includes(element);
         if(tmp_status===false) {
@@ -191,7 +196,11 @@ module.exports = {
               }
             });
             const last_time = moment(log_test_peserta[element]).format('YYYY-MM-DD HH:mm:ss');
-            const waktu_pengerjaan = moment().diff(last_time, 'seconds');
+            let waktu_pengerjaan = moment().diff(last_time, 'seconds');
+
+            if(jenis_soal=='mii') {
+              waktu_pengerjaan = moment().diff(log_peserta_mii.created_at, 'seconds');
+            }
 
             status_test = (waktu_pengerjaan > waktu_soal.waktu) ? 'Waktu habis' : 'Sedang dikerjakan';
           }
@@ -219,5 +228,29 @@ module.exports = {
         data: {}
       });
     }
+  },
+  delete: async (req, res) => {
+    await Promise.all([
+      logSoalPeserta.destroy({
+        where: {
+          peserta_id: req.params.pesertaId,
+        },
+      }),
+      scorePeserta.destroy({
+        where: {
+          peserta_id: req.params.pesertaId,
+        },
+      }),
+      jawaban.destroy({
+        where: {
+          peserta_id: req.params.pesertaId,
+        },
+      }),
+    ]);
+
+    res.json({
+      status: 'OK',
+      messages: 'All answers deleted successfully',
+    });
   }
 }

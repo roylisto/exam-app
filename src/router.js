@@ -18,7 +18,7 @@ const routes = new Router({
       name: 'Home',
       component: Home,
       beforeEnter: (to, from, next) => {
-        let token = localStorage.getItem('token');
+        let token = sessionStorage.getItem('token');
         if (token) next({path: '/rincian-test'})
         else next();
       }
@@ -64,7 +64,7 @@ const routes = new Router({
 })
 
 routes.beforeEach((to, from, next) => {
-  let token = localStorage.getItem('token');
+  let token = sessionStorage.getItem('token');
 
   if (to.matched.some(route => route.meta.requiresAuth)) {
     if (token) {

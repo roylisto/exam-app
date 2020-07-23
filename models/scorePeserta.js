@@ -1,4 +1,5 @@
 'use strict';
+const { Op } = require ('sequelize');
 module.exports = (sequelize, DataTypes) => {
   const scorePeserta = sequelize.define('scorePeserta', {
     id: {
@@ -22,8 +23,13 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   scorePeserta.getIQ = async (peserta_id, umur) => {
-    let sum_rw = await scorePeserta.sum('rw', {where: {peserta_id: peserta_id}});
-    
+    let sum_rw = await scorePeserta.sum('rw', {where: {
+      peserta_id: peserta_id,
+      kategori: {
+        [Op.not]: 'mii'
+      }
+    }});
+
     if(isNaN(sum_rw)) {
       return 0;
     }

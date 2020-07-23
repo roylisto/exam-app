@@ -3,7 +3,7 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (41-61)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase().replace('IST','')}} (41-61)
       </p>
       <div class="box">
         <div class="container">
@@ -29,7 +29,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="container">
           <p class="has-text-weight-normal">Hubungan antara hutan dan pohon ialah bahwa hutan terdiri atas pohon-pohon, maka hubungan antara tembok dan salah satu kata pilihan ialah bahwa tembok terdiri atas batu-batu bata. Oleh karena itu pilihlah jawaban a) batu bata </p>
         </div>
@@ -52,13 +52,13 @@
             </div>
           </div>
         </div>
-        
+
         <div class="container">
           <p class="has-text-weight-normal">Pada a,b,c dan e orang berada dalam keadaan tidak bergerak, sedangkan d orang dalam
             keadaan bergerak. Maka jawaban yang benar adalah d berjalan.
             oleh karena itu jawabna yang harus dipilih adalah d. berjalan</p>
         </div>
-        
+
         <b-button   type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
         >Mulai test</b-button>
       </div>

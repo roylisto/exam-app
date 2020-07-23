@@ -3,7 +3,7 @@
     <Navbar />
     <template v-if="!akhirTes">
       <div class="container">
-        <p class="title has-text-centered has-text-weight-light">Test {{jenisSoal.toUpperCase()}} Bagian {{bagianSoal}}</p>
+        <p class="title has-text-centered has-text-weight-light">Test {{jenisSoal.toUpperCase().replace('IST', '')}} Bagian {{bagianSoal}}</p>
         <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan: <span class="has-text-danger">{{convertTime}}</span></p>
         <div class="box">
           <div class="columns">
@@ -114,7 +114,7 @@ export default {
           this.$store.dispatch('ist/resetJawaban');
           this.$buefy.toast.open({
               duration: 5000,
-              message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
+              message: `Sesi waktu soal bagian ${this.bagianSoal} sudah habis`,
               position: 'is-bottom',
               type: 'is-warning'
           })

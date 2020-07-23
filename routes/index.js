@@ -9,12 +9,18 @@ const jawaban = require('../controllers/jawaban.js');
 const jadwalTest = require('../controllers/jadwalTest.js');
 const hasil = require('../controllers/hasil.js');
 const authorize = require('../middlewares/authorize.js');
-//etc: api/time/ist/subtest1/3
+const download = require('../controllers/download');
+
 router.get('/time/:jenis_soal', authorize(), time.get);
 
 //jawaban route
 router.post('/jawaban', authorize(), jawaban.store);
 router.get('/rincian-test', authorize(), jawaban.list);
+
+if (process.env.NODE_ENV === 'development') {
+  router.delete('/rincian-test/delete/:pesertaId', jawaban.delete);
+}
+
 //users route
 router.get('/users', user.list);
 router.get('/users/:id', user.get);
@@ -46,4 +52,8 @@ router.delete('/jadwal-test/:id', jadwalTest.delete);
 //route hasil
 router.get('/hasil-test/:id', hasil.list);
 router.post('/auth', auth.login);
+
+//download
+router.get('/download', download.get);
+
 module.exports = router;

@@ -3,10 +3,10 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase()}} (01-20)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase().replace('IST','')}} (01-20)
       </p>
       <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu menghafal: <span class="has-text-danger">{{convertTime}}</span></p>
-      <div class="box has-text-centered">
+      <div class="box has-text-centered" v-show="showHapalan">
         <p class="has-text-weight-semibold subtitle">Disediakan waktu 3 menit untuk menghafalkan kata-kata di bawah ini:</p>
         <ul>
           <li class="is-size-5">BUNGA: Soka - Larat - Flamboyan - Jasmin - Dahlia</li>
@@ -15,8 +15,6 @@
           <li class="is-size-5">KESENIAN: Quintet - Arca - Opera - Gamelan - Ukiran</li>
           <li class="is-size-5">BINATANG: Musang - Rusa - Beruang - Zebra - Harimau</li>
         </ul>
-        <b-button   type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
-        >Mulai test</b-button>
       </div>
     </div>
     <Footer />
@@ -31,6 +29,13 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: "rincian-test",
+  data: () => ({
+    waktu: {
+      waktu: 0
+    },
+    timeFetched: false,
+    showHapalan: false,
+  }),
   components: {
     Navbar,
     Footer
@@ -39,40 +44,66 @@ export default {
     clearInterval(this.$options.interval);
   },
   computed: {
-    ...mapGetters("soal", ["timer"]),
+    ...mapGetters("auth", ["user"]),
     bagianSoal() {
       return this.$route.query.paket;
     },
+    userInfo() {
+      return JSON.parse(this.user)
+    },
     convertTime() {
-      var totalWaktu;
-      var menit = Math.floor(this.timer / 60);
-      var detik = Math.floor(this.timer % 60);
-      totalWaktu = `${menit < 10 ? '0' + menit : menit}:${detik < 10 ? '0' + detik : detik}`;
-      if (this.timer < 1) {
-        this.$store.dispatch("soal/resetTimer");
-        this.$router.replace({
-          path: '/soal', query: {
-            paket: this.bagianSoal,
-            jenis: this.jenis
-          }
-        })
-      } else {
-        return totalWaktu
+      if (this.timeFetched) {
+        var totalWaktu;
+        var menit = Math.floor(this.waktu.waktu / 60);
+        var detik = Math.floor(this.waktu.waktu % 60);
+        totalWaktu = `${menit < 10 ? '0' + menit : menit}:${detik < 10 ? '0' + detik : detik}`;
+        if (this.waktu.waktu < 1) {
+          this.$router.replace({
+            path: '/soal', query: {
+              paket: this.bagianSoal,
+              jenis: 'ist'
+            }
+          })
+        } else {
+          return totalWaktu
+        }
       }
     },
   },
+  created() {
+      this.fetchWaktu();
+  },
   mounted() {
     this.$options.interval = setInterval(() => {
-        this.startTimer()
+        this.waktu.waktu -= 1
     }, 1000);
   },
   methods: {
-    startTimer() {
-      this.$store.dispatch("soal/startTimer")
+    fetchWaktu() {
+      var jenis = 'ist';
+      var paket = this.$route.query.paket;
+      var id    = this.userInfo.id;
+
+      var payload = {
+        jenis_soal: jenis,
+        paket_soal: paket,
+        peserta_id: id
+      }
+
+      this.$store.dispatch("waktu/sisaWaktu", payload)
+        .then((response) => {
+          if (response.data.data.keterangan === 'hapalan') {
+            this.waktu = response.data.data;
+            this.showHapalan = true;
+          } else {
+            this.waktu.waktu = 0;
+          }
+          this.timeFetched = true;
+        })
         .catch((error) => {
           console.error(error)
         })
-    }
+    },
   }
 };
 </script>
