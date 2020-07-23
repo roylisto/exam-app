@@ -13,7 +13,7 @@
           Dalam mengerjakan tes ini diperlukan kejujuran dari saudara
         </p>
         <div class="has-text-centered">
-          <b-button type="is-primary" tag="router-link" :to="{path: '/hafal-soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
+          <b-button type="is-primary" tag="router-link" :to="{path: '/hafal-soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
           >Daftar Kata</b-button>
         </div>
       </div>
