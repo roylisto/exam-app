@@ -125,36 +125,6 @@ export default {
           this.$router.replace('rincian-test')
         }
       }
-
-      // console.log(this.waktu.waktu)
-      // console.log(this.waktu.waktu != null)
-      // console.log(this.waktu.waktu != ' ')
-      // } else {
-      //   // auto send jawaban if time reached < 1
-      //   var id = JSON.parse(this.$store.getters['auth/user']).id
-      //   var payload = {
-      //     jawaban_peserta: this.jawaban,
-      //     peserta_id: id,
-      //     paket_soal: this.$route.query.paket,
-      //     jenis_soal: this.$route.query.jenis,
-      //   }
-
-      //   this.$store.dispatch('soal/kirimJawaban', payload)
-      //     .catch((error) => {
-      //       console.error(error)
-      //     })
-
-      //     // reset jawaban
-      //     this.$store.dispatch('mii/resetJawaban');
-      //     this.$buefy.toast.open({
-      //         duration: 5000,
-      //         message: `Sesi waktu soal ${this.jenisSoal.toUpperCase()} bagian ${this.bagianSoal} sudah habis`,
-      //         position: 'is-bottom',
-      //         type: 'is-warning'
-      //     })
-      //     this.$router.replace('rincian-test')
-      // }
-      // return totalWaktu
     },
     dataJawaban() {
       return this.$store.state.mii.jawaban
