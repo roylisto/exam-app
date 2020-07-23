@@ -183,8 +183,6 @@ module.exports = {
         index++;
 
         let tmp_status = log_jawaban_user.includes(element);
-
-        let tmp_status = log_jawaban_user.includes(element);
         if(tmp_status===false) {
           if(log_test_peserta[element]==null) {
             status_test = 'Belum';
@@ -196,11 +194,7 @@ module.exports = {
               }
             });
             const last_time = moment(log_test_peserta[element]).format('YYYY-MM-DD HH:mm:ss');
-            let waktu_pengerjaan = moment().diff(last_time, 'seconds');
-
-            if(jenis_soal=='mii') {
-              waktu_pengerjaan = moment().diff(log_peserta_mii.created_at, 'seconds');
-            }
+            const waktu_pengerjaan = moment().diff(last_time, 'seconds');
 
             status_test = (waktu_pengerjaan > waktu_soal.waktu) ? 'Waktu habis' : 'Sedang dikerjakan';
           }
