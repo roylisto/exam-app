@@ -41,12 +41,20 @@
             <div class="radio">
               <input id="duduk" type="radio" name="radio-2" value="duduk">
               <label for="duduk">a) Duduk</label>
+            </div>
+            <div class="radio">
               <input id="berbaring" type="radio" name="radio-2" value="berbaring">
               <label for="berbaring">b) Putus Asa</label>
+            </div>
+            <div class="radio">
               <input id="berdiri" type="radio" name="radio-2" value="berdiri">
               <label for="berdiri">c) Berdiri</label>
+            </div>
+            <div class="radio">
               <input id="berjalan" type="radio" name="radio-2" value="berjalan">
               <label for="berjalan">d) Berjalan</label>
+            </div>
+            <div class="radio">
               <input id="berjongkok" type="radio" name="radio-2" value="berjongkok">
               <label for="berjongkok">e) Berjongkok</label>
             </div>
