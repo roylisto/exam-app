@@ -38,9 +38,13 @@
         <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
           <section>
             <b-field label="Jawaban">
-                <b-input v-model="jawaban[soal.nomor - 1]" maxlength="50" v-if="total !== nomor"
+                <b-input v-model="jawaban[soal.nomor - 1]" maxlength="50"
+                :autofocus="true"
+                v-if="total !== nomor"
                 @keyup.native.enter="submitJawaban('Berikutnya')"></b-input>
-                <b-input v-model="jawaban[soal.nomor - 1]" maxlength="50" v-else
+                <b-input v-model="jawaban[soal.nomor - 1]" maxlength="50"
+                :autofocus="true"
+                v-else
                 @keyup.native.enter="kirimJawaban"></b-input>
             </b-field>
           </section>
