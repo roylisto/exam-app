@@ -24,14 +24,14 @@
                   </div>
                   <div class="field">
                     <div class="control">
-                      <input
+                      <b-input
                         class="input"
                         type="password"
                         password-reveal
                         placeholder="Password"
                         v-model="password"
                         v-on:keyup.enter="login"
-                      />
+                      ></b-input>
                     </div>
                   </div>
                   <div class="field">

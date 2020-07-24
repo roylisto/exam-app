@@ -7,7 +7,6 @@
       </p>
       <div class="box">
         <div class="container">
-          <p class="has-text-weight-normal">Ditentukan tiga kata</p>
           <p class="has-text-weight-normal">Ditentukan tiga kata antara kata pertama dan kata kedua terdapat suatu hubungan yang tertentu. <br/>
           antara kata ketiga dan salah satu kata diantara lima kata pilihan harus pula terdapat hubungan yang sama itu.  Carilah kata itu </p>
         </div>
@@ -74,7 +73,6 @@
             keadaan bergerak. Maka jawaban yang benar adalah d berjalan.
             oleh karena itu jawabna yang harus dipilih adalah d. berjalan</p>
         </div>
-        
         <div class="has-text-centered">
           <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
           >Mulai test</b-button>
