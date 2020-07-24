@@ -11,29 +11,20 @@
                   <p class="title">
                     Log in to your account
                   </p>
-                  <div class="field">
-                    <div class="control">
-                      <input
-                        class="input"
-                        type="email"
-                        placeholder="Email"
-                        v-model="email"
-                        v-on:keyup.enter="login"
-                      />
-                    </div>
-                  </div>
-                  <div class="field">
-                    <div class="control">
-                      <b-input
-                        class="input"
-                        type="password"
-                        password-reveal
-                        placeholder="Password"
-                        v-model="password"
-                        v-on:keyup.enter="login"
+                  <b-field label="Email">
+                    <b-input type="email"
+                      v-model="email"
+                      placeholder="Masukkan email Anda"
+                      v-on:keyup.enter="login"
                       ></b-input>
-                    </div>
-                  </div>
+                  </b-field>
+                  <b-field label="Password">
+                    <b-input type="password"
+                      v-model="password"
+                      placeholder="Masukkan password Anda"
+                      v-on:keyup.enter="login"
+                      password-reveal></b-input>
+                  </b-field>
                   <div class="field">
                     <div class="control">
                       <b-button expanded type="is-primary" @click="login" native-type="submit"
