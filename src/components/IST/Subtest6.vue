@@ -91,17 +91,18 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-items: center;
+  flex-wrap:wrap;
 }
 .checkbox-gbr-group .checkbox {
-  overflow-x: hidden;
-  margin: .20em .2rem;
-  line-height: 4;
+  overflow-x: auto;
+  margin: .20em .1rem;
+  line-height: 3;
 }
 .checkbox-gbr-group .checkbox label {
   margin-top: 2rem;
   background: #fff;
   border: 1px solid #ddd;
-  padding: 1rem .75rem;
+  padding: .75rem .50rem;
   border-radius: 56px;
   cursor: pointer;
   color: #444;
