@@ -7,7 +7,6 @@
       </p>
       <div class="box">
         <div class="container">
-          <p class="has-text-weight-normal">Ditentukan tiga kata</p>
           <p class="has-text-weight-normal">Ditentukan tiga kata antara kata pertama dan kata kedua terdapat suatu hubungan yang tertentu. <br/>
           antara kata ketiga dan salah satu kata diantara lima kata pilihan harus pula terdapat hubungan yang sama itu.  Carilah kata itu </p>
         </div>
