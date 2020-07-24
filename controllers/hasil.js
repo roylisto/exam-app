@@ -1,6 +1,7 @@
 const db = require('../models/index.js');
 const Excel = require('exceljs');
 const moment = require('moment');
+const _ = require('lodash');
 
 module.exports = {
   list_jawaban: async (req, res) => {
@@ -142,22 +143,31 @@ module.exports = {
         { header: 'Email', key: 'email', width: 32 },
         { header: 'SE_rw', key: 'SE_rw', width: 8},
         { header: 'SE_sw', key: 'SE_sw', width: 8},
+        { header: 'SE_kategori', key: 'SE_kategori', width: 10},
         { header: 'WA_rw', key: 'WA_rw', width: 8},
         { header: 'WA_sw', key: 'WA_sw', width: 8},
+        { header: 'WA_kategori', key: 'WA_kategori', width: 10},
         { header: 'AN_rw', key: 'AN_rw', width: 8},
         { header: 'AN_sw', key: 'AN_sw', width: 8},
+        { header: 'AN_kategori', key: 'AN_kategori', width: 10},
         { header: 'GE_rw', key: 'GE_rw', width: 8},
         { header: 'GE_sw', key: 'GE_sw', width: 8},
+        { header: 'GE_kategori', key: 'GE_kategori', width: 10},
         { header: 'RA_rw', key: 'RA_rw', width: 8},
         { header: 'RA_sw', key: 'RA_sw', width: 8},
+        { header: 'RA_kategori', key: 'RA_kategori', width: 10},
         { header: 'ZR_rw', key: 'ZR_rw', width: 8},
         { header: 'ZR_sw', key: 'ZR_sw', width: 8},
+        { header: 'ZR_kategori', key: 'ZR_kategori', width: 10},
         { header: 'FA_rw', key: 'FA_rw', width: 8},
         { header: 'FA_sw', key: 'FA_sw', width: 8},
+        { header: 'FA_kategori', key: 'FA_kategori', width: 10},
         { header: 'WU_rw', key: 'WU_rw', width: 8},
         { header: 'WU_sw', key: 'WU_sw', width: 8},
+        { header: 'WU_kategori', key: 'WU_kategori', width: 10},
         { header: 'ME_rw', key: 'ME_rw', width: 8},
         { header: 'ME_sw', key: 'ME_sw', width: 8},
+        { header: 'ME_kategori', key: 'ME_kategori', width: 10},
         { header: 'IQ', key: 'IQ', width: 8},
       ];
 
@@ -188,43 +198,59 @@ module.exports = {
           }
         });
 
+        let kode_soal = [
+          "SE", "WA", "AN", "GE", "RA", "ZR", "FA", "WU", "ME"
+        ];
+
+        let peserta_soal = [];
+
         for(let j=0; j<peserta[i].scorePeserta.length; j++) {
+          peserta_soal.push(peserta[i].scorePeserta[j].kode_soal);
           switch(peserta[i].scorePeserta[j].kode_soal) {
             case 'SE':
               row.SE_rw = peserta[i].scorePeserta[j].rw;
-              row.SE_sw = peserta[i].scorePeserta[j].sw
+              row.SE_sw = peserta[i].scorePeserta[j].sw;
+              row.SE_kategori = peserta[i].scorePeserta[j].kategori;
               break;
             case 'WA':
               row.WA_rw = peserta[i].scorePeserta[j].rw;
-              row.WA_sw = peserta[i].scorePeserta[j].sw
+              row.WA_sw = peserta[i].scorePeserta[j].sw;
+              row.WA_kategori = peserta[i].scorePeserta[j].kategori;
               break;
             case 'AN':
               row.AN_rw = peserta[i].scorePeserta[j].rw;
-              row.AN_sw = peserta[i].scorePeserta[j].sw
+              row.AN_sw = peserta[i].scorePeserta[j].sw;
+              row.AN_kategori = peserta[i].scorePeserta[j].kategori;
               break;
             case 'GE':
               row.GE_rw = peserta[i].scorePeserta[j].rw;
-              row.GE_sw = peserta[i].scorePeserta[j].sw
+              row.GE_sw = peserta[i].scorePeserta[j].sw;
+              row.GE_kategori = peserta[i].scorePeserta[j].kategori;
               break;
             case 'RA':
               row.RA_rw = peserta[i].scorePeserta[j].rw;
-              row.RA_sw = peserta[i].scorePeserta[j].sw
+              row.RA_sw = peserta[i].scorePeserta[j].sw;
+              row.RA_kategori = peserta[i].scorePeserta[j].kategori;
               break;
             case 'ZR':
               row.ZR_rw = peserta[i].scorePeserta[j].rw;
-              row.ZR_sw = peserta[i].scorePeserta[j].sw
+              row.ZR_sw = peserta[i].scorePeserta[j].sw;
+              row.ZR_kategori = peserta[i].scorePeserta[j].kategori;
               break;
             case 'FA':
               row.FA_rw = peserta[i].scorePeserta[j].rw;
-              row.FA_sw = peserta[i].scorePeserta[j].sw
+              row.FA_sw = peserta[i].scorePeserta[j].sw;
+              row.FA_kategori = peserta[i].scorePeserta[j].kategori;
               break;
             case 'WU':
               row.WU_rw = peserta[i].scorePeserta[j].rw;
-              row.WU_sw = peserta[i].scorePeserta[j].sw
+              row.WU_sw = peserta[i].scorePeserta[j].sw;
+              row.WU_kategori = peserta[i].scorePeserta[j].kategori;
               break;
             case 'ME':
               row.ME_rw = peserta[i].scorePeserta[j].rw;
-              row.ME_sw = peserta[i].scorePeserta[j].sw
+              row.ME_sw = peserta[i].scorePeserta[j].sw;
+              row.ME_kategori = peserta[i].scorePeserta[j].kategori;
               break;
             case 'M1':
             case 'M2':
@@ -268,6 +294,39 @@ module.exports = {
         peserta[i].iq = await db.scorePeserta.getIQ(peserta[i].id, umur);
         row.IQ = peserta[i].iq;
 
+        const check_code = _.difference(kode_soal, peserta_soal);
+
+        for(let l=0; l<check_code.length; l++) {
+          const sw = await db.scoreSubtest.findOne({
+            where: {
+              rw: 0,
+              umur: umur,
+              kode_soal: check_code[l]
+            }
+          });
+          let kategori = 'Sangat Rendah';
+          if(sw.sw>80 && sw.sw<=94) {
+            kategori = 'Rendah';
+          } else if(sw.sw > 94 && sw.sw <= 99) {
+            kategori = 'Sedang';
+          } else if(sw.sw > 99 && sw.sw <= 104) {
+            kategori = 'Cukup';
+          } else if(sw.sw > 104 && sw.sw <= 118) {
+            kategori = 'Tinggi';
+          } else if(sw.sw > 118) {
+            kategori = 'Sangat Tinggi';
+          }
+          db.scorePeserta.create({
+            kode_soal: check_code[l],
+            rw: 0,
+            sw: sw.sw,
+            kategori: kategori,
+            peserta_id: peserta[i].id
+          });
+          row[check_code[l]+"_rw"] = 0;
+          row[check_code[l]+"_sw"] = sw.sw; 
+          row[check_code[l]+"_kategori"] = kategori;
+        }
         worksheet.addRow(row);
         worksheet2.addRow(row2);
       }
@@ -287,6 +346,74 @@ module.exports = {
         data: {}
       });
     }
-  }
+  },
 
+  list_peserta: async (req, res) => {
+    try {
+      const event_test = await db.jadwalTest.findByPk(req.params.id);
+      if(event_test === null) {
+        return res.status(404).json({
+          message: 'Jadwal test not found!'
+        });
+      }
+
+      const peserta = await db.sequelize.query('SELECT user.nama, user.tanggal_lahir, \
+        user.email, peserta.password, peserta.valid, peserta.expired FROM peserta\
+        JOIN user on user.email = peserta.email WHERE jadwal_test = ?',
+        {
+          replacements: [event_test.id],
+          type: db.sequelize.QueryTypes.SELECT
+        }
+      );
+    
+      const workbook = new Excel.Workbook();
+
+      workbook.creator = 'Bakatku.id';
+      workbook.lastModifiedBy = 'Bakatku';
+      workbook.created = new Date();
+      workbook.modified = new Date();
+
+      const worksheet =  workbook.addWorksheet('Peserta', {
+        pageSetup:{paperSize: 9, orientation:'landscape'}
+      });
+
+      worksheet.columns = [
+        { header: 'No', key: 'no', width: 5 },
+        { header: 'Nama', key: 'nama', width: 32 },
+        { header: 'Tanggal lahir', key: 'tanggal_lahir', width: 15 },
+        { header: 'Email', key: 'email', width: 32 },
+        { header: 'Password', key: 'password', width: 15 },
+        { header: 'Valid', key: 'valid', width: 15 },
+        { header: 'Expired', key: 'expired', width: 15 },
+      ];
+
+      for(let i=0; i<peserta.length; i++) {
+        let row = {};
+        row.no = i+1;
+        row.nama = peserta[i].nama;
+        row.tanggal_lahir = peserta[i].tanggal_lahir;
+        row.email = peserta[i].email;
+        row.password = peserta[i].password;
+        row.valid = peserta[i].valid;
+        row.expired = peserta[i].expired;
+
+        worksheet.addRow(row);
+      }
+
+      let nameFile = `peserta_${moment(event_test.waktu).format('YYYY-MM-DD')}_${event_test.instansi}`;
+      nameFile = nameFile.replace(/ /g,"_").replace(/:/g,"-") +'-'+event_test.id;
+
+      await workbook.xlsx.writeFile(`./files/${nameFile}.xlsx`);
+      res.json({
+        download:`${process.env.VUE_APP_API_URL}download?file=${nameFile}.xlsx`,
+        peserta
+      });
+    } catch (err) {
+      res.status(500).json({
+        status: 'ERROR',
+        message: err,
+        data: {}
+      });
+    }
+  }
 }

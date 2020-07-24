@@ -52,6 +52,7 @@ router.delete('/jadwal-test/:id', jadwalTest.delete);
 //route hasil
 router.get('/hasil-test/:id', hasil.list);
 router.get('/jawaban-test/:id', hasil.list_jawaban);
+router.get('/peserta-test/:id', hasil.list_peserta);
 router.post('/auth', auth.login);
 
 //download
