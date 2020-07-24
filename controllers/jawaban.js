@@ -50,7 +50,7 @@ const hitungSubtestPilgan = async (peserta, jawaban, paket_soal, jenis_soal) => 
     } else if(paket_soal=='subtest_5_ist' || paket_soal=='subtest_6_ist') {
       kunci_ist.forEach((row, index) => {
         let tmp_jawaban = jawaban[index];
-        if(tmp_jawaban) {
+        if(Array.isArray(tmp_jawaban)) {
           tmp_jawaban.sort()
           if(row==tmp_jawaban.join("")) {
             rw_peserta++;
