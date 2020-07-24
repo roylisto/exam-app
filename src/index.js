@@ -6,8 +6,17 @@ import "./assets/scss/style.scss";
 import router from "./router.js";
 import store from "./store";
 import API from './services/API.js'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-Vue.use(Buefy);
+library.add(faCheck, faTimesCircle)
+Vue.component('vue-fontawesome', FontAwesomeIcon);
+
+Vue.use(Buefy, {
+  defaultIconComponent: 'vue-fontawesome',
+  defaultIconPack: 'fas',
+});
 Vue.use(VueRouter);
 
 Vue.config.productionTip = false;
