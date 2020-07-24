@@ -15,25 +15,38 @@
           <h1>Contoh 02</h1>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="kucing" type="radio" name="radio-1" value="kucing">
+              <input id="kucing" type="radio" name="radio-1" value="kucing" v-model="soal1">
               <label for="kucing">a) Meja</label>
             </div>
             <div class="radio">
-              <input id="bajing" type="radio" name="radio-1" value="bajing">
+              <input id="bajing" type="radio" name="radio-1" value="bajing" v-model="soal1">
               <label for="bajing">b) Kursi</label>
             </div>
             <div class="radio">
-              <input id="lembu" type="radio" name="radio-1" value="lembu">
+              <input id="lembu" type="radio" name="radio-1" value="Burung" v-model="soal1">
               <label for="lembu">c) Burung</label>
             </div>
             <div class="radio">
-              <input id="anjing" type="radio" name="radio-1" value="anjing">
+              <input id="anjing" type="radio" name="radio-1" value="anjing" v-model="soal1">
               <label for="anjing">d) Lemari</label>
             </div>
             <div class="radio">
-              <input id="tempat" type="radio" name="radio-1" value="tempat">
+              <input id="tempat" type="radio" name="radio-1" value="tempat" v-model="soal1">
               <label for="tempat">d) Tempat Tidur</label>
             </div>
+            <p class="mt-3 has-text-success" v-if="rightAnswer1">
+              <b-icon
+                icon="check"
+                size="is-small">
+              </b-icon>
+              Jawaban Benar</p>
+            <p class="mt-3 has-text-success" v-else-if="soal1 == ''"></p>
+            <p class="mt-3 has-text-danger" v-else>
+              <b-icon
+                icon="times-circle"
+                size="is-small">
+              </b-icon>
+              Jawaban Salah</p>
           </div>
         </div>
 
@@ -47,25 +60,38 @@
           <p>Lawannya "Harapan" adalah.....</p>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="duduk" type="radio" name="radio-2" value="duduk">
+              <input id="duduk" type="radio" name="radio-2" value="duduk" v-model="soal2">
               <label for="duduk">a) Duduk</label>
             </div>
             <div class="radio">
-              <input id="berbaring" type="radio" name="radio-2" value="berbaring">
-              <label for="berbaring">b) Putus Asa</label>
+              <input id="berbaring" type="radio" name="radio-2" value="berbaring" v-model="soal2">
+              <label for="berbaring">b) Berbaring</label>
             </div>
             <div class="radio">
-              <input id="berdiri" type="radio" name="radio-2" value="berdiri">
+              <input id="berdiri" type="radio" name="radio-2" value="berdiri" v-model="soal2">
               <label for="berdiri">c) Berdiri</label>
             </div>
             <div class="radio">
-              <input id="berjalan" type="radio" name="radio-2" value="berjalan">
+              <input id="berjalan" type="radio" name="radio-2" value="berjalan" v-model="soal2">
               <label for="berjalan">d) Berjalan</label>
             </div>
             <div class="radio">
-              <input id="berjongkok" type="radio" name="radio-2" value="berjongkok">
+              <input id="berjongkok" type="radio" name="radio-2" value="berjongkok" v-model="soal2">
               <label for="berjongkok">e) Berjongkok</label>
             </div>
+            <p class="mt-3 has-text-success" v-if="rightAnswer2">
+              <b-icon
+                icon="check"
+                size="is-small">
+              </b-icon>
+              Jawaban Benar</p>
+            <p class="mt-3 has-text-success" v-else-if="soal2 == ''"></p>
+            <p class="mt-3 has-text-danger" v-else>
+              <b-icon
+                icon="times-circle"
+                size="is-small">
+              </b-icon>
+              Jawaban Salah</p>
           </div>
         </div>
 
@@ -92,6 +118,10 @@ import Footer from "../Footer.vue";
 
 export default {
   name: "rincian-test",
+  data: () => ({
+    soal1: '',
+    soal2: ''
+  }),
   components: {
     Navbar,
     Footer
@@ -103,6 +133,12 @@ export default {
     jenisSoal() {
       return this.$route.query.jenis;
     },
+    rightAnswer2() {
+      return this.soal2 == 'berbaring' ? true : false;
+    },
+    rightAnswer1() {
+      return this.soal1 == 'Burung' ? true : false;
+    }
   },
 };
 </script>
