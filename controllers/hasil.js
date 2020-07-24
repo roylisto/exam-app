@@ -3,6 +3,105 @@ const Excel = require('exceljs');
 const moment = require('moment');
 
 module.exports = {
+  list_jawaban: async (req, res) => {
+    try {
+      const event_test = await db.jadwalTest.findByPk(req.params.id);
+      if(event_test === null) {
+        return res.status(404).json({
+          message: 'Jadwal test not found!'
+        });
+      }
+      const peserta = await db.sequelize.query('SELECT user.nama, user.email, \
+        peserta.id as peserta_id FROM peserta JOIN user ON user.email = peserta.email \
+        WHERE peserta.jadwal_test = ?',
+        {
+          replacements: [event_test.id],
+          type: db.sequelize.QueryTypes.SELECT
+        }
+      );
+      
+      
+      // return res.send(row);
+      const workbook = new Excel.Workbook();
+
+      workbook.creator = 'Bakatku.id';
+      workbook.lastModifiedBy = 'Bakatku';
+      workbook.created = new Date();
+      workbook.modified = new Date();
+
+      const worksheet =  workbook.addWorksheet('Jawaban Ist', {
+        pageSetup:{paperSize: 9, orientation:'landscape'}
+      });
+
+      const worksheet2 =  workbook.addWorksheet('Jawaban Mii', {
+        pageSetup:{paperSize: 9, orientation:'landscape'}
+      });
+
+      worksheet.columns = [
+        { header: 'No', key: 'no', width: 5 },
+        { header: 'Nama', key: 'nama', width: 32 },
+        { header: 'Email', key: 'email', width: 32 },
+        { header: 'subtest 1 ist', key: 'subtest_1_ist', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'subtest 2 ist', key: 'subtest_2_ist', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'subtest 3 ist', key: 'subtest_3_ist', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'subtest 4 ist', key: 'subtest_4_ist', width: 50, style: { alignment: {wrapText: true}}},
+        { header: 'subtest 5 ist', key: 'subtest_5_ist', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'subtest 6 ist', key: 'subtest_6_ist', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'subtest 7 ist', key: 'subtest_7_ist', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'subtest 8 ist', key: 'subtest_8_ist', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'subtest 9 ist', key: 'subtest_9_ist', width: 30, style: { alignment: {wrapText: true}}}
+      ];
+
+      worksheet2.columns = [
+        { header: 'No', key: 'no', width: 5 },
+        { header: 'Nama', key: 'nama', width: 32 },
+        { header: 'Email', key: 'email', width: 32 },
+        { header: 'bagian 1 verb_ling', key: 'bagian_1_verb_ling', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'bagian 2 log_math', key: 'bagian_2_log_math', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'bagian 3 spat', key: 'bagian_3_spat', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'bagian 4 mus', key: 'bagian_4_mus', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'bagian 5 bod_kin', key: 'bagian_5_bod_kin', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'bagian 6 inter', key: 'bagian_6_inter', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'bagian 7 intra', key: 'bagian_7_intra', width: 30, style: { alignment: {wrapText: true}}},
+        { header: 'bagian 8 nat', key: 'bagian_8_nat', width: 30, style: { alignment: {wrapText: true}}}
+      ];
+
+      for(let i=0; i<peserta.length; i++) {
+        let row = {};
+        row.no = i+1;
+        row.nama = peserta[i].nama;
+        row.email = peserta[i].email;
+        
+        const jawabanPeserta = await db.jawaban.findAll({
+          where: {
+            peserta_id: peserta[i].peserta_id
+          }
+        }); 
+        for(let j=0; j<jawabanPeserta.length; j++) {
+          row[jawabanPeserta[j].paket_soal] = jawabanPeserta[j].getDataValue('jawaban_peserta');
+        }
+        
+        worksheet.addRow(row);
+        worksheet2.addRow(row);
+      }
+
+      let nameFile = `jawaban_${moment(event_test.waktu).format('YYYY-MM-DD')}_${event_test.instansi}`;
+      nameFile = nameFile.replace(/ /g,"_").replace(/:/g,"-") +'-'+event_test.id;
+
+      await workbook.xlsx.writeFile(`./files/${nameFile}.xlsx`);
+      res.json({
+        download:`${process.env.VUE_APP_API_URL}download?file=${nameFile}.xlsx`,
+        peserta
+      });
+    } catch (err) {
+      res.status(500).json({
+        status: 'ERROR',
+        message: err,
+        data: {}
+      });
+    }
+  },
+
   list: async (req, res) => {
     try {
       let event_test = await db.jadwalTest.findByPk(req.params.id);
