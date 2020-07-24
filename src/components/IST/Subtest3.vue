@@ -73,7 +73,6 @@
             keadaan bergerak. Maka jawaban yang benar adalah d berjalan.
             oleh karena itu jawabna yang harus dipilih adalah d. berjalan</p>
         </div>
-
         <div class="has-text-centered">
           <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
           >Mulai test</b-button>
