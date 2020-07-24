@@ -2,10 +2,7 @@
   <div>
     <Navbar />
     <div class="container mt-5">
-      <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase().replace('IST','')}} (01-20)
-      </p>
-      <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu menghafal: <span class="has-text-danger">{{convertTime}}</span></p>
+      <p class="title has-text-centered has-text-weight-light">Waktu untuk menghafalkan kata <span class="has-text-danger">{{convertTime}} menit</span></p>
       <div class="box has-text-centered" v-show="showHapalan">
         <p class="has-text-weight-semibold subtitle">Disediakan waktu 3 menit untuk menghafalkan kata-kata di bawah ini:</p>
         <ul>
