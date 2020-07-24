@@ -21,19 +21,19 @@
           <div class="radio-btn-group">
             <div class="radio">
               <input id="kucing" type="radio" name="radio-1" value="kucing" v-model="soal1">
-              <label for="kucing">Kucing</label>
+              <label for="kucing">a) Kucing</label>
             </div>
             <div class="radio">
               <input id="bajing" type="radio" name="radio-1" value="bajing" v-model="soal1">
-              <label for="bajing">Bajing</label>
+              <label for="bajing">b) Bajing</label>
             </div>
             <div class="radio">
               <input id="lembu" type="radio" name="radio-1" value="lembu" v-model="soal1">
-              <label for="lembu">Lembu</label>
+              <label for="lembu">c) Lembu</label>
             </div>
             <div class="radio">
               <input id="anjing" type="radio" name="radio-1" value="anjing" v-model="soal1">
-              <label for="anjing">Anjing</label>
+              <label for="anjing">d) Anjing</label>
             </div>
             <p class="mt-3 has-text-success" v-if="rightAnswer1">
               <b-icon
@@ -57,19 +57,19 @@
           <div class="radio-btn-group">
             <div class="radio">
               <input id="duka" type="radio" name="radio-2" value="duka" v-model="soal2">
-              <label for="duka">Duka</label>
+              <label for="duka">a) Duka</label>
             </div>
             <div class="radio">
               <input id="putusAsa" type="radio" name="radio-2" value="putusAsa" v-model="soal2">
-              <label for="putusAsa">Putus Asa</label>
+              <label for="putusAsa">b) Putus Asa</label>
             </div>
             <div class="radio">
               <input id="sengsara" type="radio" name="radio-2" value="sengsara" v-model="soal2">
-              <label for="sengsara">Sengsara</label>
+              <label for="sengsara">c) Sengsara</label>
             </div>
             <div class="radio">
               <input id="cinta" type="radio" name="radio-2" value="cinta" v-model="soal2">
-              <label for="cinta">Cinta</label>
+              <label for="cinta">d) Cinta</label>
             </div>
             <p class="mt-3 has-text-success" v-if="rightAnswer2">
               <b-icon
