@@ -30,7 +30,7 @@
 
         <div class="soal-item">
           <h1>Contoh berikutnya</h1>
-          <p>9&emsp;7&emsp; 10&emsp;8&emsp;11&emsp;9&emsp;12&emsp;? </p>
+          <p>9&emsp;7&emsp;10&emsp;8&emsp;11&emsp;9&emsp;12&emsp;? </p>
           <div class="checkbox-gbr-group">
             <div v-for="(value, index) in pilganbutton" :key="index" class="checkbox" >
               <input :id="value + '1'" type="checkbox" :name="jawaban[index]" :value="value + '1'" v-model="tmpJawaban">
@@ -78,57 +78,46 @@ export default {
     bagianSoal() {
       return this.$route.query.paket;
     },
-    jenisSoal() {
-      return this.$route.query.jenis;
-    },
   },
 };
 </script>
 
 
 <style>
-.radio-btn-group {
+.checkbox-gbr-group {
+  margin: 2rem 0;
   display: -webkit-box;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  flex-wrap:wrap;
 }
-.radio-btn-group .radio {
-  margin: 1em .25rem;
+.checkbox-gbr-group .checkbox {
+  overflow-x: auto;
+  margin: .20em .1rem;
+  line-height: 3;
 }
-
-.radio-btn-group .radio label {
+.checkbox-gbr-group .checkbox label {
+  margin-top: 2rem;
   background: #fff;
   border: 1px solid #ddd;
-  padding: .5rem 1.25rem;
+  padding: .75rem .50rem;
   border-radius: 56px;
   cursor: pointer;
   color: #444;
   -webkit-transition: box-shadow 400ms ease;
   transition: box-shadow 400ms ease;
 }
-.radio-btn-group .radio label:hover {
+.checkbox-gbr-group .checkbox label:hover {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-.radio-btn-group .radio input[type="radio"] {
+.checkbox-gbr-group .checkbox input[type="checkbox"] {
   display: none;
 }
-.radio-btn-group .radio input[type="radio"]:checked + label {
+.checkbox-gbr-group .checkbox input[type="checkbox"]:checked + label {
   background: #2196F3;
   color: #fff;
   border-color: #2196F3;
-}
-
-.show {
-  font-weight: 400;
-  color: #444;
-}
-.show span {
-  background: #f5f5f5;
-  color: #F44336;
-  border-radius: 3px;
-  padding: .25rem .5rem;
-  font-size: 1.25rem;
-  border: 1px solid #f1f1f1;
 }
 </style>

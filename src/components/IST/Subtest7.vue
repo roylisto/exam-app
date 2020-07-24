@@ -157,6 +157,9 @@ export default {
 .radio-gbr-group .radio {
   margin: .20em .25rem;
 }
+img {
+  margin-bottom: 1rem;
+}
 .radio-gbr-group .radio label {
   margin-top: 2rem;
   background: #fff;
