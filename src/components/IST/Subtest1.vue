@@ -20,21 +20,34 @@
           <p class="has-text-left">Seekor kuda memunyai kesamaan terbanyak dengan seekor....................</p>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="kucing" type="radio" name="radio-1" value="kucing">
-              <label for="kucing">Kucing</label>
+              <input id="kucing" type="radio" name="radio-1" value="kucing" v-model="soal1">
+              <label for="kucing">a) Kucing</label>
             </div>
             <div class="radio">
-              <input id="bajing" type="radio" name="radio-1" value="bajing">
-              <label for="bajing">Bajing</label>
+              <input id="bajing" type="radio" name="radio-1" value="bajing" v-model="soal1">
+              <label for="bajing">b) Bajing</label>
             </div>
             <div class="radio">
-              <input id="lembu" type="radio" name="radio-1" value="lembu">
-              <label for="lembu">Lembu</label>
+              <input id="lembu" type="radio" name="radio-1" value="lembu" v-model="soal1">
+              <label for="lembu">c) Lembu</label>
             </div>
             <div class="radio">
-              <input id="anjing" type="radio" name="radio-1" value="anjing">
-              <label for="anjing">Anjing</label>
+              <input id="anjing" type="radio" name="radio-1" value="anjing" v-model="soal1">
+              <label for="anjing">d) Anjing</label>
             </div>
+            <p class="mt-3 has-text-success" v-if="rightAnswer1">
+              <b-icon
+                icon="check"
+                size="is-small">
+              </b-icon>
+              Jawaban Benar</p>
+            <p class="mt-3 has-text-success" v-else-if="soal1 == ''"></p>
+            <p class="mt-3 has-text-danger" v-else>
+              <b-icon
+                icon="times-circle"
+                size="is-small">
+              </b-icon>
+              Jawaban Salah</p>
           </div>
         </div>
 
@@ -43,21 +56,34 @@
           <p>Lawannya "Harapan" adalah.....</p>
           <div class="radio-btn-group">
             <div class="radio">
-              <input id="duka" type="radio" name="radio-2" value="duka">
-              <label for="duka">Duka</label>
+              <input id="duka" type="radio" name="radio-2" value="duka" v-model="soal2">
+              <label for="duka">a) Duka</label>
             </div>
             <div class="radio">
-              <input id="putusAsa" type="radio" name="radio-2" value="putusAsa">
-              <label for="putusAsa">Putus Asa</label>
+              <input id="putusAsa" type="radio" name="radio-2" value="putusAsa" v-model="soal2">
+              <label for="putusAsa">b) Putus Asa</label>
             </div>
             <div class="radio">
-              <input id="sengsara" type="radio" name="radio-2" value="sengsara">
-              <label for="sengsara">Sengsara</label>
+              <input id="sengsara" type="radio" name="radio-2" value="sengsara" v-model="soal2">
+              <label for="sengsara">c) Sengsara</label>
             </div>
             <div class="radio">
-              <input id="cinta" type="radio" name="radio-2" value="cinta">
-              <label for="cinta">Cinta</label>
+              <input id="cinta" type="radio" name="radio-2" value="cinta" v-model="soal2">
+              <label for="cinta">d) Cinta</label>
             </div>
+            <p class="mt-3 has-text-success" v-if="rightAnswer2">
+              <b-icon
+                icon="check"
+                size="is-small">
+              </b-icon>
+              Jawaban Benar</p>
+            <p class="mt-3 has-text-success" v-else-if="soal2 == ''"></p>
+            <p class="mt-3 has-text-danger" v-else>
+              <b-icon
+                icon="times-circle"
+                size="is-small">
+              </b-icon>
+              Jawaban Salah</p>
           </div>
         </div>
 
@@ -78,6 +104,10 @@ import Footer from "../Footer.vue";
 
 export default {
   name: "rincian-test",
+  data: () => ({
+    soal1: '',
+    soal2: ''
+  }),
   components: {
     Navbar,
     Footer
@@ -89,6 +119,12 @@ export default {
     jenisSoal() {
       return this.$route.query.jenis;
     },
+    rightAnswer2() {
+      return this.soal2 == 'duka' ? true : false;
+    },
+    rightAnswer1() {
+      return this.soal1 == 'kucing' ? true : false;
+    }
   },
 };
 </script>
