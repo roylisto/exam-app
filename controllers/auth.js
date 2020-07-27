@@ -34,8 +34,11 @@ module.exports = {
           "email": peserta.email,
           "valid": peserta.valid,
           "expired": peserta.expired,
+          "id_test": test.id,
           "waktu": test.waktu,
-          "instansi": test.instansi
+          "expired_test": test.expired,
+          "instansi": test.instansi,
+          "keterangan": test.keterangan
         }
         //sign token for 12 hour
         jwt.sign({ data:credential }, process.env.JWT_SECRET, { algorithm:'HS256', expiresIn:'12h' }, (error, token) => {
