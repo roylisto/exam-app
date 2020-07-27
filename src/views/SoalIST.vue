@@ -57,7 +57,8 @@ export default {
     totalSoal: '',
     allSoal: [],
     akhirTes: false,
-    waktu: ''
+    waktu: '',
+    submit: false,
   }),
   components: {
     SoalContainer,
@@ -97,18 +98,22 @@ export default {
         totalWaktu = `${menit < 10 ? '0' + menit : menit}:${detik < 10 ? '0' + detik : detik}`;
       } else {
         // auto send jawaban if time reached < 1
-        var id = JSON.parse(this.$store.getters['auth/user']).id
-        var payload = {
-          jawaban_peserta: this.jawaban,
-          peserta_id: id,
-          paket_soal: this.$route.query.paket,
-          jenis_soal: this.$route.query.jenis,
-        }
+        if (!this.submit) {
+          this.submit = true;
+          if (this.jawaban.length > 0) {
+            var id = JSON.parse(this.$store.getters['auth/user']).id
+            var payload = {
+              jawaban_peserta: this.jawaban[0],
+              peserta_id: id,
+              paket_soal: this.$route.query.paket,
+              jenis_soal: this.$route.query.jenis,
+            }
 
-        this.$store.dispatch('soal/kirimJawaban', payload)
-          .catch((error) => {
-            console.error(error)
-          })
+            this.$store.dispatch('soal/kirimJawaban', payload)
+              .catch((error) => {
+                console.error(error)
+              });
+          }
 
           // reset jawaban
           this.$store.dispatch('ist/resetJawaban');
@@ -119,6 +124,7 @@ export default {
               type: 'is-warning'
           })
           this.$router.replace('rincian-test')
+        }
       }
       return totalWaktu
     },
