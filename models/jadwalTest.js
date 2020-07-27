@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     waktu: {
       type: DataTypes.DATE,
     },
-    instansi: DataTypes.STRING
+    instansi: DataTypes.STRING,
+    expired: DataTypes.DATE,
+    keterangan: DataTypes.STRING
   }, {
     tableName: 'jadwal_test',
     underscored: true,
