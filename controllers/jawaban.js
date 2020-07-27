@@ -155,12 +155,29 @@ module.exports = {
   },
   list: async (req, res) => {
     try {
+      let check_test = [];
       const all_soal = [
         "subtest_1_ist", "subtest_2_ist", "subtest_3_ist", "subtest_4_ist", "subtest_5_ist",
         "subtest_6_ist", "subtest_7_ist", "subtest_8_ist", "subtest_9_ist",
         "bagian_1_verb_ling", "bagian_2_log_math", "bagian_3_spat", "bagian_4_mus", "bagian_5_bod_kin",
         "bagian_6_inter", "bagian_7_intra", "bagian_8_nat"
       ];
+
+      if(moment().isAfter(req.decoded.data.expired_test)) {
+        for(let i=0; i<all_soal.length; i++) {
+          let jenis_soal = (i<9) ? 'ist': 'mii';
+          check_test.push({
+            jenis: jenis_soal,
+            test: all_soal[i],
+            status: 'Waktu habis'
+          });
+        }
+        return res.json({
+          status: 'OK',
+          messages: '',
+          data: check_test
+        });
+      }
 
       const jawaban_user = await jawaban.findAll({where: {
         peserta_id: req.decoded.data.id
@@ -178,8 +195,7 @@ module.exports = {
           peserta_id: req.decoded.data.id
         }
       });
-
-      let check_test = [];
+      
       let log_test_peserta = {};
       const log_jawaban_user = jawaban_user.map(row => row.paket_soal);
 

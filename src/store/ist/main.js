@@ -11,10 +11,7 @@ const soal = {
       state.soalIST.push(payload)
     },
     SIMPAN_JAWABAN(state, payload) {
-      console.log(payload)
-      console.log(typeof state.soalIST)
-      console.log(state.jawaban)
-      // state.jawaban.push(payload)
+      state.jawaban = payload
     },
     RESET_JAWABAN(state, payload) {
       state.jawaban = [];
