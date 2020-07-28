@@ -10,6 +10,7 @@ const jadwalTest = require('../controllers/jadwalTest.js');
 const hasil = require('../controllers/hasil.js');
 const authorize = require('../middlewares/authorize.js');
 const download = require('../controllers/download');
+const multer = require('../middlewares/multer.js');
 
 router.get('/time/:jenis_soal', authorize(), time.get);
 
@@ -27,6 +28,7 @@ router.get('/users/:id', user.get);
 router.post('/users', user.create);
 router.put('/users/:id', user.update);
 router.delete('/users/:id', user.delete);
+router.post('/users/excel', multer.single('user'), user.import);
 
 //peserta route
 router.get('/peserta', peserta.list);
