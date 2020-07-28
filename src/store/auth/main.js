@@ -36,7 +36,7 @@ const user = {
           commit('SET_TOKEN', token);
           commit('SET_USER', user);
 
-          return Promise.resolve(response)
+          return Promise.resolve(user)
         })
         .catch((error) => {
           return Promise.reject(error)

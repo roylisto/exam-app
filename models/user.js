@@ -22,8 +22,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       type: DataTypes.INTEGER
     },
+    jenis_kelamin: {      
+      allowNull: true,
+      type: DataTypes.STRING
+    },
     kelompok: {      
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.STRING
     },
     instansi: {      

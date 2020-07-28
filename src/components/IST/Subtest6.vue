@@ -48,7 +48,7 @@
         </div>
 
          <div class="has-text-centered">
-          <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
+          <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'ist'}}" style="margin-top: 2rem"
           >Mulai test</b-button>
         </div>
       </div>
