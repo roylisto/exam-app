@@ -25,8 +25,9 @@ module.exports = {
             email: row.values[3],
             no_hp: row.values[4],
             tanggal_lahir: moment(row.values[5]).format('YYYY-MM-DD'),
-            kelompok: row.values[6],
-            instansi: row.values[7]
+            jenis_kelamin: row.values[6],
+            kelompok: row.values[7],
+            instansi: row.values[8]
           };
           
           user.create(data).then(calon_peserta => {            
@@ -108,6 +109,7 @@ module.exports = {
       email: email,
       no_hp: no_hp,
       tanggal_lahir: tanggal_lahir,
+      jenis_kelamin: jenis_kelamin,
       kelompok: kelompok,
       instansi: instansi
     }).then( users => {
@@ -132,6 +134,7 @@ module.exports = {
       email: email,
       no_hp: no_hp,
       tanggal_lahir: tanggal_lahir,
+      jenis_kelamin: jenis_kelamin,
       kelompok: kelompok,
       instansi: instansi
     }, {
@@ -148,6 +151,7 @@ module.exports = {
           email: email,
           no_hp: no_hp,
           tanggal_lahir: tanggal_lahir,
+          jenis_kelamin: jenis_kelamin,
           kelompok: kelompok,
           instansi: instansi
         }
