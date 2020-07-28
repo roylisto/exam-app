@@ -114,14 +114,16 @@ module.exports = {
         });
       }
 
-      let peserta = await db.peserta.findAll({
-        where: {
-          jadwal_test: req.params.id
-        },
-        // include: db.scorePeserta,
-        raw: true
-      });
-
+      let peserta = await db.sequelize.query('SELECT user.nama, user.email, \
+        peserta.id as id FROM peserta JOIN user ON user.email = peserta.email \
+        WHERE peserta.jadwal_test = ?',
+        {
+          replacements: [event_test.id],
+          type: db.sequelize.QueryTypes.SELECT,
+          raw: true
+        }
+      );
+      
       //init workbook
       const workbook = new Excel.Workbook();
 
@@ -140,6 +142,7 @@ module.exports = {
 
       worksheet.columns = [
         { header: 'No', key: 'no', width: 5 },
+        { header: 'Nama', key: 'nama', width: 32 },
         { header: 'Email', key: 'email', width: 32 },
         { header: 'SE_rw', key: 'SE_rw', width: 8},
         { header: 'SE_sw', key: 'SE_sw', width: 8},
@@ -174,6 +177,7 @@ module.exports = {
 
       worksheet2.columns = [
         { header: 'No', key: 'no', width: 5 },
+        { header: 'Nama', key: 'nama', width: 32 },
         { header: 'Email', key: 'email', width: 32 },
         { header: 'M1', key: 'M1', width: 8},
         { header: 'M2', key: 'M2', width: 8},
@@ -192,7 +196,9 @@ module.exports = {
         row.no = i+1;
         row2.no = i+1;
         row.email = peserta[i].email;
+        row.nama = peserta[i].nama;
         row2.email = peserta[i].email;
+        row2.nama = peserta[i].nama;
         peserta[i].scorePeserta = await db.scorePeserta.findAll({
           where: {
             peserta_id: peserta[i].id
