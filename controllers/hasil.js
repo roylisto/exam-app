@@ -114,14 +114,16 @@ module.exports = {
         });
       }
 
-      let peserta = await db.peserta.findAll({
-        where: {
-          jadwal_test: req.params.id
-        },
-        // include: db.scorePeserta,
-        raw: true
-      });
-
+      let peserta = await db.sequelize.query('SELECT user.nama, user.email, \
+        peserta.id as id FROM peserta JOIN user ON user.email = peserta.email \
+        WHERE peserta.jadwal_test = ?',
+        {
+          replacements: [event_test.id],
+          type: db.sequelize.QueryTypes.SELECT,
+          raw: true
+        }
+      );
+      
       //init workbook
       const workbook = new Excel.Workbook();
 
@@ -140,6 +142,7 @@ module.exports = {
 
       worksheet.columns = [
         { header: 'No', key: 'no', width: 5 },
+        { header: 'Nama', key: 'nama', width: 32 },
         { header: 'Email', key: 'email', width: 32 },
         { header: 'SE_rw', key: 'SE_rw', width: 8},
         { header: 'SE_sw', key: 'SE_sw', width: 8},
@@ -169,10 +172,12 @@ module.exports = {
         { header: 'ME_sw', key: 'ME_sw', width: 8},
         { header: 'ME_kategori', key: 'ME_kategori', width: 10},
         { header: 'IQ', key: 'IQ', width: 8},
+        { header: 'IQ_kategori', key: 'IQ_kategori', width: 15},
       ];
 
       worksheet2.columns = [
         { header: 'No', key: 'no', width: 5 },
+        { header: 'Nama', key: 'nama', width: 32 },
         { header: 'Email', key: 'email', width: 32 },
         { header: 'M1', key: 'M1', width: 8},
         { header: 'M2', key: 'M2', width: 8},
@@ -191,7 +196,9 @@ module.exports = {
         row.no = i+1;
         row2.no = i+1;
         row.email = peserta[i].email;
+        row.nama = peserta[i].nama;
         row2.email = peserta[i].email;
+        row2.nama = peserta[i].nama;
         peserta[i].scorePeserta = await db.scorePeserta.findAll({
           where: {
             peserta_id: peserta[i].id
@@ -294,6 +301,24 @@ module.exports = {
         peserta[i].iq = await db.scorePeserta.getIQ(peserta[i].id, umur);
         row.IQ = peserta[i].iq;
 
+        row.IQ_kategori = 'Mentally Defective'; 
+
+        if(row.IQ > 65 && row.IQ <= 79) {
+          row.IQ_kategori = 'Borderline Defective';
+        } else if(row.IQ > 79 && row.IQ <= 90) {
+          row.IQ_kategori = 'Low Average';
+        } else if(row.IQ > 90 && row.IQ <= 110) {
+          row.IQ_kategori = 'Average';
+        } else if(row.IQ > 110 && row.IQ <= 119) {
+          row.IQ_kategori = 'High Average';
+        } else if(row.IQ > 119 && row.IQ <= 127) {
+          row.IQ_kategori = 'Superior';
+        } else if(row.IQ > 127 && row.IQ <= 139) {
+          row.IQ_kategori = 'Very Superior';
+        } else if(row.IQ > 139) {
+          row.IQ_kategori = 'Genius';
+        }
+
         const check_code = _.difference(kode_soal, peserta_soal);
 
         for(let l=0; l<check_code.length; l++) {
@@ -394,8 +419,8 @@ module.exports = {
         row.tanggal_lahir = peserta[i].tanggal_lahir;
         row.email = peserta[i].email;
         row.password = peserta[i].password;
-        row.valid = peserta[i].valid;
-        row.expired = peserta[i].expired;
+        row.valid = moment(peserta[i].valid).format('YYYY-MM-DD HH:mm');
+        row.expired = moment(peserta[i].expired).format('YYYY-MM-DD HH:mm');
 
         worksheet.addRow(row);
       }
