@@ -7,10 +7,10 @@ import router from "./router.js";
 import store from "./store";
 import API from './services/API.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faTimesCircle, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faCheck, faTimesCircle)
+library.add(faCheck, faTimesCircle, faEye, faEyeSlash)
 Vue.component('vue-fontawesome', FontAwesomeIcon);
 
 Vue.use(Buefy, {

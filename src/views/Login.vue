@@ -51,7 +51,8 @@ export default {
   name: "login",
   data: () => ({
     email: '',
-    password: ''
+    password: '',
+    user: ''
   }),
   components: {
     Navbar,
@@ -59,6 +60,13 @@ export default {
   },
   mounted() {
     localStorage.clear();
+  },
+  beforeDestroy() {
+    this.$buefy.dialog.alert({
+        title: 'Selamat datang!',
+        message: `Hai ${this.user.nama}, selamat datang di portal Tes Minat Bakat by Bakatku.id. Dalam portal ini kamu akan dihadapkan pada serangkaian tes untuk mengetahui Minat dan Bakat kamu. Oleh karena itu, diharapkan untuk mengerjakan tes ini sebaik mungkin sesuai dengan kemampuan kamu ya. Kejujuranmu sangat diperlukan dalam mengerjakan tes yang ada agar hasil yang keluar benar2 sesuai dengan diri kamu. Perhatikan instruksi pengerjaan tes yang tersedia. Selamat mengerjakan 😊`,
+        confirmText: 'Terima kasih!'
+    })
   },
   methods: {
     login() {
@@ -73,6 +81,7 @@ export default {
       this.$store.dispatch('ist/resetJawaban');
       this.$store.dispatch('auth/login', payload)
         .then((response) => {
+          this.user = JSON.parse(response)
           this.$buefy.toast.open({
               duration: 5000,
               message: `Berhasil login.`,
