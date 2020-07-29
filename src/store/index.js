@@ -13,8 +13,8 @@ Vue.use(Vuex);
 
 const logger = createLogger({
   collapsed: false,
-  logActions: true,
-  logMutations: true,
+  logActions: process.env.VUE_APP_NODE_ENV === 'development' ? true : false,
+  logMutations: process.env.VUE_APP_NODE_ENV === 'development' ? true : false,
   logger: console,
 });
 

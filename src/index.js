@@ -20,9 +20,6 @@ Vue.use(Buefy, {
 Vue.use(VueRouter);
 
 Vue.config.productionTip = false;
-Vue.config.devtools = process.env.VUE_APP_NODE_ENV === 'development' ? true : false;
-Vue.config.debug = process.env.VUE_APP_NODE_ENV === 'development' ? true : false;
-Vue.config.silent = process.env.VUE_APP_NODE_ENV === 'development' ? false : true;
 Vue.prototype.$http = API;
 
 API.interceptors.request.use((config) => {
