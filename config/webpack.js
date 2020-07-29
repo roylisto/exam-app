@@ -107,6 +107,7 @@ const options = {
         minifyURLs: false,
         removeComments: true,
       },
+      favicon: 'src/assets/favicon.png'
     }),
     new LiveReloadPlugin({
       port: 0,
