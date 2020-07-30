@@ -15,14 +15,13 @@
                     <b-input type="email"
                       v-model="email"
                       placeholder="Masukkan email Anda"
-                      v-on:keyup.enter="login"
                       ></b-input>
                   </b-field>
                   <b-field label="Password">
                     <b-input type="password"
                       v-model="password"
                       placeholder="Masukkan password Anda"
-                      v-on:keyup.enter="login"
+                      @keyup.native.enter="login()"
                       password-reveal></b-input>
                   </b-field>
                   <div class="field">
