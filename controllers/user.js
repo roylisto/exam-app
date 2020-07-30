@@ -103,7 +103,7 @@ module.exports = {
   },
 
   create: (req, res) => {
-    let { nama, email, no_hp, tanggal_lahir, kelompok, instansi } = req.body
+    let { nama, email, no_hp, tanggal_lahir, kelompok, instansi, jenis_kelamin } = req.body
     user.create({
       nama: nama,
       email: email,
@@ -128,7 +128,7 @@ module.exports = {
   },
 
   update: (req, res) => {
-    let { nama, email, no_hp, tanggal_lahir, kelompok, instansi } = req.body
+    let { nama, email, no_hp, tanggal_lahir, kelompok, instansi, jenis_kelamin } = req.body
     user.update({
       nama: nama,
       email: email,
