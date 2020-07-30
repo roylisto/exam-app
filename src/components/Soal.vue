@@ -115,11 +115,18 @@ export default {
     isLast() {
       return this.nomor === this.soal.length
     },
+    bindJawabanTmp() {
+      return this.tmpJawaban = this.jawabanTersimpan
+    },
+    bindJawaban() {
+      return this.jawaban = this.jawabanTersimpan
+    },
     ...mapGetters("ist", ["jawabanTersimpan"]),
   },
   created() {
     this.jawabanTersimpan;
     this.bindJawaban;
+    this.bindJawabamTmp;
     this.openLoading()
   },
   methods: {

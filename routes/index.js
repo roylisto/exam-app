@@ -11,6 +11,7 @@ const hasil = require('../controllers/hasil.js');
 const authorize = require('../middlewares/authorize.js');
 const download = require('../controllers/download');
 const multer = require('../middlewares/multer.js');
+const file = require('../controllers/file');
 
 router.get('/time/:jenis_soal', authorize(), time.get);
 
@@ -59,5 +60,9 @@ router.post('/auth', auth.login);
 
 //download
 router.get('/download', download.get);
+
+//delete files
+router.delete('/files', file.hasil);
+router.delete('/uploads', file.uploads);
 
 module.exports = router;

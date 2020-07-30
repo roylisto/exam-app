@@ -1,5 +1,5 @@
 {
-  "name": "vue-express",
+  "name": "exam-app",
   "version": "1.0.0",
   "description": "",
   "main": "./bin/www",
@@ -7,11 +7,12 @@
     "node": "10.x"
   },
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
     "build": "NODE_ENV=production webpack --progress --hide-modules --config ./config/webpack.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "ucpc",
+  "author": "educasia",
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
