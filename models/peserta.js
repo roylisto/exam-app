@@ -7,7 +7,10 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
     },
     email: {        
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      set(value) {
+        this.setDataValue('email', value.toLowerCase())
+      }
     },
     password: {
       type: DataTypes.STRING,

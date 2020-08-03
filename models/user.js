@@ -12,7 +12,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     email: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      set(value) {
+        this.setDataValue('email', value.toLowerCase())
+      }
     },
     no_hp: {
       allowNull: false,
