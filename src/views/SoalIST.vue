@@ -11,15 +11,17 @@
               <b-button disabled type="is-text">{{`Nomor ${nomor + 1} dari ${totalSoal} soal`}}</b-button>
             </div>
           </div>
-          <div class="is-mobile has-text-centered">
-            <soal-container
-              :total="totalSoal"
-              :soal="soal[nomor]"
-              v-on:jawaban="handleJawaban"
-              :nomor="nomor + 1"
-              :dataJawaban="dataJawaban"
-            ></soal-container>
-          </div>
+            <div class="is-mobile has-text-centered">
+              <transition name="fade">
+                <soal-container
+                  :total="totalSoal"
+                  :soal="soal[nomor]"
+                  v-on:jawaban="handleJawaban"
+                  :nomor="nomor + 1"
+                  :dataJawaban="dataJawaban"
+                ></soal-container>
+              </transition>
+            </div>
         </div>
       </div>
     </template>
@@ -46,7 +48,7 @@
 import SoalContainer from '../components/Soal.vue';
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'soal',
@@ -73,7 +75,7 @@ export default {
   watch: {
     'interval': function (newValue, oldValue) {
       this.convertTime
-    }
+    },
   },
   beforeDestroy () {
     clearInterval(this.$options.interval);
@@ -211,3 +213,15 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+   .fade-enter-active{
+        transition: opacity 1.5s;
+    }
+    .fade-leave-active {
+        opacity: 0;
+    }
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+    }
+</style>
