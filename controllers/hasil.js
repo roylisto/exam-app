@@ -405,11 +405,14 @@ module.exports = {
       worksheet.columns = [
         { header: 'No', key: 'no', width: 5 },
         { header: 'Nama', key: 'nama', width: 32 },
+        { header: 'Jenis Kelamin', key: 'jenis_kelamin', width: 15 },
         { header: 'Tanggal lahir', key: 'tanggal_lahir', width: 15 },
         { header: 'Email', key: 'email', width: 32 },
         { header: 'Password', key: 'password', width: 15 },
         { header: 'Valid', key: 'valid', width: 15 },
         { header: 'Expired', key: 'expired', width: 15 },
+        { header: 'Kelompok', key: 'kelompok', width: 15 },
+        { header: 'Instansi', key: 'instansi', width: 15 },
       ];
 
       for(let i=0; i<peserta.length; i++) {
@@ -421,6 +424,13 @@ module.exports = {
         row.password = peserta[i].password;
         row.valid = moment(peserta[i].valid).format('YYYY-MM-DD HH:mm');
         row.expired = moment(peserta[i].expired).format('YYYY-MM-DD HH:mm');
+
+        const account = await db.user.findOne({ where: {email: peserta[i].email} });
+        if(account) {
+          row.jenis_kelamin = account.jenis_kelamin;
+          row.kelompok = account.kelompok;
+          row.instansi = account.instansi;
+        }
 
         worksheet.addRow(row);
       }
