@@ -18,7 +18,6 @@
                   :soal="soal[nomor]"
                   v-on:jawaban="handleJawaban"
                   :nomor="nomor + 1"
-                  :dataJawaban="dataJawaban"
                 ></soal-container>
               </transition>
             </div>
@@ -102,10 +101,10 @@ export default {
         // auto send jawaban if time reached < 1
         if (!this.submit) {
           this.submit = true;
-          if (this.jawaban.length > 0) {
+          if (this.jawabanTersimpan.length > 0) {
             var id = JSON.parse(this.$store.getters['auth/user']).id
             var payload = {
-              jawaban_peserta: this.jawaban[0],
+              jawaban_peserta: this.jawabanTersimpan,
               peserta_id: id,
               paket_soal: this.$route.query.paket,
               jenis_soal: this.$route.query.jenis,
@@ -130,7 +129,7 @@ export default {
       }
       return totalWaktu
     },
-    dataJawaban() {
+    jawabanTersimpan() {
       return this.$store.state.ist.jawaban
     }
   },

@@ -95,7 +95,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'soal-ist',
-  props: ['soal', 'nomor', 'total', 'dataJawaban'],
+  props: ['soal', 'nomor', 'total'],
   data: () => ({
     pilganbutton: [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 0
