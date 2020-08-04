@@ -42,7 +42,7 @@ const routes = new Router({
     {
       path: '/hafal-soal',
       name: 'Hafal Soal',
-      component: () => import(/* webpackChunkName: "hafal-soal" */ '../src/components/HafalSoal.vue'),
+      component: () => import(/* webpackChunkName: "hafal-soal" */ '../src/components/IST/HafalSoal.vue'),
       meta: {
         requiresAuth: true
       }
@@ -58,7 +58,7 @@ const routes = new Router({
     {
       path: '/info-soal',
       name: 'Info Soal',
-      component: () => import(/* webpackChunkName: "soal" */ '../src/components/InfoSubtest9.vue'),
+      component: () => import(/* webpackChunkName: "soal" */ '../src/components/IST/InfoSubtest9.vue'),
       meta: {
         requiresAuth: true
       }
