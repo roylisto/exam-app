@@ -20,8 +20,8 @@ const user = {
     }
   },
   actions: {
-    login({commit}, payload) {
-      return Auth.login(payload)
+    async login({commit}, payload) {
+      return await Auth.login(payload)
         .then((response) => {
           var token = response.data.data.token
 
