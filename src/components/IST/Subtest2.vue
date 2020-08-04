@@ -52,12 +52,11 @@
 
         <div class="container">
           <p class="has-text-weight-normal">a,b,d, dan e adalah peralatan perabot rumah (meubel) <br />c burung bukan perabot rumah atau tidak memiliki kesamaan keempat kata itu
-          <br/> oleh karena itu, jawaban yang harus dipilih adalah c</p>
+          <br/> Oleh karena itu, jawaban yang harus dipilih adalah c</p>
         </div>
 
         <div class="soal-item container">
           <h1>Contoh berikutnya</h1>
-          <p>Lawannya "Harapan" adalah.....</p>
           <div class="radio-btn-group">
             <div class="radio">
               <input id="duduk" type="radio" name="radio-2" value="duduk" v-model="soal2">
@@ -97,8 +96,8 @@
 
         <div class="container">
           <p class="has-text-weight-normal">Pada a,b,c dan e orang berada dalam keadaan tidak bergerak, sedangkan d orang dalam
-            keadaan bergerak. Maka jawaban yang benar adalah d berjalan.
-            oleh karena itu jawabna yang harus dipilih adalah d. berjalan</p>
+            keadaan bergerak. <br /> Maka jawaban yang benar adalah d berjalan. <br />
+            Oleh karena itu jawabna yang harus dipilih adalah d. berjalan</p>
         </div>
 
         <div class="has-text-centered">

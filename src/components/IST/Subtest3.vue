@@ -3,20 +3,20 @@
     <Navbar />
     <div class="container mt-5">
       <p class="title has-text-centered has-text-weight-light">
-        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase().replace('IST','')}} (41-61)
+        Petunjuk Soal {{bagianSoal.replace(/_/g, ' ').toUpperCase().replace('IST','')}} (41-60)
       </p>
       <div class="box">
         <div class="container">
-          <p class="has-text-weight-normal">Ditentukan tiga kata antara kata pertama dan kata kedua terdapat suatu hubungan yang tertentu. <br/>
-          antara kata ketiga dan salah satu kata diantara lima kata pilihan harus pula terdapat hubungan yang sama itu.  Carilah kata itu </p>
+          <p class="has-text-weight-normal">Ditentukan tiga kata <br>Antara kata pertama dan kata kedua terdapat suatu hubungan yang tertentu. <br/>
+          Antara kata ketiga dan salah satu kata diantara lima kata pilihan harus pula terdapat hubungan yang sama itu. <br> Carilah kata itu </p>
         </div>
         <div class="soal-item container">
-          <h1>Contoh 01</h1>
+          <h1>Contoh 03</h1>
           <p>Hutan : pohon = tembok : ?</p>
           <div class="radio-btn-group">
             <div class="radio">
               <input id="batuBara" type="radio" name="radio-1" value="batuBara" v-model="soal1">
-              <label for="batuBara">a) Batu Bara</label>
+              <label for="batuBara">a) Batu Bata</label>
             </div>
             <div class="radio">
               <input id="bajing" type="radio" name="radio-1" value="bajing" v-model="soal1">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="container">
-          <p class="has-text-weight-normal">Hubungan antara hutan dan pohon ialah bahwa hutan terdiri atas pohon-pohon, maka hubungan antara tembok dan salah satu kata pilihan ialah bahwa tembok terdiri atas batu-batu bata. Oleh karena itu pilihlah jawaban a) batu bata </p>
+          <p class="has-text-weight-normal">Hubungan antara hutan dan pohon ialah bahwa hutan terdiri atas pohon-pohon, maka hubungan antara tembok dan salah satu kata pilihan ialah bahwa tembok terdiri atas batu-batu bata. <br /> Oleh karena itu pilihlah jawaban a) batu bata </p>
         </div>
 
         <div class="soal-item container">
@@ -95,9 +95,7 @@
         </div>
 
         <div class="container">
-          <p class="has-text-weight-normal">Pada a,b,c dan e orang berada dalam keadaan tidak bergerak, sedangkan d orang dalam
-            keadaan bergerak. Maka jawaban yang benar adalah d berjalan.
-            oleh karena itu jawabna yang harus dipilih adalah d. berjalan</p>
+          <p class="has-text-weight-normal">Gelap ialah lawannya dari terang, maka untuk basah lawannya ialah kering <br> Maka Jawabannya ialah: E) Kering <br> Oleh karena itu huruf e seharusnya yang dicoret.</p>
         </div>
         <div class="has-text-centered">
           <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
