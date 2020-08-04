@@ -95,7 +95,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'soal-ist',
-  props: ['soal', 'nomor', 'total', 'dataJawaban'],
+  props: ['soal', 'nomor', 'total'],
   data: () => ({
     pilganbutton: [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 0
@@ -115,18 +115,20 @@ export default {
     isLast() {
       return this.nomor === this.soal.length
     },
-    bindJawabanTmp() {
-      return this.tmpJawaban = this.jawabanTersimpan
-    },
     bindJawaban() {
       return this.jawaban = this.jawabanTersimpan
+    },
+    bindJawabanTmp() {
+      if (this.jawabanTersimpan.length > 0) {
+        this.tmpJawaban = this.jawabanTersimpan[this.nomor - 1];
+      }
     },
     ...mapGetters("ist", ["jawabanTersimpan"]),
   },
   created() {
     this.jawabanTersimpan;
     this.bindJawaban;
-    this.bindJawabamTmp;
+    this.bindJawabanTmp;
     this.openLoading()
   },
   methods: {

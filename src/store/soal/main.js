@@ -18,8 +18,8 @@ const tes = {
     }
   },
   actions: {
-    getRincianTes({commit}, payload) {
-      return Soal.getRincianTes(payload)
+    async getRincianTes({commit}, payload) {
+      return await Soal.getRincianTes(payload)
         .then((response) => {
           commit('SET_TES', response);
           return response;
@@ -28,12 +28,12 @@ const tes = {
           return Promise.reject(error)
         })
     },
-    kirimJawaban({commit}, payload) {
+    async kirimJawaban({commit}, payload) {
       // validate jawaban not more than 20 items
       if (payload.jawaban_peserta.length > 20) {
         payload.jawaban_peserta.slice(0, 20)
       }
-      return Soal.kirimJawaban(payload)
+      return await Soal.kirimJawaban(payload)
         .then((response) => {
           return response
         })

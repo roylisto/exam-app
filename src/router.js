@@ -1,12 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from "../src/views/Home.vue";
-import Login from "../src/views/Login.vue";
-import RincianTest from "../src/views/RincianTest.vue";
-import PetunjukSoal from "../src/views/PetunjukSoal.vue";
-import HafalSoal from "../src/components/IST/HafalSoal.vue";
-import InfoSoal from "../src/components/IST/InfoSubtest9.vue";
-import Soal from "../src/views/Soal.vue";
 
 Vue.use(Router)
 
@@ -27,12 +21,12 @@ const routes = new Router({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: () => import(/* webpackChunkName: "login" */ '../src/views/Login.vue'),
     },
     {
       path: '/rincian-test',
       name: 'Rincian Test',
-      component: RincianTest,
+      component: () => import(/* webpackChunkName: "rincian-test" */ '../src/views/RincianTest.vue'),
       meta: {
         requiresAuth: true
       }
@@ -40,7 +34,7 @@ const routes = new Router({
     {
       path: '/petunjuk-soal',
       name: 'Petunjuk Soal',
-      component: PetunjukSoal,
+      component: () => import(/* webpackChunkName: "petunjuk-soal" */ '../src/views/PetunjukSoal.vue'),
       meta: {
         requiresAuth: true
       }
@@ -48,7 +42,7 @@ const routes = new Router({
     {
       path: '/hafal-soal',
       name: 'Hafal Soal',
-      component: HafalSoal,
+      component: () => import(/* webpackChunkName: "hafal-soal" */ '../src/components/IST/HafalSoal.vue'),
       meta: {
         requiresAuth: true
       }
@@ -56,7 +50,7 @@ const routes = new Router({
     {
       path: '/soal',
       name: 'Soal',
-      component: Soal,
+      component: () => import(/* webpackChunkName: "soal" */ '../src/views/Soal.vue'),
       meta: {
         requiresAuth: true
       }
@@ -64,7 +58,7 @@ const routes = new Router({
     {
       path: '/info-soal',
       name: 'Info Soal',
-      component: InfoSoal,
+      component: () => import(/* webpackChunkName: "soal" */ '../src/components/IST/InfoSubtest9.vue'),
       meta: {
         requiresAuth: true
       }
