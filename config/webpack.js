@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
+const fs = require('fs');
 
 const env = process.env.NODE_ENV;
 const dir = path.resolve(__dirname, '..');
@@ -107,7 +108,7 @@ const options = {
         minifyURLs: false,
         removeComments: true,
       },
-      favicon: 'src/assets/favicon.png'
+      favicon: fs.existsSync('src/assets/favicon/favicon_client.png') === true ? 'src/assets/favicon/favicon_client.png' : 'src/assets/favicon/favicon.png',
     }),
     new LiveReloadPlugin({
       port: 0,
@@ -117,6 +118,7 @@ const options = {
       'process.env.VUE_APP_API_URL': JSON.stringify(process.env.VUE_APP_API_URL),
       'process.env.VUE_APP_IMAGE_URL': JSON.stringify(process.env.VUE_APP_IMAGE_URL),
       'process.env.VUE_APP_NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.VUE_APP_TITLE': JSON.stringify(process.env.VUE_APP_TITLE),
     }),
   ],
   resolve: {

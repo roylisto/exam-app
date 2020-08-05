@@ -17,10 +17,16 @@ const states = mapState({
 
 export default {
   name: "app",
+  data : () => ({
+    title: process.env.VUE_APP_TITLE
+  }),
   computed: { ...states },
   components: {
     Footer
-  }
+  },
+  created() {
+    document.title = this.title
+  },
 };
 </script>
 
