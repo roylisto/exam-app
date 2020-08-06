@@ -5,7 +5,7 @@
       <div class="hero-body has-text-centered">
         <div class="container">
           <h1 class="title has-text-primary">
-            Ketahui Minat dan Bakatmu disini !
+            Ketahui Minat dan Bakatmu Disini!
           </h1>
           <p>
             Ikuti tes ini dan dapatkan gambaran tentang diri Anda secara akurat
