@@ -4,8 +4,8 @@
       <template slot="brand">
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
           <img
-            @error="onImageLoadFailure($e)"
-            src="@/assets/logo/logo_client.png"
+            @error="logoDefault"
+            :src="'/images/logo_client.png'"
             alt="Logo"
           >
         </b-navbar-item>
@@ -42,6 +42,7 @@
 import { mapGetters } from 'vuex';
 import moment from 'moment';
 import 'moment/locale/id';
+import logoDefault from "@/assets/logo/logo.png"
 
 export default {
   name: 'login',
@@ -56,11 +57,11 @@ export default {
     userInfo() {
       var user = JSON.parse(this.user)
       return user
-    }
+    },
   },
   methods: {
-    onImageLoadFailure(event) {
-      event.target.src = './src/assets/favicon/favicon_client.png'
+    logoDefault(event) {
+      event.target.src = "/images/logo.png"
     },
     moment: function (date) {
       return moment(date);

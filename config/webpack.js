@@ -49,17 +49,6 @@ const options = {
         }
       },
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              esModule: false,
-            },
-          },
-        ],
-      },
-      {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
