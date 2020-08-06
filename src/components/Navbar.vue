@@ -3,9 +3,11 @@
     <b-navbar spaced fixed-top>
       <template slot="brand">
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <a class="button button-outline">
-            bakatku.id
-          </a>
+          <img
+            @error="onImageLoadFailure($e)"
+            src="@/assets/logo/logo_client.png"
+            alt="Logo"
+          >
         </b-navbar-item>
       </template>
 
@@ -57,6 +59,9 @@ export default {
     }
   },
   methods: {
+    onImageLoadFailure(event) {
+      event.target.src = './src/assets/favicon/favicon_client.png'
+    },
     moment: function (date) {
       return moment(date);
     },
