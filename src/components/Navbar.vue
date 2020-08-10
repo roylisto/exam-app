@@ -4,8 +4,7 @@
       <template slot="brand">
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
           <img
-            @error="logoDefault"
-            :src="'/images/logo_client.png'"
+            src="@/assets/logo/logo.png"
             alt="Logo"
           >
         </b-navbar-item>
@@ -42,7 +41,6 @@
 import { mapGetters } from 'vuex';
 import moment from 'moment';
 import 'moment/locale/id';
-import logoDefault from "@/assets/logo/logo.png"
 
 export default {
   name: 'login',
@@ -60,9 +58,6 @@ export default {
     },
   },
   methods: {
-    logoDefault(event) {
-      event.target.src = "/images/logo.png"
-    },
     moment: function (date) {
       return moment(date);
     },

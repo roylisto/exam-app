@@ -127,7 +127,7 @@ const options = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve('src')
+      '@': path.resolve(__dirname, '../src')
     }
   }
 };
