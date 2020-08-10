@@ -6,6 +6,8 @@
           <img
             src="@/assets/logo/logo.png"
             alt="Logo"
+            height="200"
+            width="105"
           >
         </b-navbar-item>
       </template>
