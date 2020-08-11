@@ -4,7 +4,7 @@
       <template slot="brand">
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
           <img
-            src="@/assets/logo/logo.png"
+            :src="logo"
             alt="Logo"
             height="200"
             width="105"
@@ -46,6 +46,9 @@ import 'moment/locale/id';
 
 export default {
   name: 'login',
+  data: () => ({
+    logo: process.env.VUE_APP_LOGO_URL
+  }),
   mounted() {
     this.userInfo
   },

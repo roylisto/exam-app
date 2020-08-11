@@ -122,6 +122,8 @@ const options = {
       'process.env.VUE_APP_IMAGE_URL': JSON.stringify(process.env.VUE_APP_IMAGE_URL),
       'process.env.VUE_APP_NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.VUE_APP_TITLE': JSON.stringify(process.env.VUE_APP_TITLE),
+      'process.env.VUE_APP_LOGO_URL': JSON.stringify(process.env.VUE_APP_LOGO_URL),
+      'process.env.VUE_APP_FAVICON_URL': JSON.stringify(process.env.VUE_APP_FAVICON_URL),
     }),
   ],
   resolve: {
