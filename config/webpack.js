@@ -101,6 +101,7 @@ const options = {
     }),
     new HtmlWebpackPlugin({
       title: process.env.VUE_APP_TITLE === '' ? 'educasia.id' : process.env.VUE_APP_TITLE,
+      favicon: 'src/assets/favicon/favicon.png',
       inject: true,
       template: `${dir}/index.html`,
       minify: {
