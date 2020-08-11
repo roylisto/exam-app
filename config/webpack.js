@@ -9,6 +9,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
+const fs = require('fs');
+const { HotModuleReplacementPlugin } = require('webpack');
 
 const env = process.env.NODE_ENV;
 const dir = path.resolve(__dirname, '..');
@@ -59,6 +61,7 @@ const options = {
         loader: 'file-loader',
         options: {
           name: 'images/[name].[ext]',
+          esModule: false
         },
       },
       {
@@ -97,6 +100,8 @@ const options = {
       filename: env === 'development' ? 'css/[name].css' : 'css/[name].[hash:8].css',
     }),
     new HtmlWebpackPlugin({
+      title: process.env.VUE_APP_TITLE === '' ? 'educasia.id' : process.env.VUE_APP_TITLE,
+      favicon: 'src/assets/favicon/favicon.png',
       inject: true,
       template: `${dir}/index.html`,
       minify: {
@@ -107,7 +112,6 @@ const options = {
         minifyURLs: false,
         removeComments: true,
       },
-      favicon: 'src/assets/favicon.png'
     }),
     new LiveReloadPlugin({
       port: 0,
@@ -117,11 +121,15 @@ const options = {
       'process.env.VUE_APP_API_URL': JSON.stringify(process.env.VUE_APP_API_URL),
       'process.env.VUE_APP_IMAGE_URL': JSON.stringify(process.env.VUE_APP_IMAGE_URL),
       'process.env.VUE_APP_NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.VUE_APP_TITLE': JSON.stringify(process.env.VUE_APP_TITLE),
+      'process.env.VUE_APP_LOGO_URL': JSON.stringify(process.env.VUE_APP_LOGO_URL),
+      'process.env.VUE_APP_FAVICON_URL': JSON.stringify(process.env.VUE_APP_FAVICON_URL),
     }),
   ],
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
+      '@': path.resolve(__dirname, '../src')
     }
   }
 };

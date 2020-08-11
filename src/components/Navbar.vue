@@ -3,9 +3,12 @@
     <b-navbar spaced fixed-top>
       <template slot="brand">
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <a class="button button-outline">
-            bakatku.id
-          </a>
+          <img
+            :src="logo"
+            alt="Logo"
+            height="200"
+            width="105"
+          >
         </b-navbar-item>
       </template>
 
@@ -43,6 +46,9 @@ import 'moment/locale/id';
 
 export default {
   name: 'login',
+  data: () => ({
+    logo: process.env.VUE_APP_LOGO_URL
+  }),
   mounted() {
     this.userInfo
   },
@@ -54,7 +60,7 @@ export default {
     userInfo() {
       var user = JSON.parse(this.user)
       return user
-    }
+    },
   },
   methods: {
     moment: function (date) {

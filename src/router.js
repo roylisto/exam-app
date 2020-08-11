@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from "../src/views/Home.vue";
 
 Vue.use(Router)
 
@@ -11,7 +10,7 @@ const routes = new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home,
+      component: () => import(/* webpackChunkName: "home" */ '../src/views/Home.vue'),
       beforeEnter: (to, from, next) => {
         let token = sessionStorage.getItem('token');
         if (token) next({path: '/rincian-test'})
@@ -58,7 +57,7 @@ const routes = new Router({
     {
       path: '/info-soal',
       name: 'Info Soal',
-      component: () => import(/* webpackChunkName: "soal" */ '../src/components/IST/InfoSubtest9.vue'),
+      component: () => import(/* webpackChunkName: "info-subtest-9" */ '../src/components/IST/InfoSubtest9.vue'),
       meta: {
         requiresAuth: true
       }
