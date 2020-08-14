@@ -57,7 +57,7 @@ const routes = new Router({
     {
       path: '/info-soal',
       name: 'Info Soal',
-      component: () => import(/* webpackChunkName: "soal" */ '../src/components/IST/InfoSubtest9.vue'),
+      component: () => import(/* webpackChunkName: "info-subtest-9" */ '../src/components/IST/InfoSubtest9.vue'),
       meta: {
         requiresAuth: true
       }

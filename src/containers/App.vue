@@ -20,7 +20,7 @@ export default {
   computed: { ...states },
   components: {
     Footer
-  }
+  },
 };
 </script>
 
