@@ -10,7 +10,7 @@ const routes = new Router({
     {
       path: '/',
       name: 'Home',
-      component: () => import(/* webpackChunkName: "home" */ '../src/views/Home.vue'),
+      component: () => import('../src/views/Home.vue'),
       beforeEnter: (to, from, next) => {
         let token = sessionStorage.getItem('token');
         if (token) next({path: '/rincian-test'})
@@ -20,12 +20,12 @@ const routes = new Router({
     {
       path: '/login',
       name: 'Login',
-      component: () => import(/* webpackChunkName: "login" */ '../src/views/Login.vue'),
+      component: () => import('../src/views/Login.vue'),
     },
     {
       path: '/rincian-test',
       name: 'Rincian Test',
-      component: () => import(/* webpackChunkName: "rincian-test" */ '../src/views/RincianTest.vue'),
+      component: () => import('../src/views/RincianTest.vue'),
       meta: {
         requiresAuth: true
       }
@@ -33,7 +33,7 @@ const routes = new Router({
     {
       path: '/petunjuk-soal',
       name: 'Petunjuk Soal',
-      component: () => import(/* webpackChunkName: "petunjuk-soal" */ '../src/views/PetunjukSoal.vue'),
+      component: () => import('../src/views/PetunjukSoal.vue'),
       meta: {
         requiresAuth: true
       }
@@ -41,7 +41,7 @@ const routes = new Router({
     {
       path: '/hafal-soal',
       name: 'Hafal Soal',
-      component: () => import(/* webpackChunkName: "hafal-soal" */ '../src/components/IST/HafalSoal.vue'),
+      component: () => import('../src/components/IST/HafalSoal.vue'),
       meta: {
         requiresAuth: true
       }
