@@ -14,6 +14,7 @@
                   <b-field label="Email">
                     <b-input type="email"
                       v-model="email"
+                      @keyup.native.enter="login()"
                       placeholder="Masukkan email Anda"
                       ></b-input>
                   </b-field>
