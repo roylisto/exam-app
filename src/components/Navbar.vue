@@ -7,7 +7,7 @@
             :src="logo"
             alt="Logo"
             height="200"
-            width="105"
+            width="90"
           >
         </b-navbar-item>
       </template>
