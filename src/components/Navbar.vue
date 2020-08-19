@@ -6,8 +6,6 @@
           <img
             :src="logo"
             alt="Logo"
-            height="200"
-            width="90"
           >
         </b-navbar-item>
       </template>
@@ -77,3 +75,12 @@ export default {
   },
 }
 </script>
+
+<style>
+.navbar-item img {
+  height: 50px;
+  width: auto;
+  max-height: 50px;
+  object-fit: cover;
+}
+</style>
