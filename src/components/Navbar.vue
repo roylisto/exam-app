@@ -10,7 +10,7 @@
         </b-navbar-item>
       </template>
 
-      <template slot="end">
+      <template slot="end" v-if="!showLoginButton">
         <b-navbar-item tag="router-link" :to="{ path: '/login' }" v-if="!token">
           <div class="buttons">
             <a class="button button-round">
@@ -45,19 +45,22 @@ import 'moment/locale/id';
 export default {
   name: 'login',
   data: () => ({
-    logo: process.env.VUE_APP_LOGO_URL
+    logo: process.env.VUE_APP_LOGO_URL,
   }),
   mounted() {
     this.userInfo
+    
   },
   computed: {
+    showLoginButton() {
+      return this.$route.name == 'Login' ? true : false
+    },
     ...mapGetters("auth", ["user"]),
     token() {
       return sessionStorage.getItem('token');
     },
     userInfo() {
-      var user = JSON.parse(this.user)
-      return user
+      return this.user.length > 0 ? JSON.parse(this.user) : []
     },
   },
   methods: {
