@@ -70,6 +70,15 @@ export default {
           console.error(error)
         })
         .finally(() => {
+          var jumlahSoalBelum = _.countBy(this.soalTes, o => o.status == 'Belum').true
+          if (jumlahSoalBelum === 0) {
+            this.$buefy.notification.open({
+              duration: 5000,
+              message: `Semua test telah dikerjakan/waktu habis, silahkan menunggu hasilnya.`,
+              position: 'is-top-right',
+              type: 'is-danger'
+            })
+          }
           loadingComponent.close()
         })
     }
