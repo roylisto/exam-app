@@ -15,10 +15,10 @@
         <div v-for="(value, index) in soalTes" :key="index">
           <div class="columns is-mobile has-text-centered">
             <div class="column">
-              <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' || (nodeENV !== 'development' && value.test != testWhichBelum[0].test) ? 'disabled' : 'has-text-primary has-text-weight-semibold'" :to="{path: '/petunjuk-soal', query: {paket: value.test, jenis: value.jenis}}">{{(value.test.replace(/_/g, " ").toUpperCase()).replace("BAGIAN", "MII").replace("IST", "")}}</router-link>
+              <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' || (!skippable && value.test != testWhichBelum[0].test) ? 'disabled' : 'has-text-primary has-text-weight-semibold'" :to="{path: '/petunjuk-soal', query: {paket: value.test, jenis: value.jenis}}">{{(value.test.replace(/_/g, " ").toUpperCase()).replace("BAGIAN", "MII").replace("IST", "")}}</router-link>
             </div>
             <div class="column">
-              <p :class="value.status == 'Sudah' || value.status == 'Waktu habis' || (nodeENV !== 'development' && value.test != testWhichBelum[0].test) ? 'disabled' : value.status == 'Sedang dikerjakan' ? 'has-text-success' : 'has-text-primary has-text-weight-semibold'">{{value.status}}</p>
+              <p :class="value.status == 'Sudah' || value.status == 'Waktu habis' || (!skippable && value.test != testWhichBelum[0].test) ? 'disabled' : value.status == 'Sedang dikerjakan' ? 'has-text-success' : 'has-text-primary has-text-weight-semibold'">{{value.status}}</p>
             </div>
           </div>
         </div>
@@ -37,7 +37,8 @@ import _ from 'lodash'
 export default {
   name: "rincian-test",
   data: () => ({
-    soalTes: []
+    soalTes: [],
+    skippable: false
   }),
   components: {
     Navbar,
@@ -70,6 +71,19 @@ export default {
           console.error(error)
         })
         .finally(() => {
+          this.$nextTick(() => {
+            var jumlahSoalBelum = _.countBy(this.soalTes, o => o.status == 'Belum' || o.status == 'Sedang dikerjakan').false
+            console.log(jumlahSoalBelum)
+            // console.log(jumlahSoalBelum.false)
+            if (jumlahSoalBelum === 17) {
+              this.$buefy.notification.open({
+                duration: 5000,
+                message: `Semua test telah dikerjakan/waktu habis, silahkan menunggu hasilnya.`,
+                position: 'is-top-right',
+                type: 'is-danger'
+              })
+            }
+          })
           loadingComponent.close()
         })
     }

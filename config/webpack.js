@@ -100,8 +100,8 @@ const options = {
       filename: env === 'development' ? 'css/[name].css' : 'css/[name].[hash:8].css',
     }),
     new HtmlWebpackPlugin({
+      fav: process.env.VUE_APP_FAVICON_URL,
       title: process.env.VUE_APP_TITLE === '' ? 'educasia.id' : process.env.VUE_APP_TITLE,
-      favicon: 'src/assets/favicon/favicon.png',
       inject: true,
       template: `${dir}/index.html`,
       minify: {

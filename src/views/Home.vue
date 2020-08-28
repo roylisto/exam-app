@@ -14,7 +14,6 @@
           </p>
           <img
             src="https://cdn.zeplin.io/5eea0882a4d52d4a36e76902/assets/9c71260d-bab9-4036-a3e5-2c192901e874.png"
-            style="height: 21rem"
           />
         </div>
       </div>
@@ -38,3 +37,11 @@ export default {
   },
 };
 </script>
+
+<style>
+  img {
+    height: 21rem;
+    width: auto;
+    object-fit: contain;
+  }
+</style>
