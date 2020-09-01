@@ -15,8 +15,17 @@
           </div>
         </div>
         <div class="my-5" v-if="!loaded">
-          <div v-for="i in 17" :key="i">
-            <b-skeleton width="100%" :animated="true"></b-skeleton> <br>
+          <div class="columns is-mobile has-text-centered">
+            <div class="column">
+              <div v-for="i in 17" :key="i">
+                <b-skeleton width="100%" :animated="true"></b-skeleton> <br>
+              </div>
+            </div>
+            <div class="column">
+              <div v-for="i in 17" :key="i">
+                <b-skeleton width="100%" :animated="true"></b-skeleton> <br>
+              </div>
+            </div>
           </div>
         </div>
         <div class="item" v-for="(value, index) in soalTes" :key="index" v-else>
@@ -68,8 +77,6 @@ export default {
   },
   methods: {
     getSoal() {
-      // const loadingComponent = this.$buefy.loading.open()
-
       var peserta_id = JSON.parse(this.$store.getters['auth/user']).id
       this.$store.dispatch("soal/getRincianTes", peserta_id)
         .then((response) => {
@@ -91,7 +98,6 @@ export default {
               })
             }
           })
-          // loadingComponent.close()
         })
     }
   }
