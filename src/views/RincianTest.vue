@@ -3,16 +3,23 @@
     <Navbar />
     <div class="container">
       <p class="title has-text-centered has-text-weight-light">Rincian Test</p>
-      <div class="box my-5">
+      <div class="my-5">
         <div class="columns is-mobile has-text-centered">
           <div class="column">
-            <h5 class="is-size-5 has-text-weight-semibold">Jenis Test</h5>
+            <b-skeleton v-if="!loaded" width="100%" :animated="true"></b-skeleton>
+            <h5 class="is-size-5 has-text-weight-semibold" v-else>Jenis Test</h5>
           </div>
           <div class="column">
-            <h5 class="is-size-5 has-text-weight-semibold">Status</h5>
+            <b-skeleton v-if="!loaded" width="100%" :animated="true"></b-skeleton>
+            <h5 class="is-size-5 has-text-weight-semibold" v-else>Status</h5>
           </div>
         </div>
-        <div v-for="(value, index) in soalTes" :key="index">
+        <div class="my-5" v-if="!loaded">
+          <div v-for="i in 17" :key="i">
+            <b-skeleton width="100%" :animated="true"></b-skeleton> <br>
+          </div>
+        </div>
+        <div class="item" v-for="(value, index) in soalTes" :key="index" v-else>
           <div class="columns is-mobile has-text-centered">
             <div class="column">
               <router-link :class="value.status == 'Sudah' || value.status == 'Waktu habis' || (!skippable && value.test != testWhichBelum[0].test) ? 'disabled' : 'has-text-primary has-text-weight-semibold'" :to="{path: '/petunjuk-soal', query: {paket: value.test, jenis: value.jenis}}">{{(value.test.replace(/_/g, " ").toUpperCase()).replace("BAGIAN", "MII").replace("IST", "")}}</router-link>
@@ -38,7 +45,8 @@ export default {
   name: "rincian-test",
   data: () => ({
     soalTes: [],
-    skippable: false
+    skippable: false,
+    loaded: false,
   }),
   components: {
     Navbar,
@@ -51,16 +59,16 @@ export default {
         return o.status == 'Belum' || o.status == 'Sedang dikerjakan'
       })
     },
-    nodeENV() {
-      return process.env.VUE_APP_NODE_ENV
-    },
   },
-  mounted() {
+  // mounted() {
+  //   this.loaded = true
+  // },
+  created() {
     this.getSoal();
   },
   methods: {
     getSoal() {
-      const loadingComponent = this.$buefy.loading.open()
+      // const loadingComponent = this.$buefy.loading.open()
 
       var peserta_id = JSON.parse(this.$store.getters['auth/user']).id
       this.$store.dispatch("soal/getRincianTes", peserta_id)
@@ -72,9 +80,8 @@ export default {
         })
         .finally(() => {
           this.$nextTick(() => {
+            this.loaded = true
             var jumlahSoalBelum = _.countBy(this.soalTes, o => o.status == 'Belum' || o.status == 'Sedang dikerjakan').false
-            console.log(jumlahSoalBelum)
-            // console.log(jumlahSoalBelum.false)
             if (jumlahSoalBelum === 17) {
               this.$buefy.notification.open({
                 duration: 5000,
@@ -84,7 +91,7 @@ export default {
               })
             }
           })
-          loadingComponent.close()
+          // loadingComponent.close()
         })
     }
   }
