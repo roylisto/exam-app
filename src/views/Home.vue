@@ -15,6 +15,7 @@
           <img
             src="https://cdn.zeplin.io/5eea0882a4d52d4a36e76902/assets/9c71260d-bab9-4036-a3e5-2c192901e874.png"
           />
+          <b-skeleton width="100%" height="21rem" :animated="true" v-if="!loaded"></b-skeleton>
         </div>
       </div>
     </section>
@@ -28,11 +29,17 @@ import Footer from "../components/Footer.vue";
 
 export default {
   name: "home",
+  data: () => ({
+    loaded: false
+  }),
   components: {
     Navbar,
     Footer
   },
   mounted() {
+    this.loaded = true
+  },
+  created() {
     localStorage.clear();
   },
 };

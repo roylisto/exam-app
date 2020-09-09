@@ -1,7 +1,7 @@
 <template>
   <div id="soal">
     <Navbar />
-    <template v-if="!akhirTes">
+    <template>
       <div class="container">
         <p class="title has-text-centered has-text-weight-light">Test {{jenisSoal.toUpperCase().replace('IST', '')}} Bagian {{bagianSoal}}</p>
         <p class="subtitle has-text-centered has-text-weight-light">Sisa waktu pengerjaan: <span class="has-text-danger">{{convertTime}}</span></p>
@@ -13,31 +13,24 @@
           </div>
             <div class="is-mobile has-text-centered">
               <transition name="fade">
+                <div v-if="!loaded">
+                  <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
+                  <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
+                  <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
+                  <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
+                  <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
+                </div>
                 <soal-container
                   :total="totalSoal"
                   :soal="soal[nomor]"
                   v-on:jawaban="handleJawaban"
                   :nomor="nomor + 1"
+                  v-else
                 ></soal-container>
               </transition>
             </div>
         </div>
       </div>
-    </template>
-    <template v-else>
-      <section class="hero is-medium">
-        <div class="hero-body has-text-centered">
-          <div class="container">
-            <h1 class="title has-text-weight-light">
-              Anda telah selesai mengerjakan soal test {{jenisSoal.toUpperCase()}}
-            </h1>
-            <h2 class="subtitle">
-              Submit jawaban anda dengan menekan tombol button dibawah ini
-            </h2>
-            <b-button type="is-primary" @click="submitJawaban" style="margin-top: 2rem; width: 30%">Submit</b-button>
-          </div>
-        </div>
-      </section>
     </template>
     <Footer />
   </div>
@@ -60,6 +53,7 @@ export default {
     akhirTes: false,
     waktu: '',
     submit: false,
+    loaded: false
   }),
   components: {
     SoalContainer,
@@ -157,6 +151,9 @@ export default {
         .catch((error) => {
           console.error(error)
         })
+        .finally(() => {
+          this.loaded = true
+        })
     },
     getSingleSoalIST() {
       var nomor = this.$route.query.nomor;
@@ -175,9 +172,11 @@ export default {
         .catch((error) => {
           console.error(error)
         })
+        .finally(() => {
+          this.loaded = true
+        })
     },
     getAllSoalIST() {
-      const loadingComponent = this.$buefy.loading.open()
       var jenis = this.$route.query.jenis;
 
       if (jenis == 'ist') {
@@ -198,7 +197,6 @@ export default {
             console.error(error)
           })
       }
-      loadingComponent.close()
     },
     handleJawaban(e) {
       if (e.aksi == 'Berikutnya') {
