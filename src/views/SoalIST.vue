@@ -14,7 +14,7 @@
             <div class="is-mobile has-text-centered">
               <transition name="fade">
                 <div v-if="!loaded">
-                  <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
+                  <b-skeleton width="80%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
                   <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
                   <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
                   <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>

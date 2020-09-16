@@ -19,8 +19,10 @@
       </div>
       <div v-else-if="soal.kategori == 'gambar'">
         <div class="has-text-left" style="position: relative;">
-          <img :src="gambarURL + '/' + soal.pertanyaan" alt />
-          <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
+          <v-lazy-image
+            :src="gambarSoal"
+            :src-placeholder="`Gambar soal ${gambarSoal}`"
+          />
         </div>
         <div class="radio-gbr-group has-text-centered">
           <div
@@ -29,8 +31,12 @@
             class="radio"
             style="position: relative;"
           >
-            <img :src="gambarURL + '/' + value" alt />
-            <br />
+          <b-skeleton v-if="loaded" circle width="64px" height="64px"></b-skeleton>
+          <v-lazy-image
+            v-else
+            :src="gambarURL + '/' + value"
+            :src-placeholder="`Gambar pilihan ${value}`"
+          />
             <input
               :id="value"
               type="radio"
@@ -39,7 +45,6 @@
               v-model="jawaban[soal.nomor - 1]"
             />
             <label :for="value">{{index}}</label>
-            <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
           </div>
         </div>
       </div>
@@ -159,6 +164,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import VLazyImage from "v-lazy-image";
 
 export default {
   name: "soal-ist",
@@ -171,9 +177,15 @@ export default {
     isLoading: false,
     loaded: false
   }),
+  components: {
+    VLazyImage
+  },
   computed: {
     gambarURL() {
       return process.env.VUE_APP_IMAGE_URL;
+    },
+    gambarSoal() {
+      return `${process.env.VUE_APP_IMAGE_URL}/${this.soal.pertanyaan}`
     },
     jenisSoal() {
       return this.$route.query.jenis;
@@ -191,19 +203,15 @@ export default {
     },
     ...mapGetters("ist", ["jawabanTersimpan"]),
   },
+  mounted () {
+    this.gambarURL
+  },
   created() {
     this.jawabanTersimpan;
     this.bindJawaban;
     this.bindJawabanTmp;
-    // this.openLoading();
   },
   methods: {
-    // openLoading() {
-    //   this.isLoading = true;
-    //   setTimeout(() => {
-    //     this.isLoading = false;
-    //   }, 1000);
-    // },
     submitJawaban: function (e) {
       if (this.soal.kategori === "pilganbutton") {
         if (e === "Sebelumnya") {
@@ -217,6 +225,9 @@ export default {
         }
       }
       this.$emit("jawaban", { jawaban: this.jawaban, aksi: e });
+      this.$nextTick(() => {
+        alert(this.gambarSoal);
+      })
     },
     pilihAngka: function (value) {
       this.jawaban[this.nomor - 1] = JSON.parse(
@@ -256,6 +267,14 @@ export default {
 </script>
 
 <style>
+.v-lazy-image {
+  filter: blur(10px);
+  transition: filter 0.7s;
+}
+
+.v-lazy-image-loaded {
+  filter: blur(0);
+}
 /* non-gambar */
 .radio-btn-group {
   display: -webkit-box;

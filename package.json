@@ -37,6 +37,7 @@
     "nodemon": "^2.0.4",
     "randomstring": "^1.1.5",
     "sequelize": "^5.22.3",
+    "v-lazy-image": "^1.4.0",
     "vue-jwt-decode": "^0.1.0",
     "vue-material-design-icons": "^4.9.0",
     "vue-router": "^3.4.3",

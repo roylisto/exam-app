@@ -19,7 +19,7 @@ Vue.use(Buefy, {
 });
 Vue.use(VueRouter);
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 Vue.prototype.$http = API;
 
 API.interceptors.request.use((config) => {
