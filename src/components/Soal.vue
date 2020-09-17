@@ -20,8 +20,8 @@
       <div v-else-if="soal.kategori == 'gambar'">
         <div class="has-text-left" style="position: relative;">
           <v-lazy-image
-            :src="gambarSoal"
-            :src-placeholder="`Gambar soal ${gambarSoal}`"
+            :src="`${gambarURL}/${soal.pertanyaan}`"
+            src-placeholder="Gambar soal"
           />
         </div>
         <div class="radio-gbr-group has-text-centered">
@@ -31,7 +31,7 @@
             class="radio"
             style="position: relative;"
           >
-          <b-skeleton v-if="loaded" circle width="64px" height="64px"></b-skeleton>
+          <b-skeleton v-if="$store.state.loading" circle width="64px" height="64px"></b-skeleton>
           <v-lazy-image
             v-else
             :src="gambarURL + '/' + value"
@@ -184,9 +184,6 @@ export default {
     gambarURL() {
       return process.env.VUE_APP_IMAGE_URL;
     },
-    gambarSoal() {
-      return `${process.env.VUE_APP_IMAGE_URL}/${this.soal.pertanyaan}`
-    },
     jenisSoal() {
       return this.$route.query.jenis;
     },
@@ -213,6 +210,7 @@ export default {
   },
   methods: {
     submitJawaban: function (e) {
+      this.$store.state.loading = true
       if (this.soal.kategori === "pilganbutton") {
         if (e === "Sebelumnya") {
           this.tmpJawaban = this.jawaban[this.nomor - 2];
@@ -226,7 +224,7 @@ export default {
       }
       this.$emit("jawaban", { jawaban: this.jawaban, aksi: e });
       this.$nextTick(() => {
-        alert(this.gambarSoal);
+        this.$store.state.loading = false
       })
     },
     pilihAngka: function (value) {

@@ -13,7 +13,7 @@
           </div>
             <div class="is-mobile has-text-centered">
               <transition name="fade">
-                <div v-if="!loaded">
+                <div v-if="this.$store.state.loading">
                   <b-skeleton width="80%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
                   <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
                   <b-skeleton width="40%" class="mb-6" size="is-large" :animated="true"></b-skeleton>
@@ -52,8 +52,7 @@ export default {
     allSoal: [],
     akhirTes: false,
     waktu: '',
-    submit: false,
-    loaded: false
+    submit: false
   }),
   components: {
     SoalContainer,
@@ -152,7 +151,7 @@ export default {
           console.error(error)
         })
         .finally(() => {
-          this.loaded = true
+          this.$store.state.loading = false
         })
     },
     getSingleSoalIST() {
@@ -173,7 +172,7 @@ export default {
           console.error(error)
         })
         .finally(() => {
-          this.loaded = true
+          this.$store.state.loading = false
         })
     },
     getAllSoalIST() {
