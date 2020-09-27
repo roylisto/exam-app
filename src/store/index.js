@@ -21,6 +21,9 @@ const logger = createLogger({
 export default new Vuex.Store({
   // plugins: [logger],
   plugins: [logger, createPersistedState()],
+  state: {
+    loading: true
+  },
   modules: {
     auth: auth,
     ist: ist,
