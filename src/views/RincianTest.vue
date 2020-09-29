@@ -54,7 +54,7 @@ export default {
   name: "rincian-test",
   data: () => ({
     soalTes: [],
-    skippable: true,
+    skippable: false,
     loaded: false,
   }),
   components: {
