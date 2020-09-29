@@ -54,7 +54,7 @@ export default {
   name: "rincian-test",
   data: () => ({
     soalTes: [],
-    skippable: true,
+    skippable: process.env.NODE_ENV === 'development' ? true : false,
     loaded: false,
   }),
   components: {
