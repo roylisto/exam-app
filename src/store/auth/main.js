@@ -27,7 +27,6 @@ const user = {
 
           var decodedToken = VueJwtDecode.decode(token)
           var user = JSON.stringify(decodedToken.data)
-          console.log(user)
 
           sessionStorage.clear();
           localStorage.clear();
