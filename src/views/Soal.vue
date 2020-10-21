@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ jenis }}
     <soal-i-s-t v-if="jenis == 'ist'"></soal-i-s-t>
     <soal-m-i-i v-else-if="jenis == 'mii'"></soal-m-i-i>
   </div>
