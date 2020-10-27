@@ -27,7 +27,7 @@ module.exports = {
           attributes: ['nama'],
           where: {email:peserta.email}
         });
-
+        
         let credential = {
           "id": peserta.id,
           "nama": userPeserta.nama,
@@ -38,7 +38,8 @@ module.exports = {
           "waktu": test.waktu,
           "expired_test": test.expired,
           "instansi": test.instansi,
-          "keterangan": test.keterangan
+          "keterangan": test.keterangan,
+          "jenis_test": peserta.jenis_test
         }
         //sign token for 12 hour
         jwt.sign({ data:credential }, process.env.JWT_SECRET, { algorithm:'HS256', expiresIn:'12h' }, (error, token) => {

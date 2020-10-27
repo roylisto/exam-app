@@ -3,33 +3,27 @@
     <b-navbar spaced>
       <template slot="brand">
         <b-navbar-item tag="router-link" :to="{ path: '/' }">
-          <img
-            :src="logo"
-            alt="Logo"
-          >
+          <img :src="logo" alt="Logo" />
         </b-navbar-item>
       </template>
 
       <template slot="end" v-if="!showLoginButton">
         <b-navbar-item tag="router-link" :to="{ path: '/login' }" v-if="!token">
           <div class="buttons">
-            <a class="button button-round">
-              Log in
-            </a>
+            <a class="button button-round"> Log in </a>
           </div>
         </b-navbar-item>
         <template v-else>
           <b-navbar-item>
             <div class="buttons">
               <button class="button button-round">
-                {{userInfo.nama}} - Jadwal Tes {{ moment(userInfo.waktu).format('MMMM Do YYYY') }}
+                {{ userInfo.nama }} - Jadwal Tes
+                {{ moment(userInfo.waktu).format("MMMM Do YYYY") }}
               </button>
             </div>
           </b-navbar-item>
           <b-navbar-item>
-            <b-button type="is-text" @click="logout"
-              >Log out</b-button
-            >
+            <b-button type="is-text" @click="logout">Log out</b-button>
           </b-navbar-item>
         </template>
       </template>
@@ -38,29 +32,28 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import moment from 'moment';
-import 'moment/locale/id';
+import { mapGetters } from "vuex";
+import moment from "moment";
+import "moment/locale/id";
 
 export default {
-  name: 'login',
+  name: "login",
   data: () => ({
     logo: process.env.VUE_APP_LOGO_URL,
   }),
   mounted() {
-    this.userInfo
-    
+    this.userInfo;
   },
   computed: {
     showLoginButton() {
-      return this.$route.name == 'Login' ? true : false
+      return this.$route.name == "Login" ? true : false;
     },
     ...mapGetters("auth", ["user"]),
     token() {
-      return sessionStorage.getItem('token');
+      return sessionStorage.getItem("token");
     },
     userInfo() {
-      return this.user.length > 0 ? JSON.parse(this.user) : []
+      return this.user.length > 0 ? JSON.parse(this.user) : [];
     },
   },
   methods: {
@@ -68,15 +61,14 @@ export default {
       return moment(date);
     },
     logout() {
-      this.$store.dispatch('ist/resetJawaban');
-      this.$store.dispatch("auth/logout")
-        .then(() => {
-          localStorage.clear();
-          this.$router.replace({ path: '/login' })
-        })
-    }
+      this.$store.dispatch("ist/resetJawaban");
+      this.$store.dispatch("auth/logout").then(() => {
+        localStorage.clear();
+        this.$router.replace({ path: "/login" });
+      });
+    },
   },
-}
+};
 </script>
 
 <style>
