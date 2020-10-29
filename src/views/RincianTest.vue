@@ -2,8 +2,16 @@
   <div>
     <Navbar />
     <div class="container">
-      <p class="title has-text-centered has-text-weight-light">Rincian Test</p>
-      <div class="my-5">
+      <h1
+        class="has-text-centered is-size-2 has-text-primary"
+        v-if="userJenisTest.jenis_test === null"
+      >
+        Tidak ada tes tersedia.
+      </h1>
+      <div class="my-5" v-else>
+        <p class="title has-text-centered has-text-weight-light">
+          Rincian Test
+        </p>
         <div class="columns is-mobile has-text-centered">
           <div class="column">
             <b-skeleton
@@ -38,94 +46,101 @@
             </div>
           </div>
         </div>
-        <div class="item" v-for="(value, index) in soalTes" :key="index" v-else>
-          <div class="columns is-mobile has-text-centered">
-            <div class="column">
-              <!-- {{value}} -->
-              <router-link
-                v-if="
-                  userJenisTest.jenis_test.indexOf('IST') >= 0 &&
-                  value.jenis == 'ist'
-                "
-                :class="
-                  value.status == 'Sudah' ||
-                  value.status == 'Waktu habis' ||
-                  (!skippable && value.test != testWhichBelum[0].test)
-                    ? 'disabled'
-                    : 'has-text-primary has-text-weight-semibold'
-                "
-                :to="{
-                  path: '/petunjuk-soal',
-                  query: { paket: value.test, jenis: value.jenis },
-                }"
-                >{{
-                  value.test
-                    .replace(/_/g, " ")
-                    .toUpperCase()
-                    .replace("BAGIAN", "MII")
-                    .replace("IST", "")
-                }}</router-link
-              >
-              <router-link
-                v-if="
-                  userJenisTest.jenis_test.indexOf('MII') >= 0 &&
-                  value.jenis == 'mii'
-                "
-                :class="
-                  value.status == 'Sudah' ||
-                  value.status == 'Waktu habis' ||
-                  (!skippable && value.test != testWhichBelum[0].test)
-                    ? 'disabled'
-                    : 'has-text-primary has-text-weight-semibold'
-                "
-                :to="{
-                  path: '/petunjuk-soal',
-                  query: { paket: value.test, jenis: value.jenis },
-                }"
-                >{{
-                  value.test
-                    .replace(/_/g, " ")
-                    .toUpperCase()
-                    .replace("BAGIAN", "MII")
-                    .replace("IST", "")
-                }}</router-link
-              >
+        <div v-for="(value, index) in soalTes" :key="index" v-else>
+          <div
+            class="item"
+            v-if="
+              userJenisTest.jenis_test != null &&
+              userJenisTest.jenis_test.indexOf('IST') >= 0 &&
+              value.jenis == 'ist'
+            "
+          >
+            <div class="columns is-mobile has-text-centered">
+              <div class="column">
+                <router-link
+                  :class="
+                    value.status == 'Sudah' ||
+                    value.status == 'Waktu habis' ||
+                    (!skippable && value.test != testWhichBelum[0].test)
+                      ? 'disabled'
+                      : 'has-text-primary has-text-weight-semibold'
+                  "
+                  :to="{
+                    path: '/petunjuk-soal',
+                    query: { paket: value.test, jenis: value.jenis },
+                  }"
+                  >{{
+                    value.test
+                      .replace(/_/g, " ")
+                      .toUpperCase()
+                      .replace("BAGIAN", "MII")
+                      .replace("IST", "")
+                  }}</router-link
+                >
+              </div>
+              <div class="column">
+                <p
+                  :class="
+                    value.status == 'Sudah' ||
+                    value.status == 'Waktu habis' ||
+                    (!skippable && value.test != testWhichBelum[0].test)
+                      ? 'disabled'
+                      : value.status == 'Sedang dikerjakan'
+                      ? 'has-text-success'
+                      : 'has-text-primary has-text-weight-semibold'
+                  "
+                >
+                  {{ value.status }}
+                </p>
+              </div>
             </div>
-            <div class="column">
-              <p
-                v-if="
-                  userJenisTest.jenis_test.indexOf('IST') >= 0 &&
-                  value.jenis == 'ist'
-                "
-                :class="
-                  value.status == 'Sudah' ||
-                  value.status == 'Waktu habis' ||
-                  (!skippable && value.test != testWhichBelum[0].test)
-                    ? 'disabled'
-                    : value.status == 'Sedang dikerjakan'
-                    ? 'has-text-success'
-                    : 'has-text-primary has-text-weight-semibold'
-                "
-              >
-                {{ value.status }}
-              </p>
-              <p
-                v-if="
-                  userJenisTest.jenis_test.indexOf('MII') >= 0 &&
-                  value.jenis == 'mii'
-                "
-                :class="
-                  value.status == 'Sudah' ||
-                  value.status == 'Waktu habis' ||
-                  (!skippable && value.test != testWhichBelum[0].test)
-                    ? 'disabled'
-                    : value.status == 'Sedang dikerjakan'
-                    ? 'has-text-success'
-                    : 'has-text-primary has-text-weight-semibold'
-                "
-              >
-                {{ value.status }}
-              </p>
+          </div>
+          <div
+            class="item"
+            v-else-if="
+              userJenisTest.jenis_test != null &&
+              userJenisTest.jenis_test.indexOf('MII') >= 0 &&
+              value.jenis == 'mii'
+            "
+          >
+            <div class="columns is-mobile has-text-centered">
+              <div class="column">
+                <router-link
+                  :class="
+                    value.status == 'Sudah' ||
+                    value.status == 'Waktu habis' ||
+                    (!skippable && value.test != testWhichBelum[0].test)
+                      ? 'disabled'
+                      : 'has-text-primary has-text-weight-semibold'
+                  "
+                  :to="{
+                    path: '/petunjuk-soal',
+                    query: { paket: value.test, jenis: value.jenis },
+                  }"
+                  >{{
+                    value.test
+                      .replace(/_/g, " ")
+                      .toUpperCase()
+                      .replace("BAGIAN", "MII")
+                      .replace("IST", "")
+                  }}</router-link
+                >
+              </div>
+              <div class="column">
+                <p
+                  :class="
+                    value.status == 'Sudah' ||
+                    value.status == 'Waktu habis' ||
+                    (!skippable && value.test != testWhichBelum[0].test)
+                      ? 'disabled'
+                      : value.status == 'Sedang dikerjakan'
+                      ? 'has-text-success'
+                      : 'has-text-primary has-text-weight-semibold'
+                  "
+                >
+                  {{ value.status }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -164,6 +179,9 @@ export default {
       return JSON.parse(this.user);
     },
   },
+  // mounted() {
+  //   this.loaded = true
+  // },
   created() {
     this.getSoal();
   },
