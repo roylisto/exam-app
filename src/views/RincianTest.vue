@@ -155,9 +155,14 @@ export default {
   computed: {
     ...mapGetters("ist", ["soalIST"]),
     testWhichBelum() {
-      return _.filter(this.soalTes, function (o) {
-        return o.status == "Belum" || o.status == "Sedang dikerjakan";
-      });
+      if (this.userJenisTest.jenis_test.indexOf("MII") >= 0) {
+        return _.filter(this.soalTes, (o) => {
+          return (
+            (o.status === "Belum" || o.status === "Sedang dikerjakan") && o.jenis === "mii"
+          );
+        });
+    }
+    return _.filter(this.soalTes, (o) => o.status === "Belum" || o.status === "Sedang dikerjakan");
     },
     ...mapGetters("auth", ["user"]),
     userJenisTest() {
