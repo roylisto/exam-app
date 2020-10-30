@@ -52,15 +52,15 @@
             v-if="
               userJenisTest.jenis_test != null &&
               userJenisTest.jenis_test.indexOf('IST') >= 0 &&
-              value.jenis == 'ist'
+              value.jenis === 'ist'
             "
           >
             <div class="columns is-mobile has-text-centered">
               <div class="column">
                 <router-link
                   :class="
-                    value.status == 'Sudah' ||
-                    value.status == 'Waktu habis' ||
+                    value.status === 'Sudah' ||
+                    value.status === 'Waktu habis' ||
                     (!skippable && value.test != testWhichBelum[0].test)
                       ? 'disabled'
                       : 'has-text-primary has-text-weight-semibold'
@@ -81,11 +81,11 @@
               <div class="column">
                 <p
                   :class="
-                    value.status == 'Sudah' ||
-                    value.status == 'Waktu habis' ||
+                    value.status === 'Sudah' ||
+                    value.status === 'Waktu habis' ||
                     (!skippable && value.test != testWhichBelum[0].test)
                       ? 'disabled'
-                      : value.status == 'Sedang dikerjakan'
+                      : value.status === 'Sedang dikerjakan'
                       ? 'has-text-success'
                       : 'has-text-primary has-text-weight-semibold'
                   "
@@ -100,15 +100,15 @@
             v-else-if="
               userJenisTest.jenis_test != null &&
               userJenisTest.jenis_test.indexOf('MII') >= 0 &&
-              value.jenis == 'mii'
+              value.jenis === 'mii'
             "
           >
             <div class="columns is-mobile has-text-centered">
               <div class="column">
                 <router-link
                   :class="
-                    value.status == 'Sudah' ||
-                    value.status == 'Waktu habis' ||
+                    value.status === 'Sudah' ||
+                    value.status === 'Waktu habis' ||
                     (!skippable && value.test != testWhichBelum[0].test)
                       ? 'disabled'
                       : 'has-text-primary has-text-weight-semibold'
@@ -129,11 +129,11 @@
               <div class="column">
                 <p
                   :class="
-                    value.status == 'Sudah' ||
-                    value.status == 'Waktu habis' ||
+                    value.status === 'Sudah' ||
+                    value.status === 'Waktu habis' ||
                     (!skippable && value.test != testWhichBelum[0].test)
                       ? 'disabled'
-                      : value.status == 'Sedang dikerjakan'
+                      : value.status === 'Sedang dikerjakan'
                       ? 'has-text-success'
                       : 'has-text-primary has-text-weight-semibold'
                   "
@@ -170,18 +170,21 @@ export default {
   computed: {
     ...mapGetters("ist", ["soalIST"]),
     testWhichBelum() {
-      return _.filter(this.soalTes, function (o) {
-        return o.status == "Belum" || o.status == "Sedang dikerjakan";
-      });
+      if (this.userJenisTest.jenis_test === "MII") {
+        return _.filter(this.soalTes, (o) => {
+          return (
+            (o.status === "Belum" || o.status === "Sedang dikerjakan") &&
+            o.jenis === "mii"
+          );
+        });
+      }
+      return _.filter(this.soalTes, (o) => o.status === "Belum" || o.status === "Sedang dikerjakan");
     },
     ...mapGetters("auth", ["user"]),
     userJenisTest() {
       return JSON.parse(this.user);
     },
   },
-  // mounted() {
-  //   this.loaded = true
-  // },
   created() {
     this.getSoal();
   },
@@ -201,7 +204,7 @@ export default {
             this.loaded = true;
             var jumlahSoalBelum = _.countBy(
               this.soalTes,
-              (o) => o.status == "Belum" || o.status == "Sedang dikerjakan"
+              (o) => o.status === "Belum" || o.status === "Sedang dikerjakan"
             ).false;
             if (jumlahSoalBelum === 17) {
               this.$buefy.notification.open({
