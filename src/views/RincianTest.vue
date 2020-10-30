@@ -160,7 +160,8 @@ export default {
   name: "rincian-test",
   data: () => ({
     soalTes: [],
-    skippable: process.env.NODE_ENV === "development" ? true : false,
+    // skippable: process.env.NODE_ENV === "development" ? true : false,
+    skippable: false,
     loaded: false,
   }),
   components: {
@@ -170,14 +171,21 @@ export default {
   computed: {
     ...mapGetters("ist", ["soalIST"]),
     testWhichBelum() {
-      if (this.userJenisTest.jenis_test.indexOf("MII") >= 0) {
+      if (
+        this.userJenisTest.jenis_test.indexOf("MII") >= 0 &&
+        this.userJenisTest.jenis_test.indexOf("IST") === -1
+      ) {
         return _.filter(this.soalTes, (o) => {
           return (
-            (o.status === "Belum" || o.status === "Sedang dikerjakan") && o.jenis === "mii"
+            (o.status === "Belum" || o.status === "Sedang dikerjakan") &&
+            o.jenis === "mii"
           );
         });
-    }
-    return _.filter(this.soalTes, (o) => o.status === "Belum" || o.status === "Sedang dikerjakan");
+      }
+      return _.filter(
+        this.soalTes,
+        (o) => o.status === "Belum" || o.status === "Sedang dikerjakan"
+      );
     },
     ...mapGetters("auth", ["user"]),
     userJenisTest() {
