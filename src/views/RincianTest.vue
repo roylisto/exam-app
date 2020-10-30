@@ -170,6 +170,14 @@ export default {
   computed: {
     ...mapGetters("ist", ["soalIST"]),
     testWhichBelum() {
+      if (this.userJenisTest.jenis_test == "MII") {
+        return _.filter(this.soalTes, function (o) {
+          return (
+            (o.status == "Belum" || o.status == "Sedang dikerjakan") &&
+            o.jenis == "mii"
+          );
+        });
+      }
       return _.filter(this.soalTes, function (o) {
         return o.status == "Belum" || o.status == "Sedang dikerjakan";
       });
@@ -179,9 +187,6 @@ export default {
       return JSON.parse(this.user);
     },
   },
-  // mounted() {
-  //   this.loaded = true
-  // },
   created() {
     this.getSoal();
   },
