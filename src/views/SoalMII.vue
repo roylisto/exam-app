@@ -1,7 +1,12 @@
 <template>
   <div id="soal">
     <Navbar />
-    <template v-if="!akhirTes">
+    <template>
+      <b-loading
+        :is-full-page="false"
+        :active.sync="loading"
+        :can-cancel="true"
+      ></b-loading>
       <div class="container">
         <p class="title has-text-centered has-text-weight-light">
           Test {{ jenisSoal.toUpperCase() }} Bagian {{ bagianSoal }}
@@ -29,26 +34,6 @@
           </div>
         </div>
       </div>
-    </template>
-    <template v-else>
-      <section class="hero is-medium">
-        <div class="hero-body has-text-centered">
-          <div class="container">
-            <h1 class="title has-text-weight-light">
-              Anda telah selesai mengerjakan soal test MII
-            </h1>
-            <h2 class="subtitle">
-              Submit jawaban anda dengan menekan tombol button dibawah ini
-            </h2>
-            <b-button
-              type="is-primary"
-              @click="submitJawaban"
-              style="margin-top: 2rem; width: 30%"
-              >Submit</b-button
-            >
-          </div>
-        </div>
-      </section>
     </template>
     <Footer />
   </div>
@@ -91,6 +76,9 @@ export default {
   computed: {
     ...mapGetters("mii", ["soalMII"]),
     ...mapGetters("auth", ["user"]),
+    loading() {
+      return this.$store.state.general.loading;
+    },
     userInfo() {
       return JSON.parse(this.user);
     },
@@ -160,7 +148,6 @@ export default {
   created() {
     this.fetchWaktu();
     this.getSingleSoalMII(this.$route.query.nomor);
-    this.getAllSoalMII();
   },
   methods: {
     fetchWaktu() {
@@ -184,6 +171,7 @@ export default {
         });
     },
     getSingleSoalMII(args) {
+      this.$store.dispatch("general/changeLoadingState", true);
       var nomor = args;
       var paket_soal = this.$route.query.paket;
 
@@ -201,43 +189,30 @@ export default {
           console.error(error);
         })
         .finally(() => {
-          this.$store.dispatch("general/changeLoadingState", true);
+          this.$nextTick(() => {
+            this.getAllSoalMII();
+          });
         });
     },
     getAllSoalMII() {
-      const loadingComponent = this.$buefy.loading.open();
       var jenis = this.$route.query.jenis;
 
-      if (jenis == "mii") {
-        this.$store
-          .dispatch("mii/getAllSoal")
-          .then((response) => {
-            var data = response.data.data;
-            data.forEach((element) => {
-              if (this.$route.query.paket == element.paket_soal) {
-                this.allSoal.push(element);
-              }
-            });
-          })
-          .catch((error) => {
-            console.error(error);
+      this.$store
+        .dispatch("mii/getAllSoal")
+        .then((response) => {
+          var data = response.data.data;
+          data.forEach((element) => {
+            if (this.$route.query.paket == element.paket_soal) {
+              this.allSoal.push(element);
+            }
           });
-      } else {
-        this.$store
-          .dispatch("mii/getAllSoal")
-          .then((response) => {
-            var data = response.data.data;
-            data.forEach((element) => {
-              if (this.$route.query.paket == element.paket_soal) {
-                this.allSoal.push(element);
-              }
-            });
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
-      loadingComponent.close();
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => {
+          this.$store.dispatch("general/changeLoadingState", false);
+        })
     },
     handleJawaban(e) {
       var nomor = parseInt(this.$route.query.nomor);

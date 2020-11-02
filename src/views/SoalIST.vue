@@ -61,7 +61,11 @@
                 v-else
               ></soal-container>
             </transition>
-            <b-loading :active.sync="loading" :can-cancel="true"></b-loading>
+            <b-loading
+              :is-full-page="false"
+              :active.sync="loading"
+              :can-cancel="true"
+            ></b-loading>
           </div>
         </div>
       </div>
@@ -108,7 +112,7 @@ export default {
     ...mapGetters("ist", ["soalIST"]),
     ...mapGetters("auth", ["user"]),
     loading() {
-      return this.$store.state.loading;
+      return this.$store.state.general.loading;
     },
     userInfo() {
       return JSON.parse(this.user);
@@ -167,7 +171,6 @@ export default {
   created() {
     this.fetchWaktu();
     this.getSingleSoalIST(this.$route.query.nomor);
-    this.getAllSoalIST();
   },
   methods: {
     fetchWaktu() {
@@ -188,9 +191,6 @@ export default {
         })
         .catch((error) => {
           console.error(error);
-        })
-        .finally(() => {
-          this.$store.state.loading = false;
         });
     },
     getSingleSoalIST(args) {
@@ -211,41 +211,30 @@ export default {
           console.error(error);
         })
         .finally(() => {
-          this.$store.dispatch("general/changeLoadingState", true);
+          this.$nextTick(() => {
+            this.getAllSoalIST();
+          });
         });
     },
     getAllSoalIST() {
       var jenis = this.$route.query.jenis;
 
-      if (jenis == "ist") {
-        this.$store
-          .dispatch("ist/getAllSoal")
-          .then((response) => {
-            var data = response.data.data;
-            data.forEach((element) => {
-              if (this.$route.query.paket == element.paket_soal) {
-                this.allSoal.push(element);
-              }
-            });
-          })
-          .catch((error) => {
-            console.error(error);
+      this.$store
+        .dispatch("ist/getAllSoal")
+        .then((response) => {
+          var data = response.data.data;
+          data.forEach((element) => {
+            if (this.$route.query.paket == element.paket_soal) {
+              this.allSoal.push(element);
+            }
           });
-      } else {
-        this.$store
-          .dispatch("mii/getAllSoal")
-          .then((response) => {
-            var data = response.data.data;
-            data.forEach((element) => {
-              if (this.$route.query.paket == element.paket_soal) {
-                this.allSoal.push(element);
-              }
-            });
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => {
+          this.$store.dispatch("general/changeLoadingState", false);
+        });
     },
     handleJawaban(e) {
       var nomor = parseInt(this.$route.query.nomor);
