@@ -27,7 +27,7 @@
           <p>Selamat mengerjakan!</p>
         </div>
         <div class="has-text-centered">
-          <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'mii'}}" style="margin-top: 2rem"
+          <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: 'mii', nomor: 1}}" style="margin-top: 2rem"
           >Mulai Test</b-button>
         </div>
       </div>
