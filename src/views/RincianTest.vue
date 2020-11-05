@@ -46,118 +46,120 @@
             </div>
           </div>
         </div>
-        <div v-for="(value, index) in soalTes" :key="index" v-else>
-          <div v-if="testWhichBelum.length !== 0">
-            <div
-              class="item"
-              v-if="
-                userJenisTest.jenis_test != null &&
-                userJenisTest.jenis_test.indexOf('IST') >= 0 &&
-                value.jenis === 'ist'
-              "
-            >
-              <div class="columns is-mobile has-text-centered">
-                <div class="column">
-                  <router-link
-                    :class="
-                      value.status === 'Sudah' ||
-                      value.status === 'Waktu habis' ||
-                      (!skippable && value.test != testWhichBelum[0].test)
-                        ? 'disabled'
-                        : 'has-text-primary has-text-weight-semibold'
-                    "
-                    :to="{
-                      path: '/petunjuk-soal',
-                      query: { paket: value.test, jenis: value.jenis },
-                    }"
-                    >{{
-                      value.test
-                        .replace(/_/g, " ")
-                        .toUpperCase()
-                        .replace("BAGIAN", "MII")
-                        .replace("IST", "")
-                    }}</router-link
-                  >
-                </div>
-                <div class="column">
-                  <router-link
-                    :to="{
-                      path: '/petunjuk-soal',
-                      query: { paket: value.test, jenis: value.jenis },
-                    }"
-                    :class="
-                      value.status === 'Sudah' ||
-                      value.status === 'Waktu habis' ||
-                      (!skippable && value.test != testWhichBelum[0].test)
-                        ? 'disabled'
-                        : value.status === 'Sedang dikerjakan'
-                        ? 'has-text-success'
-                        : 'has-text-primary has-text-weight-semibold'
-                    "
-                  >
-                    {{ value.status }}
-                  </router-link>
-                </div>
+        <div
+          v-for="(value, index) in soalTes"
+          :key="index"
+          v-else-if="loaded && testWhichBelum.length > 0"
+        >
+          <div
+            class="item"
+            v-if="
+              userJenisTest.jenis_test != null &&
+              userJenisTest.jenis_test.indexOf('IST') >= 0 &&
+              value.jenis === 'ist'
+            "
+          >
+            <div class="columns is-mobile has-text-centered">
+              <div class="column">
+                <router-link
+                  :class="
+                    value.status === 'Sudah' ||
+                    value.status === 'Waktu habis' ||
+                    (!skippable && value.test != testWhichBelum[0].test)
+                      ? 'disabled'
+                      : 'has-text-primary has-text-weight-semibold'
+                  "
+                  :to="{
+                    path: '/petunjuk-soal',
+                    query: { paket: value.test, jenis: value.jenis },
+                  }"
+                  >{{
+                    value.test
+                      .replace(/_/g, " ")
+                      .toUpperCase()
+                      .replace("BAGIAN", "MII")
+                      .replace("IST", "")
+                  }}</router-link
+                >
               </div>
-            </div>
-            <div
-              class="item"
-              v-else-if="
-                userJenisTest.jenis_test != null &&
-                userJenisTest.jenis_test.indexOf('MII') >= 0 &&
-                value.jenis === 'mii'
-              "
-            >
-              <div class="columns is-mobile has-text-centered">
-                <div class="column">
-                  <router-link
-                    :class="
-                      value.status === 'Sudah' ||
-                      value.status === 'Waktu habis' ||
-                      (!skippable && value.test != testWhichBelum[0].test)
-                        ? 'disabled'
-                        : 'has-text-primary has-text-weight-semibold'
-                    "
-                    :to="{
-                      path: '/petunjuk-soal',
-                      query: { paket: value.test, jenis: value.jenis },
-                    }"
-                    >{{
-                      value.test
-                        .replace(/_/g, " ")
-                        .toUpperCase()
-                        .replace("BAGIAN", "MII")
-                        .replace("IST", "")
-                    }}</router-link
-                  >
-                </div>
-                <div class="column">
-                  <router-link
-                    :to="{
-                      path: '/petunjuk-soal',
-                      query: { paket: value.test, jenis: value.jenis },
-                    }"
-                    :class="
-                      value.status === 'Sudah' ||
-                      value.status === 'Waktu habis' ||
-                      (!skippable && value.test != testWhichBelum[0].test)
-                        ? 'disabled'
-                        : value.status === 'Sedang dikerjakan'
-                        ? 'has-text-success'
-                        : 'has-text-primary has-text-weight-semibold'
-                    "
-                  >
-                    {{ value.status }}
-                  </router-link>
-                </div>
+              <div class="column">
+                <router-link
+                  :to="{
+                    path: '/petunjuk-soal',
+                    query: { paket: value.test, jenis: value.jenis },
+                  }"
+                  :class="
+                    value.status === 'Sudah' ||
+                    value.status === 'Waktu habis' ||
+                    (!skippable && value.test != testWhichBelum[0].test)
+                      ? 'disabled'
+                      : value.status === 'Sedang dikerjakan'
+                      ? 'has-text-success'
+                      : 'has-text-primary has-text-weight-semibold'
+                  "
+                >
+                  {{ value.status }}
+                </router-link>
               </div>
             </div>
           </div>
-          <div v-else>
-            <h1 class="has-text-centered is-size-2 has-text-primary">
-              Semua soal sudah dikerjakan :)
-            </h1>
+          <div
+            class="item"
+            v-else-if="
+              userJenisTest.jenis_test != null &&
+              userJenisTest.jenis_test.indexOf('MII') >= 0 &&
+              value.jenis === 'mii'
+            "
+          >
+            <div class="columns is-mobile has-text-centered">
+              <div class="column">
+                <router-link
+                  :class="
+                    value.status === 'Sudah' ||
+                    value.status === 'Waktu habis' ||
+                    (!skippable && value.test != testWhichBelum[0].test)
+                      ? 'disabled'
+                      : 'has-text-primary has-text-weight-semibold'
+                  "
+                  :to="{
+                    path: '/petunjuk-soal',
+                    query: { paket: value.test, jenis: value.jenis },
+                  }"
+                  >{{
+                    value.test
+                      .replace(/_/g, " ")
+                      .toUpperCase()
+                      .replace("BAGIAN", "MII")
+                      .replace("IST", "")
+                  }}</router-link
+                >
+              </div>
+              <div class="column">
+                <router-link
+                  :to="{
+                    path: '/petunjuk-soal',
+                    query: { paket: value.test, jenis: value.jenis },
+                  }"
+                  :class="
+                    value.status === 'Sudah' ||
+                    value.status === 'Waktu habis' ||
+                    (!skippable && value.test != testWhichBelum[0].test)
+                      ? 'disabled'
+                      : value.status === 'Sedang dikerjakan'
+                      ? 'has-text-success'
+                      : 'has-text-primary has-text-weight-semibold'
+                  "
+                >
+                  {{ value.status }}
+                </router-link>
+              </div>
+            </div>
           </div>
+        </div>
+        <div v-else>
+          <h1 class="has-text-centered is-size-5 has-text-primary">
+            Semua test telah dikerjakan/waktu habis, silahkan menunggu hasilnya.
+          </h1>
         </div>
       </div>
     </div>
