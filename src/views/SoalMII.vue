@@ -66,7 +66,6 @@ export default {
   },
   watch: {
     $route: function (to, from) {
-      this.$store.dispatch("general/changeLoadingState", true);
       this.getSingleSoalMII(to.query.nomor);
     },
   },
@@ -201,6 +200,7 @@ export default {
         .dispatch("mii/getAllSoal")
         .then((response) => {
           var data = response.data.data;
+          this.allSoal = [];
           data.forEach((element) => {
             if (this.$route.query.paket == element.paket_soal) {
               this.allSoal.push(element);
@@ -212,7 +212,7 @@ export default {
         })
         .finally(() => {
           this.$store.dispatch("general/changeLoadingState", false);
-        })
+        });
     },
     handleJawaban(e) {
       var nomor = parseInt(this.$route.query.nomor);

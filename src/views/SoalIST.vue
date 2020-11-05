@@ -101,7 +101,6 @@ export default {
   },
   watch: {
     $route: function (to, from) {
-      this.$store.dispatch("general/changeLoadingState", true);
       this.getSingleSoalIST(to.query.nomor);
     },
   },
@@ -194,6 +193,7 @@ export default {
         });
     },
     getSingleSoalIST(args) {
+      this.$store.dispatch("general/changeLoadingState", true);
       var nomor = args;
       var paket_soal = this.$route.query.paket;
 
@@ -223,6 +223,7 @@ export default {
         .dispatch("ist/getAllSoal")
         .then((response) => {
           var data = response.data.data;
+          this.allSoal = []
           data.forEach((element) => {
             if (this.$route.query.paket == element.paket_soal) {
               this.allSoal.push(element);
