@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 require('dotenv').config();
 
 
@@ -12,6 +11,10 @@ const port = process.env.PORT;
 app.set('port', port);
 
 const server = http.createServer(app);
+
+if (env === 'production') {
+  require('newrelic');
+}
 
 function onListening() {
   console.log(`ENV\t: ${env}\nPORT\t: ${port}`);

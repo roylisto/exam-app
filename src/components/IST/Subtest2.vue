@@ -133,7 +133,7 @@ export default {
       return this.$route.query.jenis;
     },
     rightAnswer2() {
-      return this.soal2 == 'berbaring' ? true : false;
+      return this.soal2 == 'berjalan' ? true : false;
     },
     rightAnswer1() {
       return this.soal1 == 'Burung' ? true : false;
