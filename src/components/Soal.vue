@@ -96,47 +96,57 @@
         </section>
         <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
       </div>
-          <div v-else-if="soal.kategori == 'pilganbutton'">
-      <p class="has-text-left">{{ soal.nomor }}. {{ soal.pertanyaan }}</p>
-      <div class="checkbox-gbr-group">
-        <div
-          v-for="(value, index) in pilganbutton"
-          :key="index"
-          class="checkbox"
-        >
-          <input
-            :id="value"
-            type="checkbox"
-            :name="jawaban[index]"
-            :value="value"
-            v-model="tmpJawaban"
-            @change="pilihAngka(value)"
-          />
-          <label :for="value">{{ value }}</label>
+      <div v-else-if="soal.kategori == 'pilganbutton'">
+        <p class="has-text-left">{{ soal.nomor }}. {{ soal.pertanyaan }}</p>
+        <div class="checkbox-gbr-group">
+          <div
+            v-for="(value, index) in pilganbutton"
+            :key="index"
+            class="checkbox"
+          >
+            <input
+              :id="value"
+              type="checkbox"
+              :name="jawaban[index]"
+              :value="value"
+              v-model="tmpJawaban"
+              @change="pilihAngka(value)"
+            />
+            <label :for="value">{{ value }}</label>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <div class="radio-btn-group">
+          <div
+            v-for="(value, index) in soal.pilihan"
+            :key="index"
+            class="radio"
+          >
+            <input
+              :id="value"
+              type="radio"
+              :name="jawaban[index]"
+              :value="index"
+              v-model="jawaban[soal.nomor - 1]"
+            />
+            <label :for="value">{{ value }}</label>
+          </div>
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="jenisSoal == 'mii'">
+      <p class="has-text-left">{{ soal.nomor }}. {{ soal.pertanyaan }}</p>
       <div class="radio-btn-group">
         <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
           <input
             :id="value"
             type="radio"
             :name="jawaban[index]"
-            :value="index"
+            :value="value"
             v-model="jawaban[soal.nomor - 1]"
           />
           <label :for="value">{{ value }}</label>
-        </div>
-      </div>
-    </div>
-    </div>
-    <div v-else-if="jenisSoal == 'mii'">
-      <p class="has-text-left">{{soal.nomor}}. {{soal.pertanyaan}}</p>
-      <div class="radio-btn-group">
-        <div v-for="(value, index) in soal.pilihan" :key="index" class="radio">
-          <input :id="value" type="radio" :name="jawaban[index]" :value="value" v-model="jawaban[soal.nomor - 1]">
-          <label :for="value">{{value}}</label>
           <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
         </div>
       </div>
@@ -203,8 +213,10 @@ export default {
       return (this.jawaban = this.jawabanTersimpan);
     },
     bindJawabanTmp() {
-      if (this.jawabanTersimpan.length > 0) {
+      if (this.jawabanTersimpan[this.nomor - 1].length > 0) {
         this.tmpJawaban = this.jawabanTersimpan[this.nomor - 1];
+      } else {
+        this.tmpJawaban = [];
       }
     },
     ...mapGetters("ist", ["jawabanTersimpan"]),
@@ -225,7 +237,11 @@ export default {
     submitJawaban: function (e) {
       if (this.soal.kategori === "pilganbutton") {
         if (e === "Sebelumnya") {
-          this.tmpJawaban = this.jawaban[this.nomor - 2];
+          if (this.jawabanTersimpan[this.nomor - 2] != null) {
+            this.tmpJawaban = this.jawaban[this.nomor - 2];
+          } else {
+            this.tmpJawaban = [];
+          }
         } else {
           if (this.jawaban[this.nomor] && this.jawaban[this.nomor].length > 0) {
             this.tmpJawaban = this.jawaban[this.nomor];
