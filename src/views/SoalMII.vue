@@ -24,7 +24,40 @@
             </div>
           </div>
           <div class="is-mobile has-text-centered">
+            <div v-if="this.$store.state.general.loading">
+              <b-skeleton
+                width="80%"
+                class="mb-6"
+                size="is-large"
+                :animated="true"
+              ></b-skeleton>
+              <b-skeleton
+                width="40%"
+                class="mb-6"
+                size="is-large"
+                :animated="true"
+              ></b-skeleton>
+              <b-skeleton
+                width="40%"
+                class="mb-6"
+                size="is-large"
+                :animated="true"
+              ></b-skeleton>
+              <b-skeleton
+                width="40%"
+                class="mb-6"
+                size="is-large"
+                :animated="true"
+              ></b-skeleton>
+              <b-skeleton
+                width="40%"
+                class="mb-6"
+                size="is-large"
+                :animated="true"
+              ></b-skeleton>
+            </div>
             <soal-container
+              v-else
               :total="allSoal"
               :soal="soal"
               v-on:jawaban="handleJawaban"

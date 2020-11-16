@@ -21,7 +21,7 @@
           </div>
           <div class="is-mobile has-text-centered">
             <transition name="fade">
-              <div v-if="this.$store.state.loading">
+              <div v-if="this.$store.state.general.loading">
                 <b-skeleton
                   width="80%"
                   class="mb-6"
