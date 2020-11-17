@@ -46,7 +46,11 @@
             </div>
           </div>
         </div>
-        <div v-for="(value, index) in soalTes" :key="index" v-else>
+        <div
+          v-for="(value, index) in soalTes"
+          :key="index"
+          v-else-if="loaded && testWhichBelum.length > 0"
+        >
           <div
             class="item"
             v-if="
@@ -79,7 +83,11 @@
                 >
               </div>
               <div class="column">
-                <p
+                <router-link
+                  :to="{
+                    path: '/petunjuk-soal',
+                    query: { paket: value.test, jenis: value.jenis },
+                  }"
                   :class="
                     value.status === 'Sudah' ||
                     value.status === 'Waktu habis' ||
@@ -91,7 +99,7 @@
                   "
                 >
                   {{ value.status }}
-                </p>
+                </router-link>
               </div>
             </div>
           </div>
@@ -127,7 +135,11 @@
                 >
               </div>
               <div class="column">
-                <p
+                <router-link
+                  :to="{
+                    path: '/petunjuk-soal',
+                    query: { paket: value.test, jenis: value.jenis },
+                  }"
                   :class="
                     value.status === 'Sudah' ||
                     value.status === 'Waktu habis' ||
@@ -139,10 +151,15 @@
                   "
                 >
                   {{ value.status }}
-                </p>
+                </router-link>
               </div>
             </div>
           </div>
+        </div>
+        <div v-else>
+          <h1 class="has-text-centered is-size-5 has-text-primary">
+            Semua test telah dikerjakan/waktu habis, silahkan menunggu hasilnya.
+          </h1>
         </div>
       </div>
     </div>

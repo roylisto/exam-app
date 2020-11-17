@@ -98,7 +98,7 @@
           <p class="has-text-weight-normal">Gelap ialah lawannya dari terang, maka untuk basah lawannya ialah kering <br> Maka Jawabannya ialah: E) Kering <br> Oleh karena itu huruf e seharusnya yang dicoret.</p>
         </div>
         <div class="has-text-centered">
-          <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal}}" style="margin-top: 2rem"
+          <b-button type="is-primary" tag="router-link" :to="{path: '/soal', query: {paket: bagianSoal, jenis: jenisSoal, nomor: 1}}" style="margin-top: 2rem"
           >Mulai test</b-button>
         </div>
       </div>
