@@ -10,6 +10,9 @@ const apiRoutes = require('../routes');
 const fs = require('fs');
 const fileDir = './files';
 
+const swaggerUi = require('swagger-ui-express');
+swaggerDocument = require('../swagger.json');
+
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,6 +26,7 @@ if (!fs.existsSync(fileDir)) {
 }
 
 if (env === 'development') {
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   const webpack = require('webpack');
   const webpackMiddleware = require('webpack-dev-middleware');
   const webpackConfig = require('./webpack');
