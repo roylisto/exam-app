@@ -7,6 +7,7 @@ import ist from './ist/main';
 import mii from './mii/main';
 import waktu from './waktu/main'
 import soal from './soal/main'
+import general from './general/main'
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
@@ -29,6 +30,7 @@ export default new Vuex.Store({
     ist: ist,
     waktu: waktu,
     soal: soal,
-    mii: mii
+    mii: mii,
+    general: general
   }
 });

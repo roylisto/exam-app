@@ -58,7 +58,8 @@ export default {
           this.$router.replace({
             path: '/soal', query: {
               paket: this.bagianSoal,
-              jenis: 'ist'
+              jenis: 'ist',
+              nomor: 1
             }
           })
         } else {

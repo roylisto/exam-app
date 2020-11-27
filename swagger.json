@@ -1,0 +1,405 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "exam app",
+    "contact": {},
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api"
+    }
+  ],
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Login admin"
+    },
+    {
+      "name": "Soal",
+      "description": "Get data soal"
+    },
+    {
+      "name": "Time",
+      "description": "Get waktu soal yang dikerjakan"
+    },
+    {
+      "name": "Jawaban",
+      "description": "Submit jawaban user"
+    },
+    {
+      "name": "Delete Files",
+      "description": "menghapus file yang ada di server"
+    }
+  ],
+  "paths": {
+    "/soal/mii": {
+      "get": {
+        "tags": [
+          "Soal"
+        ],
+        "summary": "get one soal MII",
+        "operationId": "getonesoalMII",
+        "parameters": [
+          {
+            "name": "paket_soal",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "bagian_1_verb_ling"
+            }
+          },
+          {
+            "name": "nomor",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "operation success"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/soal/ist": {
+      "get": {
+        "tags": [
+          "Soal"
+        ],
+        "summary": "get one soal IST",
+        "operationId": "getonesoalIST",
+        "parameters": [
+          {
+            "name": "paket_soal",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "subtest_1_ist"
+            }
+          },
+          {
+            "name": "nomor",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "operation success"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "auth peserta",
+        "operationId": "authpeserta",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/authpesertarequest"
+              },
+              "example": {
+                "email": "jhon@gmail.com",
+                "password": 12345678
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "operation success"
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/time/ist": {
+      "get": {
+        "tags": [
+          "Time"
+        ],
+        "summary": "get sisa waktu subtest",
+        "operationId": "getsisawaktusubtest",
+        "parameters": [
+          {
+            "name": "paket_soal",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "subtest_1_ist"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "operation success"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/jawaban": {
+      "post": {
+        "tags": [
+          "Jawaban"
+        ],
+        "summary": "submit jawaban",
+        "operationId": "submitjawaban",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/submitjawabanrequest"
+              },
+              "example": {
+                "jawaban_peserta": [
+                  [
+                    3,
+                    5
+                  ],
+                  [
+                    2,
+                    8,
+                    0
+                  ],
+                  [
+                    2,
+                    3,
+                    5
+                  ],
+                  [
+                    2,
+                    6
+                  ],
+                  [
+                    3,
+                    0
+                  ],
+                  [
+                    7,
+                    0
+                  ],
+                  [
+                    4,
+                    5
+                  ],
+                  [
+                    4,
+                    5
+                  ],
+                  [
+                    1
+                  ],
+                  [
+                    6,
+                    7
+                  ]
+                ],
+                "paket_soal": "subtest_5_ist",
+                "jenis_soal": "ist"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "operation success"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/rincian-test": {
+      "get": {
+        "tags": [
+          "Soal"
+        ],
+        "summary": "get rincian tes",
+        "operationId": "getrinciantes",
+        "responses": {
+          "200": {
+            "description": "operation success"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/files": {
+      "delete": {
+        "tags": [
+          "Delete Files"
+        ],
+        "security":[],
+        "summary": "delete files in dir files",
+        "operationId": "deletefilesindirfiles",
+        "responses": {
+          "200": {
+            "description": "operation success"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/uploads": {
+      "delete": {
+        "tags": [
+          "Delete Files"
+        ],
+        "security":[],
+        "summary": "delete files in dir uploads",
+        "operationId": "deletefilesindiruploads",
+        "responses": {
+          "200": {
+            "description": "operation success"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "authpesertarequest": {
+        "title": "authpesertarequest",
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "jhon@gmail.com",
+          "password": 12345678
+        }
+      },
+      "submitjawabanrequest": {
+        "title": "submitjawabanrequest",
+        "required": [
+          "jawaban_peserta",
+          "jenis_soal",
+          "paket_soal"
+        ],
+        "type": "object",
+        "properties": {
+          "jawaban_peserta": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "paket_soal": {
+            "type": "string"
+          },
+          "jenis_soal": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "jawaban_peserta": [
+            [
+              3,
+              5
+            ],
+            [
+              2,
+              8,
+              0
+            ],
+            [
+              2,
+              3,
+              5
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              1
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "paket_soal": "subtest_5_ist",
+          "jenis_soal": "ist"
+        }
+      }
+    },
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "name": "x-access-token",
+        "in": "header"
+      }
+    }
+  }
+}
