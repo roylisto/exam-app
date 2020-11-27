@@ -53,7 +53,7 @@
             style="position: relative"
           >
             <b-skeleton
-              v-if="$store.state.loading"
+              v-if="$store.state.general.loading"
               circle
               width="64px"
               height="64px"
@@ -94,7 +94,6 @@
             ></b-input>
           </b-field>
         </section>
-        <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
       </div>
       <div v-else-if="soal.kategori == 'pilganbutton'">
         <p class="has-text-left">{{ soal.nomor }}. {{ soal.pertanyaan }}</p>
@@ -147,7 +146,6 @@
             v-model="jawaban[soal.nomor - 1]"
           />
           <label :for="value">{{ value }}</label>
-          <b-loading :active.sync="isLoading" :can-cancel="true"></b-loading>
         </div>
       </div>
     </div>
@@ -213,7 +211,10 @@ export default {
       return (this.jawaban = this.jawabanTersimpan);
     },
     bindJawabanTmp() {
-      if (this.jawabanTersimpan[this.nomor - 1].length > 0) {
+      if (
+        this.jawabanTersimpan[this.nomor - 1] &&
+        this.jawabanTersimpan[this.nomor - 1].length > 0
+      ) {
         this.tmpJawaban = this.jawabanTersimpan[this.nomor - 1];
       } else {
         this.tmpJawaban = [];
@@ -225,15 +226,8 @@ export default {
     this.jawabanTersimpan;
     this.bindJawaban;
     this.bindJawabanTmp;
-    this.openLoading();
   },
   methods: {
-    openLoading() {
-      this.isLoading = true;
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 1000);
-    },
     submitJawaban: function (e) {
       if (this.soal.kategori === "pilganbutton") {
         if (e === "Sebelumnya") {
