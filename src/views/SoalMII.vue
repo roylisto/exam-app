@@ -2,11 +2,6 @@
   <div id="soal">
     <Navbar />
     <template>
-      <b-loading
-        :is-full-page="false"
-        :active.sync="loading"
-        :can-cancel="true"
-      ></b-loading>
       <div class="container">
         <p class="title has-text-centered has-text-weight-light">
           Test {{ jenisSoal.toUpperCase() }} Bagian {{ bagianSoal }}

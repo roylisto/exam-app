@@ -61,11 +61,6 @@
                 v-else
               ></soal-container>
             </transition>
-            <b-loading
-              :is-full-page="false"
-              :active.sync="loading"
-              :can-cancel="true"
-            ></b-loading>
           </div>
         </div>
       </div>
